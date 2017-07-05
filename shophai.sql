@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.10.18
--- https://www.phpmyadmin.net
+-- version 4.6.5.2
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: May 04, 2017 at 04:32 AM
--- Server version: 5.6.35-cll-lve
--- PHP Version: 5.6.30
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th7 05, 2017 lúc 07:29 SA
+-- Phiên bản máy phục vụ: 10.1.21-MariaDB
+-- Phiên bản PHP: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,20 +14,20 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `modern_demo`
+-- Cơ sở dữ liệu: `shophai`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_address`
+-- Cấu trúc bảng cho bảng `oc_address`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_address` (
-  `address_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_address` (
+  `address_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `firstname` varchar(32) NOT NULL,
   `lastname` varchar(32) NOT NULL,
@@ -38,13 +38,11 @@ CREATE TABLE IF NOT EXISTS `oc_address` (
   `postcode` varchar(10) NOT NULL,
   `country_id` int(11) NOT NULL DEFAULT '0',
   `zone_id` int(11) NOT NULL DEFAULT '0',
-  `custom_field` text NOT NULL,
-  PRIMARY KEY (`address_id`),
-  KEY `customer_id` (`customer_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+  `custom_field` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_address`
+-- Đang đổ dữ liệu cho bảng `oc_address`
 --
 
 INSERT INTO `oc_address` (`address_id`, `customer_id`, `firstname`, `lastname`, `company`, `address_1`, `address_2`, `city`, `postcode`, `country_id`, `zone_id`, `custom_field`) VALUES
@@ -57,16 +55,17 @@ INSERT INTO `oc_address` (`address_id`, `customer_id`, `firstname`, `lastname`, 
 (7, 7, 'webiarch', 'infotech', '', 'surat', '', 'surat', '395006', 99, 1485, ''),
 (8, 8, 'harita', 'PATEL', '', 'ADD1', '', 'SURAT', '', 99, 1485, ''),
 (9, 9, 'abc', 'abc', '', 'surat', 'surat', 'surat', '395006', 99, 1485, ''),
-(10, 10, 'jeni', 'borad', 'Red &amp; White', 'surat', 'surat', 'surat', '395006', 99, 1485, '');
+(10, 10, 'jeni', 'borad', 'Red &amp; White', 'surat', 'surat', 'surat', '395006', 99, 1485, ''),
+(11, 11, 'Beach', 'Belinda', 'GlobalMandate LTD', '3630 Margaret Street', '', 'Houston', '77063', 223, 3669, '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_affiliate`
+-- Cấu trúc bảng cho bảng `oc_affiliate`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_affiliate` (
-  `affiliate_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_affiliate` (
+  `affiliate_id` int(11) NOT NULL,
   `firstname` varchar(32) NOT NULL,
   `lastname` varchar(32) NOT NULL,
   `email` varchar(96) NOT NULL,
@@ -96,12 +95,11 @@ CREATE TABLE IF NOT EXISTS `oc_affiliate` (
   `ip` varchar(40) NOT NULL,
   `status` tinyint(1) NOT NULL,
   `approved` tinyint(1) NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`affiliate_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  `date_added` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_affiliate`
+-- Đang đổ dữ liệu cho bảng `oc_affiliate`
 --
 
 INSERT INTO `oc_affiliate` (`affiliate_id`, `firstname`, `lastname`, `email`, `telephone`, `fax`, `password`, `salt`, `company`, `website`, `address_1`, `address_2`, `city`, `postcode`, `country_id`, `zone_id`, `code`, `commission`, `tax`, `payment`, `cheque`, `paypal`, `bank_name`, `bank_branch_number`, `bank_swift_code`, `bank_account_name`, `bank_account_number`, `ip`, `status`, `approved`, `date_added`) VALUES
@@ -110,147 +108,132 @@ INSERT INTO `oc_affiliate` (`affiliate_id`, `firstname`, `lastname`, `email`, `t
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_affiliate_activity`
+-- Cấu trúc bảng cho bảng `oc_affiliate_activity`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_affiliate_activity` (
-  `affiliate_activity_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_affiliate_activity` (
+  `affiliate_activity_id` int(11) NOT NULL,
   `affiliate_id` int(11) NOT NULL,
   `key` varchar(64) NOT NULL,
   `data` text NOT NULL,
   `ip` varchar(40) NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`affiliate_activity_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `date_added` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_affiliate_login`
+-- Cấu trúc bảng cho bảng `oc_affiliate_login`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_affiliate_login` (
-  `affiliate_login_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_affiliate_login` (
+  `affiliate_login_id` int(11) NOT NULL,
   `email` varchar(96) NOT NULL,
   `ip` varchar(40) NOT NULL,
   `total` int(4) NOT NULL,
   `date_added` datetime NOT NULL,
-  `date_modified` datetime NOT NULL,
-  PRIMARY KEY (`affiliate_login_id`),
-  KEY `email` (`email`),
-  KEY `ip` (`ip`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `date_modified` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_affiliate_transaction`
+-- Cấu trúc bảng cho bảng `oc_affiliate_transaction`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_affiliate_transaction` (
-  `affiliate_transaction_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_affiliate_transaction` (
+  `affiliate_transaction_id` int(11) NOT NULL,
   `affiliate_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `description` text NOT NULL,
   `amount` decimal(15,4) NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`affiliate_transaction_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `date_added` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_api`
+-- Cấu trúc bảng cho bảng `oc_api`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_api` (
-  `api_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_api` (
+  `api_id` int(11) NOT NULL,
   `name` varchar(64) NOT NULL,
   `key` text NOT NULL,
   `status` tinyint(1) NOT NULL,
   `date_added` datetime NOT NULL,
-  `date_modified` datetime NOT NULL,
-  PRIMARY KEY (`api_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+  `date_modified` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_api`
+-- Đang đổ dữ liệu cho bảng `oc_api`
 --
 
 INSERT INTO `oc_api` (`api_id`, `name`, `key`, `status`, `date_added`, `date_modified`) VALUES
 (1, 'Default', '5GtTUjcVSqXQo6jjPmA5FCaets6mgixRkua9EsM9vxP9voFDG8fj3om59qpF5GMPyxz8CVGa55Zm7hz1C6NSssobkc8uPbTw2anQodl1Q741CxAUYy3acgH9TSMezE89eYsjuG7eAjrBSb8uQFXHGDGCC5uNkJOJQMQrLZprsszgUSzp8EiarwD8GfHvwuq5bQaaPhmrhEtL05KR7UTeJPOHnnX5aQh1oroEkmoRD9R7Rr1NU13oUKVCKWlGgWdn', 1, '2016-11-30 17:45:10', '2016-11-30 17:45:10'),
-(2, 'Default', '9gHsB9JFlL0WvWJ4v6Cx5CAciKQ8YeMFN5Wwo71iEItX5lyZac9LRsOFx47I8GQnaLmIrb0Rso8aaPrgRpBQIWO1EHUJguI0F3M52HwYwMYEq9ILry2vIBmcvLSWu0YImbhTWk1NOzTh8JAybRFIgfVqNUbnEG3VlWrjHtqVvoksMctVOIymIE875nrLa9XAfvJTSPup9s0yvs45KN1iU0uPfr5ycnbIBvJNERtuTPoHYpcWxaCDxdhqvQm1UIuj', 1, '2017-05-04 10:04:43', '2017-05-04 10:04:43');
+(2, 'Default', '9gHsB9JFlL0WvWJ4v6Cx5CAciKQ8YeMFN5Wwo71iEItX5lyZac9LRsOFx47I8GQnaLmIrb0Rso8aaPrgRpBQIWO1EHUJguI0F3M52HwYwMYEq9ILry2vIBmcvLSWu0YImbhTWk1NOzTh8JAybRFIgfVqNUbnEG3VlWrjHtqVvoksMctVOIymIE875nrLa9XAfvJTSPup9s0yvs45KN1iU0uPfr5ycnbIBvJNERtuTPoHYpcWxaCDxdhqvQm1UIuj', 1, '2017-05-04 10:04:43', '2017-05-04 10:04:43'),
+(3, 'Default', 'UCfsxRyhEVfX60g1GRqRYI0adJ6XlMPTRZe9SGNrUcSf98nb0wRB64KvzrLIrjUd52DnL6KlUbFQ66WXOolk3CDU9L5ghWvVdYKpH1BPVVopJ201xgySR4MyYB8AuIKu5YkbxiJ8d2WKRSY5rMbuOvFRImAQWQeGKokHw3ncHULwfabhxeJEA6hKaDzW4lajmJsdzfaHi2upeJLa18HTyjb9hx0bSMmlUYw0LOgtutJjxQxLQnyQZMYYYt5qO5AI', 1, '2017-07-02 02:04:30', '2017-07-02 02:04:30');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_api_ip`
+-- Cấu trúc bảng cho bảng `oc_api_ip`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_api_ip` (
-  `api_ip_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_api_ip` (
+  `api_ip_id` int(11) NOT NULL,
   `api_id` int(11) NOT NULL,
-  `ip` varchar(40) NOT NULL,
-  PRIMARY KEY (`api_ip_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+  `ip` varchar(40) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_api_ip`
+-- Đang đổ dữ liệu cho bảng `oc_api_ip`
 --
 
 INSERT INTO `oc_api_ip` (`api_ip_id`, `api_id`, `ip`) VALUES
 (1, 1, '175.100.146.181'),
-(2, 1, '219.91.138.52');
+(2, 1, '219.91.138.52'),
+(3, 3, '::1');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_api_session`
+-- Cấu trúc bảng cho bảng `oc_api_session`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_api_session` (
-  `api_session_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_api_session` (
+  `api_session_id` int(11) NOT NULL,
   `api_id` int(11) NOT NULL,
   `token` varchar(32) NOT NULL,
   `session_id` varchar(32) NOT NULL,
   `session_name` varchar(32) NOT NULL,
   `ip` varchar(40) NOT NULL,
   `date_added` datetime NOT NULL,
-  `date_modified` datetime NOT NULL,
-  PRIMARY KEY (`api_session_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+  `date_modified` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_api_session`
+-- Đang đổ dữ liệu cho bảng `oc_api_session`
 --
 
 INSERT INTO `oc_api_session` (`api_session_id`, `api_id`, `token`, `session_id`, `session_name`, `ip`, `date_added`, `date_modified`) VALUES
-(1, 1, 'QFCHq3wCEDLL342w8uPQiUF1U1XzGjyD', 'cb3f0017f5c964b487cb788776', '', '175.100.146.181', '2016-12-24 02:36:59', '2016-12-24 02:37:36'),
-(2, 1, 'ZhvMWd1Oh7oIxxrQGoyIqYCqdpsfvpOg', '1c36e4e47d455cec9cf0940e5e', '', '175.100.146.181', '2016-12-24 02:41:40', '2016-12-24 02:42:07'),
-(3, 1, 'Fo8ojX10Cn4M6pB7YKwfQE3qcx4VArdJ', 'ff69b64df92a455f86f28195b9', '', '175.100.146.181', '2016-12-24 02:50:07', '2016-12-24 02:53:05'),
-(4, 1, 'l6stduEC9nPlgzalXmqXi2VL3PKRJKZq', '87a9d588ce3f255fa5f9ba06f0', '', '175.100.146.181', '2016-12-24 02:53:26', '2016-12-24 02:53:26'),
-(5, 1, 'ncWW8OSjIiNvhg5jbaQlP7wS21luPFkH', 'a2f068d98c513b2b43a34eee91', '', '175.100.146.181', '2016-12-24 02:53:31', '2016-12-24 02:53:50'),
-(6, 1, '3S0fDz9M4gihEMEaaB3L8RnWWE6trDwn', '9081ce825bcdaffd847d67bdd4', '', '219.91.138.52', '2016-12-24 03:04:29', '2016-12-24 03:05:54'),
-(7, 1, 'lgXNnsAvh18J3HGk33Rfpgs822C4M2Vy', '41d2874ab2f8bb61cb1ff6e5d6', '', '219.91.138.52', '2016-12-24 03:06:01', '2016-12-24 03:06:06'),
-(8, 1, 'pVKbIYbSJMF0Pc7EoqnA6tWn4Bb3uEK3', '470f47da7a4c552cbdabd51230', '', '219.91.138.52', '2016-12-24 03:08:08', '2016-12-24 03:08:19'),
-(9, 1, 'agIsJhckf0pMz9OrFgdrUnFWPVkMCGnM', '4b6b74a99f3d880bdd038ab95a', '', '219.91.138.52', '2016-12-24 03:08:40', '2016-12-24 03:08:40'),
-(10, 1, 'vAjIhpbgSKQPBksON7iru5pAsWjXg58A', 'd465b3b7b4ccf0317f605a1bfc', '', '219.91.138.52', '2016-12-24 03:09:05', '2016-12-24 03:09:05');
+(12, 3, 'n3Tk4Jd0eY5WvzwStfwwLAUeGKxVWdiV', 'tmms2qapmsgeri8fn4fsehs2o4', '', '::1', '2017-07-04 16:33:08', '2017-07-04 16:33:08'),
+(11, 3, 'L3YuVznRRlT2LEzZy5Ao3xX1ap5l5sIz', 't82uo3vq742fm0gct6dfk2o1h5', '', '::1', '2017-07-02 09:19:13', '2017-07-02 09:19:13');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_attribute`
+-- Cấu trúc bảng cho bảng `oc_attribute`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_attribute` (
-  `attribute_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_attribute` (
+  `attribute_id` int(11) NOT NULL,
   `attribute_group_id` int(11) NOT NULL,
-  `sort_order` int(3) NOT NULL,
-  PRIMARY KEY (`attribute_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+  `sort_order` int(3) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_attribute`
+-- Đang đổ dữ liệu cho bảng `oc_attribute`
 --
 
 INSERT INTO `oc_attribute` (`attribute_id`, `attribute_group_id`, `sort_order`) VALUES
@@ -269,18 +252,17 @@ INSERT INTO `oc_attribute` (`attribute_id`, `attribute_group_id`, `sort_order`) 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_attribute_description`
+-- Cấu trúc bảng cho bảng `oc_attribute_description`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_attribute_description` (
+CREATE TABLE `oc_attribute_description` (
   `attribute_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `name` varchar(64) NOT NULL,
-  PRIMARY KEY (`attribute_id`,`language_id`)
+  `name` varchar(64) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_attribute_description`
+-- Đang đổ dữ liệu cho bảng `oc_attribute_description`
 --
 
 INSERT INTO `oc_attribute_description` (`attribute_id`, `language_id`, `name`) VALUES
@@ -294,33 +276,21 @@ INSERT INTO `oc_attribute_description` (`attribute_id`, `language_id`, `name`) V
 (9, 1, 'test 6'),
 (10, 1, 'test 7'),
 (11, 1, 'test 8'),
-(3, 1, 'Clockspeed'),
-(1, 2, 'Description'),
-(2, 2, 'No. of Cores'),
-(4, 2, 'test 1'),
-(5, 2, 'test 2'),
-(6, 2, 'test 3'),
-(7, 2, 'test 4'),
-(8, 2, 'test 5'),
-(9, 2, 'test 6'),
-(10, 2, 'test 7'),
-(11, 2, 'test 8'),
-(3, 2, 'Clockspeed');
+(3, 1, 'Clockspeed');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_attribute_group`
+-- Cấu trúc bảng cho bảng `oc_attribute_group`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_attribute_group` (
-  `attribute_group_id` int(11) NOT NULL AUTO_INCREMENT,
-  `sort_order` int(3) NOT NULL,
-  PRIMARY KEY (`attribute_group_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+CREATE TABLE `oc_attribute_group` (
+  `attribute_group_id` int(11) NOT NULL,
+  `sort_order` int(3) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_attribute_group`
+-- Đang đổ dữ liệu cho bảng `oc_attribute_group`
 --
 
 INSERT INTO `oc_attribute_group` (`attribute_group_id`, `sort_order`) VALUES
@@ -332,45 +302,39 @@ INSERT INTO `oc_attribute_group` (`attribute_group_id`, `sort_order`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_attribute_group_description`
+-- Cấu trúc bảng cho bảng `oc_attribute_group_description`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_attribute_group_description` (
+CREATE TABLE `oc_attribute_group_description` (
   `attribute_group_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `name` varchar(64) NOT NULL,
-  PRIMARY KEY (`attribute_group_id`,`language_id`)
+  `name` varchar(64) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_attribute_group_description`
+-- Đang đổ dữ liệu cho bảng `oc_attribute_group_description`
 --
 
 INSERT INTO `oc_attribute_group_description` (`attribute_group_id`, `language_id`, `name`) VALUES
 (3, 1, 'Memory'),
 (4, 1, 'Technical'),
 (5, 1, 'Motherboard'),
-(6, 1, 'Processor'),
-(3, 2, 'Memory'),
-(4, 2, 'Technical'),
-(5, 2, 'Motherboard'),
-(6, 2, 'Processor');
+(6, 1, 'Processor');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_banner`
+-- Cấu trúc bảng cho bảng `oc_banner`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_banner` (
-  `banner_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_banner` (
+  `banner_id` int(11) NOT NULL,
   `name` varchar(64) NOT NULL,
-  `status` tinyint(1) NOT NULL,
-  PRIMARY KEY (`banner_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
+  `status` tinyint(1) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_banner`
+-- Đang đổ dữ liệu cho bảng `oc_banner`
 --
 
 INSERT INTO `oc_banner` (`banner_id`, `name`, `status`) VALUES
@@ -382,22 +346,21 @@ INSERT INTO `oc_banner` (`banner_id`, `name`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_banner_image`
+-- Cấu trúc bảng cho bảng `oc_banner_image`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_banner_image` (
-  `banner_image_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_banner_image` (
+  `banner_image_id` int(11) NOT NULL,
   `banner_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `title` varchar(64) NOT NULL,
   `link` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
-  `sort_order` int(3) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`banner_image_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=297 ;
+  `sort_order` int(3) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_banner_image`
+-- Đang đổ dữ liệu cho bảng `oc_banner_image`
 --
 
 INSERT INTO `oc_banner_image` (`banner_image_id`, `banner_id`, `language_id`, `title`, `link`, `image`, `sort_order`) VALUES
@@ -435,21 +398,20 @@ INSERT INTO `oc_banner_image` (`banner_image_id`, `banner_id`, `language_id`, `t
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_blogger`
+-- Cấu trúc bảng cho bảng `oc_blogger`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_blogger` (
-  `blogger_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_blogger` (
+  `blogger_id` int(11) NOT NULL,
   `module_id` int(11) NOT NULL,
   `status` int(1) NOT NULL DEFAULT '0',
   `image` varchar(255) DEFAULT NULL,
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`blogger_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_blogger`
+-- Đang đổ dữ liệu cho bảng `oc_blogger`
 --
 
 INSERT INTO `oc_blogger` (`blogger_id`, `module_id`, `status`, `image`, `date_added`, `date_modified`) VALUES
@@ -462,21 +424,20 @@ INSERT INTO `oc_blogger` (`blogger_id`, `module_id`, `status`, `image`, `date_ad
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_blogger_comment`
+-- Cấu trúc bảng cho bảng `oc_blogger_comment`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_blogger_comment` (
-  `blogger_comment_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_blogger_comment` (
+  `blogger_comment_id` int(11) NOT NULL,
   `blogger_id` int(11) NOT NULL,
   `approved` int(1) NOT NULL DEFAULT '0',
   `author` varchar(64) NOT NULL DEFAULT '',
   `email` varchar(96) NOT NULL,
-  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`blogger_comment_id`,`blogger_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_blogger_comment`
+-- Đang đổ dữ liệu cho bảng `oc_blogger_comment`
 --
 
 INSERT INTO `oc_blogger_comment` (`blogger_comment_id`, `blogger_id`, `approved`, `author`, `email`, `date_added`) VALUES
@@ -485,18 +446,17 @@ INSERT INTO `oc_blogger_comment` (`blogger_comment_id`, `blogger_id`, `approved`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_blogger_comment_description`
+-- Cấu trúc bảng cho bảng `oc_blogger_comment_description`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_blogger_comment_description` (
+CREATE TABLE `oc_blogger_comment_description` (
   `blogger_comment_id` int(11) NOT NULL DEFAULT '0',
   `language_id` int(11) NOT NULL DEFAULT '0',
-  `comment` text NOT NULL,
-  PRIMARY KEY (`blogger_comment_id`,`language_id`)
+  `comment` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_blogger_comment_description`
+-- Đang đổ dữ liệu cho bảng `oc_blogger_comment_description`
 --
 
 INSERT INTO `oc_blogger_comment_description` (`blogger_comment_id`, `language_id`, `comment`) VALUES
@@ -505,19 +465,18 @@ INSERT INTO `oc_blogger_comment_description` (`blogger_comment_id`, `language_id
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_blogger_description`
+-- Cấu trúc bảng cho bảng `oc_blogger_description`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_blogger_description` (
+CREATE TABLE `oc_blogger_description` (
   `blogger_id` int(11) NOT NULL DEFAULT '0',
   `language_id` int(11) NOT NULL DEFAULT '0',
   `title` varchar(64) NOT NULL DEFAULT '',
-  `description` text NOT NULL,
-  PRIMARY KEY (`blogger_id`,`language_id`)
+  `description` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_blogger_description`
+-- Đang đổ dữ liệu cho bảng `oc_blogger_description`
 --
 
 INSERT INTO `oc_blogger_description` (`blogger_id`, `language_id`, `title`, `description`) VALUES
@@ -535,11 +494,11 @@ INSERT INTO `oc_blogger_description` (`blogger_id`, `language_id`, `title`, `des
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_cart`
+-- Cấu trúc bảng cho bảng `oc_cart`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_cart` (
-  `cart_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_cart` (
+  `cart_id` int(11) UNSIGNED NOT NULL,
   `api_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `session_id` varchar(32) NOT NULL,
@@ -547,29 +506,29 @@ CREATE TABLE IF NOT EXISTS `oc_cart` (
   `recurring_id` int(11) NOT NULL,
   `option` text NOT NULL,
   `quantity` int(5) NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`cart_id`),
-  KEY `cart_id` (`api_id`,`customer_id`,`session_id`,`product_id`,`recurring_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=32 ;
+  `date_added` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_cart`
+-- Đang đổ dữ liệu cho bảng `oc_cart`
 --
 
 INSERT INTO `oc_cart` (`cart_id`, `api_id`, `customer_id`, `session_id`, `product_id`, `recurring_id`, `option`, `quantity`, `date_added`) VALUES
 (3, 0, 4, '8rdj73mdac67uvhbrvp7jfrac3', 50, 0, '[]', 1, '2017-04-10 15:46:29'),
-(25, 0, 8, '110441b25ae91e385ff7162325', 35, 0, '{"224":"13"}', 1, '2017-04-15 02:12:28'),
+(25, 0, 8, '110441b25ae91e385ff7162325', 35, 0, '{\"224\":\"13\"}', 1, '2017-04-15 02:12:28'),
 (27, 0, 9, 'a8687f9f7db5cce829434562f9', 48, 0, '[]', 1, '2017-04-15 06:37:31'),
-(28, 0, 7, '0e9cf99fb614f8cf5eb48bcc19', 54, 0, '[]', 3, '2017-04-15 07:25:18');
+(28, 0, 7, '0e9cf99fb614f8cf5eb48bcc19', 54, 0, '[]', 3, '2017-04-15 07:25:18'),
+(31, 0, 11, 'clilb3vks7tb77ubjacsiapmm6', 47, 0, '{\"225\":\"2011-04-22\"}', 1, '2017-07-04 16:16:38'),
+(33, 0, 11, 'clilb3vks7tb77ubjacsiapmm6', 41, 0, '[]', 1, '2017-07-05 10:22:36');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_category`
+-- Cấu trúc bảng cho bảng `oc_category`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_category` (
-  `category_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_category` (
+  `category_id` int(11) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
   `parent_id` int(11) NOT NULL DEFAULT '0',
   `top` tinyint(1) NOT NULL,
@@ -577,13 +536,11 @@ CREATE TABLE IF NOT EXISTS `oc_category` (
   `sort_order` int(3) NOT NULL DEFAULT '0',
   `status` tinyint(1) NOT NULL,
   `date_added` datetime NOT NULL,
-  `date_modified` datetime NOT NULL,
-  PRIMARY KEY (`category_id`),
-  KEY `parent_id` (`parent_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=64 ;
+  `date_modified` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_category`
+-- Đang đổ dữ liệu cho bảng `oc_category`
 --
 
 INSERT INTO `oc_category` (`category_id`, `image`, `parent_id`, `top`, `column`, `sort_order`, `status`, `date_added`, `date_modified`) VALUES
@@ -634,23 +591,21 @@ INSERT INTO `oc_category` (`category_id`, `image`, `parent_id`, `top`, `column`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_category_description`
+-- Cấu trúc bảng cho bảng `oc_category_description`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_category_description` (
+CREATE TABLE `oc_category_description` (
   `category_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `meta_title` varchar(255) NOT NULL,
   `meta_description` varchar(255) NOT NULL,
-  `meta_keyword` varchar(255) NOT NULL,
-  PRIMARY KEY (`category_id`,`language_id`),
-  KEY `name` (`name`)
+  `meta_keyword` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_category_description`
+-- Đang đổ dữ liệu cho bảng `oc_category_description`
 --
 
 INSERT INTO `oc_category_description` (`category_id`, `language_id`, `name`, `description`, `meta_title`, `meta_description`, `meta_keyword`) VALUES
@@ -744,17 +699,16 @@ INSERT INTO `oc_category_description` (`category_id`, `language_id`, `name`, `de
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_category_filter`
+-- Cấu trúc bảng cho bảng `oc_category_filter`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_category_filter` (
+CREATE TABLE `oc_category_filter` (
   `category_id` int(11) NOT NULL,
-  `filter_id` int(11) NOT NULL,
-  PRIMARY KEY (`category_id`,`filter_id`)
+  `filter_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_category_filter`
+-- Đang đổ dữ liệu cho bảng `oc_category_filter`
 --
 
 INSERT INTO `oc_category_filter` (`category_id`, `filter_id`) VALUES
@@ -797,18 +751,17 @@ INSERT INTO `oc_category_filter` (`category_id`, `filter_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_category_path`
+-- Cấu trúc bảng cho bảng `oc_category_path`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_category_path` (
+CREATE TABLE `oc_category_path` (
   `category_id` int(11) NOT NULL,
   `path_id` int(11) NOT NULL,
-  `level` int(11) NOT NULL,
-  PRIMARY KEY (`category_id`,`path_id`)
+  `level` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_category_path`
+-- Đang đổ dữ liệu cho bảng `oc_category_path`
 --
 
 INSERT INTO `oc_category_path` (`category_id`, `path_id`, `level`) VALUES
@@ -925,18 +878,17 @@ INSERT INTO `oc_category_path` (`category_id`, `path_id`, `level`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_category_to_layout`
+-- Cấu trúc bảng cho bảng `oc_category_to_layout`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_category_to_layout` (
+CREATE TABLE `oc_category_to_layout` (
   `category_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
-  `layout_id` int(11) NOT NULL,
-  PRIMARY KEY (`category_id`,`store_id`)
+  `layout_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_category_to_layout`
+-- Đang đổ dữ liệu cho bảng `oc_category_to_layout`
 --
 
 INSERT INTO `oc_category_to_layout` (`category_id`, `store_id`, `layout_id`) VALUES
@@ -974,17 +926,16 @@ INSERT INTO `oc_category_to_layout` (`category_id`, `store_id`, `layout_id`) VAL
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_category_to_store`
+-- Cấu trúc bảng cho bảng `oc_category_to_store`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_category_to_store` (
+CREATE TABLE `oc_category_to_store` (
   `category_id` int(11) NOT NULL,
-  `store_id` int(11) NOT NULL,
-  PRIMARY KEY (`category_id`,`store_id`)
+  `store_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_category_to_store`
+-- Đang đổ dữ liệu cho bảng `oc_category_to_store`
 --
 
 INSERT INTO `oc_category_to_store` (`category_id`, `store_id`) VALUES
@@ -1035,22 +986,21 @@ INSERT INTO `oc_category_to_store` (`category_id`, `store_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_country`
+-- Cấu trúc bảng cho bảng `oc_country`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_country` (
-  `country_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_country` (
+  `country_id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
   `iso_code_2` varchar(2) NOT NULL,
   `iso_code_3` varchar(3) NOT NULL,
   `address_format` text NOT NULL,
   `postcode_required` tinyint(1) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`country_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=258 ;
+  `status` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_country`
+-- Đang đổ dữ liệu cho bảng `oc_country`
 --
 
 INSERT INTO `oc_country` (`country_id`, `name`, `iso_code_2`, `iso_code_3`, `address_format`, `postcode_required`, `status`) VALUES
@@ -1105,7 +1055,7 @@ INSERT INTO `oc_country` (`country_id`, `name`, `iso_code_2`, `iso_code_3`, `add
 (49, 'Congo', 'CG', 'COG', '', 0, 1),
 (50, 'Cook Islands', 'CK', 'COK', '', 0, 1),
 (51, 'Costa Rica', 'CR', 'CRI', '', 0, 1),
-(52, 'Cote D''Ivoire', 'CI', 'CIV', '', 0, 1),
+(52, 'Cote D\'Ivoire', 'CI', 'CIV', '', 0, 1),
 (53, 'Croatia', 'HR', 'HRV', '', 0, 1),
 (54, 'Cuba', 'CU', 'CUB', '', 0, 1),
 (55, 'Cyprus', 'CY', 'CYP', '', 0, 1),
@@ -1168,7 +1118,7 @@ INSERT INTO `oc_country` (`country_id`, `name`, `iso_code_2`, `iso_code_3`, `add
 (113, 'South Korea', 'KR', 'KOR', '', 0, 1),
 (114, 'Kuwait', 'KW', 'KWT', '', 0, 1),
 (115, 'Kyrgyzstan', 'KG', 'KGZ', '', 0, 1),
-(116, 'Lao People''s Democratic Republic', 'LA', 'LAO', '', 0, 1),
+(116, 'Lao People\'s Democratic Republic', 'LA', 'LAO', '', 0, 1),
 (117, 'Latvia', 'LV', 'LVA', '', 0, 1),
 (118, 'Lebanon', 'LB', 'LBN', '', 0, 1),
 (119, 'Lesotho', 'LS', 'LSO', '', 0, 1),
@@ -1311,11 +1261,11 @@ INSERT INTO `oc_country` (`country_id`, `name`, `iso_code_2`, `iso_code_3`, `add
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_coupon`
+-- Cấu trúc bảng cho bảng `oc_coupon`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_coupon` (
-  `coupon_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_coupon` (
+  `coupon_id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
   `code` varchar(20) NOT NULL,
   `type` char(1) NOT NULL,
@@ -1328,12 +1278,11 @@ CREATE TABLE IF NOT EXISTS `oc_coupon` (
   `uses_total` int(11) NOT NULL,
   `uses_customer` varchar(11) NOT NULL,
   `status` tinyint(1) NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`coupon_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+  `date_added` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_coupon`
+-- Đang đổ dữ liệu cho bảng `oc_coupon`
 --
 
 INSERT INTO `oc_coupon` (`coupon_id`, `name`, `code`, `type`, `discount`, `logged`, `shipping`, `total`, `date_start`, `date_end`, `uses_total`, `uses_customer`, `status`, `date_added`) VALUES
@@ -1344,52 +1293,49 @@ INSERT INTO `oc_coupon` (`coupon_id`, `name`, `code`, `type`, `discount`, `logge
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_coupon_category`
+-- Cấu trúc bảng cho bảng `oc_coupon_category`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_coupon_category` (
+CREATE TABLE `oc_coupon_category` (
   `coupon_id` int(11) NOT NULL,
-  `category_id` int(11) NOT NULL,
-  PRIMARY KEY (`coupon_id`,`category_id`)
+  `category_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_coupon_history`
+-- Cấu trúc bảng cho bảng `oc_coupon_history`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_coupon_history` (
-  `coupon_history_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_coupon_history` (
+  `coupon_history_id` int(11) NOT NULL,
   `coupon_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `amount` decimal(15,4) NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`coupon_history_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `date_added` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_coupon_product`
+-- Cấu trúc bảng cho bảng `oc_coupon_product`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_coupon_product` (
-  `coupon_product_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_coupon_product` (
+  `coupon_product_id` int(11) NOT NULL,
   `coupon_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  PRIMARY KEY (`coupon_product_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `product_id` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_currency`
+-- Cấu trúc bảng cho bảng `oc_currency`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_currency` (
-  `currency_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_currency` (
+  `currency_id` int(11) NOT NULL,
   `title` varchar(32) NOT NULL,
   `code` varchar(3) NOT NULL,
   `symbol_left` varchar(12) NOT NULL,
@@ -1397,27 +1343,24 @@ CREATE TABLE IF NOT EXISTS `oc_currency` (
   `decimal_place` char(1) NOT NULL,
   `value` float(15,8) NOT NULL,
   `status` tinyint(1) NOT NULL,
-  `date_modified` datetime NOT NULL,
-  PRIMARY KEY (`currency_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+  `date_modified` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_currency`
+-- Đang đổ dữ liệu cho bảng `oc_currency`
 --
 
 INSERT INTO `oc_currency` (`currency_id`, `title`, `code`, `symbol_left`, `symbol_right`, `decimal_place`, `value`, `status`, `date_modified`) VALUES
-(1, 'Pound Sterling', 'GBP', '£', '', '2', 0.77660000, 1, '2017-05-04 05:27:20'),
-(2, 'US Dollar', 'USD', '$', '', '2', 1.00000000, 1, '2017-05-04 10:05:15'),
-(3, 'Euro', 'EUR', '', '€', '2', 0.91769999, 1, '2017-05-04 05:27:20');
+(2, 'US Dollar', 'USD', '$', '', '2', 1.00000000, 1, '2017-07-02 04:07:34');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_customer`
+-- Cấu trúc bảng cho bảng `oc_customer`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_customer` (
-  `customer_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_customer` (
+  `customer_id` int(11) NOT NULL,
   `customer_group_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL DEFAULT '0',
   `language_id` int(11) NOT NULL,
@@ -1439,12 +1382,11 @@ CREATE TABLE IF NOT EXISTS `oc_customer` (
   `safe` tinyint(1) NOT NULL,
   `token` text NOT NULL,
   `code` varchar(40) NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`customer_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+  `date_added` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_customer`
+-- Đang đổ dữ liệu cho bảng `oc_customer`
 --
 
 INSERT INTO `oc_customer` (`customer_id`, `customer_group_id`, `store_id`, `language_id`, `firstname`, `lastname`, `email`, `telephone`, `fax`, `password`, `salt`, `cart`, `wishlist`, `newsletter`, `address_id`, `custom_field`, `ip`, `status`, `approved`, `safe`, `token`, `code`, `date_added`) VALUES
@@ -1457,39 +1399,38 @@ INSERT INTO `oc_customer` (`customer_id`, `customer_group_id`, `store_id`, `lang
 (7, 1, 0, 1, 'webiarch', 'infotech', 'webiarchinfotech@gmail.com', '1234564561', '', 'c69c804f139a3e471f847ca81f6c9727b1e58738', 'xKaKywm9T', NULL, NULL, 0, 7, '', '175.100.147.59', 1, 1, 0, '', '', '2017-04-12 19:39:46'),
 (8, 1, 0, 1, 'harita', 'PATEL', 'haritasavaliya@gmail.com', '5448948949648', '', '332fa401f19992593001397dafad872e4ba4ab72', 'YnKlm849q', NULL, NULL, 0, 8, '', '219.91.138.43', 1, 1, 0, '', '', '2017-04-15 02:12:28'),
 (9, 1, 0, 1, 'abc', 'abc', 'abc@gmail.com', '1234567', '', '9f00653fb3144b3f3c4044d1df8ca23ba15bd240', 'w9Oom2ern', NULL, NULL, 0, 9, '', '175.100.147.10', 1, 1, 0, '', '', '2017-04-15 05:19:49'),
-(10, 1, 0, 1, 'jeni', 'borad', 'jenishborad24@gmail.com', '9979512312', '', '3318d5e411ab6d62d439f4fe89fea2b011237982', 'h6843dySJ', NULL, NULL, 0, 10, '', '175.100.146.16', 1, 1, 0, '', '', '2017-04-19 07:18:26');
+(10, 1, 0, 1, 'jeni', 'borad', 'jenishborad24@gmail.com', '9979512312', '', '3318d5e411ab6d62d439f4fe89fea2b011237982', 'h6843dySJ', NULL, NULL, 0, 10, '', '175.100.146.16', 1, 1, 0, '', '', '2017-04-19 07:18:26'),
+(11, 1, 0, 1, 'Beach', 'Belinda', 'belindatbeach@gmail.com', '7139530148', '7139530148', '9cbe52c473a06099d939bc4f2d17654049a6b792', 'MWMWI15td', NULL, NULL, 1, 11, '', '::1', 1, 1, 0, '', '', '2017-07-04 16:16:25');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_customer_activity`
+-- Cấu trúc bảng cho bảng `oc_customer_activity`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_customer_activity` (
-  `customer_activity_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_customer_activity` (
+  `customer_activity_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `key` varchar(64) NOT NULL,
   `data` text NOT NULL,
   `ip` varchar(40) NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`customer_activity_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `date_added` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_customer_group`
+-- Cấu trúc bảng cho bảng `oc_customer_group`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_customer_group` (
-  `customer_group_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_customer_group` (
+  `customer_group_id` int(11) NOT NULL,
   `approval` int(1) NOT NULL,
-  `sort_order` int(3) NOT NULL,
-  PRIMARY KEY (`customer_group_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  `sort_order` int(3) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_customer_group`
+-- Đang đổ dữ liệu cho bảng `oc_customer_group`
 --
 
 INSERT INTO `oc_customer_group` (`customer_group_id`, `approval`, `sort_order`) VALUES
@@ -1498,19 +1439,18 @@ INSERT INTO `oc_customer_group` (`customer_group_id`, `approval`, `sort_order`) 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_customer_group_description`
+-- Cấu trúc bảng cho bảng `oc_customer_group_description`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_customer_group_description` (
+CREATE TABLE `oc_customer_group_description` (
   `customer_group_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `name` varchar(32) NOT NULL,
-  `description` text NOT NULL,
-  PRIMARY KEY (`customer_group_id`,`language_id`)
+  `description` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_customer_group_description`
+-- Đang đổ dữ liệu cho bảng `oc_customer_group_description`
 --
 
 INSERT INTO `oc_customer_group_description` (`customer_group_id`, `language_id`, `name`, `description`) VALUES
@@ -1520,34 +1460,31 @@ INSERT INTO `oc_customer_group_description` (`customer_group_id`, `language_id`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_customer_history`
+-- Cấu trúc bảng cho bảng `oc_customer_history`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_customer_history` (
-  `customer_history_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_customer_history` (
+  `customer_history_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `comment` text NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`customer_history_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `date_added` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_customer_ip`
+-- Cấu trúc bảng cho bảng `oc_customer_ip`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_customer_ip` (
-  `customer_ip_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_customer_ip` (
+  `customer_ip_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `ip` varchar(40) NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`customer_ip_id`),
-  KEY `ip` (`ip`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
+  `date_added` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_customer_ip`
+-- Đang đổ dữ liệu cho bảng `oc_customer_ip`
 --
 
 INSERT INTO `oc_customer_ip` (`customer_ip_id`, `customer_id`, `ip`, `date_added`) VALUES
@@ -1572,28 +1509,26 @@ INSERT INTO `oc_customer_ip` (`customer_ip_id`, `customer_id`, `ip`, `date_added
 (19, 10, '175.100.146.16', '2017-04-19 07:18:26'),
 (20, 6, '219.91.133.51', '2017-04-21 01:08:04'),
 (21, 6, '175.100.147.234', '2017-04-21 06:14:55'),
-(22, 7, '175.100.147.59', '2017-05-03 23:00:15');
+(22, 7, '175.100.147.59', '2017-05-03 23:00:15'),
+(23, 11, '::1', '2017-07-04 16:16:38');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_customer_login`
+-- Cấu trúc bảng cho bảng `oc_customer_login`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_customer_login` (
-  `customer_login_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_customer_login` (
+  `customer_login_id` int(11) NOT NULL,
   `email` varchar(96) NOT NULL,
   `ip` varchar(40) NOT NULL,
   `total` int(4) NOT NULL,
   `date_added` datetime NOT NULL,
-  `date_modified` datetime NOT NULL,
-  PRIMARY KEY (`customer_login_id`),
-  KEY `email` (`email`),
-  KEY `ip` (`ip`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
+  `date_modified` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_customer_login`
+-- Đang đổ dữ liệu cho bảng `oc_customer_login`
 --
 
 INSERT INTO `oc_customer_login` (`customer_login_id`, `email`, `ip`, `total`, `date_added`, `date_modified`) VALUES
@@ -1609,36 +1544,34 @@ INSERT INTO `oc_customer_login` (`customer_login_id`, `email`, `ip`, `total`, `d
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_customer_online`
+-- Cấu trúc bảng cho bảng `oc_customer_online`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_customer_online` (
+CREATE TABLE `oc_customer_online` (
   `ip` varchar(40) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `url` text NOT NULL,
   `referer` text NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`ip`)
+  `date_added` datetime NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_customer_reward`
+-- Cấu trúc bảng cho bảng `oc_customer_reward`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_customer_reward` (
-  `customer_reward_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_customer_reward` (
+  `customer_reward_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL DEFAULT '0',
   `order_id` int(11) NOT NULL DEFAULT '0',
   `description` text NOT NULL,
   `points` int(8) NOT NULL DEFAULT '0',
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`customer_reward_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+  `date_added` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_customer_reward`
+-- Đang đổ dữ liệu cho bảng `oc_customer_reward`
 --
 
 INSERT INTO `oc_customer_reward` (`customer_reward_id`, `customer_id`, `order_id`, `description`, `points`, `date_added`) VALUES
@@ -1649,11 +1582,11 @@ INSERT INTO `oc_customer_reward` (`customer_reward_id`, `customer_id`, `order_id
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_customer_search`
+-- Cấu trúc bảng cho bảng `oc_customer_search`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_customer_search` (
-  `customer_search_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_customer_search` (
+  `customer_search_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
@@ -1663,28 +1596,26 @@ CREATE TABLE IF NOT EXISTS `oc_customer_search` (
   `description` tinyint(1) NOT NULL,
   `products` int(11) NOT NULL,
   `ip` varchar(40) NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`customer_search_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `date_added` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_customer_transaction`
+-- Cấu trúc bảng cho bảng `oc_customer_transaction`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_customer_transaction` (
-  `customer_transaction_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_customer_transaction` (
+  `customer_transaction_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `description` text NOT NULL,
   `amount` decimal(15,4) NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`customer_transaction_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+  `date_added` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_customer_transaction`
+-- Đang đổ dữ liệu cho bảng `oc_customer_transaction`
 --
 
 INSERT INTO `oc_customer_transaction` (`customer_transaction_id`, `customer_id`, `order_id`, `description`, `amount`, `date_added`) VALUES
@@ -1698,18 +1629,17 @@ INSERT INTO `oc_customer_transaction` (`customer_transaction_id`, `customer_id`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_customer_wishlist`
+-- Cấu trúc bảng cho bảng `oc_customer_wishlist`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_customer_wishlist` (
+CREATE TABLE `oc_customer_wishlist` (
   `customer_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`customer_id`,`product_id`)
+  `date_added` datetime NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_customer_wishlist`
+-- Đang đổ dữ liệu cho bảng `oc_customer_wishlist`
 --
 
 INSERT INTO `oc_customer_wishlist` (`customer_id`, `product_id`, `date_added`) VALUES
@@ -1723,123 +1653,116 @@ INSERT INTO `oc_customer_wishlist` (`customer_id`, `product_id`, `date_added`) V
 (7, 41, '2017-05-03 23:00:15'),
 (7, 48, '2017-05-03 23:00:15'),
 (7, 51, '2017-05-03 23:00:15'),
-(7, 33, '2017-05-03 23:00:15');
+(7, 33, '2017-05-03 23:00:15'),
+(11, 41, '2017-07-05 10:22:36');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_custom_field`
+-- Cấu trúc bảng cho bảng `oc_custom_field`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_custom_field` (
-  `custom_field_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_custom_field` (
+  `custom_field_id` int(11) NOT NULL,
   `type` varchar(32) NOT NULL,
   `value` text NOT NULL,
   `validation` varchar(255) NOT NULL,
   `location` varchar(7) NOT NULL,
   `status` tinyint(1) NOT NULL,
-  `sort_order` int(3) NOT NULL,
-  PRIMARY KEY (`custom_field_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `sort_order` int(3) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_custom_field_customer_group`
+-- Cấu trúc bảng cho bảng `oc_custom_field_customer_group`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_custom_field_customer_group` (
+CREATE TABLE `oc_custom_field_customer_group` (
   `custom_field_id` int(11) NOT NULL,
   `customer_group_id` int(11) NOT NULL,
-  `required` tinyint(1) NOT NULL,
-  PRIMARY KEY (`custom_field_id`,`customer_group_id`)
+  `required` tinyint(1) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_custom_field_description`
+-- Cấu trúc bảng cho bảng `oc_custom_field_description`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_custom_field_description` (
+CREATE TABLE `oc_custom_field_description` (
   `custom_field_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `name` varchar(128) NOT NULL,
-  PRIMARY KEY (`custom_field_id`,`language_id`)
+  `name` varchar(128) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_custom_field_value`
+-- Cấu trúc bảng cho bảng `oc_custom_field_value`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_custom_field_value` (
-  `custom_field_value_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_custom_field_value` (
+  `custom_field_value_id` int(11) NOT NULL,
   `custom_field_id` int(11) NOT NULL,
-  `sort_order` int(3) NOT NULL,
-  PRIMARY KEY (`custom_field_value_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `sort_order` int(3) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_custom_field_value_description`
+-- Cấu trúc bảng cho bảng `oc_custom_field_value_description`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_custom_field_value_description` (
+CREATE TABLE `oc_custom_field_value_description` (
   `custom_field_value_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `custom_field_id` int(11) NOT NULL,
-  `name` varchar(128) NOT NULL,
-  PRIMARY KEY (`custom_field_value_id`,`language_id`)
+  `name` varchar(128) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_download`
+-- Cấu trúc bảng cho bảng `oc_download`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_download` (
-  `download_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_download` (
+  `download_id` int(11) NOT NULL,
   `filename` varchar(160) NOT NULL,
   `mask` varchar(128) NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`download_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `oc_download_description`
---
-
-CREATE TABLE IF NOT EXISTS `oc_download_description` (
-  `download_id` int(11) NOT NULL,
-  `language_id` int(11) NOT NULL,
-  `name` varchar(64) NOT NULL,
-  PRIMARY KEY (`download_id`,`language_id`)
+  `date_added` datetime NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_event`
+-- Cấu trúc bảng cho bảng `oc_download_description`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_event` (
-  `event_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_download_description` (
+  `download_id` int(11) NOT NULL,
+  `language_id` int(11) NOT NULL,
+  `name` varchar(64) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `oc_event`
+--
+
+CREATE TABLE `oc_event` (
+  `event_id` int(11) NOT NULL,
   `code` varchar(32) NOT NULL,
   `trigger` text NOT NULL,
   `action` text NOT NULL,
   `status` tinyint(1) NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`event_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  `date_added` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_event`
+-- Đang đổ dữ liệu cho bảng `oc_event`
 --
 
 INSERT INTO `oc_event` (`event_id`, `code`, `trigger`, `action`, `status`, `date_added`) VALUES
@@ -1848,22 +1771,20 @@ INSERT INTO `oc_event` (`event_id`, `code`, `trigger`, `action`, `status`, `date
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_extension`
+-- Cấu trúc bảng cho bảng `oc_extension`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_extension` (
-  `extension_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_extension` (
+  `extension_id` int(11) NOT NULL,
   `type` varchar(32) NOT NULL,
-  `code` varchar(32) NOT NULL,
-  PRIMARY KEY (`extension_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=42 ;
+  `code` varchar(32) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_extension`
+-- Đang đổ dữ liệu cho bảng `oc_extension`
 --
 
 INSERT INTO `oc_extension` (`extension_id`, `type`, `code`) VALUES
-(1, 'payment', 'cod'),
 (2, 'total', 'shipping'),
 (3, 'total', 'sub_total'),
 (4, 'total', 'tax'),
@@ -1879,7 +1800,7 @@ INSERT INTO `oc_extension` (`extension_id`, `type`, `code`) VALUES
 (14, 'module', 'account'),
 (15, 'total', 'reward'),
 (16, 'total', 'voucher'),
-(17, 'payment', 'free_checkout'),
+(57, 'payment', 'pp_pro'),
 (18, 'module', 'featured'),
 (19, 'module', 'slideshow'),
 (20, 'theme', 'theme_default'),
@@ -1899,23 +1820,27 @@ INSERT INTO `oc_extension` (`extension_id`, `type`, `code`) VALUES
 (38, 'module', 'recent'),
 (39, 'module', 'htmlfeature'),
 (40, 'module', 'special'),
-(41, 'module', 'ocsearchcategory');
+(41, 'module', 'ocsearchcategory'),
+(44, 'payment', 'skrill'),
+(45, 'payment', 'web_payment_software'),
+(56, 'payment', 'pp_pro_iframe'),
+(55, 'payment', 'pp_payflow_iframe'),
+(52, 'payment', 'pp_standard');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_filter`
+-- Cấu trúc bảng cho bảng `oc_filter`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_filter` (
-  `filter_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_filter` (
+  `filter_id` int(11) NOT NULL,
   `filter_group_id` int(11) NOT NULL,
-  `sort_order` int(3) NOT NULL,
-  PRIMARY KEY (`filter_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+  `sort_order` int(3) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_filter`
+-- Đang đổ dữ liệu cho bảng `oc_filter`
 --
 
 INSERT INTO `oc_filter` (`filter_id`, `filter_group_id`, `sort_order`) VALUES
@@ -1929,19 +1854,18 @@ INSERT INTO `oc_filter` (`filter_id`, `filter_group_id`, `sort_order`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_filter_description`
+-- Cấu trúc bảng cho bảng `oc_filter_description`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_filter_description` (
+CREATE TABLE `oc_filter_description` (
   `filter_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `filter_group_id` int(11) NOT NULL,
-  `name` varchar(64) NOT NULL,
-  PRIMARY KEY (`filter_id`,`language_id`)
+  `name` varchar(64) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_filter_description`
+-- Đang đổ dữ liệu cho bảng `oc_filter_description`
 --
 
 INSERT INTO `oc_filter_description` (`filter_id`, `language_id`, `filter_group_id`, `name`) VALUES
@@ -1961,17 +1885,16 @@ INSERT INTO `oc_filter_description` (`filter_id`, `language_id`, `filter_group_i
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_filter_group`
+-- Cấu trúc bảng cho bảng `oc_filter_group`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_filter_group` (
-  `filter_group_id` int(11) NOT NULL AUTO_INCREMENT,
-  `sort_order` int(3) NOT NULL,
-  PRIMARY KEY (`filter_group_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+CREATE TABLE `oc_filter_group` (
+  `filter_group_id` int(11) NOT NULL,
+  `sort_order` int(3) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_filter_group`
+-- Đang đổ dữ liệu cho bảng `oc_filter_group`
 --
 
 INSERT INTO `oc_filter_group` (`filter_group_id`, `sort_order`) VALUES
@@ -1981,18 +1904,17 @@ INSERT INTO `oc_filter_group` (`filter_group_id`, `sort_order`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_filter_group_description`
+-- Cấu trúc bảng cho bảng `oc_filter_group_description`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_filter_group_description` (
+CREATE TABLE `oc_filter_group_description` (
   `filter_group_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `name` varchar(64) NOT NULL,
-  PRIMARY KEY (`filter_group_id`,`language_id`)
+  `name` varchar(64) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_filter_group_description`
+-- Đang đổ dữ liệu cho bảng `oc_filter_group_description`
 --
 
 INSERT INTO `oc_filter_group_description` (`filter_group_id`, `language_id`, `name`) VALUES
@@ -2004,20 +1926,19 @@ INSERT INTO `oc_filter_group_description` (`filter_group_id`, `language_id`, `na
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_geo_zone`
+-- Cấu trúc bảng cho bảng `oc_geo_zone`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_geo_zone` (
-  `geo_zone_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_geo_zone` (
+  `geo_zone_id` int(11) NOT NULL,
   `name` varchar(32) NOT NULL,
   `description` varchar(255) NOT NULL,
   `date_modified` datetime NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`geo_zone_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+  `date_added` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_geo_zone`
+-- Đang đổ dữ liệu cho bảng `oc_geo_zone`
 --
 
 INSERT INTO `oc_geo_zone` (`geo_zone_id`, `name`, `description`, `date_modified`, `date_added`) VALUES
@@ -2028,19 +1949,18 @@ INSERT INTO `oc_geo_zone` (`geo_zone_id`, `name`, `description`, `date_modified`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_information`
+-- Cấu trúc bảng cho bảng `oc_information`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_information` (
-  `information_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_information` (
+  `information_id` int(11) NOT NULL,
   `bottom` int(1) NOT NULL DEFAULT '0',
   `sort_order` int(3) NOT NULL DEFAULT '0',
-  `status` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`information_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+  `status` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_information`
+-- Đang đổ dữ liệu cho bảng `oc_information`
 --
 
 INSERT INTO `oc_information` (`information_id`, `bottom`, `sort_order`, `status`) VALUES
@@ -2052,22 +1972,21 @@ INSERT INTO `oc_information` (`information_id`, `bottom`, `sort_order`, `status`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_information_description`
+-- Cấu trúc bảng cho bảng `oc_information_description`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_information_description` (
+CREATE TABLE `oc_information_description` (
   `information_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `title` varchar(64) NOT NULL,
   `description` text NOT NULL,
   `meta_title` varchar(255) NOT NULL,
   `meta_description` varchar(255) NOT NULL,
-  `meta_keyword` varchar(255) NOT NULL,
-  PRIMARY KEY (`information_id`,`language_id`)
+  `meta_keyword` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_information_description`
+-- Đang đổ dữ liệu cho bảng `oc_information_description`
 --
 
 INSERT INTO `oc_information_description` (`information_id`, `language_id`, `title`, `description`, `meta_title`, `meta_description`, `meta_keyword`) VALUES
@@ -2083,18 +2002,17 @@ INSERT INTO `oc_information_description` (`information_id`, `language_id`, `titl
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_information_to_layout`
+-- Cấu trúc bảng cho bảng `oc_information_to_layout`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_information_to_layout` (
+CREATE TABLE `oc_information_to_layout` (
   `information_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
-  `layout_id` int(11) NOT NULL,
-  PRIMARY KEY (`information_id`,`store_id`)
+  `layout_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_information_to_layout`
+-- Đang đổ dữ liệu cho bảng `oc_information_to_layout`
 --
 
 INSERT INTO `oc_information_to_layout` (`information_id`, `store_id`, `layout_id`) VALUES
@@ -2106,17 +2024,16 @@ INSERT INTO `oc_information_to_layout` (`information_id`, `store_id`, `layout_id
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_information_to_store`
+-- Cấu trúc bảng cho bảng `oc_information_to_store`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_information_to_store` (
+CREATE TABLE `oc_information_to_store` (
   `information_id` int(11) NOT NULL,
-  `store_id` int(11) NOT NULL,
-  PRIMARY KEY (`information_id`,`store_id`)
+  `store_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_information_to_store`
+-- Đang đổ dữ liệu cho bảng `oc_information_to_store`
 --
 
 INSERT INTO `oc_information_to_store` (`information_id`, `store_id`) VALUES
@@ -2128,44 +2045,40 @@ INSERT INTO `oc_information_to_store` (`information_id`, `store_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_language`
+-- Cấu trúc bảng cho bảng `oc_language`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_language` (
-  `language_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_language` (
+  `language_id` int(11) NOT NULL,
   `name` varchar(32) NOT NULL,
   `code` varchar(5) NOT NULL,
   `locale` varchar(255) NOT NULL,
   `image` varchar(64) NOT NULL,
   `directory` varchar(32) NOT NULL,
   `sort_order` int(3) NOT NULL DEFAULT '0',
-  `status` tinyint(1) NOT NULL,
-  PRIMARY KEY (`language_id`),
-  KEY `name` (`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+  `status` tinyint(1) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_language`
+-- Đang đổ dữ liệu cho bảng `oc_language`
 --
 
 INSERT INTO `oc_language` (`language_id`, `name`, `code`, `locale`, `image`, `directory`, `sort_order`, `status`) VALUES
-(1, 'English', 'en-gb', 'en-US,en_US.UTF-8,en_US,en-gb,english', 'gb.png', 'english', 1, 1),
-(2, 'Arabic', 'ar', 'ar_ua-arabic', '', '', 1, 1);
+(1, 'English', 'en-gb', 'en-US,en_US.UTF-8,en_US,en-gb,english', 'gb.png', 'english', 1, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_layout`
+-- Cấu trúc bảng cho bảng `oc_layout`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_layout` (
-  `layout_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(64) NOT NULL,
-  PRIMARY KEY (`layout_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+CREATE TABLE `oc_layout` (
+  `layout_id` int(11) NOT NULL,
+  `name` varchar(64) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_layout`
+-- Đang đổ dữ liệu cho bảng `oc_layout`
 --
 
 INSERT INTO `oc_layout` (`layout_id`, `name`) VALUES
@@ -2187,20 +2100,19 @@ INSERT INTO `oc_layout` (`layout_id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_layout_module`
+-- Cấu trúc bảng cho bảng `oc_layout_module`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_layout_module` (
-  `layout_module_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_layout_module` (
+  `layout_module_id` int(11) NOT NULL,
   `layout_id` int(11) NOT NULL,
   `code` varchar(64) NOT NULL,
   `position` varchar(14) NOT NULL,
-  `sort_order` int(3) NOT NULL,
-  PRIMARY KEY (`layout_module_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1434 ;
+  `sort_order` int(3) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_layout_module`
+-- Đang đổ dữ liệu cho bảng `oc_layout_module`
 --
 
 INSERT INTO `oc_layout_module` (`layout_module_id`, `layout_id`, `code`, `position`, `sort_order`) VALUES
@@ -2333,19 +2245,18 @@ INSERT INTO `oc_layout_module` (`layout_module_id`, `layout_id`, `code`, `positi
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_layout_route`
+-- Cấu trúc bảng cho bảng `oc_layout_route`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_layout_route` (
-  `layout_route_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_layout_route` (
+  `layout_route_id` int(11) NOT NULL,
   `layout_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
-  `route` varchar(64) NOT NULL,
-  PRIMARY KEY (`layout_route_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=215 ;
+  `route` varchar(64) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_layout_route`
+-- Đang đổ dữ liệu cho bảng `oc_layout_route`
 --
 
 INSERT INTO `oc_layout_route` (`layout_route_id`, `layout_id`, `store_id`, `route`) VALUES
@@ -2368,17 +2279,16 @@ INSERT INTO `oc_layout_route` (`layout_route_id`, `layout_id`, `store_id`, `rout
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_length_class`
+-- Cấu trúc bảng cho bảng `oc_length_class`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_length_class` (
-  `length_class_id` int(11) NOT NULL AUTO_INCREMENT,
-  `value` decimal(15,8) NOT NULL,
-  PRIMARY KEY (`length_class_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+CREATE TABLE `oc_length_class` (
+  `length_class_id` int(11) NOT NULL,
+  `value` decimal(15,8) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_length_class`
+-- Đang đổ dữ liệu cho bảng `oc_length_class`
 --
 
 INSERT INTO `oc_length_class` (`length_class_id`, `value`) VALUES
@@ -2389,19 +2299,18 @@ INSERT INTO `oc_length_class` (`length_class_id`, `value`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_length_class_description`
+-- Cấu trúc bảng cho bảng `oc_length_class_description`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_length_class_description` (
+CREATE TABLE `oc_length_class_description` (
   `length_class_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `title` varchar(32) NOT NULL,
-  `unit` varchar(4) NOT NULL,
-  PRIMARY KEY (`length_class_id`,`language_id`)
+  `unit` varchar(4) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_length_class_description`
+-- Đang đổ dữ liệu cho bảng `oc_length_class_description`
 --
 
 INSERT INTO `oc_length_class_description` (`length_class_id`, `language_id`, `title`, `unit`) VALUES
@@ -2415,11 +2324,11 @@ INSERT INTO `oc_length_class_description` (`length_class_id`, `language_id`, `ti
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_location`
+-- Cấu trúc bảng cho bảng `oc_location`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_location` (
-  `location_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_location` (
+  `location_id` int(11) NOT NULL,
   `name` varchar(32) NOT NULL,
   `address` text NOT NULL,
   `telephone` varchar(32) NOT NULL,
@@ -2427,27 +2336,24 @@ CREATE TABLE IF NOT EXISTS `oc_location` (
   `geocode` varchar(32) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
   `open` text NOT NULL,
-  `comment` text NOT NULL,
-  PRIMARY KEY (`location_id`),
-  KEY `name` (`name`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `comment` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_manufacturer`
+-- Cấu trúc bảng cho bảng `oc_manufacturer`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_manufacturer` (
-  `manufacturer_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_manufacturer` (
+  `manufacturer_id` int(11) NOT NULL,
   `name` varchar(64) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
-  `sort_order` int(3) NOT NULL,
-  PRIMARY KEY (`manufacturer_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+  `sort_order` int(3) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_manufacturer`
+-- Đang đổ dữ liệu cho bảng `oc_manufacturer`
 --
 
 INSERT INTO `oc_manufacturer` (`manufacturer_id`, `name`, `image`, `sort_order`) VALUES
@@ -2461,17 +2367,16 @@ INSERT INTO `oc_manufacturer` (`manufacturer_id`, `name`, `image`, `sort_order`)
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_manufacturer_to_store`
+-- Cấu trúc bảng cho bảng `oc_manufacturer_to_store`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_manufacturer_to_store` (
+CREATE TABLE `oc_manufacturer_to_store` (
   `manufacturer_id` int(11) NOT NULL,
-  `store_id` int(11) NOT NULL,
-  PRIMARY KEY (`manufacturer_id`,`store_id`)
+  `store_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_manufacturer_to_store`
+-- Đang đổ dữ liệu cho bảng `oc_manufacturer_to_store`
 --
 
 INSERT INTO `oc_manufacturer_to_store` (`manufacturer_id`, `store_id`) VALUES
@@ -2485,71 +2390,66 @@ INSERT INTO `oc_manufacturer_to_store` (`manufacturer_id`, `store_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_marketing`
+-- Cấu trúc bảng cho bảng `oc_marketing`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_marketing` (
-  `marketing_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_marketing` (
+  `marketing_id` int(11) NOT NULL,
   `name` varchar(32) NOT NULL,
   `description` text NOT NULL,
   `code` varchar(64) NOT NULL,
   `clicks` int(5) NOT NULL DEFAULT '0',
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`marketing_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `date_added` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_menu`
+-- Cấu trúc bảng cho bảng `oc_menu`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_menu` (
-  `menu_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_menu` (
+  `menu_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
   `type` varchar(6) NOT NULL,
   `link` varchar(255) NOT NULL,
   `sort_order` int(3) NOT NULL,
-  `status` tinyint(1) NOT NULL,
-  PRIMARY KEY (`menu_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `oc_menu_description`
---
-
-CREATE TABLE IF NOT EXISTS `oc_menu_description` (
-  `menu_id` int(11) NOT NULL,
-  `language_id` int(11) NOT NULL,
-  `name` varchar(64) NOT NULL,
-  PRIMARY KEY (`menu_id`,`language_id`)
+  `status` tinyint(1) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_menu_module`
+-- Cấu trúc bảng cho bảng `oc_menu_description`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_menu_module` (
+CREATE TABLE `oc_menu_description` (
+  `menu_id` int(11) NOT NULL,
+  `language_id` int(11) NOT NULL,
+  `name` varchar(64) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `oc_menu_module`
+--
+
+CREATE TABLE `oc_menu_module` (
   `menu_module_id` int(11) NOT NULL,
   `menu_id` int(11) NOT NULL,
   `code` varchar(64) NOT NULL,
-  `sort_order` int(3) NOT NULL,
-  PRIMARY KEY (`menu_module_id`),
-  KEY `menu_id` (`menu_id`)
+  `sort_order` int(3) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_modification`
+-- Cấu trúc bảng cho bảng `oc_modification`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_modification` (
-  `modification_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_modification` (
+  `modification_id` int(11) NOT NULL,
   `name` varchar(64) NOT NULL,
   `code` varchar(64) NOT NULL,
   `author` varchar(64) NOT NULL,
@@ -2557,61 +2457,58 @@ CREATE TABLE IF NOT EXISTS `oc_modification` (
   `link` varchar(255) NOT NULL,
   `xml` mediumtext NOT NULL,
   `status` tinyint(1) NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`modification_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `date_added` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_module`
+-- Cấu trúc bảng cho bảng `oc_module`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_module` (
-  `module_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_module` (
+  `module_id` int(11) NOT NULL,
   `name` varchar(64) NOT NULL,
   `code` varchar(32) NOT NULL,
-  `setting` text NOT NULL,
-  PRIMARY KEY (`module_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=58 ;
+  `setting` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_module`
+-- Đang đổ dữ liệu cho bảng `oc_module`
 --
 
 INSERT INTO `oc_module` (`module_id`, `name`, `code`, `setting`) VALUES
-(29, 'Home Page Brand Logos', 'carousel', '{"name":"Home Page Brand Logos","banner_id":"8","width":"200","height":"100","status":"1"}'),
-(28, 'Featured Products', 'featured', '{"name":"Featured Products","product_name":"","product":["47","41","48","36","34","32"],"limit":"6","width":"343","height":"392","status":"1"}'),
-(27, 'Home Page Slider', 'slideshow', '{"name":"Home Page Slider","banner_id":"9","width":"1470","height":"414","status":"1"}'),
-(33, 'Latest Products', 'latest', '{"name":"Latest Products","limit":"10","width":"343","height":"392","status":"1"}'),
-(45, 'html_shipping', 'html', '{"name":"html_shipping","module_description":{"2":{"title":"","description":"&lt;!--Delivery Information --&gt;\\r\\n&lt;div class=&quot;deliveryinfo&quot;&gt;\\r\\n    &lt;div class=&quot;row&quot;&gt;\\r\\n        &lt;div class=&quot;col-md-3 col-sm-6&quot;&gt;\\r\\n            &lt;ul&gt;\\r\\n                &lt;li class=&quot;text-center&quot;&gt;\\r\\n                    &lt;img src=&quot;image\\/catalog\\/delivery-info\\/d1-60x60.png&quot; class=&quot;img-responsive&quot; alt=&quot;support&quot;&gt;\\r\\n                &lt;\\/li&gt;\\r\\n                &lt;li&gt;\\r\\n                    &lt;h4&gt;support 24\\/7&lt;\\/h4&gt;\\r\\n                    &lt;p&gt;We support online 24 hours a day&lt;\\/p&gt;\\r\\n                &lt;\\/li&gt;   \\r\\n            &lt;\\/ul&gt;\\r\\n        &lt;\\/div&gt;\\r\\n        &lt;div class=&quot;col-md-3 col-sm-6&quot;&gt;\\r\\n            &lt;ul&gt;\\r\\n                 &lt;li class=&quot;text-center&quot;&gt;\\r\\n                    &lt;img src=&quot;image\\/catalog\\/delivery-info\\/d2-60x60.png&quot; class=&quot;img-responsive&quot; alt=&quot;free return&quot;&gt;\\r\\n                 &lt;\\/li&gt;\\r\\n                &lt;li&gt;\\r\\n                    &lt;h4&gt;free return&lt;\\/h4&gt; \\r\\n                    &lt;p&gt;30 days money back guarantee!&lt;\\/p&gt;\\r\\n                  &lt;\\/li&gt;   \\r\\n            &lt;\\/ul&gt;\\r\\n        &lt;\\/div&gt;\\r\\n        &lt;div class=&quot;col-md-3 col-sm-6&quot;&gt;\\r\\n             &lt;ul&gt;\\r\\n                 &lt;li class=&quot;text-center&quot;&gt;\\r\\n                    &lt;img src=&quot;image\\/catalog\\/delivery-info\\/d3-60x60.png&quot; class=&quot;img-responsive&quot; alt=&quot;shipping&quot;&gt;\\r\\n                 &lt;\\/li&gt;\\r\\n                &lt;li&gt;\\r\\n                    &lt;h4&gt;free shipping&lt;\\/h4&gt;\\r\\n                    &lt;p&gt;Free shipping on all order&lt;\\/p&gt;\\r\\n                &lt;\\/li&gt;   \\r\\n            &lt;\\/ul&gt;\\r\\n        &lt;\\/div&gt;\\r\\n        &lt;div class=&quot;col-md-3 col-sm-6&quot;&gt;\\r\\n            &lt;ul&gt;\\r\\n                &lt;li class=&quot;text-center&quot;&gt;\\r\\n                    &lt;img src=&quot;image\\/catalog\\/delivery-info\\/d4-60x60.png&quot; class=&quot;img-responsive&quot; alt=&quot;safe shipping&quot;&gt;\\r\\n                &lt;\\/li&gt;\\r\\n                &lt;li&gt;\\r\\n                    &lt;h4&gt;Safe Shopping&lt;\\/h4&gt;\\r\\n                    &lt;p&gt;Safe Shopping guarantee&lt;\\/p&gt;\\r\\n                &lt;\\/li&gt;   \\r\\n            &lt;\\/ul&gt;\\r\\n        &lt;\\/div&gt;\\r\\n    &lt;\\/div&gt;\\r\\n&lt;\\/div&gt;\\r\\n&lt;!--product top content over--&gt;"},"1":{"title":"","description":"&lt;!--Delivery Information --&gt;\\r\\n&lt;div class=&quot;deliveryinfo&quot;&gt;\\r\\n    &lt;div class=&quot;row&quot;&gt;\\r\\n        &lt;div class=&quot;col-md-3 col-sm-6&quot;&gt;\\r\\n            &lt;ul&gt;\\r\\n                &lt;li class=&quot;text-center&quot;&gt;\\r\\n                    &lt;img src=&quot;image\\/catalog\\/delivery-info\\/d1-60x60.png&quot; class=&quot;img-responsive&quot; alt=&quot;support&quot;&gt;\\r\\n                &lt;\\/li&gt;\\r\\n                &lt;li&gt;\\r\\n                    &lt;h4&gt;support 24\\/7&lt;\\/h4&gt;\\r\\n                    &lt;p&gt;We support online 24 hours a day&lt;\\/p&gt;\\r\\n                &lt;\\/li&gt;   \\r\\n            &lt;\\/ul&gt;\\r\\n        &lt;\\/div&gt;\\r\\n        &lt;div class=&quot;col-md-3 col-sm-6&quot;&gt;\\r\\n            &lt;ul&gt;\\r\\n                 &lt;li class=&quot;text-center&quot;&gt;\\r\\n                    &lt;img src=&quot;image\\/catalog\\/delivery-info\\/d2-60x60.png&quot; class=&quot;img-responsive&quot; alt=&quot;free return&quot;&gt;\\r\\n                 &lt;\\/li&gt;\\r\\n                &lt;li&gt;\\r\\n                    &lt;h4&gt;free return&lt;\\/h4&gt; \\r\\n                    &lt;p&gt;30 days money back guarantee!&lt;\\/p&gt;\\r\\n                  &lt;\\/li&gt;   \\r\\n            &lt;\\/ul&gt;\\r\\n        &lt;\\/div&gt;\\r\\n        &lt;div class=&quot;col-md-3 col-sm-6&quot;&gt;\\r\\n             &lt;ul&gt;\\r\\n                 &lt;li class=&quot;text-center&quot;&gt;\\r\\n                    &lt;img src=&quot;image\\/catalog\\/delivery-info\\/d3-60x60.png&quot; class=&quot;img-responsive&quot; alt=&quot;shipping&quot;&gt;\\r\\n                 &lt;\\/li&gt;\\r\\n                &lt;li&gt;\\r\\n                    &lt;h4&gt;free shipping&lt;\\/h4&gt;\\r\\n                    &lt;p&gt;Free shipping on all order&lt;\\/p&gt;\\r\\n                &lt;\\/li&gt;   \\r\\n            &lt;\\/ul&gt;\\r\\n        &lt;\\/div&gt;\\r\\n        &lt;div class=&quot;col-md-3 col-sm-6&quot;&gt;\\r\\n            &lt;ul&gt;\\r\\n                &lt;li class=&quot;text-center&quot;&gt;\\r\\n                    &lt;img src=&quot;image\\/catalog\\/delivery-info\\/d4-60x60.png&quot; class=&quot;img-responsive&quot; alt=&quot;safe shipping&quot;&gt;\\r\\n                &lt;\\/li&gt;\\r\\n                &lt;li&gt;\\r\\n                    &lt;h4&gt;Safe Shopping&lt;\\/h4&gt;\\r\\n                    &lt;p&gt;Safe Shopping guarantee&lt;\\/p&gt;\\r\\n                &lt;\\/li&gt;   \\r\\n            &lt;\\/ul&gt;\\r\\n        &lt;\\/div&gt;\\r\\n    &lt;\\/div&gt;\\r\\n&lt;\\/div&gt;\\r\\n&lt;!--product top content over--&gt;"}},"status":"1"}'),
-(43, 'Latest Blog', 'blogger', '{"module_id":"43","name":"Latest Blog","status":"1","width":"1170","height":"662","limit":"5","char_limit":"130","comments":"1","login":"0","auto_approve":"1"}'),
-(48, 'left-banner', 'banner', '{"name":"left-banner","banner_id":"18","width":"270","height":"400","status":"1"}'),
-(49, 'Recent products', 'recent', '{"name":"Recent products","product_name":"","product":["42"],"limit":"1","width":"256","height":"316","status":"1"}'),
-(50, 'Testimonial', 'html', '{"name":"Testimonial","module_description":{"2":{"title":"","description":"&lt;div class=&quot;testimonial clearfix &quot; data-spy=&quot;responsive-slider&quot;&gt;\\r\\n&lt;h3 class=&quot;title&quot;&gt;&lt;i class=&quot;fa fa-bars&quot;&gt;&lt;\\/i&gt;testimonial&lt;\\/h3&gt;\\r\\n    &lt;hr&gt;\\r\\n  &lt;div id=&quot;owl-testimonial&quot; class=&quot;owl-carousel p-slider&quot;&gt;\\r\\n&lt;div class=&quot;item&quot;&gt;\\r\\n   &lt;ul class=&quot;list-inline list-unstyled&quot;&gt;\\r\\n&lt;li&gt;\\r\\n     &lt;img src=&quot;image\\/catalog\\/testimonial\\/testiminial1.png&quot; class=&quot;lazyOwl img-responsive &quot; alt=&quot;testimonial-1.jpg&quot;&gt;\\r\\n&lt;\\/li&gt;\\r\\n &lt;li class=&quot;info&quot;&gt;\\r\\n        &lt;h4&gt;JOHN DOE&lt;\\/h4&gt;\\r\\n        &lt;span&gt;webiarch&lt;\\/span&gt;\\r\\n      &lt;\\/li&gt;\\r\\n&lt;\\/ul&gt;\\r\\n      &lt;div class=&quot;carousel-content&quot;&gt; &lt;span&gt;Duis faucibus enim vitae nunc molestie, nec facilisis arcu pulvinar.&lt;br&gt;\\r\\n        Nullam mattis arcu convallis, bibendum dui ac, laoreet est.Vivamus interdum earcu convallis, bibendum dui ac, laoreet est. &lt;br&gt;\\r\\n        Vivamus interdum earcu convallis.&lt;\\/span&gt; &lt;\\/div&gt;\\r\\n   &lt;\\/div&gt;\\r\\n&lt;div class=&quot;item&quot;&gt;\\r\\n\\r\\n     &lt;ul class=&quot;list-inline list-unstyled&quot;&gt;\\r\\n&lt;li&gt;\\r\\n     &lt;img src=&quot;image\\/catalog\\/testimonial\\/testiminial2.png&quot; class=&quot;lazyOwl img-responsive &quot; alt=&quot;testimonial-1.jpg&quot;&gt;\\r\\n&lt;\\/li&gt;\\r\\n &lt;li class=&quot;info&quot;&gt;\\r\\n        &lt;h4&gt;JOHN DOE&lt;\\/h4&gt;\\r\\n       &lt;span&gt;webiarch&lt;\\/span&gt;\\r\\n      &lt;\\/li&gt;\\r\\n&lt;\\/ul&gt;\\r\\n      &lt;div class=&quot;carousel-content&quot;&gt; &lt;span&gt;Duis faucibus enim vitae nunc molestie, nec facilisis arcu pulvinar.&lt;br&gt;\\r\\n        Nullam mattis arcu convallis, bibendum dui ac, laoreet est.Vivamus interdum earcu convallis, bibendum dui ac, laoreet est.&lt;br&gt;\\r\\n        Vivamus interdum earcu convallis.&lt;\\/span&gt; &lt;\\/div&gt;\\r\\n&lt;\\/div&gt;\\r\\n&lt;div class=&quot;item&quot;&gt;\\r\\n      &lt;ul class=&quot;list-inline list-unstyled&quot;&gt;\\r\\n&lt;li&gt;\\r\\n     &lt;img src=&quot;image\\/catalog\\/testimonial\\/testiminial3.png&quot; class=&quot;lazyOwl img-responsive &quot; alt=&quot;testimonial-1.jpg&quot;&gt;\\r\\n&lt;\\/li&gt;\\r\\n &lt;li class=&quot;info&quot;&gt;\\r\\n        &lt;h4&gt;JOHN DOE&lt;\\/h4&gt;\\r\\n        &lt;span&gt;webiarch&lt;\\/span&gt;\\r\\n      &lt;\\/li&gt;\\r\\n&lt;\\/ul&gt;\\r\\n      &lt;div class=&quot;carousel-content&quot;&gt; &lt;span&gt;Duis faucibus enim vitae nunc molestie, nec facilisis arcu pulvinar.&lt;br&gt;\\r\\n        Nullam mattis arcu convallis, bibendum dui ac, laoreet est.&lt;br&gt;\\r\\n        Vivamus interdum earcu convallis, bibendum dui ac, laoreet est. Vivamus interdum earcu convallis.&lt;\\/span&gt; &lt;\\/div&gt;\\r\\n  &lt;\\/div&gt;\\r\\n&lt;\\/div&gt;\\r\\n&lt;\\/div&gt;"},"1":{"title":"","description":"&lt;div class=&quot;testimonial clearfix &quot; data-spy=&quot;responsive-slider&quot;&gt;\\r\\n&lt;h3 class=&quot;title&quot;&gt;&lt;i class=&quot;fa fa-bars&quot;&gt;&lt;\\/i&gt;testimonial&lt;\\/h3&gt;\\r\\n    &lt;hr&gt;\\r\\n  &lt;div id=&quot;owl-testimonial&quot; class=&quot;owl-carousel p-slider&quot;&gt;\\r\\n&lt;div class=&quot;item&quot;&gt;\\r\\n   &lt;ul class=&quot;list-inline list-unstyled&quot;&gt;\\r\\n&lt;li&gt;\\r\\n     &lt;img src=&quot;image\\/catalog\\/testimonial\\/testiminial1.png&quot; class=&quot;lazyOwl img-responsive &quot; alt=&quot;testimonial-1.jpg&quot;&gt;\\r\\n&lt;\\/li&gt;\\r\\n &lt;li class=&quot;info&quot;&gt;\\r\\n        &lt;h4&gt;JOHN DOE&lt;\\/h4&gt;\\r\\n        &lt;span&gt;webiarch&lt;\\/span&gt;\\r\\n      &lt;\\/li&gt;\\r\\n&lt;\\/ul&gt;\\r\\n      &lt;div class=&quot;carousel-content&quot;&gt; &lt;span&gt;Duis faucibus enim vitae nunc molestie, nec facilisis arcu pulvinar.&lt;br&gt;\\r\\n        Nullam mattis arcu convallis, bibendum dui ac, laoreet est.Vivamus interdum earcu convallis, bibendum dui ac, laoreet est. &lt;br&gt;\\r\\n        Vivamus interdum earcu convallis.&lt;\\/span&gt; &lt;\\/div&gt;\\r\\n   &lt;\\/div&gt;\\r\\n&lt;div class=&quot;item&quot;&gt;\\r\\n\\r\\n     &lt;ul class=&quot;list-inline list-unstyled&quot;&gt;\\r\\n&lt;li&gt;\\r\\n     &lt;img src=&quot;image\\/catalog\\/testimonial\\/testiminial2.png&quot; class=&quot;lazyOwl img-responsive &quot; alt=&quot;testimonial-1.jpg&quot;&gt;\\r\\n&lt;\\/li&gt;\\r\\n &lt;li class=&quot;info&quot;&gt;\\r\\n        &lt;h4&gt;JOHN DOE&lt;\\/h4&gt;\\r\\n       &lt;span&gt;webiarch&lt;\\/span&gt;\\r\\n      &lt;\\/li&gt;\\r\\n&lt;\\/ul&gt;\\r\\n      &lt;div class=&quot;carousel-content&quot;&gt; &lt;span&gt;Duis faucibus enim vitae nunc molestie, nec facilisis arcu pulvinar.&lt;br&gt;\\r\\n        Nullam mattis arcu convallis, bibendum dui ac, laoreet est.Vivamus interdum earcu convallis, bibendum dui ac, laoreet est.&lt;br&gt;\\r\\n        Vivamus interdum earcu convallis.&lt;\\/span&gt; &lt;\\/div&gt;\\r\\n&lt;\\/div&gt;\\r\\n&lt;div class=&quot;item&quot;&gt;\\r\\n      &lt;ul class=&quot;list-inline list-unstyled&quot;&gt;\\r\\n&lt;li&gt;\\r\\n     &lt;img src=&quot;image\\/catalog\\/testimonial\\/testiminial3.png&quot; class=&quot;lazyOwl img-responsive &quot; alt=&quot;testimonial-1.jpg&quot;&gt;\\r\\n&lt;\\/li&gt;\\r\\n &lt;li class=&quot;info&quot;&gt;\\r\\n        &lt;h4&gt;JOHN DOE&lt;\\/h4&gt;\\r\\n        &lt;span&gt;webiarch&lt;\\/span&gt;\\r\\n      &lt;\\/li&gt;\\r\\n&lt;\\/ul&gt;\\r\\n      &lt;div class=&quot;carousel-content&quot;&gt; &lt;span&gt;Duis faucibus enim vitae nunc molestie, nec facilisis arcu pulvinar.&lt;br&gt;\\r\\n        Nullam mattis arcu convallis, bibendum dui ac, laoreet est.&lt;br&gt;\\r\\n        Vivamus interdum earcu convallis, bibendum dui ac, laoreet est. Vivamus interdum earcu convallis.&lt;\\/span&gt; &lt;\\/div&gt;\\r\\n  &lt;\\/div&gt;\\r\\n&lt;\\/div&gt;\\r\\n&lt;\\/div&gt;"}},"status":"1"}'),
-(51, 'Follow', 'html', '{"name":"Follow","module_description":{"2":{"title":"","description":"&lt;div class=&quot;follow&quot;&gt;\\r\\n&lt;h3 class=&quot;title&quot;&gt;&lt;i class=&quot;fa fa-bars&quot;&gt;&lt;\\/i&gt;follow&lt;\\/h3&gt;\\r\\n    &lt;hr&gt;\\r\\n&lt;ul class=&quot;list-inline list-unstyle&quot;&gt;\\r\\n   &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;fa fa-facebook&quot;&gt;&lt;\\/i&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n   &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;fa fa-twitter&quot;&gt;&lt;\\/i&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n   &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;fa fa-instagram&quot;&gt;&lt;\\/i&gt;&lt;\\/a&gt;&lt;a&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n   &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;fa fa-linkedin&quot;&gt;&lt;\\/i&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n&lt;\\/ul&gt;\\r\\n&lt;\\/div&gt;"},"1":{"title":"","description":"&lt;div class=&quot;follow&quot;&gt;\\r\\n&lt;h3 class=&quot;title&quot;&gt;&lt;i class=&quot;fa fa-bars&quot;&gt;&lt;\\/i&gt;follow&lt;\\/h3&gt;\\r\\n    &lt;hr&gt;\\r\\n&lt;ul class=&quot;list-inline list-unstyle&quot;&gt;\\r\\n   &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;fa fa-facebook&quot;&gt;&lt;\\/i&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n   &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;fa fa-twitter&quot;&gt;&lt;\\/i&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n   &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;fa fa-instagram&quot;&gt;&lt;\\/i&gt;&lt;\\/a&gt;&lt;a&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n   &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;fa fa-linkedin&quot;&gt;&lt;\\/i&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n&lt;\\/ul&gt;\\r\\n&lt;\\/div&gt;"}},"status":"1"}'),
-(52, 'Inastafeed', 'html', '{"name":"Inastafeed","module_description":{"2":{"title":"","description":"&lt;section class=&quot;insta-content fullwidth hidden-xs&quot;&gt;\\r\\n&lt;div class=&quot;title-pad&quot;&gt;\\r\\n &lt;h3 class=&quot;title&quot;&gt;&lt;i class=&quot;fa fa-bars&quot;&gt;&lt;\\/i&gt;INSTAGRAM&lt;\\/h3&gt;\\r\\n                &lt;hr&gt;\\r\\n&lt;\\/div&gt;\\r\\n    &lt;div class=&quot;container-fluid&quot;&gt;\\r\\n        &lt;div class=&quot;row&quot;&gt;\\r\\n            &lt;div class=&quot;instafeed-wrapper&quot;&gt;\\r\\n                \\r\\n                &lt;div id=&quot;instafeed&quot; class=&quot;instafeed&quot;&gt;&lt;\\/div&gt;\\r\\n            &lt;\\/div&gt;\\r\\n        &lt;\\/div&gt;\\r\\n    &lt;\\/div&gt;\\r\\n&lt;\\/section&gt;"},"1":{"title":"","description":"&lt;section class=&quot;insta-content fullwidth hidden-xs&quot;&gt;\\r\\n&lt;div class=&quot;title-pad&quot;&gt;\\r\\n &lt;h3 class=&quot;title&quot;&gt;&lt;i class=&quot;fa fa-bars&quot;&gt;&lt;\\/i&gt;INSTAGRAM&lt;\\/h3&gt;\\r\\n                &lt;hr&gt;\\r\\n&lt;\\/div&gt;\\r\\n    &lt;div class=&quot;container-fluid&quot;&gt;\\r\\n        &lt;div class=&quot;row&quot;&gt;\\r\\n            &lt;div class=&quot;instafeed-wrapper&quot;&gt;\\r\\n                \\r\\n                &lt;div id=&quot;instafeed&quot; class=&quot;instafeed&quot;&gt;&lt;\\/div&gt;\\r\\n            &lt;\\/div&gt;\\r\\n        &lt;\\/div&gt;\\r\\n    &lt;\\/div&gt;\\r\\n&lt;\\/section&gt;"}},"status":"1"}'),
-(53, 'Banners', 'html', '{"name":"Banners","module_description":{"2":{"title":"","description":"&lt;div class=&quot;row html-banners&quot;&gt;\\r\\n&lt;div class=&quot;col-md-8 col-sm-12 col-xs-12 ih-sec em-effect07&quot;&gt;\\r\\n    &lt;div class=&quot;item &quot;&gt;\\r\\n      &lt;a href=&quot;#&quot; class=&quot;em-eff06-04&quot;&gt;\\r\\n        &lt;div class=&quot;img&quot;&gt;\\r\\n          &lt;img class=&quot;img-responsive&quot; src=&quot;image\\/catalog\\/banners\\/middle-banner970x400.png&quot; alt=&quot;banner1&quot;&gt;\\r\\n        &lt;\\/div&gt;\\r\\n      &lt;\\/a&gt;\\r\\n    &lt;\\/div&gt;\\r\\n  &lt;\\/div&gt;\\r\\n&lt;div class=&quot;col-md-4 col-xs-12 hidden-sm banner-2 ih-sec em-effect07&quot;&gt;\\r\\n    &lt;div class=&quot;item &quot;&gt;\\r\\n      &lt;a href=&quot;#&quot; class=&quot;em-eff06-04&quot;&gt;\\r\\n        &lt;div class=&quot;img&quot;&gt;\\r\\n         &lt;img class=&quot;img-responsive center-block&quot; src=&quot;image\\/catalog\\/banners\\/middle-banner2-470x400.png&quot; alt=&quot;banner&quot;&gt;\\r\\n        &lt;\\/div&gt;\\r\\n      &lt;\\/a&gt;\\r\\n    &lt;\\/div&gt;\\r\\n  &lt;\\/div&gt;\\r\\n&lt;\\/div&gt;\\r\\n\\r\\n"},"1":{"title":"","description":"&lt;div class=&quot;row html-banners&quot;&gt;\\r\\n&lt;div class=&quot;col-md-8 col-sm-12 col-xs-12 ih-sec em-effect07&quot;&gt;\\r\\n    &lt;div class=&quot;item &quot;&gt;\\r\\n      &lt;a href=&quot;#&quot; class=&quot;em-eff06-04&quot;&gt;\\r\\n        &lt;div class=&quot;img&quot;&gt;\\r\\n          &lt;img class=&quot;img-responsive&quot; src=&quot;image\\/catalog\\/banners\\/middle-banner970x400.png&quot; alt=&quot;banner1&quot;&gt;\\r\\n        &lt;\\/div&gt;\\r\\n      &lt;\\/a&gt;\\r\\n    &lt;\\/div&gt;\\r\\n  &lt;\\/div&gt;\\r\\n&lt;div class=&quot;col-md-4 col-xs-12 hidden-sm banner-2 ih-sec em-effect07&quot;&gt;\\r\\n    &lt;div class=&quot;item &quot;&gt;\\r\\n      &lt;a href=&quot;#&quot; class=&quot;em-eff06-04&quot;&gt;\\r\\n        &lt;div class=&quot;img&quot;&gt;\\r\\n         &lt;img class=&quot;img-responsive center-block&quot; src=&quot;image\\/catalog\\/banners\\/middle-banner2-470x400.png&quot; alt=&quot;banner2&quot;&gt;\\r\\n        &lt;\\/div&gt;\\r\\n      &lt;\\/a&gt;\\r\\n    &lt;\\/div&gt;\\r\\n  &lt;\\/div&gt;\\r\\n&lt;\\/div&gt;\\r\\n\\r\\n"}},"status":"1"}'),
-(54, 'Discount Products', 'htmlfeature', '{"name":"Discount Products","module_description":{"2":{"title":"","description":"&lt;div class=&quot;item &quot;&gt;\\r\\n      &lt;a href=&quot;#&quot; class=&quot;em-eff06-04&quot;&gt;\\r\\n        &lt;div class=&quot;img&quot;&gt;&lt;img src=&quot;image\\/catalog\\/banners\\/250-X-450-New-Banner.jpg&quot; class=&quot;img-responsive center-block discount-banner&quot; alt=&quot;banner-left&quot;&gt;\\r\\n&lt;\\/div&gt;\\r\\n&lt;\\/a&gt;&lt;\\/div&gt;\\r\\n&lt;a class=&quot;btn shop-now&quot; href=&quot;#&quot;&gt;&lt;span&gt;shop now&lt;\\/span&gt;&lt;\\/a&gt;"},"1":{"title":"","description":"&lt;div class=&quot;item &quot;&gt;\\r\\n      &lt;a href=&quot;#&quot; class=&quot;em-eff06-04&quot;&gt;\\r\\n        &lt;div class=&quot;img&quot;&gt;&lt;img src=&quot;image\\/catalog\\/banners\\/250-X-450-New-Banner.jpg&quot; class=&quot;img-responsive center-block discount-banner&quot; alt=&quot;left-banner&quot;&gt;\\r\\n&lt;\\/div&gt;\\r\\n&lt;\\/a&gt;&lt;\\/div&gt;\\r\\n&lt;a class=&quot;btn shop-now&quot; href=&quot;#&quot;&gt;&lt;span&gt;shop now&lt;\\/span&gt;&lt;\\/a&gt;"}},"product_name":"","product":["28","46","40","35","43","31","44"],"limit":"7","width":"247","height":"331","status":"1"}'),
-(55, 'Special Products', 'special', '{"name":"Special Products","limit":"10","width":"343","height":"392","status":"1"}'),
-(56, 'Footer-bottom', 'html', '{"name":"Footer-bottom","module_description":{"2":{"title":"","description":"&lt;div class=&quot;footer-bottom&quot;&gt;\\r\\n&lt;div class=&quot;container&quot;&gt;\\r\\n                &lt;div class=&quot;col-md-3 col-sm-4 pay-connect pull-right&quot;&gt;\\r\\n                    &lt;div class=&quot;row&quot;&gt;\\r\\n                        &lt;h4 class=&quot;pay hidden-xs&quot;&gt;payment&lt;\\/h4&gt;\\r\\n                    &lt;\\/div&gt;\\r\\n                    &lt;div class=&quot;row&quot;&gt;\\r\\n                        &lt;ul class=&quot;list-inline list-unstyled&quot;&gt;\\r\\n                            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img class=&quot;img img-responsive&quot; src=&quot;image\\/catalog\\/payment\\/mastercard.png&quot; alt=&quot;master-card&quot;&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n                            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img class=&quot;img img-responsive&quot; src=&quot;image\\/catalog\\/payment\\/moneypad.png&quot; alt=&quot;moneypad&quot;&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n                            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img class=&quot;img img-responsive&quot; src=&quot;image\\/catalog\\/payment\\/card.png&quot; alt=&quot;card&quot;&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n                            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img class=&quot;img img-responsive&quot; src=&quot;image\\/catalog\\/payment\\/paypal.png&quot; alt=&quot;paypal&quot;&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n                        &lt;\\/ul&gt;\\r\\n                    &lt;\\/div&gt;\\r\\n                &lt;\\/div&gt;\\r\\n                &lt;div class=&quot;col-md-6 col-sm-5&quot;&gt;\\r\\n                    &lt;p class=&quot;text-left powered&quot;&gt; Powered By OpenCart Demo Store \\u00a9 2017&lt;\\/p&gt;\\r\\n                &lt;\\/div&gt;\\r\\n                &lt;div class=&quot;connect-social col-md-3 col-sm-3 &quot;&gt;\\r\\n                    &lt;div class=&quot;row&quot;&gt;\\r\\n                        &lt;h4 class=&quot;pay hidden-xs&quot;&gt;connect&lt;\\/h4&gt;\\r\\n                    &lt;\\/div&gt;\\r\\n                    &lt;div class=&quot;row social-icon&quot;&gt;\\r\\n                        &lt;ul class=&quot;list-inline list-unstyled&quot;&gt;\\r\\n                            &lt;li&gt;&lt;a&gt;&lt;i class=&quot;fa fa-facebook-square&quot;&gt;&lt;\\/i&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n                            &lt;li&gt;&lt;a&gt;&lt;i class=&quot;fa fa-twitter&quot;&gt;&lt;\\/i&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n                            &lt;li&gt;&lt;a&gt;&lt;i class=&quot;fa fa-instagram&quot;&gt;&lt;\\/i&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n                            &lt;li&gt;&lt;a&gt;&lt;i class=&quot;fa fa-youtube-play&quot;&gt;&lt;\\/i&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n                            &lt;li&gt;&lt;a&gt;&lt;i class=&quot;fa fa-google-plus&quot;&gt;&lt;\\/i&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n                        &lt;\\/ul&gt;\\r\\n                    &lt;\\/div&gt;\\r\\n                &lt;\\/div&gt;\\r\\n        &lt;\\/div&gt;&lt;\\/div&gt;"},"1":{"title":"","description":"&lt;div class=&quot;footer-bottom&quot;&gt;\\r\\n&lt;div class=&quot;container&quot;&gt;\\r\\n                &lt;div class=&quot;col-md-3 col-sm-4 pay-connect pull-right&quot;&gt;\\r\\n                    &lt;div class=&quot;row&quot;&gt;\\r\\n                        &lt;h4 class=&quot;pay hidden-xs&quot;&gt;payment&lt;\\/h4&gt;\\r\\n                    &lt;\\/div&gt;\\r\\n                    &lt;div class=&quot;row&quot;&gt;\\r\\n                         &lt;ul class=&quot;list-inline list-unstyled&quot;&gt;\\r\\n                            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img class=&quot;img img-responsive&quot; src=&quot;image\\/catalog\\/payment\\/mastercard.png&quot; alt=&quot;master-card&quot;&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n                            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img class=&quot;img img-responsive&quot; src=&quot;image\\/catalog\\/payment\\/moneypad.png&quot; alt=&quot;moneypad&quot;&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n                            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img class=&quot;img img-responsive&quot; src=&quot;image\\/catalog\\/payment\\/card.png&quot; alt=&quot;card&quot;&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n                            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img class=&quot;img img-responsive&quot; src=&quot;image\\/catalog\\/payment\\/paypal.png&quot; alt=&quot;paypal&quot;&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n                        &lt;\\/ul&gt;\\r\\n                    &lt;\\/div&gt;\\r\\n                &lt;\\/div&gt;\\r\\n                &lt;div class=&quot;col-md-6 col-sm-5&quot;&gt;\\r\\n                    &lt;p class=&quot;text-left powered&quot;&gt; Powered By &lt;a href=&quot;http:\\/\\/www.opencart.com&quot;&gt;OpenCart&lt;\\/a&gt; Demo Store \\u00a9 2017&lt;\\/p&gt;\\r\\n                &lt;\\/div&gt;\\r\\n                &lt;div class=&quot;connect-social col-md-3 col-sm-3 &quot;&gt;\\r\\n                    &lt;div class=&quot;row&quot;&gt;\\r\\n                        &lt;h4 class=&quot;pay hidden-xs&quot;&gt;connect&lt;\\/h4&gt;\\r\\n                    &lt;\\/div&gt;\\r\\n                    &lt;div class=&quot;row social-icon&quot;&gt;\\r\\n                        &lt;ul class=&quot;list-inline list-unstyled&quot;&gt;\\r\\n                            &lt;li&gt;&lt;a&gt;&lt;i class=&quot;fa fa-facebook-square&quot;&gt;&lt;\\/i&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n                            &lt;li&gt;&lt;a&gt;&lt;i class=&quot;fa fa-twitter&quot;&gt;&lt;\\/i&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n                            &lt;li&gt;&lt;a&gt;&lt;i class=&quot;fa fa-instagram&quot;&gt;&lt;\\/i&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n                            &lt;li&gt;&lt;a&gt;&lt;i class=&quot;fa fa-youtube-play&quot;&gt;&lt;\\/i&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n                            &lt;li&gt;&lt;a&gt;&lt;i class=&quot;fa fa-google-plus&quot;&gt;&lt;\\/i&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n                        &lt;\\/ul&gt;\\r\\n                    &lt;\\/div&gt;\\r\\n                &lt;\\/div&gt;\\r\\n        &lt;\\/div&gt;&lt;\\/div&gt;"}},"status":"1"}'),
-(57, 'Footer-up-subscribe', 'html', '{"name":"Footer-up-subscribe","module_description":{"2":{"title":"","description":"&lt;div class=&quot;col-md-2&quot;&gt;&lt;\\/div&gt;\\r\\n            &lt;div class=&quot;col-md-8&quot;&gt;\\r\\n            \\t&lt;div&gt;\\r\\n                \\t&lt;h3 class=&quot;text-left&quot;&gt;newsletter&lt;\\/h3&gt;\\r\\n                    &lt;hr class=&quot;foothr&quot;&gt;\\r\\n                &lt;\\/div&gt;\\r\\n              \\t&lt;div id=&quot;input-email&quot; class=&quot;input-group&quot;&gt;\\r\\n\\t&lt;img src=&quot;image\\/catalog\\/envelop.png&quot; alt=&quot;envelop&quot;&gt;\\r\\n  &lt;input name=&quot;search&quot; value=&quot;&quot; placeholder=&quot;Enter your email...&quot; class=&quot;form-control input-lg&quot; type=&quot;text&quot;&gt;\\r\\n  &lt;span class=&quot;input-group-btn&quot;&gt;\\r\\n    &lt;button type=&quot;button&quot; class=&quot;btn btn-default btn-lg&quot;&gt;&lt;span&gt;subscribe&lt;\\/span&gt;&lt;\\/button&gt;\\r\\n  &lt;\\/span&gt;\\r\\n&lt;\\/div&gt;\\r\\n                &lt;\\/div&gt;\\r\\n                &lt;div class=&quot;col-md-2 col-sm-2 &quot;&gt;&lt;\\/div&gt;"},"1":{"title":"","description":"&lt;div class=&quot;col-md-2&quot;&gt;&lt;\\/div&gt;\\r\\n            &lt;div class=&quot;col-md-8&quot;&gt;\\r\\n            \\t&lt;div&gt;\\r\\n                \\t&lt;h3 class=&quot;text-left&quot;&gt;newsletter&lt;\\/h3&gt;\\r\\n                    &lt;hr class=&quot;foothr&quot;&gt;\\r\\n                &lt;\\/div&gt;\\r\\n              \\t&lt;div id=&quot;input-email&quot; class=&quot;input-group&quot;&gt;\\r\\n\\t&lt;img src=&quot;image\\/catalog\\/envelop.png&quot; alt=&quot;envelop&quot;&gt;\\r\\n  &lt;input name=&quot;search&quot; value=&quot;&quot; placeholder=&quot;Enter your email...&quot; class=&quot;form-control input-lg&quot; type=&quot;text&quot;&gt;\\r\\n  &lt;span class=&quot;input-group-btn&quot;&gt;\\r\\n    &lt;button type=&quot;button&quot; class=&quot;btn btn-default btn-lg&quot;&gt;&lt;span&gt;subscribe&lt;\\/span&gt;&lt;\\/button&gt;\\r\\n  &lt;\\/span&gt;\\r\\n&lt;\\/div&gt;\\r\\n                &lt;\\/div&gt;\\r\\n                &lt;div class=&quot;col-md-2 col-sm-2 &quot;&gt;&lt;\\/div&gt;"}},"search":"","status":"1"}');
+(29, 'Home Page Brand Logos', 'carousel', '{\"name\":\"Home Page Brand Logos\",\"banner_id\":\"8\",\"width\":\"200\",\"height\":\"100\",\"status\":\"1\"}'),
+(28, 'Featured Products', 'featured', '{\"name\":\"Featured Products\",\"product_name\":\"\",\"product\":[\"47\",\"41\",\"48\",\"36\",\"34\",\"32\"],\"limit\":\"6\",\"width\":\"343\",\"height\":\"392\",\"status\":\"1\"}'),
+(27, 'Home Page Slider', 'slideshow', '{\"name\":\"Home Page Slider\",\"banner_id\":\"9\",\"width\":\"1470\",\"height\":\"414\",\"status\":\"1\"}'),
+(33, 'Latest Products', 'latest', '{\"name\":\"Latest Products\",\"limit\":\"10\",\"width\":\"343\",\"height\":\"392\",\"status\":\"1\"}'),
+(45, 'html_shipping', 'html', '{\"name\":\"html_shipping\",\"module_description\":{\"2\":{\"title\":\"\",\"description\":\"&lt;!--Delivery Information --&gt;\\r\\n&lt;div class=&quot;deliveryinfo&quot;&gt;\\r\\n    &lt;div class=&quot;row&quot;&gt;\\r\\n        &lt;div class=&quot;col-md-3 col-sm-6&quot;&gt;\\r\\n            &lt;ul&gt;\\r\\n                &lt;li class=&quot;text-center&quot;&gt;\\r\\n                    &lt;img src=&quot;image\\/catalog\\/delivery-info\\/d1-60x60.png&quot; class=&quot;img-responsive&quot; alt=&quot;support&quot;&gt;\\r\\n                &lt;\\/li&gt;\\r\\n                &lt;li&gt;\\r\\n                    &lt;h4&gt;support 24\\/7&lt;\\/h4&gt;\\r\\n                    &lt;p&gt;We support online 24 hours a day&lt;\\/p&gt;\\r\\n                &lt;\\/li&gt;   \\r\\n            &lt;\\/ul&gt;\\r\\n        &lt;\\/div&gt;\\r\\n        &lt;div class=&quot;col-md-3 col-sm-6&quot;&gt;\\r\\n            &lt;ul&gt;\\r\\n                 &lt;li class=&quot;text-center&quot;&gt;\\r\\n                    &lt;img src=&quot;image\\/catalog\\/delivery-info\\/d2-60x60.png&quot; class=&quot;img-responsive&quot; alt=&quot;free return&quot;&gt;\\r\\n                 &lt;\\/li&gt;\\r\\n                &lt;li&gt;\\r\\n                    &lt;h4&gt;free return&lt;\\/h4&gt; \\r\\n                    &lt;p&gt;30 days money back guarantee!&lt;\\/p&gt;\\r\\n                  &lt;\\/li&gt;   \\r\\n            &lt;\\/ul&gt;\\r\\n        &lt;\\/div&gt;\\r\\n        &lt;div class=&quot;col-md-3 col-sm-6&quot;&gt;\\r\\n             &lt;ul&gt;\\r\\n                 &lt;li class=&quot;text-center&quot;&gt;\\r\\n                    &lt;img src=&quot;image\\/catalog\\/delivery-info\\/d3-60x60.png&quot; class=&quot;img-responsive&quot; alt=&quot;shipping&quot;&gt;\\r\\n                 &lt;\\/li&gt;\\r\\n                &lt;li&gt;\\r\\n                    &lt;h4&gt;free shipping&lt;\\/h4&gt;\\r\\n                    &lt;p&gt;Free shipping on all order&lt;\\/p&gt;\\r\\n                &lt;\\/li&gt;   \\r\\n            &lt;\\/ul&gt;\\r\\n        &lt;\\/div&gt;\\r\\n        &lt;div class=&quot;col-md-3 col-sm-6&quot;&gt;\\r\\n            &lt;ul&gt;\\r\\n                &lt;li class=&quot;text-center&quot;&gt;\\r\\n                    &lt;img src=&quot;image\\/catalog\\/delivery-info\\/d4-60x60.png&quot; class=&quot;img-responsive&quot; alt=&quot;safe shipping&quot;&gt;\\r\\n                &lt;\\/li&gt;\\r\\n                &lt;li&gt;\\r\\n                    &lt;h4&gt;Safe Shopping&lt;\\/h4&gt;\\r\\n                    &lt;p&gt;Safe Shopping guarantee&lt;\\/p&gt;\\r\\n                &lt;\\/li&gt;   \\r\\n            &lt;\\/ul&gt;\\r\\n        &lt;\\/div&gt;\\r\\n    &lt;\\/div&gt;\\r\\n&lt;\\/div&gt;\\r\\n&lt;!--product top content over--&gt;\"},\"1\":{\"title\":\"\",\"description\":\"&lt;!--Delivery Information --&gt;\\r\\n&lt;div class=&quot;deliveryinfo&quot;&gt;\\r\\n    &lt;div class=&quot;row&quot;&gt;\\r\\n        &lt;div class=&quot;col-md-3 col-sm-6&quot;&gt;\\r\\n            &lt;ul&gt;\\r\\n                &lt;li class=&quot;text-center&quot;&gt;\\r\\n                    &lt;img src=&quot;image\\/catalog\\/delivery-info\\/d1-60x60.png&quot; class=&quot;img-responsive&quot; alt=&quot;support&quot;&gt;\\r\\n                &lt;\\/li&gt;\\r\\n                &lt;li&gt;\\r\\n                    &lt;h4&gt;support 24\\/7&lt;\\/h4&gt;\\r\\n                    &lt;p&gt;We support online 24 hours a day&lt;\\/p&gt;\\r\\n                &lt;\\/li&gt;   \\r\\n            &lt;\\/ul&gt;\\r\\n        &lt;\\/div&gt;\\r\\n        &lt;div class=&quot;col-md-3 col-sm-6&quot;&gt;\\r\\n            &lt;ul&gt;\\r\\n                 &lt;li class=&quot;text-center&quot;&gt;\\r\\n                    &lt;img src=&quot;image\\/catalog\\/delivery-info\\/d2-60x60.png&quot; class=&quot;img-responsive&quot; alt=&quot;free return&quot;&gt;\\r\\n                 &lt;\\/li&gt;\\r\\n                &lt;li&gt;\\r\\n                    &lt;h4&gt;free return&lt;\\/h4&gt; \\r\\n                    &lt;p&gt;30 days money back guarantee!&lt;\\/p&gt;\\r\\n                  &lt;\\/li&gt;   \\r\\n            &lt;\\/ul&gt;\\r\\n        &lt;\\/div&gt;\\r\\n        &lt;div class=&quot;col-md-3 col-sm-6&quot;&gt;\\r\\n             &lt;ul&gt;\\r\\n                 &lt;li class=&quot;text-center&quot;&gt;\\r\\n                    &lt;img src=&quot;image\\/catalog\\/delivery-info\\/d3-60x60.png&quot; class=&quot;img-responsive&quot; alt=&quot;shipping&quot;&gt;\\r\\n                 &lt;\\/li&gt;\\r\\n                &lt;li&gt;\\r\\n                    &lt;h4&gt;free shipping&lt;\\/h4&gt;\\r\\n                    &lt;p&gt;Free shipping on all order&lt;\\/p&gt;\\r\\n                &lt;\\/li&gt;   \\r\\n            &lt;\\/ul&gt;\\r\\n        &lt;\\/div&gt;\\r\\n        &lt;div class=&quot;col-md-3 col-sm-6&quot;&gt;\\r\\n            &lt;ul&gt;\\r\\n                &lt;li class=&quot;text-center&quot;&gt;\\r\\n                    &lt;img src=&quot;image\\/catalog\\/delivery-info\\/d4-60x60.png&quot; class=&quot;img-responsive&quot; alt=&quot;safe shipping&quot;&gt;\\r\\n                &lt;\\/li&gt;\\r\\n                &lt;li&gt;\\r\\n                    &lt;h4&gt;Safe Shopping&lt;\\/h4&gt;\\r\\n                    &lt;p&gt;Safe Shopping guarantee&lt;\\/p&gt;\\r\\n                &lt;\\/li&gt;   \\r\\n            &lt;\\/ul&gt;\\r\\n        &lt;\\/div&gt;\\r\\n    &lt;\\/div&gt;\\r\\n&lt;\\/div&gt;\\r\\n&lt;!--product top content over--&gt;\"}},\"status\":\"1\"}'),
+(43, 'Latest Blog', 'blogger', '{\"module_id\":\"43\",\"name\":\"Latest Blog\",\"status\":\"1\",\"width\":\"1170\",\"height\":\"662\",\"limit\":\"5\",\"char_limit\":\"130\",\"comments\":\"1\",\"login\":\"0\",\"auto_approve\":\"1\"}'),
+(48, 'left-banner', 'banner', '{\"name\":\"left-banner\",\"banner_id\":\"18\",\"width\":\"270\",\"height\":\"400\",\"status\":\"1\"}'),
+(49, 'Recent products', 'recent', '{\"name\":\"Recent products\",\"product_name\":\"\",\"product\":[\"42\"],\"limit\":\"1\",\"width\":\"256\",\"height\":\"316\",\"status\":\"1\"}'),
+(50, 'Testimonial', 'html', '{\"name\":\"Testimonial\",\"module_description\":{\"2\":{\"title\":\"\",\"description\":\"&lt;div class=&quot;testimonial clearfix &quot; data-spy=&quot;responsive-slider&quot;&gt;\\r\\n&lt;h3 class=&quot;title&quot;&gt;&lt;i class=&quot;fa fa-bars&quot;&gt;&lt;\\/i&gt;testimonial&lt;\\/h3&gt;\\r\\n    &lt;hr&gt;\\r\\n  &lt;div id=&quot;owl-testimonial&quot; class=&quot;owl-carousel p-slider&quot;&gt;\\r\\n&lt;div class=&quot;item&quot;&gt;\\r\\n   &lt;ul class=&quot;list-inline list-unstyled&quot;&gt;\\r\\n&lt;li&gt;\\r\\n     &lt;img src=&quot;image\\/catalog\\/testimonial\\/testiminial1.png&quot; class=&quot;lazyOwl img-responsive &quot; alt=&quot;testimonial-1.jpg&quot;&gt;\\r\\n&lt;\\/li&gt;\\r\\n &lt;li class=&quot;info&quot;&gt;\\r\\n        &lt;h4&gt;JOHN DOE&lt;\\/h4&gt;\\r\\n        &lt;span&gt;webiarch&lt;\\/span&gt;\\r\\n      &lt;\\/li&gt;\\r\\n&lt;\\/ul&gt;\\r\\n      &lt;div class=&quot;carousel-content&quot;&gt; &lt;span&gt;Duis faucibus enim vitae nunc molestie, nec facilisis arcu pulvinar.&lt;br&gt;\\r\\n        Nullam mattis arcu convallis, bibendum dui ac, laoreet est.Vivamus interdum earcu convallis, bibendum dui ac, laoreet est. &lt;br&gt;\\r\\n        Vivamus interdum earcu convallis.&lt;\\/span&gt; &lt;\\/div&gt;\\r\\n   &lt;\\/div&gt;\\r\\n&lt;div class=&quot;item&quot;&gt;\\r\\n\\r\\n     &lt;ul class=&quot;list-inline list-unstyled&quot;&gt;\\r\\n&lt;li&gt;\\r\\n     &lt;img src=&quot;image\\/catalog\\/testimonial\\/testiminial2.png&quot; class=&quot;lazyOwl img-responsive &quot; alt=&quot;testimonial-1.jpg&quot;&gt;\\r\\n&lt;\\/li&gt;\\r\\n &lt;li class=&quot;info&quot;&gt;\\r\\n        &lt;h4&gt;JOHN DOE&lt;\\/h4&gt;\\r\\n       &lt;span&gt;webiarch&lt;\\/span&gt;\\r\\n      &lt;\\/li&gt;\\r\\n&lt;\\/ul&gt;\\r\\n      &lt;div class=&quot;carousel-content&quot;&gt; &lt;span&gt;Duis faucibus enim vitae nunc molestie, nec facilisis arcu pulvinar.&lt;br&gt;\\r\\n        Nullam mattis arcu convallis, bibendum dui ac, laoreet est.Vivamus interdum earcu convallis, bibendum dui ac, laoreet est.&lt;br&gt;\\r\\n        Vivamus interdum earcu convallis.&lt;\\/span&gt; &lt;\\/div&gt;\\r\\n&lt;\\/div&gt;\\r\\n&lt;div class=&quot;item&quot;&gt;\\r\\n      &lt;ul class=&quot;list-inline list-unstyled&quot;&gt;\\r\\n&lt;li&gt;\\r\\n     &lt;img src=&quot;image\\/catalog\\/testimonial\\/testiminial3.png&quot; class=&quot;lazyOwl img-responsive &quot; alt=&quot;testimonial-1.jpg&quot;&gt;\\r\\n&lt;\\/li&gt;\\r\\n &lt;li class=&quot;info&quot;&gt;\\r\\n        &lt;h4&gt;JOHN DOE&lt;\\/h4&gt;\\r\\n        &lt;span&gt;webiarch&lt;\\/span&gt;\\r\\n      &lt;\\/li&gt;\\r\\n&lt;\\/ul&gt;\\r\\n      &lt;div class=&quot;carousel-content&quot;&gt; &lt;span&gt;Duis faucibus enim vitae nunc molestie, nec facilisis arcu pulvinar.&lt;br&gt;\\r\\n        Nullam mattis arcu convallis, bibendum dui ac, laoreet est.&lt;br&gt;\\r\\n        Vivamus interdum earcu convallis, bibendum dui ac, laoreet est. Vivamus interdum earcu convallis.&lt;\\/span&gt; &lt;\\/div&gt;\\r\\n  &lt;\\/div&gt;\\r\\n&lt;\\/div&gt;\\r\\n&lt;\\/div&gt;\"},\"1\":{\"title\":\"\",\"description\":\"&lt;div class=&quot;testimonial clearfix &quot; data-spy=&quot;responsive-slider&quot;&gt;\\r\\n&lt;h3 class=&quot;title&quot;&gt;&lt;i class=&quot;fa fa-bars&quot;&gt;&lt;\\/i&gt;testimonial&lt;\\/h3&gt;\\r\\n    &lt;hr&gt;\\r\\n  &lt;div id=&quot;owl-testimonial&quot; class=&quot;owl-carousel p-slider&quot;&gt;\\r\\n&lt;div class=&quot;item&quot;&gt;\\r\\n   &lt;ul class=&quot;list-inline list-unstyled&quot;&gt;\\r\\n&lt;li&gt;\\r\\n     &lt;img src=&quot;image\\/catalog\\/testimonial\\/testiminial1.png&quot; class=&quot;lazyOwl img-responsive &quot; alt=&quot;testimonial-1.jpg&quot;&gt;\\r\\n&lt;\\/li&gt;\\r\\n &lt;li class=&quot;info&quot;&gt;\\r\\n        &lt;h4&gt;JOHN DOE&lt;\\/h4&gt;\\r\\n        &lt;span&gt;webiarch&lt;\\/span&gt;\\r\\n      &lt;\\/li&gt;\\r\\n&lt;\\/ul&gt;\\r\\n      &lt;div class=&quot;carousel-content&quot;&gt; &lt;span&gt;Duis faucibus enim vitae nunc molestie, nec facilisis arcu pulvinar.&lt;br&gt;\\r\\n        Nullam mattis arcu convallis, bibendum dui ac, laoreet est.Vivamus interdum earcu convallis, bibendum dui ac, laoreet est. &lt;br&gt;\\r\\n        Vivamus interdum earcu convallis.&lt;\\/span&gt; &lt;\\/div&gt;\\r\\n   &lt;\\/div&gt;\\r\\n&lt;div class=&quot;item&quot;&gt;\\r\\n\\r\\n     &lt;ul class=&quot;list-inline list-unstyled&quot;&gt;\\r\\n&lt;li&gt;\\r\\n     &lt;img src=&quot;image\\/catalog\\/testimonial\\/testiminial2.png&quot; class=&quot;lazyOwl img-responsive &quot; alt=&quot;testimonial-1.jpg&quot;&gt;\\r\\n&lt;\\/li&gt;\\r\\n &lt;li class=&quot;info&quot;&gt;\\r\\n        &lt;h4&gt;JOHN DOE&lt;\\/h4&gt;\\r\\n       &lt;span&gt;webiarch&lt;\\/span&gt;\\r\\n      &lt;\\/li&gt;\\r\\n&lt;\\/ul&gt;\\r\\n      &lt;div class=&quot;carousel-content&quot;&gt; &lt;span&gt;Duis faucibus enim vitae nunc molestie, nec facilisis arcu pulvinar.&lt;br&gt;\\r\\n        Nullam mattis arcu convallis, bibendum dui ac, laoreet est.Vivamus interdum earcu convallis, bibendum dui ac, laoreet est.&lt;br&gt;\\r\\n        Vivamus interdum earcu convallis.&lt;\\/span&gt; &lt;\\/div&gt;\\r\\n&lt;\\/div&gt;\\r\\n&lt;div class=&quot;item&quot;&gt;\\r\\n      &lt;ul class=&quot;list-inline list-unstyled&quot;&gt;\\r\\n&lt;li&gt;\\r\\n     &lt;img src=&quot;image\\/catalog\\/testimonial\\/testiminial3.png&quot; class=&quot;lazyOwl img-responsive &quot; alt=&quot;testimonial-1.jpg&quot;&gt;\\r\\n&lt;\\/li&gt;\\r\\n &lt;li class=&quot;info&quot;&gt;\\r\\n        &lt;h4&gt;JOHN DOE&lt;\\/h4&gt;\\r\\n        &lt;span&gt;webiarch&lt;\\/span&gt;\\r\\n      &lt;\\/li&gt;\\r\\n&lt;\\/ul&gt;\\r\\n      &lt;div class=&quot;carousel-content&quot;&gt; &lt;span&gt;Duis faucibus enim vitae nunc molestie, nec facilisis arcu pulvinar.&lt;br&gt;\\r\\n        Nullam mattis arcu convallis, bibendum dui ac, laoreet est.&lt;br&gt;\\r\\n        Vivamus interdum earcu convallis, bibendum dui ac, laoreet est. Vivamus interdum earcu convallis.&lt;\\/span&gt; &lt;\\/div&gt;\\r\\n  &lt;\\/div&gt;\\r\\n&lt;\\/div&gt;\\r\\n&lt;\\/div&gt;\"}},\"status\":\"1\"}'),
+(51, 'Follow', 'html', '{\"name\":\"Follow\",\"module_description\":{\"2\":{\"title\":\"\",\"description\":\"&lt;div class=&quot;follow&quot;&gt;\\r\\n&lt;h3 class=&quot;title&quot;&gt;&lt;i class=&quot;fa fa-bars&quot;&gt;&lt;\\/i&gt;follow&lt;\\/h3&gt;\\r\\n    &lt;hr&gt;\\r\\n&lt;ul class=&quot;list-inline list-unstyle&quot;&gt;\\r\\n   &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;fa fa-facebook&quot;&gt;&lt;\\/i&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n   &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;fa fa-twitter&quot;&gt;&lt;\\/i&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n   &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;fa fa-instagram&quot;&gt;&lt;\\/i&gt;&lt;\\/a&gt;&lt;a&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n   &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;fa fa-linkedin&quot;&gt;&lt;\\/i&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n&lt;\\/ul&gt;\\r\\n&lt;\\/div&gt;\"},\"1\":{\"title\":\"\",\"description\":\"&lt;div class=&quot;follow&quot;&gt;\\r\\n&lt;h3 class=&quot;title&quot;&gt;&lt;i class=&quot;fa fa-bars&quot;&gt;&lt;\\/i&gt;follow&lt;\\/h3&gt;\\r\\n    &lt;hr&gt;\\r\\n&lt;ul class=&quot;list-inline list-unstyle&quot;&gt;\\r\\n   &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;fa fa-facebook&quot;&gt;&lt;\\/i&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n   &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;fa fa-twitter&quot;&gt;&lt;\\/i&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n   &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;fa fa-instagram&quot;&gt;&lt;\\/i&gt;&lt;\\/a&gt;&lt;a&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n   &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;fa fa-linkedin&quot;&gt;&lt;\\/i&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n&lt;\\/ul&gt;\\r\\n&lt;\\/div&gt;\"}},\"status\":\"1\"}'),
+(52, 'Inastafeed', 'html', '{\"name\":\"Inastafeed\",\"module_description\":{\"2\":{\"title\":\"\",\"description\":\"&lt;section class=&quot;insta-content fullwidth hidden-xs&quot;&gt;\\r\\n&lt;div class=&quot;title-pad&quot;&gt;\\r\\n &lt;h3 class=&quot;title&quot;&gt;&lt;i class=&quot;fa fa-bars&quot;&gt;&lt;\\/i&gt;INSTAGRAM&lt;\\/h3&gt;\\r\\n                &lt;hr&gt;\\r\\n&lt;\\/div&gt;\\r\\n    &lt;div class=&quot;container-fluid&quot;&gt;\\r\\n        &lt;div class=&quot;row&quot;&gt;\\r\\n            &lt;div class=&quot;instafeed-wrapper&quot;&gt;\\r\\n                \\r\\n                &lt;div id=&quot;instafeed&quot; class=&quot;instafeed&quot;&gt;&lt;\\/div&gt;\\r\\n            &lt;\\/div&gt;\\r\\n        &lt;\\/div&gt;\\r\\n    &lt;\\/div&gt;\\r\\n&lt;\\/section&gt;\"},\"1\":{\"title\":\"\",\"description\":\"&lt;section class=&quot;insta-content fullwidth hidden-xs&quot;&gt;\\r\\n&lt;div class=&quot;title-pad&quot;&gt;\\r\\n &lt;h3 class=&quot;title&quot;&gt;&lt;i class=&quot;fa fa-bars&quot;&gt;&lt;\\/i&gt;INSTAGRAM&lt;\\/h3&gt;\\r\\n                &lt;hr&gt;\\r\\n&lt;\\/div&gt;\\r\\n    &lt;div class=&quot;container-fluid&quot;&gt;\\r\\n        &lt;div class=&quot;row&quot;&gt;\\r\\n            &lt;div class=&quot;instafeed-wrapper&quot;&gt;\\r\\n                \\r\\n                &lt;div id=&quot;instafeed&quot; class=&quot;instafeed&quot;&gt;&lt;\\/div&gt;\\r\\n            &lt;\\/div&gt;\\r\\n        &lt;\\/div&gt;\\r\\n    &lt;\\/div&gt;\\r\\n&lt;\\/section&gt;\"}},\"status\":\"1\"}'),
+(53, 'Banners', 'html', '{\"name\":\"Banners\",\"module_description\":{\"2\":{\"title\":\"\",\"description\":\"&lt;div class=&quot;row html-banners&quot;&gt;\\r\\n&lt;div class=&quot;col-md-8 col-sm-12 col-xs-12 ih-sec em-effect07&quot;&gt;\\r\\n    &lt;div class=&quot;item &quot;&gt;\\r\\n      &lt;a href=&quot;#&quot; class=&quot;em-eff06-04&quot;&gt;\\r\\n        &lt;div class=&quot;img&quot;&gt;\\r\\n          &lt;img class=&quot;img-responsive&quot; src=&quot;image\\/catalog\\/banners\\/middle-banner970x400.png&quot; alt=&quot;banner1&quot;&gt;\\r\\n        &lt;\\/div&gt;\\r\\n      &lt;\\/a&gt;\\r\\n    &lt;\\/div&gt;\\r\\n  &lt;\\/div&gt;\\r\\n&lt;div class=&quot;col-md-4 col-xs-12 hidden-sm banner-2 ih-sec em-effect07&quot;&gt;\\r\\n    &lt;div class=&quot;item &quot;&gt;\\r\\n      &lt;a href=&quot;#&quot; class=&quot;em-eff06-04&quot;&gt;\\r\\n        &lt;div class=&quot;img&quot;&gt;\\r\\n         &lt;img class=&quot;img-responsive center-block&quot; src=&quot;image\\/catalog\\/banners\\/middle-banner2-470x400.png&quot; alt=&quot;banner&quot;&gt;\\r\\n        &lt;\\/div&gt;\\r\\n      &lt;\\/a&gt;\\r\\n    &lt;\\/div&gt;\\r\\n  &lt;\\/div&gt;\\r\\n&lt;\\/div&gt;\\r\\n\\r\\n\"},\"1\":{\"title\":\"\",\"description\":\"&lt;div class=&quot;row html-banners&quot;&gt;\\r\\n&lt;div class=&quot;col-md-8 col-sm-12 col-xs-12 ih-sec em-effect07&quot;&gt;\\r\\n    &lt;div class=&quot;item &quot;&gt;\\r\\n      &lt;a href=&quot;#&quot; class=&quot;em-eff06-04&quot;&gt;\\r\\n        &lt;div class=&quot;img&quot;&gt;\\r\\n          &lt;img class=&quot;img-responsive&quot; src=&quot;image\\/catalog\\/banners\\/middle-banner970x400.png&quot; alt=&quot;banner1&quot;&gt;\\r\\n        &lt;\\/div&gt;\\r\\n      &lt;\\/a&gt;\\r\\n    &lt;\\/div&gt;\\r\\n  &lt;\\/div&gt;\\r\\n&lt;div class=&quot;col-md-4 col-xs-12 hidden-sm banner-2 ih-sec em-effect07&quot;&gt;\\r\\n    &lt;div class=&quot;item &quot;&gt;\\r\\n      &lt;a href=&quot;#&quot; class=&quot;em-eff06-04&quot;&gt;\\r\\n        &lt;div class=&quot;img&quot;&gt;\\r\\n         &lt;img class=&quot;img-responsive center-block&quot; src=&quot;image\\/catalog\\/banners\\/middle-banner2-470x400.png&quot; alt=&quot;banner2&quot;&gt;\\r\\n        &lt;\\/div&gt;\\r\\n      &lt;\\/a&gt;\\r\\n    &lt;\\/div&gt;\\r\\n  &lt;\\/div&gt;\\r\\n&lt;\\/div&gt;\\r\\n\\r\\n\"}},\"status\":\"1\"}'),
+(54, 'Discount Products', 'htmlfeature', '{\"name\":\"Discount Products\",\"module_description\":{\"2\":{\"title\":\"\",\"description\":\"&lt;div class=&quot;item &quot;&gt;\\r\\n      &lt;a href=&quot;#&quot; class=&quot;em-eff06-04&quot;&gt;\\r\\n        &lt;div class=&quot;img&quot;&gt;&lt;img src=&quot;image\\/catalog\\/banners\\/250-X-450-New-Banner.jpg&quot; class=&quot;img-responsive center-block discount-banner&quot; alt=&quot;banner-left&quot;&gt;\\r\\n&lt;\\/div&gt;\\r\\n&lt;\\/a&gt;&lt;\\/div&gt;\\r\\n&lt;a class=&quot;btn shop-now&quot; href=&quot;#&quot;&gt;&lt;span&gt;shop now&lt;\\/span&gt;&lt;\\/a&gt;\"},\"1\":{\"title\":\"\",\"description\":\"&lt;div class=&quot;item &quot;&gt;\\r\\n      &lt;a href=&quot;#&quot; class=&quot;em-eff06-04&quot;&gt;\\r\\n        &lt;div class=&quot;img&quot;&gt;&lt;img src=&quot;image\\/catalog\\/banners\\/250-X-450-New-Banner.jpg&quot; class=&quot;img-responsive center-block discount-banner&quot; alt=&quot;left-banner&quot;&gt;\\r\\n&lt;\\/div&gt;\\r\\n&lt;\\/a&gt;&lt;\\/div&gt;\\r\\n&lt;a class=&quot;btn shop-now&quot; href=&quot;#&quot;&gt;&lt;span&gt;shop now&lt;\\/span&gt;&lt;\\/a&gt;\"}},\"product_name\":\"\",\"product\":[\"28\",\"46\",\"40\",\"35\",\"43\",\"31\",\"44\"],\"limit\":\"7\",\"width\":\"247\",\"height\":\"331\",\"status\":\"1\"}'),
+(55, 'Special Products', 'special', '{\"name\":\"Special Products\",\"limit\":\"10\",\"width\":\"343\",\"height\":\"392\",\"status\":\"1\"}'),
+(56, 'Footer-bottom', 'html', '{\"name\":\"Footer-bottom\",\"module_description\":{\"2\":{\"title\":\"\",\"description\":\"&lt;div class=&quot;footer-bottom&quot;&gt;\\r\\n&lt;div class=&quot;container&quot;&gt;\\r\\n                &lt;div class=&quot;col-md-3 col-sm-4 pay-connect pull-right&quot;&gt;\\r\\n                    &lt;div class=&quot;row&quot;&gt;\\r\\n                        &lt;h4 class=&quot;pay hidden-xs&quot;&gt;payment&lt;\\/h4&gt;\\r\\n                    &lt;\\/div&gt;\\r\\n                    &lt;div class=&quot;row&quot;&gt;\\r\\n                        &lt;ul class=&quot;list-inline list-unstyled&quot;&gt;\\r\\n                            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img class=&quot;img img-responsive&quot; src=&quot;image\\/catalog\\/payment\\/mastercard.png&quot; alt=&quot;master-card&quot;&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n                            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img class=&quot;img img-responsive&quot; src=&quot;image\\/catalog\\/payment\\/moneypad.png&quot; alt=&quot;moneypad&quot;&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n                            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img class=&quot;img img-responsive&quot; src=&quot;image\\/catalog\\/payment\\/card.png&quot; alt=&quot;card&quot;&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n                            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img class=&quot;img img-responsive&quot; src=&quot;image\\/catalog\\/payment\\/paypal.png&quot; alt=&quot;paypal&quot;&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n                        &lt;\\/ul&gt;\\r\\n                    &lt;\\/div&gt;\\r\\n                &lt;\\/div&gt;\\r\\n                &lt;div class=&quot;col-md-6 col-sm-5&quot;&gt;\\r\\n                    &lt;p class=&quot;text-left powered&quot;&gt; Powered By OpenCart Demo Store \\u00a9 2017&lt;\\/p&gt;\\r\\n                &lt;\\/div&gt;\\r\\n                &lt;div class=&quot;connect-social col-md-3 col-sm-3 &quot;&gt;\\r\\n                    &lt;div class=&quot;row&quot;&gt;\\r\\n                        &lt;h4 class=&quot;pay hidden-xs&quot;&gt;connect&lt;\\/h4&gt;\\r\\n                    &lt;\\/div&gt;\\r\\n                    &lt;div class=&quot;row social-icon&quot;&gt;\\r\\n                        &lt;ul class=&quot;list-inline list-unstyled&quot;&gt;\\r\\n                            &lt;li&gt;&lt;a&gt;&lt;i class=&quot;fa fa-facebook-square&quot;&gt;&lt;\\/i&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n                            &lt;li&gt;&lt;a&gt;&lt;i class=&quot;fa fa-twitter&quot;&gt;&lt;\\/i&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n                            &lt;li&gt;&lt;a&gt;&lt;i class=&quot;fa fa-instagram&quot;&gt;&lt;\\/i&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n                            &lt;li&gt;&lt;a&gt;&lt;i class=&quot;fa fa-youtube-play&quot;&gt;&lt;\\/i&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n                            &lt;li&gt;&lt;a&gt;&lt;i class=&quot;fa fa-google-plus&quot;&gt;&lt;\\/i&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n                        &lt;\\/ul&gt;\\r\\n                    &lt;\\/div&gt;\\r\\n                &lt;\\/div&gt;\\r\\n        &lt;\\/div&gt;&lt;\\/div&gt;\"},\"1\":{\"title\":\"\",\"description\":\"&lt;div class=&quot;footer-bottom&quot;&gt;\\r\\n&lt;div class=&quot;container&quot;&gt;\\r\\n                &lt;div class=&quot;col-md-3 col-sm-4 pay-connect pull-right&quot;&gt;\\r\\n                    &lt;div class=&quot;row&quot;&gt;\\r\\n                        &lt;h4 class=&quot;pay hidden-xs&quot;&gt;payment&lt;\\/h4&gt;\\r\\n                    &lt;\\/div&gt;\\r\\n                    &lt;div class=&quot;row&quot;&gt;\\r\\n                         &lt;ul class=&quot;list-inline list-unstyled&quot;&gt;\\r\\n                            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img class=&quot;img img-responsive&quot; src=&quot;image\\/catalog\\/payment\\/mastercard.png&quot; alt=&quot;master-card&quot;&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n                            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img class=&quot;img img-responsive&quot; src=&quot;image\\/catalog\\/payment\\/moneypad.png&quot; alt=&quot;moneypad&quot;&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n                            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img class=&quot;img img-responsive&quot; src=&quot;image\\/catalog\\/payment\\/card.png&quot; alt=&quot;card&quot;&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n                            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img class=&quot;img img-responsive&quot; src=&quot;image\\/catalog\\/payment\\/paypal.png&quot; alt=&quot;paypal&quot;&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n                        &lt;\\/ul&gt;\\r\\n                    &lt;\\/div&gt;\\r\\n                &lt;\\/div&gt;\\r\\n                &lt;div class=&quot;col-md-6 col-sm-5&quot;&gt;\\r\\n                    &lt;p class=&quot;text-left powered&quot;&gt; Powered By &lt;a href=&quot;http:\\/\\/www.opencart.com&quot;&gt;OpenCart&lt;\\/a&gt; Demo Store \\u00a9 2017&lt;\\/p&gt;\\r\\n                &lt;\\/div&gt;\\r\\n                &lt;div class=&quot;connect-social col-md-3 col-sm-3 &quot;&gt;\\r\\n                    &lt;div class=&quot;row&quot;&gt;\\r\\n                        &lt;h4 class=&quot;pay hidden-xs&quot;&gt;connect&lt;\\/h4&gt;\\r\\n                    &lt;\\/div&gt;\\r\\n                    &lt;div class=&quot;row social-icon&quot;&gt;\\r\\n                        &lt;ul class=&quot;list-inline list-unstyled&quot;&gt;\\r\\n                            &lt;li&gt;&lt;a&gt;&lt;i class=&quot;fa fa-facebook-square&quot;&gt;&lt;\\/i&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n                            &lt;li&gt;&lt;a&gt;&lt;i class=&quot;fa fa-twitter&quot;&gt;&lt;\\/i&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n                            &lt;li&gt;&lt;a&gt;&lt;i class=&quot;fa fa-instagram&quot;&gt;&lt;\\/i&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n                            &lt;li&gt;&lt;a&gt;&lt;i class=&quot;fa fa-youtube-play&quot;&gt;&lt;\\/i&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n                            &lt;li&gt;&lt;a&gt;&lt;i class=&quot;fa fa-google-plus&quot;&gt;&lt;\\/i&gt;&lt;\\/a&gt;&lt;\\/li&gt;\\r\\n                        &lt;\\/ul&gt;\\r\\n                    &lt;\\/div&gt;\\r\\n                &lt;\\/div&gt;\\r\\n        &lt;\\/div&gt;&lt;\\/div&gt;\"}},\"status\":\"1\"}'),
+(57, 'Footer-up-subscribe', 'html', '{\"name\":\"Footer-up-subscribe\",\"module_description\":{\"2\":{\"title\":\"\",\"description\":\"&lt;div class=&quot;col-md-2&quot;&gt;&lt;\\/div&gt;\\r\\n            &lt;div class=&quot;col-md-8&quot;&gt;\\r\\n            \\t&lt;div&gt;\\r\\n                \\t&lt;h3 class=&quot;text-left&quot;&gt;newsletter&lt;\\/h3&gt;\\r\\n                    &lt;hr class=&quot;foothr&quot;&gt;\\r\\n                &lt;\\/div&gt;\\r\\n              \\t&lt;div id=&quot;input-email&quot; class=&quot;input-group&quot;&gt;\\r\\n\\t&lt;img src=&quot;image\\/catalog\\/envelop.png&quot; alt=&quot;envelop&quot;&gt;\\r\\n  &lt;input name=&quot;search&quot; value=&quot;&quot; placeholder=&quot;Enter your email...&quot; class=&quot;form-control input-lg&quot; type=&quot;text&quot;&gt;\\r\\n  &lt;span class=&quot;input-group-btn&quot;&gt;\\r\\n    &lt;button type=&quot;button&quot; class=&quot;btn btn-default btn-lg&quot;&gt;&lt;span&gt;subscribe&lt;\\/span&gt;&lt;\\/button&gt;\\r\\n  &lt;\\/span&gt;\\r\\n&lt;\\/div&gt;\\r\\n                &lt;\\/div&gt;\\r\\n                &lt;div class=&quot;col-md-2 col-sm-2 &quot;&gt;&lt;\\/div&gt;\"},\"1\":{\"title\":\"\",\"description\":\"&lt;div class=&quot;col-md-2&quot;&gt;&lt;\\/div&gt;\\r\\n            &lt;div class=&quot;col-md-8&quot;&gt;\\r\\n            \\t&lt;div&gt;\\r\\n                \\t&lt;h3 class=&quot;text-left&quot;&gt;newsletter&lt;\\/h3&gt;\\r\\n                    &lt;hr class=&quot;foothr&quot;&gt;\\r\\n                &lt;\\/div&gt;\\r\\n              \\t&lt;div id=&quot;input-email&quot; class=&quot;input-group&quot;&gt;\\r\\n\\t&lt;img src=&quot;image\\/catalog\\/envelop.png&quot; alt=&quot;envelop&quot;&gt;\\r\\n  &lt;input name=&quot;search&quot; value=&quot;&quot; placeholder=&quot;Enter your email...&quot; class=&quot;form-control input-lg&quot; type=&quot;text&quot;&gt;\\r\\n  &lt;span class=&quot;input-group-btn&quot;&gt;\\r\\n    &lt;button type=&quot;button&quot; class=&quot;btn btn-default btn-lg&quot;&gt;&lt;span&gt;subscribe&lt;\\/span&gt;&lt;\\/button&gt;\\r\\n  &lt;\\/span&gt;\\r\\n&lt;\\/div&gt;\\r\\n                &lt;\\/div&gt;\\r\\n                &lt;div class=&quot;col-md-2 col-sm-2 &quot;&gt;&lt;\\/div&gt;\"}},\"search\":\"\",\"status\":\"1\"}');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_option`
+-- Cấu trúc bảng cho bảng `oc_option`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_option` (
-  `option_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_option` (
+  `option_id` int(11) NOT NULL,
   `type` varchar(32) NOT NULL,
-  `sort_order` int(3) NOT NULL,
-  PRIMARY KEY (`option_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+  `sort_order` int(3) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_option`
+-- Đang đổ dữ liệu cho bảng `oc_option`
 --
 
 INSERT INTO `oc_option` (`option_id`, `type`, `sort_order`) VALUES
@@ -2630,18 +2527,17 @@ INSERT INTO `oc_option` (`option_id`, `type`, `sort_order`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_option_description`
+-- Cấu trúc bảng cho bảng `oc_option_description`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_option_description` (
+CREATE TABLE `oc_option_description` (
   `option_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `name` varchar(128) NOT NULL,
-  PRIMARY KEY (`option_id`,`language_id`)
+  `name` varchar(128) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_option_description`
+-- Đang đổ dữ liệu cho bảng `oc_option_description`
 --
 
 INSERT INTO `oc_option_description` (`option_id`, `language_id`, `name`) VALUES
@@ -2671,19 +2567,18 @@ INSERT INTO `oc_option_description` (`option_id`, `language_id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_option_value`
+-- Cấu trúc bảng cho bảng `oc_option_value`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_option_value` (
-  `option_value_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_option_value` (
+  `option_value_id` int(11) NOT NULL,
   `option_id` int(11) NOT NULL,
   `image` varchar(255) NOT NULL,
-  `sort_order` int(3) NOT NULL,
-  PRIMARY KEY (`option_value_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=49 ;
+  `sort_order` int(3) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_option_value`
+-- Đang đổ dữ liệu cho bảng `oc_option_value`
 --
 
 INSERT INTO `oc_option_value` (`option_value_id`, `option_id`, `image`, `sort_order`) VALUES
@@ -2705,19 +2600,18 @@ INSERT INTO `oc_option_value` (`option_value_id`, `option_id`, `image`, `sort_or
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_option_value_description`
+-- Cấu trúc bảng cho bảng `oc_option_value_description`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_option_value_description` (
+CREATE TABLE `oc_option_value_description` (
   `option_value_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `option_id` int(11) NOT NULL,
-  `name` varchar(128) NOT NULL,
-  PRIMARY KEY (`option_value_id`,`language_id`)
+  `name` varchar(128) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_option_value_description`
+-- Đang đổ dữ liệu cho bảng `oc_option_value_description`
 --
 
 INSERT INTO `oc_option_value_description` (`option_value_id`, `language_id`, `option_id`, `name`) VALUES
@@ -2753,11 +2647,11 @@ INSERT INTO `oc_option_value_description` (`option_value_id`, `language_id`, `op
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_order`
+-- Cấu trúc bảng cho bảng `oc_order`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_order` (
-  `order_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_order` (
+  `order_id` int(11) NOT NULL,
   `invoice_no` int(11) NOT NULL DEFAULT '0',
   `invoice_prefix` varchar(26) NOT NULL,
   `store_id` int(11) NOT NULL DEFAULT '0',
@@ -2817,12 +2711,11 @@ CREATE TABLE IF NOT EXISTS `oc_order` (
   `user_agent` varchar(255) NOT NULL,
   `accept_language` varchar(255) NOT NULL,
   `date_added` datetime NOT NULL,
-  `date_modified` datetime NOT NULL,
-  PRIMARY KEY (`order_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
+  `date_modified` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_order`
+-- Đang đổ dữ liệu cho bảng `oc_order`
 --
 
 INSERT INTO `oc_order` (`order_id`, `invoice_no`, `invoice_prefix`, `store_id`, `store_name`, `store_url`, `customer_id`, `customer_group_id`, `firstname`, `lastname`, `email`, `telephone`, `fax`, `custom_field`, `payment_firstname`, `payment_lastname`, `payment_company`, `payment_address_1`, `payment_address_2`, `payment_city`, `payment_postcode`, `payment_country`, `payment_country_id`, `payment_zone`, `payment_zone_id`, `payment_address_format`, `payment_custom_field`, `payment_method`, `payment_code`, `shipping_firstname`, `shipping_lastname`, `shipping_company`, `shipping_address_1`, `shipping_address_2`, `shipping_city`, `shipping_postcode`, `shipping_country`, `shipping_country_id`, `shipping_zone`, `shipping_zone_id`, `shipping_address_format`, `shipping_custom_field`, `shipping_method`, `shipping_code`, `comment`, `total`, `order_status_id`, `affiliate_id`, `commission`, `marketing_id`, `tracking`, `language_id`, `currency_id`, `currency_code`, `currency_value`, `ip`, `forwarded_ip`, `user_agent`, `accept_language`, `date_added`, `date_modified`) VALUES
@@ -2845,44 +2738,60 @@ INSERT INTO `oc_order` (`order_id`, `invoice_no`, `invoice_prefix`, `store_id`, 
 (17, 0, 'INV-2013-00', 0, 'shopnow', 'http://localhost/shopnow/', 7, 1, 'webiarch', 'infotech', 'webiarchinfotech@gmail.com', '1234564561', '', '', 'webiarch', 'infotech', '', 'surat', '', 'surat', '395006', 'India', 99, 'Gujarat', 1485, '', '[]', 'Cash On Delivery', 'cod', 'webiarch', 'infotech', '', 'surat', '', 'surat', '395006', 'India', 99, 'Gujarat', 1485, '', '[]', 'Flat Shipping Rate', 'flat.flat', '', '55.0000', 1, 0, '0.0000', 0, '', 1, 2, 'USD', '1.00000000', '::1', '', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0', 'en-US,en;q=0.5', '2017-04-12 19:43:53', '2017-04-12 19:43:54'),
 (18, 0, 'INV-2013-00', 0, 'shopnow', 'http://localhost/shopnow/', 6, 1, 'raksha', 'jivani', 'support@webiarch.com', '9865321472', '', '', 'raksha', 'jivani', '', 'kapodra', '', 'surat', '', 'India', 99, 'Gujarat', 1485, '', '[]', 'Cash On Delivery', 'cod', 'raksha', 'jivani', '', 'kapodra', '', 'surat', '', 'India', 99, 'Gujarat', 1485, '', '[]', 'Flat Shipping Rate', 'flat.flat', '', '484.9800', 1, 0, '0.0000', 0, '', 1, 2, 'USD', '1.00000000', '::1', '', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0', 'en-US,en;q=0.5', '2017-04-14 16:45:50', '2017-04-14 16:45:52'),
 (19, 0, 'INV-2013-00', 0, 'shopnow', 'http://opencart.webiarch.com/OC0005/OCSN01/', 5, 1, 'Romit', 'Gabani', 'gabaniromit4892@gmail.com', '9099799433', '', '', 'Romit', 'Gabani', '', 'Viththal Nagar So. Hirabaug', 'Varachha Road', 'Surat', '395006', 'India', 99, 'Gujarat', 1485, '', '[]', 'Free Checkout', 'free_checkout', 'Romit', 'Gabani', '', 'Viththal Nagar So. Hirabaug', 'Varachha Road', 'Surat', '395006', 'India', 99, 'Gujarat', 1485, '', '[]', 'Flat Shipping Rate', 'flat.flat', '', '-792.0000', 1, 0, '0.0000', 0, '', 1, 2, 'USD', '1.00000000', '175.100.147.95', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36', 'en-GB,en-US;q=0.8,en;q=0.6', '2017-04-17 07:15:09', '2017-04-17 07:15:12'),
-(20, 0, 'INV-2013-00', 0, 'shopnow', 'http://opencart.webiarch.com/OC0005/OCSN01/', 10, 1, 'jeni', 'borad', 'jenishborad24@gmail.com', '9979512312', '', '', 'jeni', 'borad', 'Red &amp; White', 'surat', 'surat', 'surat', '395006', 'India', 99, 'Gujarat', 1485, '', '[]', 'Cash On Delivery', 'cod', 'jeni', 'borad', 'Red &amp; White', 'surat', 'surat', 'surat', '395006', 'India', 99, 'Gujarat', 1485, '', '[]', 'Flat Shipping Rate', 'flat.flat', '', '105.0000', 1, 0, '0.0000', 0, '', 1, 2, 'USD', '1.00000000', '175.100.146.16', '', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0', 'en-US,en;q=0.5', '2017-04-19 07:18:34', '2017-04-19 07:18:35');
+(20, 0, 'INV-2013-00', 0, 'shopnow', 'http://opencart.webiarch.com/OC0005/OCSN01/', 10, 1, 'jeni', 'borad', 'jenishborad24@gmail.com', '9979512312', '', '', 'jeni', 'borad', 'Red &amp; White', 'surat', 'surat', 'surat', '395006', 'India', 99, 'Gujarat', 1485, '', '[]', 'Cash On Delivery', 'cod', 'jeni', 'borad', 'Red &amp; White', 'surat', 'surat', 'surat', '395006', 'India', 99, 'Gujarat', 1485, '', '[]', 'Flat Shipping Rate', 'flat.flat', '', '105.0000', 1, 0, '0.0000', 0, '', 1, 2, 'USD', '1.00000000', '175.100.146.16', '', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0', 'en-US,en;q=0.5', '2017-04-19 07:18:34', '2017-04-19 07:18:35'),
+(21, 0, 'INV-2013-00', 0, 'shopnow', 'http://localhost/cms/shophai/', 11, 1, 'Beach', 'Belinda', 'belindatbeach@gmail.com', '7139530148', '7139530148', '', 'Beach', 'Belinda', 'GlobalMandate LTD', '3630 Margaret Street', '', 'Houston', '77063', 'United States', 223, 'Texas', 3669, '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', '[]', 'Credit Card / Debit Card (Web Payment Software)', 'web_payment_software', 'Beach', 'Belinda', 'GlobalMandate LTD', '3630 Margaret Street', '', 'Houston', '77063', 'United States', 223, 'Texas', 3669, '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', '[]', 'Flat Shipping Rate', 'flat.flat', '', '105.0000', 0, 0, '0.0000', 0, '', 1, 2, 'USD', '1.00000000', '::1', '', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36', 'vi-VN,vi;q=0.8,fr-FR;q=0.6,fr;q=0.4,en-US;q=0.2,en;q=0.2', '2017-07-04 16:17:01', '2017-07-04 16:17:01'),
+(22, 0, 'INV-2013-00', 0, 'shopnow', 'http://localhost/cms/shophai/', 11, 1, 'Beach', 'Belinda', 'belindatbeach@gmail.com', '7139530148', '7139530148', '', 'Beach', 'Belinda', 'GlobalMandate LTD', '3630 Margaret Street', '', 'Houston', '77063', 'United States', 223, 'Texas', 3669, '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', '[]', 'Credit Card / Debit Card (Paymate)', 'paymate', 'Beach', 'Belinda', 'GlobalMandate LTD', '3630 Margaret Street', '', 'Houston', '77063', 'United States', 223, 'Texas', 3669, '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', '[]', 'Flat Shipping Rate', 'flat.flat', '', '105.0000', 0, 0, '0.0000', 0, '', 1, 2, 'USD', '1.00000000', '::1', '', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36', 'vi-VN,vi;q=0.8,fr-FR;q=0.6,fr;q=0.4,en-US;q=0.2,en;q=0.2', '2017-07-04 16:18:36', '2017-07-04 16:18:36'),
+(23, 0, 'INV-2013-00', 0, 'shopnow', 'http://localhost/cms/shophai/', 11, 1, 'Beach', 'Belinda', 'belindatbeach@gmail.com', '7139530148', '7139530148', '', 'Beach', 'Belinda', 'GlobalMandate LTD', '3630 Margaret Street', '', 'Houston', '77063', 'United States', 223, 'Texas', 3669, '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', '[]', 'Credit Card / Debit Card (Web Payment Software)', 'web_payment_software', 'Beach', 'Belinda', 'GlobalMandate LTD', '3630 Margaret Street', '', 'Houston', '77063', 'United States', 223, 'Texas', 3669, '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', '[]', 'Flat Shipping Rate', 'flat.flat', '', '105.0000', 0, 0, '0.0000', 0, '', 1, 2, 'USD', '1.00000000', '::1', '', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36', 'vi-VN,vi;q=0.8,fr-FR;q=0.6,fr;q=0.4,en-US;q=0.2,en;q=0.2', '2017-07-04 16:18:45', '2017-07-04 16:18:45'),
+(24, 0, 'INV-2013-00', 0, 'shopnow', 'http://localhost/cms/shophai/', 11, 1, 'Beach', 'Belinda', 'belindatbeach@gmail.com', '7139530148', '7139530148', '', 'Beach', 'Belinda', 'GlobalMandate LTD', '3630 Margaret Street', '', 'Houston', '77063', 'United States', 223, 'Texas', 3669, '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', '[]', 'Credit Card / Debit Card (Paymate)', 'paymate', 'Beach', 'Belinda', 'GlobalMandate LTD', '3630 Margaret Street', '', 'Houston', '77063', 'United States', 223, 'Texas', 3669, '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', '[]', 'Flat Shipping Rate', 'flat.flat', '', '105.0000', 0, 0, '0.0000', 0, '', 1, 2, 'USD', '1.00000000', '::1', '', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36', 'vi-VN,vi;q=0.8,fr-FR;q=0.6,fr;q=0.4,en-US;q=0.2,en;q=0.2', '2017-07-04 16:18:57', '2017-07-04 16:18:57'),
+(25, 0, 'INV-2013-00', 0, 'shopnow', 'http://localhost/cms/shophai/', 11, 1, 'Beach', 'Belinda', 'belindatbeach@gmail.com', '7139530148', '7139530148', '', 'Beach', 'Belinda', 'GlobalMandate LTD', '3630 Margaret Street', '', 'Houston', '77063', 'United States', 223, 'Texas', 3669, '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', '[]', 'Credit Card / Debit Card (Web Payment Software)', 'web_payment_software', 'Beach', 'Belinda', 'GlobalMandate LTD', '3630 Margaret Street', '', 'Houston', '77063', 'United States', 223, 'Texas', 3669, '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', '[]', 'Flat Shipping Rate', 'flat.flat', '', '105.0000', 0, 0, '0.0000', 0, '', 1, 2, 'USD', '1.00000000', '::1', '', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36', 'vi-VN,vi;q=0.8,fr-FR;q=0.6,fr;q=0.4,en-US;q=0.2,en;q=0.2', '2017-07-04 16:19:59', '2017-07-04 16:19:59'),
+(26, 0, 'INV-2013-00', 0, 'shopnow', 'http://localhost/cms/shophai/', 11, 1, 'Beach', 'Belinda', 'belindatbeach@gmail.com', '7139530148', '7139530148', '', 'Beach', 'Belinda', 'GlobalMandate LTD', '3630 Margaret Street', '', 'Houston', '77063', 'United States', 223, 'Texas', 3669, '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', '[]', 'Credit Card / Debit Card (Web Payment Software)', 'web_payment_software', 'Beach', 'Belinda', 'GlobalMandate LTD', '3630 Margaret Street', '', 'Houston', '77063', 'United States', 223, 'Texas', 3669, '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', '[]', 'Flat Shipping Rate', 'flat.flat', '', '105.0000', 0, 0, '0.0000', 0, '', 1, 2, 'USD', '1.00000000', '::1', '', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36', 'vi-VN,vi;q=0.8,fr-FR;q=0.6,fr;q=0.4,en-US;q=0.2,en;q=0.2', '2017-07-04 16:32:31', '2017-07-04 16:32:31'),
+(27, 0, 'INV-2013-00', 0, 'shopnow', 'http://localhost/cms/shophai/', 11, 1, 'Beach', 'Belinda', 'belindatbeach@gmail.com', '7139530148', '7139530148', '', 'Beach', 'Belinda', 'GlobalMandate LTD', '3630 Margaret Street', '', 'Houston', '77063', 'United States', 223, 'Texas', 3669, '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', '[]', 'Credit Card / Debit Card (Paymate)', 'paymate', 'Beach', 'Belinda', 'GlobalMandate LTD', '3630 Margaret Street', '', 'Houston', '77063', 'United States', 223, 'Texas', 3669, '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', '[]', 'Flat Shipping Rate', 'flat.flat', '', '125.0000', 0, 0, '0.0000', 0, '', 1, 2, 'USD', '1.00000000', '::1', '', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36', 'vi-VN,vi;q=0.8,fr-FR;q=0.6,fr;q=0.4,en-US;q=0.2,en;q=0.2', '2017-07-05 10:22:54', '2017-07-05 10:22:54'),
+(28, 0, 'INV-2013-00', 0, 'shopnow', 'http://localhost/cms/shophai/', 11, 1, 'Beach', 'Belinda', 'belindatbeach@gmail.com', '7139530148', '7139530148', '', 'Beach', 'Belinda', 'GlobalMandate LTD', '3630 Margaret Street', '', 'Houston', '77063', 'United States', 223, 'Texas', 3669, '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', '[]', 'Pay Securely & Safely with Credit / Debit Card', 'stripe_payments', 'Beach', 'Belinda', 'GlobalMandate LTD', '3630 Margaret Street', '', 'Houston', '77063', 'United States', 223, 'Texas', 3669, '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', '[]', 'Flat Shipping Rate', 'flat.flat', '', '125.0000', 0, 0, '0.0000', 0, '', 1, 2, 'USD', '1.00000000', '::1', '', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36', 'vi-VN,vi;q=0.8,fr-FR;q=0.6,fr;q=0.4,en-US;q=0.2,en;q=0.2', '2017-07-05 10:23:14', '2017-07-05 10:23:14'),
+(29, 0, 'INV-2013-00', 0, 'shopnow', 'http://localhost/cms/shophai/', 11, 1, 'Beach', 'Belinda', 'belindatbeach@gmail.com', '7139530148', '7139530148', '', 'Beach', 'Belinda', 'GlobalMandate LTD', '3630 Margaret Street', '', 'Houston', '77063', 'United States', 223, 'Texas', 3669, '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', '[]', 'Credit Card / Debit Card (Web Payment Software)', 'web_payment_software', 'Beach', 'Belinda', 'GlobalMandate LTD', '3630 Margaret Street', '', 'Houston', '77063', 'United States', 223, 'Texas', 3669, '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', '[]', 'Flat Shipping Rate', 'flat.flat', '', '125.0000', 0, 0, '0.0000', 0, '', 1, 2, 'USD', '1.00000000', '::1', '', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36', 'vi-VN,vi;q=0.8,fr-FR;q=0.6,fr;q=0.4,en-US;q=0.2,en;q=0.2', '2017-07-05 10:23:34', '2017-07-05 10:23:34'),
+(30, 0, 'INV-2013-00', 0, 'shopnow', 'http://localhost/cms/shophai/', 11, 1, 'Beach', 'Belinda', 'belindatbeach@gmail.com', '7139530148', '7139530148', '', 'Beach', 'Belinda', 'GlobalMandate LTD', '3630 Margaret Street', '', 'Houston', '77063', 'United States', 223, 'Texas', 3669, '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', '[]', 'PayPal', 'pp_standard', 'Beach', 'Belinda', 'GlobalMandate LTD', '3630 Margaret Street', '', 'Houston', '77063', 'United States', 223, 'Texas', 3669, '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', '[]', 'Flat Shipping Rate', 'flat.flat', '', '125.0000', 0, 0, '0.0000', 0, '', 1, 2, 'USD', '1.00000000', '::1', '', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36', 'vi-VN,vi;q=0.8,fr-FR;q=0.6,fr;q=0.4,en-US;q=0.2,en;q=0.2', '2017-07-05 10:27:46', '2017-07-05 10:27:46'),
+(31, 0, 'INV-2013-00', 0, 'shopnow', 'http://localhost/cms/shophai/', 11, 1, 'Beach', 'Belinda', 'belindatbeach@gmail.com', '7139530148', '7139530148', '', 'Beach', 'Belinda', 'GlobalMandate LTD', '3630 Margaret Street', '', 'Houston', '77063', 'United States', 223, 'Texas', 3669, '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', '[]', 'Credit or Debit Card', 'pp_pro_iframe', 'Beach', 'Belinda', 'GlobalMandate LTD', '3630 Margaret Street', '', 'Houston', '77063', 'United States', 223, 'Texas', 3669, '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', '[]', 'Flat Shipping Rate', 'flat.flat', '', '125.0000', 0, 0, '0.0000', 0, '', 1, 2, 'USD', '1.00000000', '::1', '', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36', 'vi-VN,vi;q=0.8,fr-FR;q=0.6,fr;q=0.4,en-US;q=0.2,en;q=0.2', '2017-07-05 10:47:16', '2017-07-05 10:47:16'),
+(32, 0, 'INV-2013-00', 0, 'shopnow', 'http://localhost/cms/shophai/', 11, 1, 'Beach', 'Belinda', 'belindatbeach@gmail.com', '7139530148', '7139530148', '', 'Beach', 'Belinda', 'GlobalMandate LTD', '3630 Margaret Street', '', 'Houston', '77063', 'United States', 223, 'Texas', 3669, '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', '[]', 'PayPal', 'pp_standard', 'Beach', 'Belinda', 'GlobalMandate LTD', '3630 Margaret Street', '', 'Houston', '77063', 'United States', 223, 'Texas', 3669, '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', '[]', 'Flat Shipping Rate', 'flat.flat', '', '125.0000', 0, 0, '0.0000', 0, '', 1, 2, 'USD', '1.00000000', '::1', '', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36', 'vi-VN,vi;q=0.8,fr-FR;q=0.6,fr;q=0.4,en-US;q=0.2,en;q=0.2', '2017-07-05 10:47:45', '2017-07-05 10:47:45'),
+(33, 0, 'INV-2013-00', 0, 'shopnow', 'http://localhost/cms/shophai/', 11, 1, 'Beach', 'Belinda', 'belindatbeach@gmail.com', '7139530148', '7139530148', '', 'Beach', 'Belinda', 'GlobalMandate LTD', '3630 Margaret Street', '', 'Houston', '77063', 'United States', 223, 'Texas', 3669, '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', '[]', 'Credit or Debit Card (Processed securely by PayPal)', 'pp_pro', 'Beach', 'Belinda', 'GlobalMandate LTD', '3630 Margaret Street', '', 'Houston', '77063', 'United States', 223, 'Texas', 3669, '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', '[]', 'Flat Shipping Rate', 'flat.flat', '', '125.0000', 0, 0, '0.0000', 0, '', 1, 2, 'USD', '1.00000000', '::1', '', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36', 'vi-VN,vi;q=0.8,fr-FR;q=0.6,fr;q=0.4,en-US;q=0.2,en;q=0.2', '2017-07-05 10:48:54', '2017-07-05 10:48:54'),
+(34, 0, 'INV-2013-00', 0, 'shopnow', 'http://localhost/cms/shophai/', 11, 1, 'Beach', 'Belinda', 'belindatbeach@gmail.com', '7139530148', '7139530148', '', 'Beach', 'Belinda', 'GlobalMandate LTD', '3630 Margaret Street', '', 'Houston', '77063', 'United States', 223, 'Texas', 3669, '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', '[]', 'Credit or Debit Card', 'pp_pro_iframe', 'Beach', 'Belinda', 'GlobalMandate LTD', '3630 Margaret Street', '', 'Houston', '77063', 'United States', 223, 'Texas', 3669, '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', '[]', 'Flat Shipping Rate', 'flat.flat', '', '125.0000', 0, 0, '0.0000', 0, '', 1, 2, 'USD', '1.00000000', '::1', '', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36', 'vi-VN,vi;q=0.8,fr-FR;q=0.6,fr;q=0.4,en-US;q=0.2,en;q=0.2', '2017-07-05 10:49:27', '2017-07-05 10:49:27'),
+(35, 0, 'INV-2013-00', 0, 'shopnow', 'http://localhost/cms/shophai/', 11, 1, 'Beach', 'Belinda', 'belindatbeach@gmail.com', '7139530148', '7139530148', '', 'Beach', 'Belinda', 'GlobalMandate LTD', '3630 Margaret Street', '', 'Houston', '77063', 'United States', 223, 'Texas', 3669, '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', '[]', 'Credit or Debit Card', 'pp_pro_iframe', 'Beach', 'Belinda', 'GlobalMandate LTD', '3630 Margaret Street', '', 'Houston', '77063', 'United States', 223, 'Texas', 3669, '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', '[]', 'Flat Shipping Rate', 'flat.flat', '', '125.0000', 0, 0, '0.0000', 0, '', 1, 2, 'USD', '1.00000000', '::1', '', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36', 'vi-VN,vi;q=0.8,fr-FR;q=0.6,fr;q=0.4,en-US;q=0.2,en;q=0.2', '2017-07-05 10:49:38', '2017-07-05 10:49:38'),
+(36, 0, 'INV-2013-00', 0, 'shopnow', 'http://localhost/cms/shophai/', 11, 1, 'Beach', 'Belinda', 'belindatbeach@gmail.com', '7139530148', '7139530148', '', 'Beach', 'Belinda', 'GlobalMandate LTD', '3630 Margaret Street', '', 'Houston', '77063', 'United States', 223, 'Texas', 3669, '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', '[]', 'Credit or Debit Card', 'pp_pro_iframe', 'Beach', 'Belinda', 'GlobalMandate LTD', '3630 Margaret Street', '', 'Houston', '77063', 'United States', 223, 'Texas', 3669, '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', '[]', 'Flat Shipping Rate', 'flat.flat', '', '125.0000', 0, 0, '0.0000', 0, '', 1, 2, 'USD', '1.00000000', '::1', '', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36', 'vi-VN,vi;q=0.8,fr-FR;q=0.6,fr;q=0.4,en-US;q=0.2,en;q=0.2', '2017-07-05 10:50:21', '2017-07-05 10:50:21'),
+(37, 0, 'INV-2013-00', 0, 'shopnow', 'http://localhost/cms/shophai/', 11, 1, 'Beach', 'Belinda', 'belindatbeach@gmail.com', '7139530148', '7139530148', '', 'Beach', 'Belinda', 'GlobalMandate LTD', '3630 Margaret Street', '', 'Houston', '77063', 'United States', 223, 'Texas', 3669, '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', '[]', 'Credit or Debit Card', 'pp_pro_iframe', 'Beach', 'Belinda', 'GlobalMandate LTD', '3630 Margaret Street', '', 'Houston', '77063', 'United States', 223, 'Texas', 3669, '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', '[]', 'Flat Shipping Rate', 'flat.flat', '', '125.0000', 0, 0, '0.0000', 0, '', 1, 2, 'USD', '1.00000000', '::1', '', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36', 'vi-VN,vi;q=0.8,fr-FR;q=0.6,fr;q=0.4,en-US;q=0.2,en;q=0.2', '2017-07-05 10:51:01', '2017-07-05 10:51:01'),
+(38, 0, 'INV-2013-00', 0, 'shopnow', 'http://localhost/cms/shophai/', 11, 1, 'Beach', 'Belinda', 'belindatbeach@gmail.com', '7139530148', '7139530148', '', 'Beach', 'Belinda', 'GlobalMandate LTD', '3630 Margaret Street', '', 'Houston', '77063', 'United States', 223, 'Texas', 3669, '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', '[]', 'Credit or Debit Card (Processed securely by PayPal)', 'pp_pro', 'Beach', 'Belinda', 'GlobalMandate LTD', '3630 Margaret Street', '', 'Houston', '77063', 'United States', 223, 'Texas', 3669, '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', '[]', 'Flat Shipping Rate', 'flat.flat', '', '125.0000', 0, 0, '0.0000', 0, '', 1, 2, 'USD', '1.00000000', '::1', '', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36', 'vi-VN,vi;q=0.8,fr-FR;q=0.6,fr;q=0.4,en-US;q=0.2,en;q=0.2', '2017-07-05 10:51:25', '2017-07-05 10:51:25');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_order_custom_field`
+-- Cấu trúc bảng cho bảng `oc_order_custom_field`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_order_custom_field` (
-  `order_custom_field_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_order_custom_field` (
+  `order_custom_field_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `custom_field_id` int(11) NOT NULL,
   `custom_field_value_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `value` text NOT NULL,
   `type` varchar(32) NOT NULL,
-  `location` varchar(16) NOT NULL,
-  PRIMARY KEY (`order_custom_field_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `location` varchar(16) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_order_history`
+-- Cấu trúc bảng cho bảng `oc_order_history`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_order_history` (
-  `order_history_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_order_history` (
+  `order_history_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `order_status_id` int(11) NOT NULL,
   `notify` tinyint(1) NOT NULL DEFAULT '0',
   `comment` text NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`order_history_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=32 ;
+  `date_added` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_order_history`
+-- Đang đổ dữ liệu cho bảng `oc_order_history`
 --
 
 INSERT INTO `oc_order_history` (`order_history_id`, `order_id`, `order_status_id`, `notify`, `comment`, `date_added`) VALUES
@@ -2921,37 +2830,54 @@ INSERT INTO `oc_order_history` (`order_history_id`, `order_id`, `order_status_id
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_order_option`
+-- Cấu trúc bảng cho bảng `oc_order_option`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_order_option` (
-  `order_option_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_order_option` (
+  `order_option_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `order_product_id` int(11) NOT NULL,
   `product_option_id` int(11) NOT NULL,
   `product_option_value_id` int(11) NOT NULL DEFAULT '0',
   `name` varchar(255) NOT NULL,
   `value` text NOT NULL,
-  `type` varchar(32) NOT NULL,
-  PRIMARY KEY (`order_option_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+  `type` varchar(32) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_order_option`
+-- Đang đổ dữ liệu cho bảng `oc_order_option`
 --
 
 INSERT INTO `oc_order_option` (`order_option_id`, `order_id`, `order_product_id`, `product_option_id`, `product_option_value_id`, `name`, `value`, `type`) VALUES
 (4, 12, 28, 225, 0, 'Delivery Date', '2011-04-22', 'date'),
-(5, 18, 34, 226, 15, 'Select', 'Red', 'select');
+(5, 18, 34, 226, 15, 'Select', 'Red', 'select'),
+(6, 21, 38, 225, 0, 'Delivery Date', '2011-04-22', 'date'),
+(7, 22, 39, 225, 0, 'Delivery Date', '2011-04-22', 'date'),
+(8, 23, 40, 225, 0, 'Delivery Date', '2011-04-22', 'date'),
+(9, 24, 41, 225, 0, 'Delivery Date', '2011-04-22', 'date'),
+(10, 25, 42, 225, 0, 'Delivery Date', '2011-04-22', 'date'),
+(11, 26, 43, 225, 0, 'Delivery Date', '2011-04-22', 'date'),
+(12, 27, 45, 225, 0, 'Delivery Date', '2011-04-22', 'date'),
+(13, 28, 47, 225, 0, 'Delivery Date', '2011-04-22', 'date'),
+(14, 29, 49, 225, 0, 'Delivery Date', '2011-04-22', 'date'),
+(15, 30, 51, 225, 0, 'Delivery Date', '2011-04-22', 'date'),
+(16, 31, 53, 225, 0, 'Delivery Date', '2011-04-22', 'date'),
+(17, 32, 55, 225, 0, 'Delivery Date', '2011-04-22', 'date'),
+(18, 33, 57, 225, 0, 'Delivery Date', '2011-04-22', 'date'),
+(19, 34, 59, 225, 0, 'Delivery Date', '2011-04-22', 'date'),
+(20, 35, 61, 225, 0, 'Delivery Date', '2011-04-22', 'date'),
+(21, 36, 63, 225, 0, 'Delivery Date', '2011-04-22', 'date'),
+(22, 37, 65, 225, 0, 'Delivery Date', '2011-04-22', 'date'),
+(23, 38, 67, 225, 0, 'Delivery Date', '2011-04-22', 'date');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_order_product`
+-- Cấu trúc bảng cho bảng `oc_order_product`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_order_product` (
-  `order_product_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_order_product` (
+  `order_product_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -2960,12 +2886,11 @@ CREATE TABLE IF NOT EXISTS `oc_order_product` (
   `price` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `total` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `tax` decimal(15,4) NOT NULL DEFAULT '0.0000',
-  `reward` int(8) NOT NULL,
-  PRIMARY KEY (`order_product_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=38 ;
+  `reward` int(8) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_order_product`
+-- Đang đổ dữ liệu cho bảng `oc_order_product`
 --
 
 INSERT INTO `oc_order_product` (`order_product_id`, `order_id`, `product_id`, `name`, `model`, `quantity`, `price`, `total`, `tax`, `reward`) VALUES
@@ -2993,16 +2918,46 @@ INSERT INTO `oc_order_product` (`order_product_id`, `order_id`, `product_id`, `n
 (34, 18, 30, 'Canon EOS 5D tablet', 'Product 3', 1, '80.0000', '80.0000', '0.0000', 200),
 (35, 18, 49, 'Samsung Galaxy Tab 10.1', 'SAM1', 2, '199.9900', '399.9800', '0.0000', 2000),
 (36, 19, 54, 'New blue hade phones', 'New blue hade phones', 1, '203.0000', '203.0000', '0.0000', 0),
-(37, 20, 48, 'iPod Classic', 'product 20', 1, '100.0000', '100.0000', '0.0000', 0);
+(37, 20, 48, 'iPod Classic', 'product 20', 1, '100.0000', '100.0000', '0.0000', 0),
+(38, 21, 47, 'HP LP3065', 'Product 21', 1, '100.0000', '100.0000', '0.0000', 300),
+(39, 22, 47, 'HP LP3065', 'Product 21', 1, '100.0000', '100.0000', '0.0000', 300),
+(40, 23, 47, 'HP LP3065', 'Product 21', 1, '100.0000', '100.0000', '0.0000', 300),
+(41, 24, 47, 'HP LP3065', 'Product 21', 1, '100.0000', '100.0000', '0.0000', 300),
+(42, 25, 47, 'HP LP3065', 'Product 21', 1, '100.0000', '100.0000', '0.0000', 300),
+(43, 26, 47, 'HP LP3065', 'Product 21', 1, '100.0000', '100.0000', '0.0000', 300),
+(44, 27, 41, 'iMac', 'Product 14', 1, '20.0000', '20.0000', '0.0000', 0),
+(45, 27, 47, 'HP LP3065', 'Product 21', 1, '100.0000', '100.0000', '0.0000', 300),
+(46, 28, 41, 'iMac', 'Product 14', 1, '20.0000', '20.0000', '0.0000', 0),
+(47, 28, 47, 'HP LP3065', 'Product 21', 1, '100.0000', '100.0000', '0.0000', 300),
+(48, 29, 41, 'iMac', 'Product 14', 1, '20.0000', '20.0000', '0.0000', 0),
+(49, 29, 47, 'HP LP3065', 'Product 21', 1, '100.0000', '100.0000', '0.0000', 300),
+(50, 30, 41, 'iMac', 'Product 14', 1, '20.0000', '20.0000', '0.0000', 0),
+(51, 30, 47, 'HP LP3065', 'Product 21', 1, '100.0000', '100.0000', '0.0000', 300),
+(52, 31, 41, 'iMac', 'Product 14', 1, '20.0000', '20.0000', '0.0000', 0),
+(53, 31, 47, 'HP LP3065', 'Product 21', 1, '100.0000', '100.0000', '0.0000', 300),
+(54, 32, 41, 'iMac', 'Product 14', 1, '20.0000', '20.0000', '0.0000', 0),
+(55, 32, 47, 'HP LP3065', 'Product 21', 1, '100.0000', '100.0000', '0.0000', 300),
+(56, 33, 41, 'iMac', 'Product 14', 1, '20.0000', '20.0000', '0.0000', 0),
+(57, 33, 47, 'HP LP3065', 'Product 21', 1, '100.0000', '100.0000', '0.0000', 300),
+(58, 34, 41, 'iMac', 'Product 14', 1, '20.0000', '20.0000', '0.0000', 0),
+(59, 34, 47, 'HP LP3065', 'Product 21', 1, '100.0000', '100.0000', '0.0000', 300),
+(60, 35, 41, 'iMac', 'Product 14', 1, '20.0000', '20.0000', '0.0000', 0),
+(61, 35, 47, 'HP LP3065', 'Product 21', 1, '100.0000', '100.0000', '0.0000', 300),
+(62, 36, 41, 'iMac', 'Product 14', 1, '20.0000', '20.0000', '0.0000', 0),
+(63, 36, 47, 'HP LP3065', 'Product 21', 1, '100.0000', '100.0000', '0.0000', 300),
+(64, 37, 41, 'iMac', 'Product 14', 1, '20.0000', '20.0000', '0.0000', 0),
+(65, 37, 47, 'HP LP3065', 'Product 21', 1, '100.0000', '100.0000', '0.0000', 300),
+(66, 38, 41, 'iMac', 'Product 14', 1, '20.0000', '20.0000', '0.0000', 0),
+(67, 38, 47, 'HP LP3065', 'Product 21', 1, '100.0000', '100.0000', '0.0000', 300);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_order_recurring`
+-- Cấu trúc bảng cho bảng `oc_order_recurring`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_order_recurring` (
-  `order_recurring_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_order_recurring` (
+  `order_recurring_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `reference` varchar(255) NOT NULL,
   `product_id` int(11) NOT NULL,
@@ -3021,41 +2976,38 @@ CREATE TABLE IF NOT EXISTS `oc_order_recurring` (
   `trial_duration` smallint(6) NOT NULL,
   `trial_price` decimal(10,4) NOT NULL,
   `status` tinyint(4) NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`order_recurring_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `date_added` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_order_recurring_transaction`
+-- Cấu trúc bảng cho bảng `oc_order_recurring_transaction`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_order_recurring_transaction` (
-  `order_recurring_transaction_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_order_recurring_transaction` (
+  `order_recurring_transaction_id` int(11) NOT NULL,
   `order_recurring_id` int(11) NOT NULL,
   `reference` varchar(255) NOT NULL,
   `type` varchar(255) NOT NULL,
   `amount` decimal(10,4) NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`order_recurring_transaction_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `date_added` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_order_status`
+-- Cấu trúc bảng cho bảng `oc_order_status`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_order_status` (
-  `order_status_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_order_status` (
+  `order_status_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `name` varchar(32) NOT NULL,
-  PRIMARY KEY (`order_status_id`,`language_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
+  `name` varchar(32) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_order_status`
+-- Đang đổ dữ liệu cho bảng `oc_order_status`
 --
 
 INSERT INTO `oc_order_status` (`order_status_id`, `language_id`, `name`) VALUES
@@ -3091,22 +3043,20 @@ INSERT INTO `oc_order_status` (`order_status_id`, `language_id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_order_total`
+-- Cấu trúc bảng cho bảng `oc_order_total`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_order_total` (
-  `order_total_id` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_order_total` (
+  `order_total_id` int(10) NOT NULL,
   `order_id` int(11) NOT NULL,
   `code` varchar(32) NOT NULL,
   `title` varchar(255) NOT NULL,
   `value` decimal(15,4) NOT NULL DEFAULT '0.0000',
-  `sort_order` int(3) NOT NULL,
-  PRIMARY KEY (`order_total_id`),
-  KEY `order_id` (`order_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=76 ;
+  `sort_order` int(3) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_order_total`
+-- Đang đổ dữ liệu cho bảng `oc_order_total`
 --
 
 INSERT INTO `oc_order_total` (`order_total_id`, `order_id`, `code`, `title`, `value`, `sort_order`) VALUES
@@ -3172,16 +3122,70 @@ INSERT INTO `oc_order_total` (`order_total_id`, `order_id`, `code`, `title`, `va
 (72, 19, 'total', 'Total', '0.0000', 9),
 (73, 20, 'sub_total', 'Sub-Total', '100.0000', 1),
 (74, 20, 'shipping', 'Flat Shipping Rate', '5.0000', 3),
-(75, 20, 'total', 'Total', '105.0000', 9);
+(75, 20, 'total', 'Total', '105.0000', 9),
+(76, 21, 'sub_total', 'Sub-Total', '100.0000', 1),
+(77, 21, 'shipping', 'Flat Shipping Rate', '5.0000', 3),
+(78, 21, 'total', 'Total', '105.0000', 9),
+(79, 22, 'sub_total', 'Sub-Total', '100.0000', 1),
+(80, 22, 'shipping', 'Flat Shipping Rate', '5.0000', 3),
+(81, 22, 'total', 'Total', '105.0000', 9),
+(82, 23, 'sub_total', 'Sub-Total', '100.0000', 1),
+(83, 23, 'shipping', 'Flat Shipping Rate', '5.0000', 3),
+(84, 23, 'total', 'Total', '105.0000', 9),
+(85, 24, 'sub_total', 'Sub-Total', '100.0000', 1),
+(86, 24, 'shipping', 'Flat Shipping Rate', '5.0000', 3),
+(87, 24, 'total', 'Total', '105.0000', 9),
+(88, 25, 'sub_total', 'Sub-Total', '100.0000', 1),
+(89, 25, 'shipping', 'Flat Shipping Rate', '5.0000', 3),
+(90, 25, 'total', 'Total', '105.0000', 9),
+(91, 26, 'sub_total', 'Sub-Total', '100.0000', 1),
+(92, 26, 'shipping', 'Flat Shipping Rate', '5.0000', 3),
+(93, 26, 'total', 'Total', '105.0000', 9),
+(94, 27, 'sub_total', 'Sub-Total', '120.0000', 1),
+(95, 27, 'shipping', 'Flat Shipping Rate', '5.0000', 3),
+(96, 27, 'total', 'Total', '125.0000', 9),
+(97, 28, 'sub_total', 'Sub-Total', '120.0000', 1),
+(98, 28, 'shipping', 'Flat Shipping Rate', '5.0000', 3),
+(99, 28, 'total', 'Total', '125.0000', 9),
+(100, 29, 'sub_total', 'Sub-Total', '120.0000', 1),
+(101, 29, 'shipping', 'Flat Shipping Rate', '5.0000', 3),
+(102, 29, 'total', 'Total', '125.0000', 9),
+(103, 30, 'sub_total', 'Sub-Total', '120.0000', 1),
+(104, 30, 'shipping', 'Flat Shipping Rate', '5.0000', 3),
+(105, 30, 'total', 'Total', '125.0000', 9),
+(106, 31, 'sub_total', 'Sub-Total', '120.0000', 1),
+(107, 31, 'shipping', 'Flat Shipping Rate', '5.0000', 3),
+(108, 31, 'total', 'Total', '125.0000', 9),
+(109, 32, 'sub_total', 'Sub-Total', '120.0000', 1),
+(110, 32, 'shipping', 'Flat Shipping Rate', '5.0000', 3),
+(111, 32, 'total', 'Total', '125.0000', 9),
+(112, 33, 'sub_total', 'Sub-Total', '120.0000', 1),
+(113, 33, 'shipping', 'Flat Shipping Rate', '5.0000', 3),
+(114, 33, 'total', 'Total', '125.0000', 9),
+(115, 34, 'sub_total', 'Sub-Total', '120.0000', 1),
+(116, 34, 'shipping', 'Flat Shipping Rate', '5.0000', 3),
+(117, 34, 'total', 'Total', '125.0000', 9),
+(118, 35, 'sub_total', 'Sub-Total', '120.0000', 1),
+(119, 35, 'shipping', 'Flat Shipping Rate', '5.0000', 3),
+(120, 35, 'total', 'Total', '125.0000', 9),
+(121, 36, 'sub_total', 'Sub-Total', '120.0000', 1),
+(122, 36, 'shipping', 'Flat Shipping Rate', '5.0000', 3),
+(123, 36, 'total', 'Total', '125.0000', 9),
+(124, 37, 'sub_total', 'Sub-Total', '120.0000', 1),
+(125, 37, 'shipping', 'Flat Shipping Rate', '5.0000', 3),
+(126, 37, 'total', 'Total', '125.0000', 9),
+(127, 38, 'sub_total', 'Sub-Total', '120.0000', 1),
+(128, 38, 'shipping', 'Flat Shipping Rate', '5.0000', 3),
+(129, 38, 'total', 'Total', '125.0000', 9);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_order_voucher`
+-- Cấu trúc bảng cho bảng `oc_order_voucher`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_order_voucher` (
-  `order_voucher_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_order_voucher` (
+  `order_voucher_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `voucher_id` int(11) NOT NULL,
   `description` varchar(255) NOT NULL,
@@ -3192,18 +3196,86 @@ CREATE TABLE IF NOT EXISTS `oc_order_voucher` (
   `to_email` varchar(96) NOT NULL,
   `voucher_theme_id` int(11) NOT NULL,
   `message` text NOT NULL,
-  `amount` decimal(15,4) NOT NULL,
-  PRIMARY KEY (`order_voucher_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `amount` decimal(15,4) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_product`
+-- Cấu trúc bảng cho bảng `oc_paypal_iframe_order`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_product` (
-  `product_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_paypal_iframe_order` (
+  `paypal_iframe_order_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `date_added` datetime NOT NULL,
+  `date_modified` datetime NOT NULL,
+  `capture_status` enum('Complete','NotComplete') DEFAULT NULL,
+  `currency_code` char(3) NOT NULL,
+  `authorization_id` varchar(30) NOT NULL,
+  `total` decimal(10,2) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `oc_paypal_iframe_order_transaction`
+--
+
+CREATE TABLE `oc_paypal_iframe_order_transaction` (
+  `paypal_iframe_order_transaction_id` int(11) NOT NULL,
+  `paypal_iframe_order_id` int(11) NOT NULL,
+  `transaction_id` char(20) NOT NULL,
+  `parent_id` char(20) NOT NULL,
+  `date_added` datetime NOT NULL,
+  `note` varchar(255) NOT NULL,
+  `msgsubid` char(38) NOT NULL,
+  `receipt_id` char(20) NOT NULL,
+  `payment_type` enum('none','echeck','instant','refund','void') DEFAULT NULL,
+  `payment_status` char(20) NOT NULL,
+  `pending_reason` char(50) NOT NULL,
+  `transaction_entity` char(50) NOT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `debug_data` text NOT NULL,
+  `call_data` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `oc_paypal_payflow_iframe_order`
+--
+
+CREATE TABLE `oc_paypal_payflow_iframe_order` (
+  `order_id` int(11) NOT NULL,
+  `secure_token_id` varchar(255) NOT NULL,
+  `transaction_reference` varchar(255) DEFAULT NULL,
+  `transaction_type` varchar(1) DEFAULT NULL,
+  `complete` tinyint(4) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `oc_paypal_payflow_iframe_order_transaction`
+--
+
+CREATE TABLE `oc_paypal_payflow_iframe_order_transaction` (
+  `order_id` int(11) NOT NULL,
+  `transaction_reference` varchar(255) NOT NULL,
+  `transaction_type` char(1) NOT NULL,
+  `time` datetime NOT NULL,
+  `amount` decimal(10,4) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `oc_product`
+--
+
+CREATE TABLE `oc_product` (
+  `product_id` int(11) NOT NULL,
   `model` varchar(64) NOT NULL,
   `sku` varchar(64) NOT NULL,
   `upc` varchar(12) NOT NULL,
@@ -3233,18 +3305,17 @@ CREATE TABLE IF NOT EXISTS `oc_product` (
   `status` tinyint(1) NOT NULL DEFAULT '0',
   `viewed` int(5) NOT NULL DEFAULT '0',
   `date_added` datetime NOT NULL,
-  `date_modified` datetime NOT NULL,
-  PRIMARY KEY (`product_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=57 ;
+  `date_modified` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_product`
+-- Đang đổ dữ liệu cho bảng `oc_product`
 --
 
 INSERT INTO `oc_product` (`product_id`, `model`, `sku`, `upc`, `ean`, `jan`, `isbn`, `mpn`, `location`, `quantity`, `stock_status_id`, `image`, `manufacturer_id`, `shipping`, `price`, `points`, `tax_class_id`, `date_available`, `weight`, `weight_class_id`, `length`, `width`, `height`, `length_class_id`, `subtract`, `minimum`, `sort_order`, `status`, `viewed`, `date_added`, `date_modified`) VALUES
-(28, 'Product 1', '', '', '', '', '', '', '', 934, 7, 'catalog/products/product1.png', 5, 1, '100.0000', 200, 9, '2009-02-03', '146.40000000', 2, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, 0, '2009-02-03 16:06:50', '2017-05-04 15:37:01'),
+(28, 'Product 1', '', '', '', '', '', '', '', 934, 7, 'catalog/products/product1.png', 5, 1, '100.0000', 200, 9, '2009-02-03', '146.40000000', 2, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, 1, '2009-02-03 16:06:50', '2017-05-04 15:37:01'),
 (29, 'Product 2', '', '', '', '', '', '', '', 999, 6, 'catalog/products/product1.png', 6, 1, '279.9900', 0, 9, '2009-02-03', '133.00000000', 2, '0.00000000', '0.00000000', '0.00000000', 3, 1, 1, 0, 1, 0, '2009-02-03 16:42:17', '2017-05-04 15:44:21'),
-(30, 'Product 3', '', '', '', '', '', '', '', 6, 6, 'catalog/products/product1.png', 9, 1, '100.0000', 0, 9, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, 0, '2009-02-03 16:59:00', '2017-05-04 15:36:23'),
+(30, 'Product 3', '', '', '', '', '', '', '', 6, 6, 'catalog/products/product1.png', 9, 1, '100.0000', 0, 9, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, 1, '2009-02-03 16:59:00', '2017-05-04 15:36:23'),
 (31, 'Product 4', '', '', '', '', '', '', '', 1000, 6, 'catalog/products/product1.png', 0, 1, '80.0000', 0, 9, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 3, 1, 1, 0, 1, 0, '2009-02-03 17:00:10', '2017-05-04 15:43:57'),
 (32, 'Product 5', '', '', '', '', '', '', '', 999, 6, 'catalog/products/product1.png', 8, 1, '100.0000', 0, 9, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, 0, '2009-02-03 17:07:26', '2017-05-04 15:39:59'),
 (33, 'Product 6', '', '', '', '', '', '', '', 1000, 6, 'catalog/products/product1.png', 0, 1, '200.0000', 0, 9, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, 0, '2009-02-03 17:08:31', '2017-05-04 15:46:16'),
@@ -3252,17 +3323,17 @@ INSERT INTO `oc_product` (`product_id`, `model`, `sku`, `upc`, `ean`, `jan`, `is
 (35, 'Product 8', '', '', '', '', '', '', '', 1000, 5, 'catalog/products/product1.png', 0, 0, '100.0000', 0, 9, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, 0, '2009-02-03 18:08:31', '2017-05-04 15:44:31'),
 (36, 'Product 9', '', '', '', '', '', '', '', 994, 6, 'catalog/products/product1.png', 8, 0, '100.0000', 100, 9, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, 0, '2009-02-03 18:09:19', '2017-05-04 15:38:41'),
 (40, 'product 11', '', '', '', '', '', '', '', 968, 5, 'catalog/products/product1.png', 8, 1, '101.0000', 0, 9, '2009-02-03', '10.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, 0, '2009-02-03 21:07:12', '2017-05-04 15:37:51'),
-(41, 'Product 14', '', '', '', '', '', '', '', 960, 5, 'catalog/products/product1.png', 8, 1, '100.0000', 0, 9, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, 0, '2009-02-03 21:07:26', '2017-05-04 15:37:19'),
+(41, 'Product 14', '', '', '', '', '', '', '', 960, 5, 'catalog/products/product1.png', 8, 1, '100.0000', 0, 9, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, 4, '2009-02-03 21:07:26', '2017-05-04 15:37:19'),
 (42, 'Product 15', '', '', '', '', '', '', '', 990, 5, 'catalog/products/product1.png', 8, 1, '100.0000', 400, 9, '2009-02-04', '12.50000000', 1, '1.00000000', '2.00000000', '3.00000000', 1, 1, 2, 0, 1, 0, '2009-02-03 21:07:37', '2017-05-04 15:35:53'),
 (43, 'Product 16', '', '', '', '', '', '', '', 927, 5, 'catalog/products/product1.png', 8, 0, '500.0000', 0, 9, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, 0, '2009-02-03 21:07:49', '2017-05-04 15:41:15'),
 (44, 'Product 17', '', '', '', '', '', '', '', 1000, 5, 'catalog/products/product1.png', 8, 1, '1000.0000', 0, 9, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, 0, '2009-02-03 21:08:00', '2017-05-04 15:41:38'),
 (45, 'Product 18', '', '', '', '', '', '', '', 972, 5, 'catalog/products/product1.png', 8, 1, '2000.0000', 0, 0, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, 0, '2009-02-03 21:08:17', '2017-05-04 15:41:56'),
 (46, 'Product 19', '', '', '', '', '', '', '', 1000, 5, 'catalog/products/product1.png', 10, 1, '1000.0000', 0, 9, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, 0, '2009-02-03 21:08:29', '2017-05-04 15:46:49'),
-(47, 'Product 21', '', '', '', '', '', '', '', 1000, 5, 'catalog/products/product1.png', 7, 1, '100.0000', 400, 9, '2009-02-03', '1.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 0, 1, 0, 1, 0, '2009-02-03 21:08:40', '2017-05-04 15:36:39'),
+(47, 'Product 21', '', '', '', '', '', '', '', 1000, 5, 'catalog/products/product1.png', 7, 1, '100.0000', 400, 9, '2009-02-03', '1.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 0, 1, 0, 1, 2, '2009-02-03 21:08:40', '2017-05-04 15:36:39'),
 (48, 'product 20', 'test 1', '', '', '', '', '', 'test 2', 993, 5, 'catalog/products/product1.png', 8, 1, '100.0000', 0, 9, '2009-02-08', '1.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, 0, '2009-02-08 17:21:51', '2017-05-04 15:38:15'),
 (49, 'SAM1', '', '', '', '', '', '', '', 1000, 8, 'catalog/products/product1.png', 0, 1, '600.9900', 0, 9, '2011-04-25', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 1, 1, 0, '2011-04-26 08:57:34', '2017-05-04 15:45:00'),
 (50, 'bag', '', '', '', '', '', '', '', 9, 6, 'catalog/products/product1.png', 8, 1, '500.0000', 0, 0, '2017-04-04', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 3, 1, 1, 1, 1, 0, '2017-04-04 18:55:22', '2017-05-04 15:36:04'),
-(51, 'new latest electronics', '', '', '', '', '', '', '', 10, 6, 'catalog/products/product1.png', 5, 1, '600.0000', 0, 9, '2017-04-15', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 3, 1, 1, 1, 1, 0, '2017-04-14 23:36:35', '2017-05-04 15:42:46'),
+(51, 'new latest electronics', '', '', '', '', '', '', '', 10, 6, 'catalog/products/product1.png', 5, 1, '600.0000', 0, 9, '2017-04-15', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 3, 1, 1, 1, 1, 1, '2017-04-14 23:36:35', '2017-05-04 15:42:46'),
 (52, 'latest head phones', '', '', '', '', '', '', '', 120, 6, 'catalog/products/product1.png', 0, 1, '820.0000', 0, 9, '2017-04-15', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 3, 1, 1, 1, 1, 0, '2017-04-14 23:38:37', '2017-05-04 15:40:26'),
 (53, 'new touch phones', '', '', '', '', '', '', '', 520, 6, 'catalog/products/product1.png', 6, 1, '1200.0000', 0, 0, '2017-04-15', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 3, 1, 1, 1, 1, 0, '2017-04-14 23:45:56', '2017-05-04 15:43:27'),
 (54, 'New blue hade phones', '', '', '', '', '', '', '', 22, 6, 'catalog/products/product1.png', 7, 1, '203.0000', 0, 9, '2017-04-15', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 3, 1, 1, 1, 1, 0, '2017-04-15 00:23:45', '2017-05-04 15:42:16'),
@@ -3272,19 +3343,18 @@ INSERT INTO `oc_product` (`product_id`, `model`, `sku`, `upc`, `ean`, `jan`, `is
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_product_attribute`
+-- Cấu trúc bảng cho bảng `oc_product_attribute`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_product_attribute` (
+CREATE TABLE `oc_product_attribute` (
   `product_id` int(11) NOT NULL,
   `attribute_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `text` text NOT NULL,
-  PRIMARY KEY (`product_id`,`attribute_id`,`language_id`)
+  `text` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_product_attribute`
+-- Đang đổ dữ liệu cho bảng `oc_product_attribute`
 --
 
 INSERT INTO `oc_product_attribute` (`product_id`, `attribute_id`, `language_id`, `text`) VALUES
@@ -3302,10 +3372,10 @@ INSERT INTO `oc_product_attribute` (`product_id`, `attribute_id`, `language_id`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_product_description`
+-- Cấu trúc bảng cho bảng `oc_product_description`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_product_description` (
+CREATE TABLE `oc_product_description` (
   `product_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -3313,13 +3383,11 @@ CREATE TABLE IF NOT EXISTS `oc_product_description` (
   `tag` text NOT NULL,
   `meta_title` varchar(255) NOT NULL,
   `meta_description` varchar(255) NOT NULL,
-  `meta_keyword` varchar(255) NOT NULL,
-  PRIMARY KEY (`product_id`,`language_id`),
-  KEY `name` (`name`)
+  `meta_keyword` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_product_description`
+-- Đang đổ dữ liệu cho bảng `oc_product_description`
 --
 
 INSERT INTO `oc_product_description` (`product_id`, `language_id`, `name`, `description`, `tag`, `meta_title`, `meta_description`, `meta_keyword`) VALUES
@@ -3341,7 +3409,7 @@ INSERT INTO `oc_product_description` (`product_id`, `language_id`, `name`, `desc
 (43, 1, 'MacBook', '&lt;div&gt;\r\n	&lt;p&gt;\r\n		&lt;b&gt;Intel Core 2 Duo processor&lt;/b&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		Powered by an Intel Core 2 Duo processor at speeds up to 2.16GHz, the new MacBook is the fastest ever.&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;b&gt;1GB memory, larger hard drives&lt;/b&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		The new MacBook now comes with 1GB of memory standard and larger hard drives for the entire line perfect for running more of your favorite applications and storing growing media collections.&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;b&gt;Sleek, 1.08-inch-thin design&lt;/b&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		MacBook makes it easy to hit the road thanks to its tough polycarbonate case, built-in wireless technologies, and innovative MagSafe Power Adapter that releases automatically if someone accidentally trips on the cord.&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;b&gt;Built-in iSight camera&lt;/b&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		Right out of the box, you can have a video chat with friends or family,2 record a video at your desk, or take fun pictures with Photo Booth&lt;/p&gt;\r\n&lt;/div&gt;\r\n', '', 'MacBook', '', ''),
 (31, 1, 'Nikon D300', '&lt;div class=&quot;cpt_product_description &quot;&gt;\r\n	&lt;div&gt;\r\n		Engineered with pro-level features and performance, the 12.3-effective-megapixel D300 combines brand new technologies with advanced features inherited from Nikon&amp;#39;s newly announced D3 professional digital SLR camera to offer serious photographers remarkable performance combined with agility.&lt;br /&gt;\r\n		&lt;br /&gt;\r\n		Similar to the D3, the D300 features Nikon&amp;#39;s exclusive EXPEED Image Processing System that is central to driving the speed and processing power needed for many of the camera&amp;#39;s new features. The D300 features a new 51-point autofocus system with Nikon&amp;#39;s 3D Focus Tracking feature and two new LiveView shooting modes that allow users to frame a photograph using the camera&amp;#39;s high-resolution LCD monitor. The D300 shares a similar Scene Recognition System as is found in the D3; it promises to greatly enhance the accuracy of autofocus, autoexposure, and auto white balance by recognizing the subject or scene being photographed and applying this information to the calculations for the three functions.&lt;br /&gt;\r\n		&lt;br /&gt;\r\n		The D300 reacts with lightning speed, powering up in a mere 0.13 seconds and shooting with an imperceptible 45-millisecond shutter release lag time. The D300 is capable of shooting at a rapid six frames per second and can go as fast as eight frames per second when using the optional MB-D10 multi-power battery pack. In continuous bursts, the D300 can shoot up to 100 shots at full 12.3-megapixel resolution. (NORMAL-LARGE image setting, using a SanDisk Extreme IV 1GB CompactFlash card.)&lt;br /&gt;\r\n		&lt;br /&gt;\r\n		The D300 incorporates a range of innovative technologies and features that will significantly improve the accuracy, control, and performance photographers can get from their equipment. Its new Scene Recognition System advances the use of Nikon&amp;#39;s acclaimed 1,005-segment sensor to recognize colors and light patterns that help the camera determine the subject and the type of scene being photographed before a picture is taken. This information is used to improve the accuracy of autofocus, autoexposure, and auto white balance functions in the D300. For example, the camera can track moving subjects better and by identifying them, it can also automatically select focus points faster and with greater accuracy. It can also analyze highlights and more accurately determine exposure, as well as infer light sources to deliver more accurate white balance detection.&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;!-- cpt_container_end --&gt;', '', 'Nikon D300', '', ''),
 (49, 1, 'Samsung Galaxy Tab 10.1', '&lt;p&gt;\r\n	Samsung Galaxy Tab 10.1, is the world&amp;rsquo;s thinnest tablet, measuring 8.6 mm thickness, running with Android 3.0 Honeycomb OS on a 1GHz dual-core Tegra 2 processor, similar to its younger brother Samsung Galaxy Tab 8.9.&lt;/p&gt;\r\n&lt;p&gt;\r\n	Samsung Galaxy Tab 10.1 gives pure Android 3.0 experience, adding its new TouchWiz UX or TouchWiz 4.0 &amp;ndash; includes a live panel, which lets you to customize with different content, such as your pictures, bookmarks, and social feeds, sporting a 10.1 inches WXGA capacitive touch screen with 1280 x 800 pixels of resolution, equipped with 3 megapixel rear camera with LED flash and a 2 megapixel front camera, HSPA+ connectivity up to 21Mbps, 720p HD video recording capability, 1080p HD playback, DLNA support, Bluetooth 2.1, USB 2.0, gyroscope, Wi-Fi 802.11 a/b/g/n, micro-SD slot, 3.5mm headphone jack, and SIM slot, including the Samsung Stick &amp;ndash; a Bluetooth microphone that can be carried in a pocket like a pen and sound dock with powered subwoofer.&lt;/p&gt;\r\n&lt;p&gt;\r\n	Samsung Galaxy Tab 10.1 will come in 16GB / 32GB / 64GB verities and pre-loaded with Social Hub, Reader&amp;rsquo;s Hub, Music Hub and Samsung Mini Apps Tray &amp;ndash; which gives you access to more commonly used apps to help ease multitasking and it is capable of Adobe Flash Player 10.2, powered by 6860mAh battery that gives you 10hours of video-playback time.&amp;nbsp;&amp;auml;&amp;ouml;&lt;/p&gt;\r\n', '', 'Samsung Galaxy Tab 10.1', '', ''),
-(30, 2, 'Canon EOS 5D tablet', '&lt;p&gt;\r\n	Canon''s press material for the EOS 5D states that it ''defines (a) new D-SLR category'', while we''re not typically too concerned with marketing talk this particular statement is clearly pretty accurate. The EOS 5D is unlike any previous digital SLR in that it combines a full-frame (35 mm sized) high resolution sensor (12.8 megapixels) with a relatively compact body (slightly larger than the EOS 20D, although in your hand it feels noticeably ''chunkier''). The EOS 5D is aimed to slot in between the EOS 20D and the EOS-1D professional digital SLR''s, an important difference when compared to the latter is that the EOS 5D doesn''t have any environmental seals. While Canon don''t specifically refer to the EOS 5D as a ''professional'' digital SLR it will have obvious appeal to professionals who want a high quality digital SLR in a body lighter than the EOS-1D. It will also no doubt appeal to current EOS 20D owners (although lets hope they''ve not bought too many EF-S lenses...) äë&lt;/p&gt;\r\n', '', 'Canon EOS 5D tablet', '', ''),
+(30, 2, 'Canon EOS 5D tablet', '&lt;p&gt;\r\n	Canon\'s press material for the EOS 5D states that it \'defines (a) new D-SLR category\', while we\'re not typically too concerned with marketing talk this particular statement is clearly pretty accurate. The EOS 5D is unlike any previous digital SLR in that it combines a full-frame (35 mm sized) high resolution sensor (12.8 megapixels) with a relatively compact body (slightly larger than the EOS 20D, although in your hand it feels noticeably \'chunkier\'). The EOS 5D is aimed to slot in between the EOS 20D and the EOS-1D professional digital SLR\'s, an important difference when compared to the latter is that the EOS 5D doesn\'t have any environmental seals. While Canon don\'t specifically refer to the EOS 5D as a \'professional\' digital SLR it will have obvious appeal to professionals who want a high quality digital SLR in a body lighter than the EOS-1D. It will also no doubt appeal to current EOS 20D owners (although lets hope they\'ve not bought too many EF-S lenses...) äë&lt;/p&gt;\r\n', '', 'Canon EOS 5D tablet', '', ''),
 (35, 2, 'Product 8', '&lt;p&gt;\r\n	Product 8&lt;/p&gt;\r\n', '', 'Product 8', '', ''),
 (46, 2, 'Sony VAIO', '&lt;div class=&quot;cpt_product_description &quot;&gt;\r\n	&lt;div&gt;\r\n		&lt;p&gt;\r\n			&lt;b&gt;Latest Intel mobile architecture&lt;/b&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Powered by the most advanced mobile processors from Intel, the new Core 2 Duo MacBook Pro is over 50% faster than the original Core Duo MacBook Pro and now supports up to 4GB of RAM.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;b&gt;Leading-edge graphics&lt;/b&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			The NVIDIA GeForce 8600M GT delivers exceptional graphics processing power. For the ultimate creative canvas, you can even configure the 17-inch model with a 1920-by-1200 resolution display.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;b&gt;Designed for life on the road&lt;/b&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Innovations such as a magnetic power connection and an illuminated keyboard with ambient light sensor put the MacBook Pro in a class by itself.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;b&gt;Connect. Create. Communicate.&lt;/b&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Quickly set up a video conference with the built-in iSight camera. Control presentations and media from up to 30 feet away with the included Apple Remote. Connect to high-bandwidth peripherals with FireWire 800 and DVI.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;b&gt;Next-generation wireless&lt;/b&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Featuring 802.11n wireless technology, the MacBook Pro delivers up to five times the performance and up to twice the range of previous-generation technologies.&lt;/p&gt;\r\n	&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;!-- cpt_container_end --&gt;', '', 'Sony VAIO', '', ''),
 (40, 2, 'iPhone', '&lt;p class=&quot;intro&quot;&gt;\r\n	iPhone is a revolutionary new mobile phone that allows you to make a call by simply tapping a name or number in your address book, a favorites list, or a call log. It also automatically syncs all your contacts from a PC, Mac, or Internet service. And it lets you select and listen to voicemail messages in whatever order you want just like email.&lt;/p&gt;\r\n', '', 'iPhone', '', ''),
@@ -3358,10 +3426,10 @@ INSERT INTO `oc_product_description` (`product_id`, `language_id`, `name`, `desc
 (43, 2, 'MacBook', '&lt;div&gt;\r\n	&lt;p&gt;\r\n		&lt;b&gt;Intel Core 2 Duo processor&lt;/b&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		Powered by an Intel Core 2 Duo processor at speeds up to 2.16GHz, the new MacBook is the fastest ever.&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;b&gt;1GB memory, larger hard drives&lt;/b&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		The new MacBook now comes with 1GB of memory standard and larger hard drives for the entire line perfect for running more of your favorite applications and storing growing media collections.&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;b&gt;Sleek, 1.08-inch-thin design&lt;/b&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		MacBook makes it easy to hit the road thanks to its tough polycarbonate case, built-in wireless technologies, and innovative MagSafe Power Adapter that releases automatically if someone accidentally trips on the cord.&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;b&gt;Built-in iSight camera&lt;/b&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		Right out of the box, you can have a video chat with friends or family,2 record a video at your desk, or take fun pictures with Photo Booth&lt;/p&gt;\r\n&lt;/div&gt;\r\n', '', 'MacBook', '', ''),
 (31, 2, 'Nikon D300', '&lt;div class=&quot;cpt_product_description &quot;&gt;\r\n	&lt;div&gt;\r\n		Engineered with pro-level features and performance, the 12.3-effective-megapixel D300 combines brand new technologies with advanced features inherited from Nikon&amp;#39;s newly announced D3 professional digital SLR camera to offer serious photographers remarkable performance combined with agility.&lt;br /&gt;\r\n		&lt;br /&gt;\r\n		Similar to the D3, the D300 features Nikon&amp;#39;s exclusive EXPEED Image Processing System that is central to driving the speed and processing power needed for many of the camera&amp;#39;s new features. The D300 features a new 51-point autofocus system with Nikon&amp;#39;s 3D Focus Tracking feature and two new LiveView shooting modes that allow users to frame a photograph using the camera&amp;#39;s high-resolution LCD monitor. The D300 shares a similar Scene Recognition System as is found in the D3; it promises to greatly enhance the accuracy of autofocus, autoexposure, and auto white balance by recognizing the subject or scene being photographed and applying this information to the calculations for the three functions.&lt;br /&gt;\r\n		&lt;br /&gt;\r\n		The D300 reacts with lightning speed, powering up in a mere 0.13 seconds and shooting with an imperceptible 45-millisecond shutter release lag time. The D300 is capable of shooting at a rapid six frames per second and can go as fast as eight frames per second when using the optional MB-D10 multi-power battery pack. In continuous bursts, the D300 can shoot up to 100 shots at full 12.3-megapixel resolution. (NORMAL-LARGE image setting, using a SanDisk Extreme IV 1GB CompactFlash card.)&lt;br /&gt;\r\n		&lt;br /&gt;\r\n		The D300 incorporates a range of innovative technologies and features that will significantly improve the accuracy, control, and performance photographers can get from their equipment. Its new Scene Recognition System advances the use of Nikon&amp;#39;s acclaimed 1,005-segment sensor to recognize colors and light patterns that help the camera determine the subject and the type of scene being photographed before a picture is taken. This information is used to improve the accuracy of autofocus, autoexposure, and auto white balance functions in the D300. For example, the camera can track moving subjects better and by identifying them, it can also automatically select focus points faster and with greater accuracy. It can also analyze highlights and more accurately determine exposure, as well as infer light sources to deliver more accurate white balance detection.&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;!-- cpt_container_end --&gt;', '', 'Nikon D300', '', ''),
 (49, 2, 'Samsung Galaxy Tab 10.1', '&lt;p&gt;\r\n	Samsung Galaxy Tab 10.1, is the world&amp;rsquo;s thinnest tablet, measuring 8.6 mm thickness, running with Android 3.0 Honeycomb OS on a 1GHz dual-core Tegra 2 processor, similar to its younger brother Samsung Galaxy Tab 8.9.&lt;/p&gt;\r\n&lt;p&gt;\r\n	Samsung Galaxy Tab 10.1 gives pure Android 3.0 experience, adding its new TouchWiz UX or TouchWiz 4.0 &amp;ndash; includes a live panel, which lets you to customize with different content, such as your pictures, bookmarks, and social feeds, sporting a 10.1 inches WXGA capacitive touch screen with 1280 x 800 pixels of resolution, equipped with 3 megapixel rear camera with LED flash and a 2 megapixel front camera, HSPA+ connectivity up to 21Mbps, 720p HD video recording capability, 1080p HD playback, DLNA support, Bluetooth 2.1, USB 2.0, gyroscope, Wi-Fi 802.11 a/b/g/n, micro-SD slot, 3.5mm headphone jack, and SIM slot, including the Samsung Stick &amp;ndash; a Bluetooth microphone that can be carried in a pocket like a pen and sound dock with powered subwoofer.&lt;/p&gt;\r\n&lt;p&gt;\r\n	Samsung Galaxy Tab 10.1 will come in 16GB / 32GB / 64GB verities and pre-loaded with Social Hub, Reader&amp;rsquo;s Hub, Music Hub and Samsung Mini Apps Tray &amp;ndash; which gives you access to more commonly used apps to help ease multitasking and it is capable of Adobe Flash Player 10.2, powered by 6860mAh battery that gives you 10hours of video-playback time.&amp;nbsp;&amp;auml;&amp;ouml;&lt;/p&gt;\r\n', '', 'Samsung Galaxy Tab 10.1', '', ''),
-(42, 2, 'Apple Cinema 30&quot;', '&lt;p&gt;\r\n	The 30-inch Apple Cinema HD Display delivers an amazing 2560 x 1600 pixel resolution. Designed specifically for the creative professional, this display provides more space for easier access to all the tools and palettes needed to edit, format and composite your work. Combine this display with a Mac Pro, MacBook Pro, or PowerMac G5 and there''s no limit to what you can achieve. &lt;br&gt;\r\n	&lt;br&gt;\r\n	The Cinema HD features an active-matrix liquid crystal display that produces flicker-free images that deliver twice the brightness, twice the sharpness and twice the contrast ratio of a typical CRT display. Unlike other flat panels, it''s designed with a pure digital interface to deliver distortion-free images that never need adjusting. With over 4 million digital pixels, the display is uniquely suited for scientific and technical applications such as visualizing molecular structures or analyzing geological data. &lt;br&gt;\r\n	&lt;br&gt;\r\n	Offering accurate, brilliant color performance, the Cinema HD delivers up to 16.7 million colors across a wide gamut allowing you to see subtle nuances between colors from soft pastels to rich jewel tones. A wide viewing angle ensures uniform color from edge to edge. Apple''s ColorSync technology allows you to create custom profiles to maintain consistent color onscreen and in print. The result: You can confidently use this display in all your color-critical applications. &lt;br&gt;\r\n	&lt;br&gt;\r\n	Housed in a new aluminum design, the display has a very thin bezel that enhances visual accuracy. Each display features two FireWire 400 ports and two USB 2.0 ports, making attachment of desktop peripherals, such as iSight, iPod, digital and still cameras, hard drives, printers and scanners, even more accessible and convenient. Taking advantage of the much thinner and lighter footprint of an LCD, the new displays support the VESA (Video Electronics Standards Association) mounting interface standard. Customers with the optional Cinema Display VESA Mount Adapter kit gain the flexibility to mount their display in locations most appropriate for their work environment. &lt;br&gt;\r\n	&lt;br&gt;\r\n	The Cinema HD features a single cable design with elegant breakout for the USB 2.0, FireWire 400 and a pure digital connection using the industry standard Digital Video Interface (DVI) interface. The DVI connection allows for a direct pure-digital connection.&lt;br&gt;\r\n&lt;/p&gt;\r\n&lt;h3&gt;\r\n	Features:&lt;/h3&gt;\r\n&lt;p&gt;\r\n	Unrivaled display performance&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		30-inch (viewable) active-matrix liquid crystal display provides breathtaking image quality and vivid, richly saturated color.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Support for 2560-by-1600 pixel resolution for display of high definition still and video imagery.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Wide-format design for simultaneous display of two full pages of text and graphics.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Industry standard DVI connector for direct attachment to Mac- and Windows-based desktops and notebooks&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Incredibly wide (170 degree) horizontal and vertical viewing angle for maximum visibility and color performance.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Lightning-fast pixel response for full-motion digital video playback.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Support for 16.7 million saturated colors, for use in all graphics-intensive applications.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	Simple setup and operation&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Single cable with elegant breakout for connection to DVI, USB and FireWire ports&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Built-in two-port USB 2.0 hub for easy connection of desktop peripheral devices.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Two FireWire 400 ports to support iSight and other desktop peripherals&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	Sleek, elegant design&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Huge virtual workspace, very small footprint.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Narrow Bezel design to minimize visual impact of using dual displays&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Unique hinge design for effortless adjustment&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Support for VESA mounting solutions (Apple Cinema Display VESA Mount Adapter sold separately)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;h3&gt;\r\n	Technical specifications&lt;/h3&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Screen size (diagonal viewable image size)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Apple Cinema HD Display: 30 inches (29.7-inch viewable)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Screen type&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Thin film transistor (TFT) active-matrix liquid crystal display (AMLCD)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Resolutions&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		2560 x 1600 pixels (optimum resolution)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		2048 x 1280&lt;/li&gt;\r\n	&lt;li&gt;\r\n		1920 x 1200&lt;/li&gt;\r\n	&lt;li&gt;\r\n		1280 x 800&lt;/li&gt;\r\n	&lt;li&gt;\r\n		1024 x 640&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Display colors (maximum)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		16.7 million&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Viewing angle (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		170° horizontal; 170° vertical&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Brightness (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		30-inch Cinema HD Display: 400 cd/m2&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Contrast ratio (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		700:1&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Response time (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		16 ms&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Pixel pitch&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		30-inch Cinema HD Display: 0.250 mm&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Screen treatment&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Antiglare hardcoat&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;User controls (hardware and software)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Display Power,&lt;/li&gt;\r\n	&lt;li&gt;\r\n		System sleep, wake&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Brightness&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Monitor tilt&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Connectors and cables&lt;/b&gt;&lt;br&gt;\r\n	Cable&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		DVI (Digital Visual Interface)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		FireWire 400&lt;/li&gt;\r\n	&lt;li&gt;\r\n		USB 2.0&lt;/li&gt;\r\n	&lt;li&gt;\r\n		DC power (24 V)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	Connectors&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Two-port, self-powered USB 2.0 hub&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Two FireWire 400 ports&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Kensington security port&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;VESA mount adapter&lt;/b&gt;&lt;br&gt;\r\n	Requires optional Cinema Display VESA Mount Adapter (M9649G/A)&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Compatible with VESA FDMI (MIS-D, 100, C) compliant mounting solutions&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Electrical requirements&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Input voltage: 100-240 VAC 50-60Hz&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Maximum power when operating: 150W&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Energy saver mode: 3W or less&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Environmental requirements&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Operating temperature: 50° to 95° F (10° to 35° C)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Storage temperature: -40° to 116° F (-40° to 47° C)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Operating humidity: 20% to 80% noncondensing&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Maximum operating altitude: 10,000 feet&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Agency approvals&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		FCC Part 15 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		EN55022 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		EN55024&lt;/li&gt;\r\n	&lt;li&gt;\r\n		VCCI Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		AS/NZS 3548 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		CNS 13438 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		ICES-003 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		ISO 13406 part 2&lt;/li&gt;\r\n	&lt;li&gt;\r\n		MPR II&lt;/li&gt;\r\n	&lt;li&gt;\r\n		IEC 60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		UL 60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		CSA 60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		EN60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		ENERGY STAR&lt;/li&gt;\r\n	&lt;li&gt;\r\n		TCO ''03&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Size and weight&lt;/b&gt;&lt;br&gt;\r\n	30-inch Apple Cinema HD Display&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Height: 21.3 inches (54.3 cm)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Width: 27.2 inches (68.8 cm)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Depth: 8.46 inches (21.5 cm)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Weight: 27.5 pounds (12.5 kg)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;System Requirements&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Mac Pro, all graphic options&lt;/li&gt;\r\n	&lt;li&gt;\r\n		MacBook Pro&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Power Mac G5 (PCI-X) with ATI Radeon 9650 or better or NVIDIA GeForce 6800 GT DDL or better&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Power Mac G5 (PCI Express), all graphics options&lt;/li&gt;\r\n	&lt;li&gt;\r\n		PowerBook G4 with dual-link DVI support&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Windows PC and graphics card that supports DVI ports with dual-link digital bandwidth and VESA DDC standard for plug-and-play setup&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', 'Apple Cinema 30', '', '');
+(42, 2, 'Apple Cinema 30&quot;', '&lt;p&gt;\r\n	The 30-inch Apple Cinema HD Display delivers an amazing 2560 x 1600 pixel resolution. Designed specifically for the creative professional, this display provides more space for easier access to all the tools and palettes needed to edit, format and composite your work. Combine this display with a Mac Pro, MacBook Pro, or PowerMac G5 and there\'s no limit to what you can achieve. &lt;br&gt;\r\n	&lt;br&gt;\r\n	The Cinema HD features an active-matrix liquid crystal display that produces flicker-free images that deliver twice the brightness, twice the sharpness and twice the contrast ratio of a typical CRT display. Unlike other flat panels, it\'s designed with a pure digital interface to deliver distortion-free images that never need adjusting. With over 4 million digital pixels, the display is uniquely suited for scientific and technical applications such as visualizing molecular structures or analyzing geological data. &lt;br&gt;\r\n	&lt;br&gt;\r\n	Offering accurate, brilliant color performance, the Cinema HD delivers up to 16.7 million colors across a wide gamut allowing you to see subtle nuances between colors from soft pastels to rich jewel tones. A wide viewing angle ensures uniform color from edge to edge. Apple\'s ColorSync technology allows you to create custom profiles to maintain consistent color onscreen and in print. The result: You can confidently use this display in all your color-critical applications. &lt;br&gt;\r\n	&lt;br&gt;\r\n	Housed in a new aluminum design, the display has a very thin bezel that enhances visual accuracy. Each display features two FireWire 400 ports and two USB 2.0 ports, making attachment of desktop peripherals, such as iSight, iPod, digital and still cameras, hard drives, printers and scanners, even more accessible and convenient. Taking advantage of the much thinner and lighter footprint of an LCD, the new displays support the VESA (Video Electronics Standards Association) mounting interface standard. Customers with the optional Cinema Display VESA Mount Adapter kit gain the flexibility to mount their display in locations most appropriate for their work environment. &lt;br&gt;\r\n	&lt;br&gt;\r\n	The Cinema HD features a single cable design with elegant breakout for the USB 2.0, FireWire 400 and a pure digital connection using the industry standard Digital Video Interface (DVI) interface. The DVI connection allows for a direct pure-digital connection.&lt;br&gt;\r\n&lt;/p&gt;\r\n&lt;h3&gt;\r\n	Features:&lt;/h3&gt;\r\n&lt;p&gt;\r\n	Unrivaled display performance&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		30-inch (viewable) active-matrix liquid crystal display provides breathtaking image quality and vivid, richly saturated color.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Support for 2560-by-1600 pixel resolution for display of high definition still and video imagery.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Wide-format design for simultaneous display of two full pages of text and graphics.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Industry standard DVI connector for direct attachment to Mac- and Windows-based desktops and notebooks&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Incredibly wide (170 degree) horizontal and vertical viewing angle for maximum visibility and color performance.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Lightning-fast pixel response for full-motion digital video playback.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Support for 16.7 million saturated colors, for use in all graphics-intensive applications.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	Simple setup and operation&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Single cable with elegant breakout for connection to DVI, USB and FireWire ports&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Built-in two-port USB 2.0 hub for easy connection of desktop peripheral devices.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Two FireWire 400 ports to support iSight and other desktop peripherals&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	Sleek, elegant design&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Huge virtual workspace, very small footprint.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Narrow Bezel design to minimize visual impact of using dual displays&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Unique hinge design for effortless adjustment&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Support for VESA mounting solutions (Apple Cinema Display VESA Mount Adapter sold separately)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;h3&gt;\r\n	Technical specifications&lt;/h3&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Screen size (diagonal viewable image size)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Apple Cinema HD Display: 30 inches (29.7-inch viewable)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Screen type&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Thin film transistor (TFT) active-matrix liquid crystal display (AMLCD)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Resolutions&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		2560 x 1600 pixels (optimum resolution)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		2048 x 1280&lt;/li&gt;\r\n	&lt;li&gt;\r\n		1920 x 1200&lt;/li&gt;\r\n	&lt;li&gt;\r\n		1280 x 800&lt;/li&gt;\r\n	&lt;li&gt;\r\n		1024 x 640&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Display colors (maximum)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		16.7 million&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Viewing angle (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		170° horizontal; 170° vertical&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Brightness (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		30-inch Cinema HD Display: 400 cd/m2&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Contrast ratio (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		700:1&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Response time (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		16 ms&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Pixel pitch&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		30-inch Cinema HD Display: 0.250 mm&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Screen treatment&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Antiglare hardcoat&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;User controls (hardware and software)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Display Power,&lt;/li&gt;\r\n	&lt;li&gt;\r\n		System sleep, wake&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Brightness&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Monitor tilt&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Connectors and cables&lt;/b&gt;&lt;br&gt;\r\n	Cable&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		DVI (Digital Visual Interface)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		FireWire 400&lt;/li&gt;\r\n	&lt;li&gt;\r\n		USB 2.0&lt;/li&gt;\r\n	&lt;li&gt;\r\n		DC power (24 V)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	Connectors&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Two-port, self-powered USB 2.0 hub&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Two FireWire 400 ports&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Kensington security port&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;VESA mount adapter&lt;/b&gt;&lt;br&gt;\r\n	Requires optional Cinema Display VESA Mount Adapter (M9649G/A)&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Compatible with VESA FDMI (MIS-D, 100, C) compliant mounting solutions&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Electrical requirements&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Input voltage: 100-240 VAC 50-60Hz&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Maximum power when operating: 150W&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Energy saver mode: 3W or less&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Environmental requirements&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Operating temperature: 50° to 95° F (10° to 35° C)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Storage temperature: -40° to 116° F (-40° to 47° C)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Operating humidity: 20% to 80% noncondensing&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Maximum operating altitude: 10,000 feet&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Agency approvals&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		FCC Part 15 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		EN55022 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		EN55024&lt;/li&gt;\r\n	&lt;li&gt;\r\n		VCCI Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		AS/NZS 3548 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		CNS 13438 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		ICES-003 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		ISO 13406 part 2&lt;/li&gt;\r\n	&lt;li&gt;\r\n		MPR II&lt;/li&gt;\r\n	&lt;li&gt;\r\n		IEC 60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		UL 60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		CSA 60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		EN60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		ENERGY STAR&lt;/li&gt;\r\n	&lt;li&gt;\r\n		TCO \'03&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Size and weight&lt;/b&gt;&lt;br&gt;\r\n	30-inch Apple Cinema HD Display&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Height: 21.3 inches (54.3 cm)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Width: 27.2 inches (68.8 cm)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Depth: 8.46 inches (21.5 cm)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Weight: 27.5 pounds (12.5 kg)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;System Requirements&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Mac Pro, all graphic options&lt;/li&gt;\r\n	&lt;li&gt;\r\n		MacBook Pro&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Power Mac G5 (PCI-X) with ATI Radeon 9650 or better or NVIDIA GeForce 6800 GT DDL or better&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Power Mac G5 (PCI Express), all graphics options&lt;/li&gt;\r\n	&lt;li&gt;\r\n		PowerBook G4 with dual-link DVI support&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Windows PC and graphics card that supports DVI ports with dual-link digital bandwidth and VESA DDC standard for plug-and-play setup&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', 'Apple Cinema 30', '', '');
 INSERT INTO `oc_product_description` (`product_id`, `language_id`, `name`, `description`, `tag`, `meta_title`, `meta_description`, `meta_keyword`) VALUES
-(42, 1, 'Apple Cinema 30&quot;', '&lt;p&gt;\r\n	The 30-inch Apple Cinema HD Display delivers an amazing 2560 x 1600 pixel resolution. Designed specifically for the creative professional, this display provides more space for easier access to all the tools and palettes needed to edit, format and composite your work. Combine this display with a Mac Pro, MacBook Pro, or PowerMac G5 and there''s no limit to what you can achieve. &lt;br&gt;\r\n	&lt;br&gt;\r\n	The Cinema HD features an active-matrix liquid crystal display that produces flicker-free images that deliver twice the brightness, twice the sharpness and twice the contrast ratio of a typical CRT display. Unlike other flat panels, it''s designed with a pure digital interface to deliver distortion-free images that never need adjusting. With over 4 million digital pixels, the display is uniquely suited for scientific and technical applications such as visualizing molecular structures or analyzing geological data. &lt;br&gt;\r\n	&lt;br&gt;\r\n	Offering accurate, brilliant color performance, the Cinema HD delivers up to 16.7 million colors across a wide gamut allowing you to see subtle nuances between colors from soft pastels to rich jewel tones. A wide viewing angle ensures uniform color from edge to edge. Apple''s ColorSync technology allows you to create custom profiles to maintain consistent color onscreen and in print. The result: You can confidently use this display in all your color-critical applications. &lt;br&gt;\r\n	&lt;br&gt;\r\n	Housed in a new aluminum design, the display has a very thin bezel that enhances visual accuracy. Each display features two FireWire 400 ports and two USB 2.0 ports, making attachment of desktop peripherals, such as iSight, iPod, digital and still cameras, hard drives, printers and scanners, even more accessible and convenient. Taking advantage of the much thinner and lighter footprint of an LCD, the new displays support the VESA (Video Electronics Standards Association) mounting interface standard. Customers with the optional Cinema Display VESA Mount Adapter kit gain the flexibility to mount their display in locations most appropriate for their work environment. &lt;br&gt;\r\n	&lt;br&gt;\r\n	The Cinema HD features a single cable design with elegant breakout for the USB 2.0, FireWire 400 and a pure digital connection using the industry standard Digital Video Interface (DVI) interface. The DVI connection allows for a direct pure-digital connection.&lt;br&gt;\r\n&lt;/p&gt;\r\n&lt;h3&gt;\r\n	Features:&lt;/h3&gt;\r\n&lt;p&gt;\r\n	Unrivaled display performance&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		30-inch (viewable) active-matrix liquid crystal display provides breathtaking image quality and vivid, richly saturated color.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Support for 2560-by-1600 pixel resolution for display of high definition still and video imagery.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Wide-format design for simultaneous display of two full pages of text and graphics.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Industry standard DVI connector for direct attachment to Mac- and Windows-based desktops and notebooks&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Incredibly wide (170 degree) horizontal and vertical viewing angle for maximum visibility and color performance.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Lightning-fast pixel response for full-motion digital video playback.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Support for 16.7 million saturated colors, for use in all graphics-intensive applications.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	Simple setup and operation&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Single cable with elegant breakout for connection to DVI, USB and FireWire ports&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Built-in two-port USB 2.0 hub for easy connection of desktop peripheral devices.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Two FireWire 400 ports to support iSight and other desktop peripherals&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	Sleek, elegant design&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Huge virtual workspace, very small footprint.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Narrow Bezel design to minimize visual impact of using dual displays&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Unique hinge design for effortless adjustment&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Support for VESA mounting solutions (Apple Cinema Display VESA Mount Adapter sold separately)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;h3&gt;\r\n	Technical specifications&lt;/h3&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Screen size (diagonal viewable image size)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Apple Cinema HD Display: 30 inches (29.7-inch viewable)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Screen type&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Thin film transistor (TFT) active-matrix liquid crystal display (AMLCD)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Resolutions&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		2560 x 1600 pixels (optimum resolution)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		2048 x 1280&lt;/li&gt;\r\n	&lt;li&gt;\r\n		1920 x 1200&lt;/li&gt;\r\n	&lt;li&gt;\r\n		1280 x 800&lt;/li&gt;\r\n	&lt;li&gt;\r\n		1024 x 640&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Display colors (maximum)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		16.7 million&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Viewing angle (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		170° horizontal; 170° vertical&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Brightness (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		30-inch Cinema HD Display: 400 cd/m2&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Contrast ratio (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		700:1&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Response time (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		16 ms&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Pixel pitch&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		30-inch Cinema HD Display: 0.250 mm&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Screen treatment&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Antiglare hardcoat&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;User controls (hardware and software)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Display Power,&lt;/li&gt;\r\n	&lt;li&gt;\r\n		System sleep, wake&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Brightness&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Monitor tilt&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Connectors and cables&lt;/b&gt;&lt;br&gt;\r\n	Cable&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		DVI (Digital Visual Interface)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		FireWire 400&lt;/li&gt;\r\n	&lt;li&gt;\r\n		USB 2.0&lt;/li&gt;\r\n	&lt;li&gt;\r\n		DC power (24 V)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	Connectors&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Two-port, self-powered USB 2.0 hub&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Two FireWire 400 ports&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Kensington security port&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;VESA mount adapter&lt;/b&gt;&lt;br&gt;\r\n	Requires optional Cinema Display VESA Mount Adapter (M9649G/A)&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Compatible with VESA FDMI (MIS-D, 100, C) compliant mounting solutions&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Electrical requirements&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Input voltage: 100-240 VAC 50-60Hz&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Maximum power when operating: 150W&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Energy saver mode: 3W or less&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Environmental requirements&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Operating temperature: 50° to 95° F (10° to 35° C)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Storage temperature: -40° to 116° F (-40° to 47° C)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Operating humidity: 20% to 80% noncondensing&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Maximum operating altitude: 10,000 feet&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Agency approvals&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		FCC Part 15 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		EN55022 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		EN55024&lt;/li&gt;\r\n	&lt;li&gt;\r\n		VCCI Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		AS/NZS 3548 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		CNS 13438 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		ICES-003 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		ISO 13406 part 2&lt;/li&gt;\r\n	&lt;li&gt;\r\n		MPR II&lt;/li&gt;\r\n	&lt;li&gt;\r\n		IEC 60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		UL 60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		CSA 60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		EN60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		ENERGY STAR&lt;/li&gt;\r\n	&lt;li&gt;\r\n		TCO ''03&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Size and weight&lt;/b&gt;&lt;br&gt;\r\n	30-inch Apple Cinema HD Display&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Height: 21.3 inches (54.3 cm)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Width: 27.2 inches (68.8 cm)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Depth: 8.46 inches (21.5 cm)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Weight: 27.5 pounds (12.5 kg)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;System Requirements&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Mac Pro, all graphic options&lt;/li&gt;\r\n	&lt;li&gt;\r\n		MacBook Pro&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Power Mac G5 (PCI-X) with ATI Radeon 9650 or better or NVIDIA GeForce 6800 GT DDL or better&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Power Mac G5 (PCI Express), all graphics options&lt;/li&gt;\r\n	&lt;li&gt;\r\n		PowerBook G4 with dual-link DVI support&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Windows PC and graphics card that supports DVI ports with dual-link digital bandwidth and VESA DDC standard for plug-and-play setup&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', 'Apple Cinema 30', '', ''),
-(30, 1, 'Canon EOS 5D tablet', '&lt;p&gt;\r\n	Canon''s press material for the EOS 5D states that it ''defines (a) new D-SLR category'', while we''re not typically too concerned with marketing talk this particular statement is clearly pretty accurate. The EOS 5D is unlike any previous digital SLR in that it combines a full-frame (35 mm sized) high resolution sensor (12.8 megapixels) with a relatively compact body (slightly larger than the EOS 20D, although in your hand it feels noticeably ''chunkier''). The EOS 5D is aimed to slot in between the EOS 20D and the EOS-1D professional digital SLR''s, an important difference when compared to the latter is that the EOS 5D doesn''t have any environmental seals. While Canon don''t specifically refer to the EOS 5D as a ''professional'' digital SLR it will have obvious appeal to professionals who want a high quality digital SLR in a body lighter than the EOS-1D. It will also no doubt appeal to current EOS 20D owners (although lets hope they''ve not bought too many EF-S lenses...) äë&lt;/p&gt;\r\n', '', 'Canon EOS 5D tablet', '', ''),
+(42, 1, 'Apple Cinema 30&quot;', '&lt;p&gt;\r\n	The 30-inch Apple Cinema HD Display delivers an amazing 2560 x 1600 pixel resolution. Designed specifically for the creative professional, this display provides more space for easier access to all the tools and palettes needed to edit, format and composite your work. Combine this display with a Mac Pro, MacBook Pro, or PowerMac G5 and there\'s no limit to what you can achieve. &lt;br&gt;\r\n	&lt;br&gt;\r\n	The Cinema HD features an active-matrix liquid crystal display that produces flicker-free images that deliver twice the brightness, twice the sharpness and twice the contrast ratio of a typical CRT display. Unlike other flat panels, it\'s designed with a pure digital interface to deliver distortion-free images that never need adjusting. With over 4 million digital pixels, the display is uniquely suited for scientific and technical applications such as visualizing molecular structures or analyzing geological data. &lt;br&gt;\r\n	&lt;br&gt;\r\n	Offering accurate, brilliant color performance, the Cinema HD delivers up to 16.7 million colors across a wide gamut allowing you to see subtle nuances between colors from soft pastels to rich jewel tones. A wide viewing angle ensures uniform color from edge to edge. Apple\'s ColorSync technology allows you to create custom profiles to maintain consistent color onscreen and in print. The result: You can confidently use this display in all your color-critical applications. &lt;br&gt;\r\n	&lt;br&gt;\r\n	Housed in a new aluminum design, the display has a very thin bezel that enhances visual accuracy. Each display features two FireWire 400 ports and two USB 2.0 ports, making attachment of desktop peripherals, such as iSight, iPod, digital and still cameras, hard drives, printers and scanners, even more accessible and convenient. Taking advantage of the much thinner and lighter footprint of an LCD, the new displays support the VESA (Video Electronics Standards Association) mounting interface standard. Customers with the optional Cinema Display VESA Mount Adapter kit gain the flexibility to mount their display in locations most appropriate for their work environment. &lt;br&gt;\r\n	&lt;br&gt;\r\n	The Cinema HD features a single cable design with elegant breakout for the USB 2.0, FireWire 400 and a pure digital connection using the industry standard Digital Video Interface (DVI) interface. The DVI connection allows for a direct pure-digital connection.&lt;br&gt;\r\n&lt;/p&gt;\r\n&lt;h3&gt;\r\n	Features:&lt;/h3&gt;\r\n&lt;p&gt;\r\n	Unrivaled display performance&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		30-inch (viewable) active-matrix liquid crystal display provides breathtaking image quality and vivid, richly saturated color.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Support for 2560-by-1600 pixel resolution for display of high definition still and video imagery.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Wide-format design for simultaneous display of two full pages of text and graphics.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Industry standard DVI connector for direct attachment to Mac- and Windows-based desktops and notebooks&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Incredibly wide (170 degree) horizontal and vertical viewing angle for maximum visibility and color performance.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Lightning-fast pixel response for full-motion digital video playback.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Support for 16.7 million saturated colors, for use in all graphics-intensive applications.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	Simple setup and operation&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Single cable with elegant breakout for connection to DVI, USB and FireWire ports&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Built-in two-port USB 2.0 hub for easy connection of desktop peripheral devices.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Two FireWire 400 ports to support iSight and other desktop peripherals&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	Sleek, elegant design&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Huge virtual workspace, very small footprint.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Narrow Bezel design to minimize visual impact of using dual displays&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Unique hinge design for effortless adjustment&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Support for VESA mounting solutions (Apple Cinema Display VESA Mount Adapter sold separately)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;h3&gt;\r\n	Technical specifications&lt;/h3&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Screen size (diagonal viewable image size)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Apple Cinema HD Display: 30 inches (29.7-inch viewable)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Screen type&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Thin film transistor (TFT) active-matrix liquid crystal display (AMLCD)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Resolutions&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		2560 x 1600 pixels (optimum resolution)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		2048 x 1280&lt;/li&gt;\r\n	&lt;li&gt;\r\n		1920 x 1200&lt;/li&gt;\r\n	&lt;li&gt;\r\n		1280 x 800&lt;/li&gt;\r\n	&lt;li&gt;\r\n		1024 x 640&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Display colors (maximum)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		16.7 million&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Viewing angle (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		170° horizontal; 170° vertical&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Brightness (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		30-inch Cinema HD Display: 400 cd/m2&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Contrast ratio (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		700:1&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Response time (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		16 ms&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Pixel pitch&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		30-inch Cinema HD Display: 0.250 mm&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Screen treatment&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Antiglare hardcoat&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;User controls (hardware and software)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Display Power,&lt;/li&gt;\r\n	&lt;li&gt;\r\n		System sleep, wake&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Brightness&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Monitor tilt&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Connectors and cables&lt;/b&gt;&lt;br&gt;\r\n	Cable&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		DVI (Digital Visual Interface)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		FireWire 400&lt;/li&gt;\r\n	&lt;li&gt;\r\n		USB 2.0&lt;/li&gt;\r\n	&lt;li&gt;\r\n		DC power (24 V)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	Connectors&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Two-port, self-powered USB 2.0 hub&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Two FireWire 400 ports&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Kensington security port&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;VESA mount adapter&lt;/b&gt;&lt;br&gt;\r\n	Requires optional Cinema Display VESA Mount Adapter (M9649G/A)&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Compatible with VESA FDMI (MIS-D, 100, C) compliant mounting solutions&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Electrical requirements&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Input voltage: 100-240 VAC 50-60Hz&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Maximum power when operating: 150W&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Energy saver mode: 3W or less&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Environmental requirements&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Operating temperature: 50° to 95° F (10° to 35° C)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Storage temperature: -40° to 116° F (-40° to 47° C)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Operating humidity: 20% to 80% noncondensing&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Maximum operating altitude: 10,000 feet&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Agency approvals&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		FCC Part 15 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		EN55022 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		EN55024&lt;/li&gt;\r\n	&lt;li&gt;\r\n		VCCI Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		AS/NZS 3548 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		CNS 13438 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		ICES-003 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		ISO 13406 part 2&lt;/li&gt;\r\n	&lt;li&gt;\r\n		MPR II&lt;/li&gt;\r\n	&lt;li&gt;\r\n		IEC 60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		UL 60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		CSA 60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		EN60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		ENERGY STAR&lt;/li&gt;\r\n	&lt;li&gt;\r\n		TCO \'03&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Size and weight&lt;/b&gt;&lt;br&gt;\r\n	30-inch Apple Cinema HD Display&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Height: 21.3 inches (54.3 cm)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Width: 27.2 inches (68.8 cm)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Depth: 8.46 inches (21.5 cm)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Weight: 27.5 pounds (12.5 kg)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;System Requirements&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Mac Pro, all graphic options&lt;/li&gt;\r\n	&lt;li&gt;\r\n		MacBook Pro&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Power Mac G5 (PCI-X) with ATI Radeon 9650 or better or NVIDIA GeForce 6800 GT DDL or better&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Power Mac G5 (PCI Express), all graphics options&lt;/li&gt;\r\n	&lt;li&gt;\r\n		PowerBook G4 with dual-link DVI support&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Windows PC and graphics card that supports DVI ports with dual-link digital bandwidth and VESA DDC standard for plug-and-play setup&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', 'Apple Cinema 30', '', ''),
+(30, 1, 'Canon EOS 5D tablet', '&lt;p&gt;\r\n	Canon\'s press material for the EOS 5D states that it \'defines (a) new D-SLR category\', while we\'re not typically too concerned with marketing talk this particular statement is clearly pretty accurate. The EOS 5D is unlike any previous digital SLR in that it combines a full-frame (35 mm sized) high resolution sensor (12.8 megapixels) with a relatively compact body (slightly larger than the EOS 20D, although in your hand it feels noticeably \'chunkier\'). The EOS 5D is aimed to slot in between the EOS 20D and the EOS-1D professional digital SLR\'s, an important difference when compared to the latter is that the EOS 5D doesn\'t have any environmental seals. While Canon don\'t specifically refer to the EOS 5D as a \'professional\' digital SLR it will have obvious appeal to professionals who want a high quality digital SLR in a body lighter than the EOS-1D. It will also no doubt appeal to current EOS 20D owners (although lets hope they\'ve not bought too many EF-S lenses...) äë&lt;/p&gt;\r\n', '', 'Canon EOS 5D tablet', '', ''),
 (50, 2, 'Black  impoted Bag', '', '', 'black  impoted bag', '', ''),
 (50, 1, 'Black  impoted bag', '', '', 'black  impoted bag', '', ''),
 (51, 2, 'new latest electronics', '', '', 'new latest electronics', '', ''),
@@ -3380,24 +3448,22 @@ INSERT INTO `oc_product_description` (`product_id`, `language_id`, `name`, `desc
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_product_discount`
+-- Cấu trúc bảng cho bảng `oc_product_discount`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_product_discount` (
-  `product_discount_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_product_discount` (
+  `product_discount_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `customer_group_id` int(11) NOT NULL,
   `quantity` int(4) NOT NULL DEFAULT '0',
   `priority` int(5) NOT NULL DEFAULT '1',
   `price` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `date_start` date NOT NULL DEFAULT '0000-00-00',
-  `date_end` date NOT NULL DEFAULT '0000-00-00',
-  PRIMARY KEY (`product_discount_id`),
-  KEY `product_id` (`product_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=558 ;
+  `date_end` date NOT NULL DEFAULT '0000-00-00'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_product_discount`
+-- Đang đổ dữ liệu cho bảng `oc_product_discount`
 --
 
 INSERT INTO `oc_product_discount` (`product_discount_id`, `product_id`, `customer_group_id`, `quantity`, `priority`, `price`, `date_start`, `date_end`) VALUES
@@ -3412,17 +3478,16 @@ INSERT INTO `oc_product_discount` (`product_discount_id`, `product_id`, `custome
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_product_filter`
+-- Cấu trúc bảng cho bảng `oc_product_filter`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_product_filter` (
+CREATE TABLE `oc_product_filter` (
   `product_id` int(11) NOT NULL,
-  `filter_id` int(11) NOT NULL,
-  PRIMARY KEY (`product_id`,`filter_id`)
+  `filter_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_product_filter`
+-- Đang đổ dữ liệu cho bảng `oc_product_filter`
 --
 
 INSERT INTO `oc_product_filter` (`product_id`, `filter_id`) VALUES
@@ -3448,20 +3513,18 @@ INSERT INTO `oc_product_filter` (`product_id`, `filter_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_product_image`
+-- Cấu trúc bảng cho bảng `oc_product_image`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_product_image` (
-  `product_image_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_product_image` (
+  `product_image_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
-  `sort_order` int(3) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`product_image_id`),
-  KEY `product_id` (`product_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2940 ;
+  `sort_order` int(3) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_product_image`
+-- Đang đổ dữ liệu cho bảng `oc_product_image`
 --
 
 INSERT INTO `oc_product_image` (`product_image_id`, `product_id`, `image`, `sort_order`) VALUES
@@ -3563,20 +3626,19 @@ INSERT INTO `oc_product_image` (`product_image_id`, `product_id`, `image`, `sort
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_product_option`
+-- Cấu trúc bảng cho bảng `oc_product_option`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_product_option` (
-  `product_option_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_product_option` (
+  `product_option_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `option_id` int(11) NOT NULL,
   `value` text NOT NULL,
-  `required` tinyint(1) NOT NULL,
-  PRIMARY KEY (`product_option_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=227 ;
+  `required` tinyint(1) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_product_option`
+-- Đang đổ dữ liệu cho bảng `oc_product_option`
 --
 
 INSERT INTO `oc_product_option` (`product_option_id`, `product_id`, `option_id`, `value`, `required`) VALUES
@@ -3596,11 +3658,11 @@ INSERT INTO `oc_product_option` (`product_option_id`, `product_id`, `option_id`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_product_option_value`
+-- Cấu trúc bảng cho bảng `oc_product_option_value`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_product_option_value` (
-  `product_option_value_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_product_option_value` (
+  `product_option_value_id` int(11) NOT NULL,
   `product_option_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `option_id` int(11) NOT NULL,
@@ -3612,12 +3674,11 @@ CREATE TABLE IF NOT EXISTS `oc_product_option_value` (
   `points` int(8) NOT NULL,
   `points_prefix` varchar(1) NOT NULL,
   `weight` decimal(15,8) NOT NULL,
-  `weight_prefix` varchar(1) NOT NULL,
-  PRIMARY KEY (`product_option_value_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
+  `weight_prefix` varchar(1) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_product_option_value`
+-- Đang đổ dữ liệu cho bảng `oc_product_option_value`
 --
 
 INSERT INTO `oc_product_option_value` (`product_option_value_id`, `product_option_id`, `product_id`, `option_id`, `option_value_id`, `quantity`, `subtract`, `price`, `price_prefix`, `points`, `points_prefix`, `weight`, `weight_prefix`) VALUES
@@ -3641,30 +3702,28 @@ INSERT INTO `oc_product_option_value` (`product_option_value_id`, `product_optio
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_product_recurring`
+-- Cấu trúc bảng cho bảng `oc_product_recurring`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_product_recurring` (
+CREATE TABLE `oc_product_recurring` (
   `product_id` int(11) NOT NULL,
   `recurring_id` int(11) NOT NULL,
-  `customer_group_id` int(11) NOT NULL,
-  PRIMARY KEY (`product_id`,`recurring_id`,`customer_group_id`)
+  `customer_group_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_product_related`
+-- Cấu trúc bảng cho bảng `oc_product_related`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_product_related` (
+CREATE TABLE `oc_product_related` (
   `product_id` int(11) NOT NULL,
-  `related_id` int(11) NOT NULL,
-  PRIMARY KEY (`product_id`,`related_id`)
+  `related_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_product_related`
+-- Đang đổ dữ liệu cho bảng `oc_product_related`
 --
 
 INSERT INTO `oc_product_related` (`product_id`, `related_id`) VALUES
@@ -3719,19 +3778,18 @@ INSERT INTO `oc_product_related` (`product_id`, `related_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_product_reward`
+-- Cấu trúc bảng cho bảng `oc_product_reward`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_product_reward` (
-  `product_reward_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_product_reward` (
+  `product_reward_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL DEFAULT '0',
   `customer_group_id` int(11) NOT NULL DEFAULT '0',
-  `points` int(8) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`product_reward_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=618 ;
+  `points` int(8) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_product_reward`
+-- Đang đổ dữ liệu cho bảng `oc_product_reward`
 --
 
 INSERT INTO `oc_product_reward` (`product_reward_id`, `product_id`, `customer_group_id`, `points`) VALUES
@@ -3747,23 +3805,21 @@ INSERT INTO `oc_product_reward` (`product_reward_id`, `product_id`, `customer_gr
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_product_special`
+-- Cấu trúc bảng cho bảng `oc_product_special`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_product_special` (
-  `product_special_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_product_special` (
+  `product_special_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `customer_group_id` int(11) NOT NULL,
   `priority` int(5) NOT NULL DEFAULT '1',
   `price` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `date_start` date NOT NULL DEFAULT '0000-00-00',
-  `date_end` date NOT NULL DEFAULT '0000-00-00',
-  PRIMARY KEY (`product_special_id`),
-  KEY `product_id` (`product_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=520 ;
+  `date_end` date NOT NULL DEFAULT '0000-00-00'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_product_special`
+-- Đang đổ dữ liệu cho bảng `oc_product_special`
 --
 
 INSERT INTO `oc_product_special` (`product_special_id`, `product_id`, `customer_group_id`, `priority`, `price`, `date_start`, `date_end`) VALUES
@@ -3779,18 +3835,16 @@ INSERT INTO `oc_product_special` (`product_special_id`, `product_id`, `customer_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_product_to_category`
+-- Cấu trúc bảng cho bảng `oc_product_to_category`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_product_to_category` (
+CREATE TABLE `oc_product_to_category` (
   `product_id` int(11) NOT NULL,
-  `category_id` int(11) NOT NULL,
-  PRIMARY KEY (`product_id`,`category_id`),
-  KEY `category_id` (`category_id`)
+  `category_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_product_to_category`
+-- Đang đổ dữ liệu cho bảng `oc_product_to_category`
 --
 
 INSERT INTO `oc_product_to_category` (`product_id`, `category_id`) VALUES
@@ -3839,30 +3893,28 @@ INSERT INTO `oc_product_to_category` (`product_id`, `category_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_product_to_download`
+-- Cấu trúc bảng cho bảng `oc_product_to_download`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_product_to_download` (
+CREATE TABLE `oc_product_to_download` (
   `product_id` int(11) NOT NULL,
-  `download_id` int(11) NOT NULL,
-  PRIMARY KEY (`product_id`,`download_id`)
+  `download_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_product_to_layout`
+-- Cấu trúc bảng cho bảng `oc_product_to_layout`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_product_to_layout` (
+CREATE TABLE `oc_product_to_layout` (
   `product_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
-  `layout_id` int(11) NOT NULL,
-  PRIMARY KEY (`product_id`,`store_id`)
+  `layout_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_product_to_layout`
+-- Đang đổ dữ liệu cho bảng `oc_product_to_layout`
 --
 
 INSERT INTO `oc_product_to_layout` (`product_id`, `store_id`, `layout_id`) VALUES
@@ -3896,17 +3948,16 @@ INSERT INTO `oc_product_to_layout` (`product_id`, `store_id`, `layout_id`) VALUE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_product_to_store`
+-- Cấu trúc bảng cho bảng `oc_product_to_store`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_product_to_store` (
+CREATE TABLE `oc_product_to_store` (
   `product_id` int(11) NOT NULL,
-  `store_id` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`product_id`,`store_id`)
+  `store_id` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_product_to_store`
+-- Đang đổ dữ liệu cho bảng `oc_product_to_store`
 --
 
 INSERT INTO `oc_product_to_store` (`product_id`, `store_id`) VALUES
@@ -3940,46 +3991,44 @@ INSERT INTO `oc_product_to_store` (`product_id`, `store_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_recurring`
+-- Cấu trúc bảng cho bảng `oc_recurring`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_recurring` (
-  `recurring_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_recurring` (
+  `recurring_id` int(11) NOT NULL,
   `price` decimal(10,4) NOT NULL,
   `frequency` enum('day','week','semi_month','month','year') NOT NULL,
-  `duration` int(10) unsigned NOT NULL,
-  `cycle` int(10) unsigned NOT NULL,
+  `duration` int(10) UNSIGNED NOT NULL,
+  `cycle` int(10) UNSIGNED NOT NULL,
   `trial_status` tinyint(4) NOT NULL,
   `trial_price` decimal(10,4) NOT NULL,
   `trial_frequency` enum('day','week','semi_month','month','year') NOT NULL,
-  `trial_duration` int(10) unsigned NOT NULL,
-  `trial_cycle` int(10) unsigned NOT NULL,
+  `trial_duration` int(10) UNSIGNED NOT NULL,
+  `trial_cycle` int(10) UNSIGNED NOT NULL,
   `status` tinyint(4) NOT NULL,
-  `sort_order` int(11) NOT NULL,
-  PRIMARY KEY (`recurring_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `oc_recurring_description`
---
-
-CREATE TABLE IF NOT EXISTS `oc_recurring_description` (
-  `recurring_id` int(11) NOT NULL,
-  `language_id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  PRIMARY KEY (`recurring_id`,`language_id`)
+  `sort_order` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_return`
+-- Cấu trúc bảng cho bảng `oc_recurring_description`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_return` (
-  `return_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_recurring_description` (
+  `recurring_id` int(11) NOT NULL,
+  `language_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `oc_return`
+--
+
+CREATE TABLE `oc_return` (
+  `return_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
@@ -3997,25 +4046,23 @@ CREATE TABLE IF NOT EXISTS `oc_return` (
   `comment` text,
   `date_ordered` date NOT NULL DEFAULT '0000-00-00',
   `date_added` datetime NOT NULL,
-  `date_modified` datetime NOT NULL,
-  PRIMARY KEY (`return_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `date_modified` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_return_action`
+-- Cấu trúc bảng cho bảng `oc_return_action`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_return_action` (
-  `return_action_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_return_action` (
+  `return_action_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL DEFAULT '0',
-  `name` varchar(64) NOT NULL,
-  PRIMARY KEY (`return_action_id`,`language_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+  `name` varchar(64) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_return_action`
+-- Đang đổ dữ liệu cho bảng `oc_return_action`
 --
 
 INSERT INTO `oc_return_action` (`return_action_id`, `language_id`, `name`) VALUES
@@ -4029,34 +4076,32 @@ INSERT INTO `oc_return_action` (`return_action_id`, `language_id`, `name`) VALUE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_return_history`
+-- Cấu trúc bảng cho bảng `oc_return_history`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_return_history` (
-  `return_history_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_return_history` (
+  `return_history_id` int(11) NOT NULL,
   `return_id` int(11) NOT NULL,
   `return_status_id` int(11) NOT NULL,
   `notify` tinyint(1) NOT NULL,
   `comment` text NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`return_history_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `date_added` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_return_reason`
+-- Cấu trúc bảng cho bảng `oc_return_reason`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_return_reason` (
-  `return_reason_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_return_reason` (
+  `return_reason_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL DEFAULT '0',
-  `name` varchar(128) NOT NULL,
-  PRIMARY KEY (`return_reason_id`,`language_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+  `name` varchar(128) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_return_reason`
+-- Đang đổ dữ liệu cho bảng `oc_return_reason`
 --
 
 INSERT INTO `oc_return_reason` (`return_reason_id`, `language_id`, `name`) VALUES
@@ -4074,18 +4119,17 @@ INSERT INTO `oc_return_reason` (`return_reason_id`, `language_id`, `name`) VALUE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_return_status`
+-- Cấu trúc bảng cho bảng `oc_return_status`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_return_status` (
-  `return_status_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_return_status` (
+  `return_status_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL DEFAULT '0',
-  `name` varchar(32) NOT NULL,
-  PRIMARY KEY (`return_status_id`,`language_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+  `name` varchar(32) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_return_status`
+-- Đang đổ dữ liệu cho bảng `oc_return_status`
 --
 
 INSERT INTO `oc_return_status` (`return_status_id`, `language_id`, `name`) VALUES
@@ -4099,11 +4143,11 @@ INSERT INTO `oc_return_status` (`return_status_id`, `language_id`, `name`) VALUE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_review`
+-- Cấu trúc bảng cho bảng `oc_review`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_review` (
-  `review_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_review` (
+  `review_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `author` varchar(64) NOT NULL,
@@ -4111,13 +4155,11 @@ CREATE TABLE IF NOT EXISTS `oc_review` (
   `rating` int(1) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0',
   `date_added` datetime NOT NULL,
-  `date_modified` datetime NOT NULL,
-  PRIMARY KEY (`review_id`),
-  KEY `product_id` (`product_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+  `date_modified` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_review`
+-- Đang đổ dữ liệu cho bảng `oc_review`
 --
 
 INSERT INTO `oc_review` (`review_id`, `product_id`, `customer_id`, `author`, `text`, `rating`, `status`, `date_added`, `date_modified`) VALUES
@@ -4129,68 +4171,65 @@ INSERT INTO `oc_review` (`review_id`, `product_id`, `customer_id`, `author`, `te
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_setting`
+-- Cấu trúc bảng cho bảng `oc_setting`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_setting` (
-  `setting_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_setting` (
+  `setting_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL DEFAULT '0',
   `code` varchar(32) NOT NULL,
   `key` varchar(64) NOT NULL,
   `value` text NOT NULL,
-  `serialized` tinyint(1) NOT NULL,
-  PRIMARY KEY (`setting_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3126 ;
+  `serialized` tinyint(1) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_setting`
+-- Đang đổ dữ liệu cho bảng `oc_setting`
 --
 
 INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES
-(3124, 0, 'config', 'config_encryption', '0thrXPtxZXN2novClmA6mmO91YwE9yH4daETuMkbhjHaNCYP5oaJoJhYQ6C9ysAT3mwvva1Vh6bGUuiwZCwBlMVDsyF6J0p0r49c89WuFai6WXhFMCDDxc6VQ54jqgR5uof5cbDOyF2agLr5C0LZa4JQ5JzXvmpfGyj4YBMA67QXVMr6nRcvhUQosooFNSf5zG5OMAj7oz8qEALlTMIdBJcdanNEVyOEPaeTjHPfUWcNfcWKxVaiM3vU7s3t3KxP6fyBjX8Putw3FHUixLwLqWigqn20LQ1EmtdRb6UWfvV5bTMbobKBP5h5G46jFDrtHzF1wRWkvICckAG2qpsnaZLKuRcctb3JMHYwKa6Vd8pfyTkAW2hQnKdyLTJC1HnigXdypxOxI2ho4gWULh20t7BsSgevMDUPKgtw1ygh1OoogtzMSrw9Rc9LnlTeJ0vo37V6FqPKg6X4lnB2cZamjFyQbz6cohfqJc3HpXDavY3UTuOEglyD9Glg2zFVPlq1Nj7vAsFQPAJXdL65CrxXk9r53e7UCPkvBlZK4RkFgndwZBk66Mky61JnT2j9twYZ3fInDrcpuxumRKLJpCKaka50pqDQEbcITfakNn4AQI3NVXhc563nUCxsDQI0FpCK5JwLQOMswpBk02E7tWeVoHewuAyVhtOQTdFvyhyAM2CLW8Gui04HZ0mu5m9fJcN4Cz92rL0j3XwJouxzR68RIKOHECCYj1BBzrYQVPiro2eQ5pv1aU7OqleSOxK6MthTs4OEPAxqHl8AhQ3zCiGM1BB8QzhXNqi9KzAblySFBCVk1OKA2W0sQWlI5WDt21yeAzVmCCpaWYfrgaSmFoqcfM27MkKuVPUtrlOqKw758gYhIHvvlzGJSp9u852Gauo3I3KRqwHcsEztAmDqtDXWdBnSafRVB9OiWWJ9Kf8PW1C2nHAN3qeaUUHqAREqNGZeMGbtvSa9B2twnzjr94QYG99gaAl09ZZpZ1AGRHnnZV7VHTziNxJ22BfE6oXXKULc', 0),
-(3100, 0, 'config', 'config_shared', '0', 0),
-(3097, 0, 'config', 'config_compression', '0', 0),
-(3098, 0, 'config', 'config_secure', '0', 0),
-(3099, 0, 'config', 'config_password', '1', 0),
+(3209, 0, 'config', 'config_compression', '0', 0),
+(3210, 0, 'config', 'config_secure', '0', 0),
+(3211, 0, 'config', 'config_password', '1', 0),
+(3212, 0, 'config', 'config_shared', '0', 0),
+(3213, 0, 'config', 'config_encryption', 'WWObNCDxZGEwBHlkK9rHtSr08rpgDIADX4bJ1JGWEk4aKru3tsgnu2q8ZBdKbK8TfAD3uHaS2AzQxFsoQHmxxUHaCZylHQ3BnMwmNPVDQfFbl5ULRmAqGSHtFJL7WXp1u41acSUX1qLA3n7ilYuP04rtSDsY4tK6I15V1x8puGtw9X3vQoH2mE20Cay5uFp1lAErDA1ZgTmTxy8Bz2cliPevuvO9SVh8k5eO0PDBfrIgiica9qx4yRkwE0pXsW3ZWJ33gIFoSxXnqWlESmJOKYj8qVSHBwadDVPtpj1vyTJpsRhCZV7JShO21GUbINhG5wSFN2zwUzoxY4mDOL2tkAKz2gxvmjkqqvj0Nb6Yf2RUXXnTg9LG83xWqJAkZ0W9t8rBpDFpWBazp6yf6LUEvugJs4JH4CcnxsyVGQMF9WVOpktrS8Z2D43912iA3A0KzF8AUP6c52AS0OY3knHOjINBfDOZra8YhD9tEVkowyAEG109urOo5VIyJTurXoGR6zRsWYlOrZaixhcegqZyI0IHZZCZfB1S0vOll2g2VzcwAL2zwDb1LMCbQDJHKVVdMdbHPLA8oH10srTF6NhWHB8Nbfna8BSXLqFZ8RQivof84sly4tewOQQgqQbKuzxb3dCgkDzy3PnL21avKJduCGp7yh4XgzQg8bC7CdLLaAUewi5kdfUdKQu1eXHlTusIMJbJJ6t8rHzf0slomIG3SvgVoJoSEuZB1NHKMgNN61GvdfPtx3xJbL2I0H3iohx8QvhvSete3ssqc6uXY9odVm2KUH53BOkpLOqJc4OPKudEmeWhDGywAUStOu0MpKTXtGugGNLk0hWRq0oBm7JeArDpS3neYi7i3l7P5xHGBGHqg7hLmEMCBlgXsSIAxniP7N8FMgItKZQSlPHP47rHBISdjN0CFqpgGynDOYI1AoWGsuqPtxPRJtV6QVFXa81Yuru1rd9vNHiohngVEba77H0RB3y50HOt7n25QFce4CxU0lcK5fjQ3HBwPzPB823S', 0),
 (4, 0, 'voucher', 'voucher_sort_order', '8', 0),
 (5, 0, 'voucher', 'voucher_status', '1', 0),
-(3077, 0, 'config', 'config_logo', 'catalog/logo.png', 0),
-(3078, 0, 'config', 'config_icon', 'catalog/favicon.png', 0),
-(3079, 0, 'config', 'config_ftp_hostname', 'localhost', 0),
-(3080, 0, 'config', 'config_ftp_port', '21', 0),
-(3081, 0, 'config', 'config_ftp_username', '', 0),
-(3082, 0, 'config', 'config_ftp_password', '', 0),
-(3083, 0, 'config', 'config_ftp_root', '', 0),
-(3084, 0, 'config', 'config_ftp_status', '0', 0),
-(3085, 0, 'config', 'config_mail_protocol', 'mail', 0),
-(3086, 0, 'config', 'config_mail_parameter', 'romitsachani@gmail.com', 0),
-(3087, 0, 'config', 'config_mail_smtp_hostname', '', 0),
-(3088, 0, 'config', 'config_mail_smtp_username', '', 0),
-(3089, 0, 'config', 'config_mail_smtp_password', '', 0),
-(3090, 0, 'config', 'config_mail_smtp_port', '25', 0),
-(3091, 0, 'config', 'config_mail_smtp_timeout', '5', 0),
-(3092, 0, 'config', 'config_mail_alert', '["account","order","review"]', 1),
-(3093, 0, 'config', 'config_mail_alert_email', '', 0),
-(3094, 0, 'config', 'config_maintenance', '0', 0),
-(3095, 0, 'config', 'config_seo_url', '0', 0),
-(3096, 0, 'config', 'config_robots', 'abot\r\ndbot\r\nebot\r\nhbot\r\nkbot\r\nlbot\r\nmbot\r\nnbot\r\nobot\r\npbot\r\nrbot\r\nsbot\r\ntbot\r\nvbot\r\nybot\r\nzbot\r\nbot.\r\nbot/\r\n_bot\r\n.bot\r\n/bot\r\n-bot\r\n:bot\r\n(bot\r\ncrawl\r\nslurp\r\nspider\r\nseek\r\naccoona\r\nacoon\r\nadressendeutschland\r\nah-ha.com\r\nahoy\r\naltavista\r\nananzi\r\nanthill\r\nappie\r\narachnophilia\r\narale\r\naraneo\r\naranha\r\narchitext\r\naretha\r\narks\r\nasterias\r\natlocal\r\natn\r\natomz\r\naugurfind\r\nbackrub\r\nbannana_bot\r\nbaypup\r\nbdfetch\r\nbig brother\r\nbiglotron\r\nbjaaland\r\nblackwidow\r\nblaiz\r\nblog\r\nblo.\r\nbloodhound\r\nboitho\r\nbooch\r\nbradley\r\nbutterfly\r\ncalif\r\ncassandra\r\nccubee\r\ncfetch\r\ncharlotte\r\nchurl\r\ncienciaficcion\r\ncmc\r\ncollective\r\ncomagent\r\ncombine\r\ncomputingsite\r\ncsci\r\ncurl\r\ncusco\r\ndaumoa\r\ndeepindex\r\ndelorie\r\ndepspid\r\ndeweb\r\ndie blinde kuh\r\ndigger\r\nditto\r\ndmoz\r\ndocomo\r\ndownload express\r\ndtaagent\r\ndwcp\r\nebiness\r\nebingbong\r\ne-collector\r\nejupiter\r\nemacs-w3 search engine\r\nesther\r\nevliya celebi\r\nezresult\r\nfalcon\r\nfelix ide\r\nferret\r\nfetchrover\r\nfido\r\nfindlinks\r\nfireball\r\nfish search\r\nfouineur\r\nfunnelweb\r\ngazz\r\ngcreep\r\ngenieknows\r\ngetterroboplus\r\ngeturl\r\nglx\r\ngoforit\r\ngolem\r\ngrabber\r\ngrapnel\r\ngralon\r\ngriffon\r\ngromit\r\ngrub\r\ngulliver\r\nhamahakki\r\nharvest\r\nhavindex\r\nhelix\r\nheritrix\r\nhku www octopus\r\nhomerweb\r\nhtdig\r\nhtml index\r\nhtml_analyzer\r\nhtmlgobble\r\nhubater\r\nhyper-decontextualizer\r\nia_archiver\r\nibm_planetwide\r\nichiro\r\niconsurf\r\niltrovatore\r\nimage.kapsi.net\r\nimagelock\r\nincywincy\r\nindexer\r\ninfobee\r\ninformant\r\ningrid\r\ninktomisearch.com\r\ninspector web\r\nintelliagent\r\ninternet shinchakubin\r\nip3000\r\niron33\r\nisraeli-search\r\nivia\r\njack\r\njakarta\r\njavabee\r\njetbot\r\njumpstation\r\nkatipo\r\nkdd-explorer\r\nkilroy\r\nknowledge\r\nkototoi\r\nkretrieve\r\nlabelgrabber\r\nlachesis\r\nlarbin\r\nlegs\r\nlibwww\r\nlinkalarm\r\nlink validator\r\nlinkscan\r\nlockon\r\nlwp\r\nlycos\r\nmagpie\r\nmantraagent\r\nmapoftheinternet\r\nmarvin/\r\nmattie\r\nmediafox\r\nmediapartners\r\nmercator\r\nmerzscope\r\nmicrosoft url control\r\nminirank\r\nmiva\r\nmj12\r\nmnogosearch\r\nmoget\r\nmonster\r\nmoose\r\nmotor\r\nmultitext\r\nmuncher\r\nmuscatferret\r\nmwd.search\r\nmyweb\r\nnajdi\r\nnameprotect\r\nnationaldirectory\r\nnazilla\r\nncsa beta\r\nnec-meshexplorer\r\nnederland.zoek\r\nnetcarta webmap engine\r\nnetmechanic\r\nnetresearchserver\r\nnetscoop\r\nnewscan-online\r\nnhse\r\nnokia6682/\r\nnomad\r\nnoyona\r\nnutch\r\nnzexplorer\r\nobjectssearch\r\noccam\r\nomni\r\nopen text\r\nopenfind\r\nopenintelligencedata\r\norb search\r\nosis-project\r\npack rat\r\npageboy\r\npagebull\r\npage_verifier\r\npanscient\r\nparasite\r\npartnersite\r\npatric\r\npear.\r\npegasus\r\nperegrinator\r\npgp key agent\r\nphantom\r\nphpdig\r\npicosearch\r\npiltdownman\r\npimptrain\r\npinpoint\r\npioneer\r\npiranha\r\nplumtreewebaccessor\r\npogodak\r\npoirot\r\npompos\r\npoppelsdorf\r\npoppi\r\npopular iconoclast\r\npsycheclone\r\npublisher\r\npython\r\nrambler\r\nraven search\r\nroach\r\nroad runner\r\nroadhouse\r\nrobbie\r\nrobofox\r\nrobozilla\r\nrules\r\nsalty\r\nsbider\r\nscooter\r\nscoutjet\r\nscrubby\r\nsearch.\r\nsearchprocess\r\nsemanticdiscovery\r\nsenrigan\r\nsg-scout\r\nshai''hulud\r\nshark\r\nshopwiki\r\nsidewinder\r\nsift\r\nsilk\r\nsimmany\r\nsite searcher\r\nsite valet\r\nsitetech-rover\r\nskymob.com\r\nsleek\r\nsmartwit\r\nsna-\r\nsnappy\r\nsnooper\r\nsohu\r\nspeedfind\r\nsphere\r\nsphider\r\nspinner\r\nspyder\r\nsteeler/\r\nsuke\r\nsuntek\r\nsupersnooper\r\nsurfnomore\r\nsven\r\nsygol\r\nszukacz\r\ntach black widow\r\ntarantula\r\ntempleton\r\n/teoma\r\nt-h-u-n-d-e-r-s-t-o-n-e\r\ntheophrastus\r\ntitan\r\ntitin\r\ntkwww\r\ntoutatis\r\nt-rex\r\ntutorgig\r\ntwiceler\r\ntwisted\r\nucsd\r\nudmsearch\r\nurl check\r\nupdated\r\nvagabondo\r\nvalkyrie\r\nverticrawl\r\nvictoria\r\nvision-search\r\nvolcano\r\nvoyager/\r\nvoyager-hc\r\nw3c_validator\r\nw3m2\r\nw3mir\r\nwalker\r\nwallpaper\r\nwanderer\r\nwauuu\r\nwavefire\r\nweb core\r\nweb hopper\r\nweb wombat\r\nwebbandit\r\nwebcatcher\r\nwebcopy\r\nwebfoot\r\nweblayers\r\nweblinker\r\nweblog monitor\r\nwebmirror\r\nwebmonkey\r\nwebquest\r\nwebreaper\r\nwebsitepulse\r\nwebsnarf\r\nwebstolperer\r\nwebvac\r\nwebwalk\r\nwebwatch\r\nwebwombat\r\nwebzinger\r\nwhizbang\r\nwhowhere\r\nwild ferret\r\nworldlight\r\nwwwc\r\nwwwster\r\nxenu\r\nxget\r\nxift\r\nxirq\r\nyandex\r\nyanga\r\nyeti\r\nyodao\r\nzao\r\nzippp\r\nzyborg', 0),
-(3076, 0, 'config', 'config_captcha_page', '["review","return","contact"]', 1),
-(3075, 0, 'config', 'config_captcha', '', 0),
-(3074, 0, 'config', 'config_return_status_id', '2', 0),
-(3073, 0, 'config', 'config_return_id', '0', 0),
-(3072, 0, 'config', 'config_affiliate_id', '4', 0),
-(3071, 0, 'config', 'config_affiliate_commission', '5', 0),
-(3070, 0, 'config', 'config_affiliate_auto', '0', 0),
-(3069, 0, 'config', 'config_affiliate_approval', '0', 0),
-(3068, 0, 'config', 'config_stock_checkout', '0', 0),
-(3067, 0, 'config', 'config_stock_warning', '0', 0),
-(3066, 0, 'config', 'config_stock_display', '0', 0),
-(3125, 0, 'config', 'config_api_id', '2', 0),
-(3064, 0, 'config', 'config_fraud_status_id', '7', 0),
-(3063, 0, 'config', 'config_complete_status', '["5","3"]', 1),
-(3062, 0, 'config', 'config_processing_status', '["5","1","2","12","3"]', 1),
-(95, 0, 'free_checkout', 'free_checkout_status', '1', 0),
-(96, 0, 'free_checkout', 'free_checkout_order_status_id', '1', 0),
+(3189, 0, 'config', 'config_logo', 'catalog/logo.png', 0),
+(3190, 0, 'config', 'config_icon', 'catalog/favicon.png', 0),
+(3191, 0, 'config', 'config_ftp_hostname', 'localhost', 0),
+(3192, 0, 'config', 'config_ftp_port', '21', 0),
+(3193, 0, 'config', 'config_ftp_username', '', 0),
+(3194, 0, 'config', 'config_ftp_password', '', 0),
+(3195, 0, 'config', 'config_ftp_root', '', 0),
+(3196, 0, 'config', 'config_ftp_status', '0', 0),
+(3197, 0, 'config', 'config_mail_protocol', 'mail', 0),
+(3198, 0, 'config', 'config_mail_parameter', 'romitsachani@gmail.com', 0),
+(3199, 0, 'config', 'config_mail_smtp_hostname', '', 0),
+(3200, 0, 'config', 'config_mail_smtp_username', '', 0),
+(3201, 0, 'config', 'config_mail_smtp_password', '', 0),
+(3202, 0, 'config', 'config_mail_smtp_port', '25', 0),
+(3203, 0, 'config', 'config_mail_smtp_timeout', '5', 0),
+(3204, 0, 'config', 'config_mail_alert', '[\"account\",\"order\",\"review\"]', 1),
+(3205, 0, 'config', 'config_mail_alert_email', '', 0),
+(3206, 0, 'config', 'config_maintenance', '0', 0),
+(3207, 0, 'config', 'config_seo_url', '0', 0),
+(3208, 0, 'config', 'config_robots', 'abot\r\ndbot\r\nebot\r\nhbot\r\nkbot\r\nlbot\r\nmbot\r\nnbot\r\nobot\r\npbot\r\nrbot\r\nsbot\r\ntbot\r\nvbot\r\nybot\r\nzbot\r\nbot.\r\nbot/\r\n_bot\r\n.bot\r\n/bot\r\n-bot\r\n:bot\r\n(bot\r\ncrawl\r\nslurp\r\nspider\r\nseek\r\naccoona\r\nacoon\r\nadressendeutschland\r\nah-ha.com\r\nahoy\r\naltavista\r\nananzi\r\nanthill\r\nappie\r\narachnophilia\r\narale\r\naraneo\r\naranha\r\narchitext\r\naretha\r\narks\r\nasterias\r\natlocal\r\natn\r\natomz\r\naugurfind\r\nbackrub\r\nbannana_bot\r\nbaypup\r\nbdfetch\r\nbig brother\r\nbiglotron\r\nbjaaland\r\nblackwidow\r\nblaiz\r\nblog\r\nblo.\r\nbloodhound\r\nboitho\r\nbooch\r\nbradley\r\nbutterfly\r\ncalif\r\ncassandra\r\nccubee\r\ncfetch\r\ncharlotte\r\nchurl\r\ncienciaficcion\r\ncmc\r\ncollective\r\ncomagent\r\ncombine\r\ncomputingsite\r\ncsci\r\ncurl\r\ncusco\r\ndaumoa\r\ndeepindex\r\ndelorie\r\ndepspid\r\ndeweb\r\ndie blinde kuh\r\ndigger\r\nditto\r\ndmoz\r\ndocomo\r\ndownload express\r\ndtaagent\r\ndwcp\r\nebiness\r\nebingbong\r\ne-collector\r\nejupiter\r\nemacs-w3 search engine\r\nesther\r\nevliya celebi\r\nezresult\r\nfalcon\r\nfelix ide\r\nferret\r\nfetchrover\r\nfido\r\nfindlinks\r\nfireball\r\nfish search\r\nfouineur\r\nfunnelweb\r\ngazz\r\ngcreep\r\ngenieknows\r\ngetterroboplus\r\ngeturl\r\nglx\r\ngoforit\r\ngolem\r\ngrabber\r\ngrapnel\r\ngralon\r\ngriffon\r\ngromit\r\ngrub\r\ngulliver\r\nhamahakki\r\nharvest\r\nhavindex\r\nhelix\r\nheritrix\r\nhku www octopus\r\nhomerweb\r\nhtdig\r\nhtml index\r\nhtml_analyzer\r\nhtmlgobble\r\nhubater\r\nhyper-decontextualizer\r\nia_archiver\r\nibm_planetwide\r\nichiro\r\niconsurf\r\niltrovatore\r\nimage.kapsi.net\r\nimagelock\r\nincywincy\r\nindexer\r\ninfobee\r\ninformant\r\ningrid\r\ninktomisearch.com\r\ninspector web\r\nintelliagent\r\ninternet shinchakubin\r\nip3000\r\niron33\r\nisraeli-search\r\nivia\r\njack\r\njakarta\r\njavabee\r\njetbot\r\njumpstation\r\nkatipo\r\nkdd-explorer\r\nkilroy\r\nknowledge\r\nkototoi\r\nkretrieve\r\nlabelgrabber\r\nlachesis\r\nlarbin\r\nlegs\r\nlibwww\r\nlinkalarm\r\nlink validator\r\nlinkscan\r\nlockon\r\nlwp\r\nlycos\r\nmagpie\r\nmantraagent\r\nmapoftheinternet\r\nmarvin/\r\nmattie\r\nmediafox\r\nmediapartners\r\nmercator\r\nmerzscope\r\nmicrosoft url control\r\nminirank\r\nmiva\r\nmj12\r\nmnogosearch\r\nmoget\r\nmonster\r\nmoose\r\nmotor\r\nmultitext\r\nmuncher\r\nmuscatferret\r\nmwd.search\r\nmyweb\r\nnajdi\r\nnameprotect\r\nnationaldirectory\r\nnazilla\r\nncsa beta\r\nnec-meshexplorer\r\nnederland.zoek\r\nnetcarta webmap engine\r\nnetmechanic\r\nnetresearchserver\r\nnetscoop\r\nnewscan-online\r\nnhse\r\nnokia6682/\r\nnomad\r\nnoyona\r\nnutch\r\nnzexplorer\r\nobjectssearch\r\noccam\r\nomni\r\nopen text\r\nopenfind\r\nopenintelligencedata\r\norb search\r\nosis-project\r\npack rat\r\npageboy\r\npagebull\r\npage_verifier\r\npanscient\r\nparasite\r\npartnersite\r\npatric\r\npear.\r\npegasus\r\nperegrinator\r\npgp key agent\r\nphantom\r\nphpdig\r\npicosearch\r\npiltdownman\r\npimptrain\r\npinpoint\r\npioneer\r\npiranha\r\nplumtreewebaccessor\r\npogodak\r\npoirot\r\npompos\r\npoppelsdorf\r\npoppi\r\npopular iconoclast\r\npsycheclone\r\npublisher\r\npython\r\nrambler\r\nraven search\r\nroach\r\nroad runner\r\nroadhouse\r\nrobbie\r\nrobofox\r\nrobozilla\r\nrules\r\nsalty\r\nsbider\r\nscooter\r\nscoutjet\r\nscrubby\r\nsearch.\r\nsearchprocess\r\nsemanticdiscovery\r\nsenrigan\r\nsg-scout\r\nshai\'hulud\r\nshark\r\nshopwiki\r\nsidewinder\r\nsift\r\nsilk\r\nsimmany\r\nsite searcher\r\nsite valet\r\nsitetech-rover\r\nskymob.com\r\nsleek\r\nsmartwit\r\nsna-\r\nsnappy\r\nsnooper\r\nsohu\r\nspeedfind\r\nsphere\r\nsphider\r\nspinner\r\nspyder\r\nsteeler/\r\nsuke\r\nsuntek\r\nsupersnooper\r\nsurfnomore\r\nsven\r\nsygol\r\nszukacz\r\ntach black widow\r\ntarantula\r\ntempleton\r\n/teoma\r\nt-h-u-n-d-e-r-s-t-o-n-e\r\ntheophrastus\r\ntitan\r\ntitin\r\ntkwww\r\ntoutatis\r\nt-rex\r\ntutorgig\r\ntwiceler\r\ntwisted\r\nucsd\r\nudmsearch\r\nurl check\r\nupdated\r\nvagabondo\r\nvalkyrie\r\nverticrawl\r\nvictoria\r\nvision-search\r\nvolcano\r\nvoyager/\r\nvoyager-hc\r\nw3c_validator\r\nw3m2\r\nw3mir\r\nwalker\r\nwallpaper\r\nwanderer\r\nwauuu\r\nwavefire\r\nweb core\r\nweb hopper\r\nweb wombat\r\nwebbandit\r\nwebcatcher\r\nwebcopy\r\nwebfoot\r\nweblayers\r\nweblinker\r\nweblog monitor\r\nwebmirror\r\nwebmonkey\r\nwebquest\r\nwebreaper\r\nwebsitepulse\r\nwebsnarf\r\nwebstolperer\r\nwebvac\r\nwebwalk\r\nwebwatch\r\nwebwombat\r\nwebzinger\r\nwhizbang\r\nwhowhere\r\nwild ferret\r\nworldlight\r\nwwwc\r\nwwwster\r\nxenu\r\nxget\r\nxift\r\nxirq\r\nyandex\r\nyanga\r\nyeti\r\nyodao\r\nzao\r\nzippp\r\nzyborg', 0),
+(3188, 0, 'config', 'config_captcha_page', '[\"review\",\"return\",\"contact\"]', 1),
+(3187, 0, 'config', 'config_captcha', '', 0),
+(3186, 0, 'config', 'config_return_status_id', '2', 0),
+(3185, 0, 'config', 'config_return_id', '0', 0),
+(3184, 0, 'config', 'config_affiliate_id', '4', 0),
+(3183, 0, 'config', 'config_affiliate_commission', '5', 0),
+(3182, 0, 'config', 'config_affiliate_auto', '0', 0),
+(3181, 0, 'config', 'config_affiliate_approval', '0', 0),
+(3180, 0, 'config', 'config_stock_checkout', '0', 0),
+(3179, 0, 'config', 'config_stock_warning', '0', 0),
+(3178, 0, 'config', 'config_stock_display', '0', 0),
+(3177, 0, 'config', 'config_api_id', '3', 0),
+(3176, 0, 'config', 'config_fraud_status_id', '7', 0),
+(3175, 0, 'config', 'config_complete_status', '[\"5\",\"3\"]', 1),
+(3314, 0, 'pp_pro_iframe', 'pp_pro_iframe_processed_status_id', '7', 0),
 (97, 0, 'shipping', 'shipping_sort_order', '3', 0),
 (98, 0, 'sub_total', 'sub_total_sort_order', '1', 0),
 (99, 0, 'sub_total', 'sub_total_status', '1', 0),
@@ -4198,12 +4237,9 @@ INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `ser
 (101, 0, 'total', 'total_sort_order', '9', 0),
 (102, 0, 'total', 'total_status', '1', 0),
 (103, 0, 'tax', 'tax_sort_order', '5', 0),
-(104, 0, 'free_checkout', 'free_checkout_sort_order', '1', 0),
-(105, 0, 'cod', 'cod_sort_order', '5', 0),
-(106, 0, 'cod', 'cod_total', '0.01', 0),
-(107, 0, 'cod', 'cod_order_status_id', '1', 0),
-(108, 0, 'cod', 'cod_geo_zone_id', '0', 0),
-(109, 0, 'cod', 'cod_status', '1', 0),
+(3313, 0, 'pp_pro_iframe', 'pp_pro_iframe_pending_status_id', '7', 0),
+(3311, 0, 'pp_pro_iframe', 'pp_pro_iframe_expired_status_id', '7', 0),
+(3312, 0, 'pp_pro_iframe', 'pp_pro_iframe_failed_status_id', '7', 0),
 (110, 0, 'shipping', 'shipping_status', '1', 0),
 (111, 0, 'shipping', 'shipping_estimator', '1', 0),
 (112, 0, 'coupon', 'coupon_sort_order', '4', 0),
@@ -4259,88 +4295,142 @@ INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `ser
 (3005, 0, 'theme_default', 'theme_default_image_additional_width', '100', 0),
 (3004, 0, 'theme_default', 'theme_default_image_product_height', '392', 0),
 (3002, 0, 'theme_default', 'theme_default_image_popup_height', '1000', 0),
-(3061, 0, 'config', 'config_order_status_id', '1', 0),
-(3060, 0, 'config', 'config_checkout_id', '5', 0),
-(3059, 0, 'config', 'config_checkout_guest', '1', 0),
-(3058, 0, 'config', 'config_cart_weight', '1', 0),
-(3057, 0, 'config', 'config_invoice_prefix', 'INV-2013-00', 0),
-(3056, 0, 'config', 'config_account_id', '3', 0),
-(3055, 0, 'config', 'config_login_attempts', '5', 0),
-(3054, 0, 'config', 'config_customer_price', '0', 0),
-(3053, 0, 'config', 'config_customer_group_display', '["1"]', 1),
-(3052, 0, 'config', 'config_customer_group_id', '1', 0),
-(3051, 0, 'config', 'config_customer_search', '0', 0),
-(3050, 0, 'config', 'config_customer_activity', '0', 0),
-(3049, 0, 'config', 'config_customer_online', '0', 0),
-(3048, 0, 'config', 'config_tax_customer', 'shipping', 0),
-(3047, 0, 'config', 'config_tax_default', 'shipping', 0),
-(3046, 0, 'config', 'config_tax', '1', 0),
-(3045, 0, 'config', 'config_voucher_max', '1000', 0),
-(3044, 0, 'config', 'config_voucher_min', '1', 0),
-(3043, 0, 'config', 'config_review_guest', '1', 0),
-(3042, 0, 'config', 'config_review_status', '1', 0),
-(3041, 0, 'config', 'config_limit_admin', '20', 0),
-(3040, 0, 'config', 'config_product_count', '1', 0),
-(3039, 0, 'config', 'config_weight_class_id', '1', 0),
-(3038, 0, 'config', 'config_length_class_id', '3', 0),
-(3037, 0, 'config', 'config_currency_auto', '1', 0),
-(3036, 0, 'config', 'config_currency', 'USD', 0),
-(3035, 0, 'config', 'config_admin_language', 'en-gb', 0),
-(3034, 0, 'config', 'config_language', 'en-gb', 0),
-(3033, 0, 'config', 'config_zone_id', '1485', 0),
-(3032, 0, 'config', 'config_country_id', '99', 0),
-(3031, 0, 'config', 'config_comment', '', 0),
-(3030, 0, 'config', 'config_open', '9:30 AM  TO 7:00 PM', 0),
-(3029, 0, 'config', 'config_image', 'catalog/store-logo.jpg', 0),
-(3028, 0, 'config', 'config_fax', '', 0),
-(3027, 0, 'config', 'config_telephone', '123456789', 0),
-(3123, 0, 'config', 'config_email', '123@gmail.com', 0),
-(3025, 0, 'config', 'config_geocode', '395006', 0),
-(3024, 0, 'config', 'config_address', 'Surat', 0),
-(3023, 0, 'config', 'config_owner', 'Romit', 0),
-(3022, 0, 'config', 'config_name', 'shopnow', 0),
-(3021, 0, 'config', 'config_layout_id', '4', 0),
-(3020, 0, 'config', 'config_theme', 'theme_default', 0),
+(3174, 0, 'config', 'config_processing_status', '[\"5\",\"1\",\"2\",\"12\",\"3\"]', 1),
+(3173, 0, 'config', 'config_order_status_id', '1', 0),
+(3172, 0, 'config', 'config_checkout_id', '5', 0),
+(3171, 0, 'config', 'config_checkout_guest', '1', 0),
+(3170, 0, 'config', 'config_cart_weight', '1', 0),
+(3169, 0, 'config', 'config_invoice_prefix', 'INV-2013-00', 0),
+(3168, 0, 'config', 'config_account_id', '3', 0),
+(3167, 0, 'config', 'config_login_attempts', '5', 0),
+(3166, 0, 'config', 'config_customer_price', '0', 0),
+(3165, 0, 'config', 'config_customer_group_display', '[\"1\"]', 1),
+(3164, 0, 'config', 'config_customer_group_id', '1', 0),
+(3163, 0, 'config', 'config_customer_search', '0', 0),
+(3162, 0, 'config', 'config_customer_activity', '0', 0),
+(3161, 0, 'config', 'config_customer_online', '0', 0),
+(3160, 0, 'config', 'config_tax_customer', 'shipping', 0),
+(3159, 0, 'config', 'config_tax_default', 'shipping', 0),
+(3158, 0, 'config', 'config_tax', '1', 0),
+(3157, 0, 'config', 'config_voucher_max', '1000', 0),
+(3156, 0, 'config', 'config_voucher_min', '1', 0),
+(3155, 0, 'config', 'config_review_guest', '1', 0),
+(3154, 0, 'config', 'config_review_status', '1', 0),
+(3153, 0, 'config', 'config_limit_admin', '20', 0),
+(3152, 0, 'config', 'config_product_count', '1', 0),
+(3151, 0, 'config', 'config_weight_class_id', '1', 0),
+(3150, 0, 'config', 'config_length_class_id', '3', 0),
+(3149, 0, 'config', 'config_currency_auto', '0', 0),
+(3148, 0, 'config', 'config_currency', 'USD', 0),
 (3003, 0, 'theme_default', 'theme_default_image_product_width', '343', 0),
 (3001, 0, 'theme_default', 'theme_default_image_popup_width', '875', 0),
 (3000, 0, 'theme_default', 'theme_default_image_thumb_height', '650', 0),
 (2999, 0, 'theme_default', 'theme_default_image_thumb_width', '560', 0),
 (2998, 0, 'theme_default', 'theme_default_image_category_height', '200', 0),
-(3019, 0, 'config', 'config_meta_keyword', 'Webiarch Infotech ', 0),
+(3147, 0, 'config', 'config_admin_language', 'en-gb', 0),
 (2997, 0, 'theme_default', 'theme_default_image_category_width', '200', 0),
-(3018, 0, 'config', 'config_meta_description', 'Webiarch Infotech', 0),
-(3017, 0, 'config', 'config_meta_title', 'Shopnow', 0),
+(3146, 0, 'config', 'config_language', 'en-gb', 0),
+(3145, 0, 'config', 'config_zone_id', '3630', 0),
 (2996, 0, 'theme_default', 'theme_default_product_description_length', '100', 0),
 (2995, 0, 'theme_default', 'theme_default_product_limit', '9', 0),
 (2994, 0, 'theme_default', 'theme_default_status', '1', 0),
 (2993, 0, 'theme_default', 'theme_default_directory', 'store1', 0),
-(3102, 0, 'config', 'config_file_max_size', '300000', 0),
-(3103, 0, 'config', 'config_file_ext_allowed', 'zip\r\ntxt\r\npng\r\njpe\r\njpeg\r\njpg\r\ngif\r\nbmp\r\nico\r\ntiff\r\ntif\r\nsvg\r\nsvgz\r\nzip\r\nrar\r\nmsi\r\ncab\r\nmp3\r\nqt\r\nmov\r\npdf\r\npsd\r\nai\r\neps\r\nps\r\ndoc', 0),
-(3104, 0, 'config', 'config_file_mime_allowed', 'text/plain\r\nimage/png\r\nimage/jpeg\r\nimage/gif\r\nimage/bmp\r\nimage/tiff\r\nimage/svg+xml\r\napplication/zip\r\n&quot;application/zip&quot;\r\napplication/x-zip\r\n&quot;application/x-zip&quot;\r\napplication/x-zip-compressed\r\n&quot;application/x-zip-compressed&quot;\r\napplication/rar\r\n&quot;application/rar&quot;\r\napplication/x-rar\r\n&quot;application/x-rar&quot;\r\napplication/x-rar-compressed\r\n&quot;application/x-rar-compressed&quot;\r\napplication/octet-stream\r\n&quot;application/octet-stream&quot;\r\naudio/mpeg\r\nvideo/quicktime\r\napplication/pdf', 0),
-(3105, 0, 'config', 'config_error_display', '1', 0),
-(3106, 0, 'config', 'config_error_log', '1', 0),
-(3107, 0, 'config', 'config_error_filename', 'error.log', 0),
+(3144, 0, 'config', 'config_country_id', '223', 0),
+(3141, 0, 'config', 'config_image', 'catalog/store-logo.jpg', 0),
+(3142, 0, 'config', 'config_open', '9:30 AM  TO 7:00 PM', 0),
+(3143, 0, 'config', 'config_comment', '', 0),
+(3131, 0, 'config', 'config_meta_keyword', 'Webiarch Infotech ', 0),
+(3132, 0, 'config', 'config_theme', 'theme_default', 0),
+(3133, 0, 'config', 'config_layout_id', '4', 0),
+(3134, 0, 'config', 'config_name', 'shopnow', 0),
+(3135, 0, 'config', 'config_owner', 'Romit', 0),
+(3136, 0, 'config', 'config_address', 'Surat', 0),
+(3137, 0, 'config', 'config_geocode', '395006', 0),
+(3138, 0, 'config', 'config_email', 'belindatbeach@gmail.com', 0),
+(3139, 0, 'config', 'config_telephone', '123456789', 0),
+(3140, 0, 'config', 'config_fax', '', 0),
+(3130, 0, 'config', 'config_meta_description', 'Webiarch Infotech', 0),
+(3129, 0, 'config', 'config_meta_title', 'Shopnow', 0),
 (3122, 0, 'ocsearchcategory', 'ocsearchcategory_product_price', '1', 0),
 (3121, 0, 'ocsearchcategory', 'ocsearchcategory_product_img', '1', 0),
 (3120, 0, 'ocsearchcategory', 'ocsearchcategory_loader_img', 'catalog/loader.gif', 0),
 (3119, 0, 'ocsearchcategory', 'ocsearchcategory_ajax_enabled', '1', 0),
-(3118, 0, 'ocsearchcategory', 'ocsearchcategory_status', '1', 0);
+(3118, 0, 'ocsearchcategory', 'ocsearchcategory_status', '1', 0),
+(3214, 0, 'config', 'config_file_max_size', '300000', 0),
+(3215, 0, 'config', 'config_file_ext_allowed', 'zip\r\ntxt\r\npng\r\njpe\r\njpeg\r\njpg\r\ngif\r\nbmp\r\nico\r\ntiff\r\ntif\r\nsvg\r\nsvgz\r\nzip\r\nrar\r\nmsi\r\ncab\r\nmp3\r\nqt\r\nmov\r\npdf\r\npsd\r\nai\r\neps\r\nps\r\ndoc', 0),
+(3216, 0, 'config', 'config_file_mime_allowed', 'text/plain\r\nimage/png\r\nimage/jpeg\r\nimage/gif\r\nimage/bmp\r\nimage/tiff\r\nimage/svg+xml\r\napplication/zip\r\n&quot;application/zip&quot;\r\napplication/x-zip\r\n&quot;application/x-zip&quot;\r\napplication/x-zip-compressed\r\n&quot;application/x-zip-compressed&quot;\r\napplication/rar\r\n&quot;application/rar&quot;\r\napplication/x-rar\r\n&quot;application/x-rar&quot;\r\napplication/x-rar-compressed\r\n&quot;application/x-rar-compressed&quot;\r\napplication/octet-stream\r\n&quot;application/octet-stream&quot;\r\naudio/mpeg\r\nvideo/quicktime\r\napplication/pdf', 0),
+(3217, 0, 'config', 'config_error_display', '1', 0),
+(3218, 0, 'config', 'config_error_log', '1', 0),
+(3219, 0, 'config', 'config_error_filename', 'error.log', 0),
+(3220, 0, 'web_payment_software', 'web_payment_software_merchant_name', '23rwrt2qwe', 0),
+(3221, 0, 'web_payment_software', 'web_payment_software_merchant_key', 'r02873lsajflkjf2013', 0),
+(3222, 0, 'web_payment_software', 'web_payment_software_mode', 'live', 0),
+(3223, 0, 'web_payment_software', 'web_payment_software_method', 'authorization', 0),
+(3224, 0, 'web_payment_software', 'web_payment_software_total', '', 0),
+(3225, 0, 'web_payment_software', 'web_payment_software_order_status_id', '7', 0),
+(3226, 0, 'web_payment_software', 'web_payment_software_geo_zone_id', '0', 0),
+(3227, 0, 'web_payment_software', 'web_payment_software_status', '1', 0),
+(3228, 0, 'web_payment_software', 'web_payment_software_sort_order', '', 0),
+(3309, 0, 'pp_pro_iframe', 'pp_pro_iframe_completed_status_id', '7', 0),
+(3310, 0, 'pp_pro_iframe', 'pp_pro_iframe_denied_status_id', '7', 0),
+(3308, 0, 'pp_pro_iframe', 'pp_pro_iframe_canceled_reversal_status_id', '7', 0),
+(3307, 0, 'pp_pro_iframe', 'pp_pro_iframe_status', '1', 0),
+(3258, 0, 'pp_standard', 'pp_standard_denied_status_id', '7', 0),
+(3257, 0, 'pp_standard', 'pp_standard_completed_status_id', '7', 0),
+(3256, 0, 'pp_standard', 'pp_standard_canceled_reversal_status_id', '7', 0),
+(3254, 0, 'pp_standard', 'pp_standard_status', '1', 0),
+(3255, 0, 'pp_standard', 'pp_standard_sort_order', '', 0),
+(3253, 0, 'pp_standard', 'pp_standard_geo_zone_id', '0', 0),
+(3252, 0, 'pp_standard', 'pp_standard_total', '', 0),
+(3251, 0, 'pp_standard', 'pp_standard_transaction', '0', 0),
+(3250, 0, 'pp_standard', 'pp_standard_debug', '0', 0),
+(3249, 0, 'pp_standard', 'pp_standard_test', '0', 0),
+(3248, 0, 'pp_standard', 'pp_standard_email', 'locvantai.itk12@gmail.com', 0),
+(3259, 0, 'pp_standard', 'pp_standard_expired_status_id', '7', 0),
+(3260, 0, 'pp_standard', 'pp_standard_failed_status_id', '7', 0),
+(3261, 0, 'pp_standard', 'pp_standard_pending_status_id', '7', 0),
+(3262, 0, 'pp_standard', 'pp_standard_processed_status_id', '7', 0),
+(3263, 0, 'pp_standard', 'pp_standard_refunded_status_id', '7', 0),
+(3264, 0, 'pp_standard', 'pp_standard_reversed_status_id', '7', 0),
+(3265, 0, 'pp_standard', 'pp_standard_voided_status_id', '7', 0),
+(3306, 0, 'pp_pro_iframe', 'pp_pro_iframe_geo_zone_id', '0', 0),
+(3305, 0, 'pp_pro_iframe', 'pp_pro_iframe_sort_order', '', 0),
+(3304, 0, 'pp_pro_iframe', 'pp_pro_iframe_total', '', 0),
+(3303, 0, 'pp_pro_iframe', 'pp_pro_iframe_checkout_method', 'redirect', 0),
+(3302, 0, 'pp_pro_iframe', 'pp_pro_iframe_transaction_method', 'sale', 0),
+(3301, 0, 'pp_pro_iframe', 'pp_pro_iframe_debug', '1', 0),
+(3300, 0, 'pp_pro_iframe', 'pp_pro_iframe_test', '1', 0),
+(3299, 0, 'pp_pro_iframe', 'pp_pro_iframe_sig', 'AFcWxV21C7fd0v3bYYYRCpSSRl31AGOgLZvVFP6fLaDFPrPGoq4sHal4', 0),
+(3298, 0, 'pp_pro_iframe', 'pp_pro_iframe_password', 'V3HS8MU8E5FYV9YM', 0),
+(3297, 0, 'pp_pro_iframe', 'pp_pro_iframe_user', 'locvantai.itk12-facilitator_api1.gmail.com', 0),
+(3287, 0, 'pp_pro', 'pp_pro_username', 'locvantai.itk12-facilitator_api1.gmail.com', 0),
+(3288, 0, 'pp_pro', 'pp_pro_password', 'V3HS8MU8E5FYV9YM', 0),
+(3289, 0, 'pp_pro', 'pp_pro_signature', 'AFcWxV21C7fd0v3bYYYRCpSSRl31AGOgLZvVFP6fLaDFPrPGoq4sHal4', 0),
+(3290, 0, 'pp_pro', 'pp_pro_test', '0', 0),
+(3291, 0, 'pp_pro', 'pp_pro_order_status_id', '7', 0),
+(3292, 0, 'pp_pro', 'pp_pro_transaction', '0', 0),
+(3293, 0, 'pp_pro', 'pp_pro_total', '', 0),
+(3294, 0, 'pp_pro', 'pp_pro_sort_order', '', 0),
+(3295, 0, 'pp_pro', 'pp_pro_geo_zone_id', '0', 0),
+(3296, 0, 'pp_pro', 'pp_pro_status', '1', 0),
+(3315, 0, 'pp_pro_iframe', 'pp_pro_iframe_refunded_status_id', '7', 0),
+(3316, 0, 'pp_pro_iframe', 'pp_pro_iframe_reversed_status_id', '7', 0),
+(3317, 0, 'pp_pro_iframe', 'pp_pro_iframe_voided_status_id', '7', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_stock_status`
+-- Cấu trúc bảng cho bảng `oc_stock_status`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_stock_status` (
-  `stock_status_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_stock_status` (
+  `stock_status_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `name` varchar(32) NOT NULL,
-  PRIMARY KEY (`stock_status_id`,`language_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+  `name` varchar(32) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_stock_status`
+-- Đang đổ dữ liệu cho bảng `oc_stock_status`
 --
 
 INSERT INTO `oc_stock_status` (`stock_status_id`, `language_id`, `name`) VALUES
@@ -4356,34 +4446,32 @@ INSERT INTO `oc_stock_status` (`stock_status_id`, `language_id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_store`
+-- Cấu trúc bảng cho bảng `oc_store`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_store` (
-  `store_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_store` (
+  `store_id` int(11) NOT NULL,
   `name` varchar(64) NOT NULL,
   `url` varchar(255) NOT NULL,
-  `ssl` varchar(255) NOT NULL,
-  PRIMARY KEY (`store_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `ssl` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_tax_class`
+-- Cấu trúc bảng cho bảng `oc_tax_class`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_tax_class` (
-  `tax_class_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_tax_class` (
+  `tax_class_id` int(11) NOT NULL,
   `title` varchar(32) NOT NULL,
   `description` varchar(255) NOT NULL,
   `date_added` datetime NOT NULL,
-  `date_modified` datetime NOT NULL,
-  PRIMARY KEY (`tax_class_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+  `date_modified` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_tax_class`
+-- Đang đổ dữ liệu cho bảng `oc_tax_class`
 --
 
 INSERT INTO `oc_tax_class` (`tax_class_id`, `title`, `description`, `date_added`, `date_modified`) VALUES
@@ -4393,22 +4481,21 @@ INSERT INTO `oc_tax_class` (`tax_class_id`, `title`, `description`, `date_added`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_tax_rate`
+-- Cấu trúc bảng cho bảng `oc_tax_rate`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_tax_rate` (
-  `tax_rate_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_tax_rate` (
+  `tax_rate_id` int(11) NOT NULL,
   `geo_zone_id` int(11) NOT NULL DEFAULT '0',
   `name` varchar(32) NOT NULL,
   `rate` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `type` char(1) NOT NULL,
   `date_added` datetime NOT NULL,
-  `date_modified` datetime NOT NULL,
-  PRIMARY KEY (`tax_rate_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=88 ;
+  `date_modified` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_tax_rate`
+-- Đang đổ dữ liệu cho bảng `oc_tax_rate`
 --
 
 INSERT INTO `oc_tax_rate` (`tax_rate_id`, `geo_zone_id`, `name`, `rate`, `type`, `date_added`, `date_modified`) VALUES
@@ -4418,17 +4505,16 @@ INSERT INTO `oc_tax_rate` (`tax_rate_id`, `geo_zone_id`, `name`, `rate`, `type`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_tax_rate_to_customer_group`
+-- Cấu trúc bảng cho bảng `oc_tax_rate_to_customer_group`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_tax_rate_to_customer_group` (
+CREATE TABLE `oc_tax_rate_to_customer_group` (
   `tax_rate_id` int(11) NOT NULL,
-  `customer_group_id` int(11) NOT NULL,
-  PRIMARY KEY (`tax_rate_id`,`customer_group_id`)
+  `customer_group_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_tax_rate_to_customer_group`
+-- Đang đổ dữ liệu cho bảng `oc_tax_rate_to_customer_group`
 --
 
 INSERT INTO `oc_tax_rate_to_customer_group` (`tax_rate_id`, `customer_group_id`) VALUES
@@ -4438,20 +4524,19 @@ INSERT INTO `oc_tax_rate_to_customer_group` (`tax_rate_id`, `customer_group_id`)
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_tax_rule`
+-- Cấu trúc bảng cho bảng `oc_tax_rule`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_tax_rule` (
-  `tax_rule_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_tax_rule` (
+  `tax_rule_id` int(11) NOT NULL,
   `tax_class_id` int(11) NOT NULL,
   `tax_rate_id` int(11) NOT NULL,
   `based` varchar(10) NOT NULL,
-  `priority` int(5) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`tax_rule_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=129 ;
+  `priority` int(5) NOT NULL DEFAULT '1'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_tax_rule`
+-- Đang đổ dữ liệu cho bảng `oc_tax_rule`
 --
 
 INSERT INTO `oc_tax_rule` (`tax_rule_id`, `tax_class_id`, `tax_rate_id`, `based`, `priority`) VALUES
@@ -4463,51 +4548,48 @@ INSERT INTO `oc_tax_rule` (`tax_rule_id`, `tax_class_id`, `tax_rate_id`, `based`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_theme`
+-- Cấu trúc bảng cho bảng `oc_theme`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_theme` (
-  `theme_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_theme` (
+  `theme_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
   `theme` varchar(64) NOT NULL,
   `route` varchar(64) NOT NULL,
-  `code` text NOT NULL,
-  PRIMARY KEY (`theme_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `code` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_translation`
+-- Cấu trúc bảng cho bảng `oc_translation`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_translation` (
-  `translation_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_translation` (
+  `translation_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `route` varchar(64) NOT NULL,
   `key` varchar(64) NOT NULL,
-  `value` text NOT NULL,
-  PRIMARY KEY (`translation_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `value` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_upload`
+-- Cấu trúc bảng cho bảng `oc_upload`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_upload` (
-  `upload_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_upload` (
+  `upload_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `filename` varchar(255) NOT NULL,
   `code` varchar(255) NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`upload_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  `date_added` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_upload`
+-- Đang đổ dữ liệu cho bảng `oc_upload`
 --
 
 INSERT INTO `oc_upload` (`upload_id`, `name`, `filename`, `code`, `date_added`) VALUES
@@ -4516,20 +4598,17 @@ INSERT INTO `oc_upload` (`upload_id`, `name`, `filename`, `code`, `date_added`) 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_url_alias`
+-- Cấu trúc bảng cho bảng `oc_url_alias`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_url_alias` (
-  `url_alias_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_url_alias` (
+  `url_alias_id` int(11) NOT NULL,
   `query` varchar(255) NOT NULL,
-  `keyword` varchar(255) NOT NULL,
-  PRIMARY KEY (`url_alias_id`),
-  KEY `query` (`query`),
-  KEY `keyword` (`keyword`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1034 ;
+  `keyword` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_url_alias`
+-- Đang đổ dữ liệu cho bảng `oc_url_alias`
 --
 
 INSERT INTO `oc_url_alias` (`url_alias_id`, `query`, `keyword`) VALUES
@@ -4608,11 +4687,11 @@ INSERT INTO `oc_url_alias` (`url_alias_id`, `query`, `keyword`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_user`
+-- Cấu trúc bảng cho bảng `oc_user`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_user` (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_user` (
+  `user_id` int(11) NOT NULL,
   `user_group_id` int(11) NOT NULL,
   `username` varchar(20) NOT NULL,
   `password` varchar(40) NOT NULL,
@@ -4624,47 +4703,45 @@ CREATE TABLE IF NOT EXISTS `oc_user` (
   `code` varchar(40) NOT NULL,
   `ip` varchar(40) NOT NULL,
   `status` tinyint(1) NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+  `date_added` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_user`
+-- Đang đổ dữ liệu cho bảng `oc_user`
 --
 
 INSERT INTO `oc_user` (`user_id`, `user_group_id`, `username`, `password`, `salt`, `firstname`, `lastname`, `email`, `image`, `code`, `ip`, `status`, `date_added`) VALUES
-(1, 1, 'admin', '3003d3f5d7c782554c796b2b89364523e9d6e302', 'MxM9xtRGh', 'John', 'Doe', '123@gmail.com', '', '', '::1', 1, '2017-05-04 10:04:43'),
+(1, 1, 'admin', '0115265acb2f9b5084e901c44f4d103018c19cbe', 'Z8dxRbadM', 'John', 'Doe', 'belindatbeach@gmail.com', '', '', '::1', 1, '2017-07-02 02:04:30'),
 (2, 1, 'romitgabani', 'ba515bcc310ad942f73131be68d27e7eccff911b', 'WM3sSs8kU', 'Romit', 'Gabani', 'gabaniromit4892i@gmail.com', 'catalog/icon-32x32.png', '', '', 1, '2016-12-24 02:19:39');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_user_group`
+-- Cấu trúc bảng cho bảng `oc_user_group`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_user_group` (
-  `user_group_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_user_group` (
+  `user_group_id` int(11) NOT NULL,
   `name` varchar(64) NOT NULL,
-  `permission` text NOT NULL,
-  PRIMARY KEY (`user_group_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+  `permission` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_user_group`
+-- Đang đổ dữ liệu cho bảng `oc_user_group`
 --
 
 INSERT INTO `oc_user_group` (`user_group_id`, `name`, `permission`) VALUES
-(1, 'Administrator', '{"access":["catalog\\/attribute","catalog\\/attribute_group","catalog\\/category","catalog\\/download","catalog\\/filter","catalog\\/information","catalog\\/manufacturer","catalog\\/option","catalog\\/product","catalog\\/recurring","catalog\\/review","common\\/column_left","common\\/filemanager","customer\\/custom_field","customer\\/customer","customer\\/customer_group","design\\/banner","design\\/language","design\\/layout","design\\/menu","design\\/theme","design\\/translation","event\\/compatibility","event\\/theme","extension\\/analytics\\/google_analytics","extension\\/captcha\\/basic_captcha","extension\\/captcha\\/google_captcha","extension\\/dashboard\\/activity","extension\\/dashboard\\/chart","extension\\/dashboard\\/customer","extension\\/dashboard\\/map","extension\\/dashboard\\/online","extension\\/dashboard\\/order","extension\\/dashboard\\/recent","extension\\/dashboard\\/sale","extension\\/event","extension\\/extension","extension\\/extension\\/analytics","extension\\/extension\\/captcha","extension\\/extension\\/dashboard","extension\\/extension\\/feed","extension\\/extension\\/fraud","extension\\/extension\\/menu","extension\\/extension\\/module","extension\\/extension\\/payment","extension\\/extension\\/shipping","extension\\/extension\\/theme","extension\\/extension\\/total","extension\\/feed\\/google_base","extension\\/feed\\/google_sitemap","extension\\/feed\\/openbaypro","extension\\/fraud\\/fraudlabspro","extension\\/fraud\\/ip","extension\\/fraud\\/maxmind","extension\\/installer","extension\\/modification","extension\\/module\\/account","extension\\/module\\/affiliate","extension\\/module\\/amazon_login","extension\\/module\\/amazon_pay","extension\\/module\\/banner","extension\\/module\\/bestseller","extension\\/module\\/carousel","extension\\/module\\/category","extension\\/module\\/divido_calculator","extension\\/module\\/ebay_listing","extension\\/module\\/featured","extension\\/module\\/filter","extension\\/module\\/google_hangouts","extension\\/module\\/html","extension\\/module\\/information","extension\\/module\\/klarna_checkout_module","extension\\/module\\/latest","extension\\/module\\/laybuy_layout","extension\\/module\\/pilibaba_button","extension\\/module\\/pp_button","extension\\/module\\/pp_login","extension\\/module\\/sagepay_direct_cards","extension\\/module\\/sagepay_server_cards","extension\\/module\\/slideshow","extension\\/module\\/special","extension\\/module\\/store","extension\\/openbay","extension\\/openbay\\/amazon","extension\\/openbay\\/amazon_listing","extension\\/openbay\\/amazon_product","extension\\/openbay\\/amazonus","extension\\/openbay\\/amazonus_listing","extension\\/openbay\\/amazonus_product","extension\\/openbay\\/ebay","extension\\/openbay\\/ebay_profile","extension\\/openbay\\/ebay_template","extension\\/openbay\\/etsy","extension\\/openbay\\/etsy_product","extension\\/openbay\\/etsy_shipping","extension\\/openbay\\/etsy_shop","extension\\/openbay\\/fba","extension\\/payment\\/amazon_login_pay","extension\\/payment\\/authorizenet_aim","extension\\/payment\\/authorizenet_sim","extension\\/payment\\/bank_transfer","extension\\/payment\\/bluepay_hosted","extension\\/payment\\/bluepay_redirect","extension\\/payment\\/cardconnect","extension\\/payment\\/cardinity","extension\\/payment\\/cheque","extension\\/payment\\/cod","extension\\/payment\\/divido","extension\\/payment\\/eway","extension\\/payment\\/firstdata","extension\\/payment\\/firstdata_remote","extension\\/payment\\/free_checkout","extension\\/payment\\/g2apay","extension\\/payment\\/globalpay","extension\\/payment\\/globalpay_remote","extension\\/payment\\/klarna_account","extension\\/payment\\/klarna_checkout","extension\\/payment\\/klarna_invoice","extension\\/payment\\/laybuy","extension\\/payment\\/liqpay","extension\\/payment\\/nochex","extension\\/payment\\/paymate","extension\\/payment\\/paypoint","extension\\/payment\\/payza","extension\\/payment\\/perpetual_payments","extension\\/payment\\/pilibaba","extension\\/payment\\/pp_express","extension\\/payment\\/pp_payflow","extension\\/payment\\/pp_payflow_iframe","extension\\/payment\\/pp_pro","extension\\/payment\\/pp_pro_iframe","extension\\/payment\\/pp_standard","extension\\/payment\\/realex","extension\\/payment\\/realex_remote","extension\\/payment\\/sagepay_direct","extension\\/payment\\/sagepay_server","extension\\/payment\\/sagepay_us","extension\\/payment\\/securetrading_pp","extension\\/payment\\/securetrading_ws","extension\\/payment\\/skrill","extension\\/payment\\/twocheckout","extension\\/payment\\/web_payment_software","extension\\/payment\\/worldpay","extension\\/shipping\\/auspost","extension\\/shipping\\/citylink","extension\\/shipping\\/fedex","extension\\/shipping\\/flat","extension\\/shipping\\/free","extension\\/shipping\\/item","extension\\/shipping\\/parcelforce_48","extension\\/shipping\\/pickup","extension\\/shipping\\/royal_mail","extension\\/shipping\\/ups","extension\\/shipping\\/usps","extension\\/shipping\\/weight","extension\\/store","extension\\/theme\\/theme_default","extension\\/total\\/coupon","extension\\/total\\/credit","extension\\/total\\/handling","extension\\/total\\/klarna_fee","extension\\/total\\/low_order_fee","extension\\/total\\/reward","extension\\/total\\/shipping","extension\\/total\\/sub_total","extension\\/total\\/tax","extension\\/total\\/total","extension\\/total\\/voucher","localisation\\/country","localisation\\/currency","localisation\\/geo_zone","localisation\\/language","localisation\\/length_class","localisation\\/location","localisation\\/order_status","localisation\\/return_action","localisation\\/return_reason","localisation\\/return_status","localisation\\/stock_status","localisation\\/tax_class","localisation\\/tax_rate","localisation\\/weight_class","localisation\\/zone","marketing\\/affiliate","marketing\\/contact","marketing\\/coupon","marketing\\/marketing","report\\/affiliate","report\\/affiliate_activity","report\\/affiliate_login","report\\/customer_activity","report\\/customer_credit","report\\/customer_login","report\\/customer_online","report\\/customer_order","report\\/customer_reward","report\\/customer_search","report\\/marketing","report\\/product_purchased","report\\/product_viewed","report\\/sale_coupon","report\\/sale_order","report\\/sale_return","report\\/sale_shipping","report\\/sale_tax","sale\\/order","sale\\/recurring","sale\\/return","sale\\/voucher","sale\\/voucher_theme","setting\\/setting","setting\\/store","startup\\/compatibility","startup\\/error","startup\\/event","startup\\/login","startup\\/permission","startup\\/router","startup\\/sass","startup\\/startup","tool\\/backup","tool\\/log","tool\\/upload","user\\/api","user\\/user","user\\/user_permission","extension\\/module\\/bestseller","extension\\/module\\/latest","extension\\/module\\/html","extension\\/module\\/html_parallexslider","extension\\/module\\/html_bannercontent","extension\\/module\\/blogger","extension\\/module\\/newsletter","extension\\/module\\/filter","extension\\/module\\/webitabs","extension\\/module\\/recent","extension\\/module\\/htmlfeature","extension\\/module\\/special","extension\\/module\\/ocsearchcategory"],"modify":["catalog\\/attribute","catalog\\/attribute_group","catalog\\/category","catalog\\/download","catalog\\/filter","catalog\\/information","catalog\\/manufacturer","catalog\\/option","catalog\\/product","catalog\\/recurring","catalog\\/review","common\\/column_left","common\\/filemanager","customer\\/custom_field","customer\\/customer","customer\\/customer_group","design\\/banner","design\\/language","design\\/layout","design\\/menu","design\\/theme","design\\/translation","event\\/compatibility","event\\/theme","extension\\/analytics\\/google_analytics","extension\\/captcha\\/basic_captcha","extension\\/captcha\\/google_captcha","extension\\/dashboard\\/activity","extension\\/dashboard\\/chart","extension\\/dashboard\\/customer","extension\\/dashboard\\/map","extension\\/dashboard\\/online","extension\\/dashboard\\/order","extension\\/dashboard\\/recent","extension\\/dashboard\\/sale","extension\\/event","extension\\/extension","extension\\/extension\\/analytics","extension\\/extension\\/captcha","extension\\/extension\\/dashboard","extension\\/extension\\/feed","extension\\/extension\\/fraud","extension\\/extension\\/menu","extension\\/extension\\/module","extension\\/extension\\/payment","extension\\/extension\\/shipping","extension\\/extension\\/theme","extension\\/extension\\/total","extension\\/feed\\/google_base","extension\\/feed\\/google_sitemap","extension\\/feed\\/openbaypro","extension\\/fraud\\/fraudlabspro","extension\\/fraud\\/ip","extension\\/fraud\\/maxmind","extension\\/installer","extension\\/modification","extension\\/module\\/account","extension\\/module\\/affiliate","extension\\/module\\/amazon_login","extension\\/module\\/amazon_pay","extension\\/module\\/banner","extension\\/module\\/bestseller","extension\\/module\\/carousel","extension\\/module\\/category","extension\\/module\\/divido_calculator","extension\\/module\\/ebay_listing","extension\\/module\\/featured","extension\\/module\\/filter","extension\\/module\\/google_hangouts","extension\\/module\\/html","extension\\/module\\/information","extension\\/module\\/klarna_checkout_module","extension\\/module\\/latest","extension\\/module\\/laybuy_layout","extension\\/module\\/pilibaba_button","extension\\/module\\/pp_button","extension\\/module\\/pp_login","extension\\/module\\/sagepay_direct_cards","extension\\/module\\/sagepay_server_cards","extension\\/module\\/slideshow","extension\\/module\\/special","extension\\/module\\/store","extension\\/openbay","extension\\/openbay\\/amazon","extension\\/openbay\\/amazon_listing","extension\\/openbay\\/amazon_product","extension\\/openbay\\/amazonus","extension\\/openbay\\/amazonus_listing","extension\\/openbay\\/amazonus_product","extension\\/openbay\\/ebay","extension\\/openbay\\/ebay_profile","extension\\/openbay\\/ebay_template","extension\\/openbay\\/etsy","extension\\/openbay\\/etsy_product","extension\\/openbay\\/etsy_shipping","extension\\/openbay\\/etsy_shop","extension\\/openbay\\/fba","extension\\/payment\\/amazon_login_pay","extension\\/payment\\/authorizenet_aim","extension\\/payment\\/authorizenet_sim","extension\\/payment\\/bank_transfer","extension\\/payment\\/bluepay_hosted","extension\\/payment\\/bluepay_redirect","extension\\/payment\\/cardconnect","extension\\/payment\\/cardinity","extension\\/payment\\/cheque","extension\\/payment\\/cod","extension\\/payment\\/divido","extension\\/payment\\/eway","extension\\/payment\\/firstdata","extension\\/payment\\/firstdata_remote","extension\\/payment\\/free_checkout","extension\\/payment\\/g2apay","extension\\/payment\\/globalpay","extension\\/payment\\/globalpay_remote","extension\\/payment\\/klarna_account","extension\\/payment\\/klarna_checkout","extension\\/payment\\/klarna_invoice","extension\\/payment\\/laybuy","extension\\/payment\\/liqpay","extension\\/payment\\/nochex","extension\\/payment\\/paymate","extension\\/payment\\/paypoint","extension\\/payment\\/payza","extension\\/payment\\/perpetual_payments","extension\\/payment\\/pilibaba","extension\\/payment\\/pp_express","extension\\/payment\\/pp_payflow","extension\\/payment\\/pp_payflow_iframe","extension\\/payment\\/pp_pro","extension\\/payment\\/pp_pro_iframe","extension\\/payment\\/pp_standard","extension\\/payment\\/realex","extension\\/payment\\/realex_remote","extension\\/payment\\/sagepay_direct","extension\\/payment\\/sagepay_server","extension\\/payment\\/sagepay_us","extension\\/payment\\/securetrading_pp","extension\\/payment\\/securetrading_ws","extension\\/payment\\/skrill","extension\\/payment\\/twocheckout","extension\\/payment\\/web_payment_software","extension\\/payment\\/worldpay","extension\\/shipping\\/auspost","extension\\/shipping\\/citylink","extension\\/shipping\\/fedex","extension\\/shipping\\/flat","extension\\/shipping\\/free","extension\\/shipping\\/item","extension\\/shipping\\/parcelforce_48","extension\\/shipping\\/pickup","extension\\/shipping\\/royal_mail","extension\\/shipping\\/ups","extension\\/shipping\\/usps","extension\\/shipping\\/weight","extension\\/store","extension\\/theme\\/theme_default","extension\\/total\\/coupon","extension\\/total\\/credit","extension\\/total\\/handling","extension\\/total\\/klarna_fee","extension\\/total\\/low_order_fee","extension\\/total\\/reward","extension\\/total\\/shipping","extension\\/total\\/sub_total","extension\\/total\\/tax","extension\\/total\\/total","extension\\/total\\/voucher","localisation\\/country","localisation\\/currency","localisation\\/geo_zone","localisation\\/language","localisation\\/length_class","localisation\\/location","localisation\\/order_status","localisation\\/return_action","localisation\\/return_reason","localisation\\/return_status","localisation\\/stock_status","localisation\\/tax_class","localisation\\/tax_rate","localisation\\/weight_class","localisation\\/zone","marketing\\/affiliate","marketing\\/contact","marketing\\/coupon","marketing\\/marketing","report\\/affiliate","report\\/affiliate_activity","report\\/affiliate_login","report\\/customer_activity","report\\/customer_credit","report\\/customer_login","report\\/customer_online","report\\/customer_order","report\\/customer_reward","report\\/customer_search","report\\/marketing","report\\/product_purchased","report\\/product_viewed","report\\/sale_coupon","report\\/sale_order","report\\/sale_return","report\\/sale_shipping","report\\/sale_tax","sale\\/order","sale\\/recurring","sale\\/return","sale\\/voucher","sale\\/voucher_theme","setting\\/setting","setting\\/store","startup\\/compatibility","startup\\/error","startup\\/event","startup\\/login","startup\\/permission","startup\\/router","startup\\/sass","startup\\/startup","tool\\/backup","tool\\/log","tool\\/upload","user\\/api","user\\/user","user\\/user_permission","extension\\/module\\/bestseller","extension\\/module\\/latest","extension\\/module\\/html","extension\\/module\\/html_parallexslider","extension\\/module\\/html_bannercontent","extension\\/module\\/blogger","extension\\/module\\/newsletter","extension\\/module\\/filter","extension\\/module\\/webitabs","extension\\/module\\/recent","extension\\/module\\/htmlfeature","extension\\/module\\/special","extension\\/module\\/ocsearchcategory"]}'),
-(10, 'Demonstration', '');
+(1, 'Administrator', '{\"access\":[\"catalog\\/attribute\",\"catalog\\/attribute_group\",\"catalog\\/category\",\"catalog\\/download\",\"catalog\\/filter\",\"catalog\\/information\",\"catalog\\/manufacturer\",\"catalog\\/option\",\"catalog\\/product\",\"catalog\\/recurring\",\"catalog\\/review\",\"common\\/column_left\",\"common\\/filemanager\",\"customer\\/custom_field\",\"customer\\/customer\",\"customer\\/customer_group\",\"design\\/banner\",\"design\\/language\",\"design\\/layout\",\"design\\/menu\",\"design\\/theme\",\"design\\/translation\",\"event\\/compatibility\",\"event\\/theme\",\"extension\\/analytics\\/google_analytics\",\"extension\\/captcha\\/basic_captcha\",\"extension\\/captcha\\/google_captcha\",\"extension\\/dashboard\\/activity\",\"extension\\/dashboard\\/chart\",\"extension\\/dashboard\\/customer\",\"extension\\/dashboard\\/map\",\"extension\\/dashboard\\/online\",\"extension\\/dashboard\\/order\",\"extension\\/dashboard\\/recent\",\"extension\\/dashboard\\/sale\",\"extension\\/event\",\"extension\\/extension\",\"extension\\/extension\\/analytics\",\"extension\\/extension\\/captcha\",\"extension\\/extension\\/dashboard\",\"extension\\/extension\\/feed\",\"extension\\/extension\\/fraud\",\"extension\\/extension\\/module\",\"extension\\/extension\\/payment\",\"extension\\/extension\\/shipping\",\"extension\\/extension\\/theme\",\"extension\\/extension\\/total\",\"extension\\/feed\\/google_base\",\"extension\\/feed\\/google_sitemap\",\"extension\\/feed\\/openbaypro\",\"extension\\/fraud\\/fraudlabspro\",\"extension\\/fraud\\/ip\",\"extension\\/fraud\\/maxmind\",\"extension\\/installer\",\"extension\\/modification\",\"extension\\/module\\/account\",\"extension\\/module\\/affiliate\",\"extension\\/module\\/amazon_login\",\"extension\\/module\\/amazon_pay\",\"extension\\/module\\/banner\",\"extension\\/module\\/bestseller\",\"extension\\/module\\/blogger\",\"extension\\/module\\/carousel\",\"extension\\/module\\/category\",\"extension\\/module\\/divido_calculator\",\"extension\\/module\\/ebay_listing\",\"extension\\/module\\/featured\",\"extension\\/module\\/filter\",\"extension\\/module\\/google_hangouts\",\"extension\\/module\\/html\",\"extension\\/module\\/htmlfeature\",\"extension\\/module\\/information\",\"extension\\/module\\/klarna_checkout_module\",\"extension\\/module\\/latest\",\"extension\\/module\\/laybuy_layout\",\"extension\\/module\\/ocsearchcategory\",\"extension\\/module\\/pilibaba_button\",\"extension\\/module\\/pp_button\",\"extension\\/module\\/pp_login\",\"extension\\/module\\/recent\",\"extension\\/module\\/sagepay_direct_cards\",\"extension\\/module\\/sagepay_server_cards\",\"extension\\/module\\/slideshow\",\"extension\\/module\\/special\",\"extension\\/module\\/store\",\"extension\\/openbay\",\"extension\\/openbay\\/amazon\",\"extension\\/openbay\\/amazon_listing\",\"extension\\/openbay\\/amazon_product\",\"extension\\/openbay\\/amazonus\",\"extension\\/openbay\\/amazonus_listing\",\"extension\\/openbay\\/amazonus_product\",\"extension\\/openbay\\/ebay\",\"extension\\/openbay\\/ebay_profile\",\"extension\\/openbay\\/ebay_template\",\"extension\\/openbay\\/etsy\",\"extension\\/openbay\\/etsy_product\",\"extension\\/openbay\\/etsy_shipping\",\"extension\\/openbay\\/etsy_shop\",\"extension\\/openbay\\/fba\",\"extension\\/payment\\/amazon_login_pay\",\"extension\\/payment\\/authorizenet_aim\",\"extension\\/payment\\/authorizenet_sim\",\"extension\\/payment\\/bank_transfer\",\"extension\\/payment\\/bluepay_hosted\",\"extension\\/payment\\/bluepay_redirect\",\"extension\\/payment\\/cardconnect\",\"extension\\/payment\\/cardinity\",\"extension\\/payment\\/cheque\",\"extension\\/payment\\/cod\",\"extension\\/payment\\/divido\",\"extension\\/payment\\/eway\",\"extension\\/payment\\/firstdata\",\"extension\\/payment\\/firstdata_remote\",\"extension\\/payment\\/free_checkout\",\"extension\\/payment\\/g2apay\",\"extension\\/payment\\/globalpay\",\"extension\\/payment\\/globalpay_remote\",\"extension\\/payment\\/klarna_account\",\"extension\\/payment\\/klarna_checkout\",\"extension\\/payment\\/klarna_invoice\",\"extension\\/payment\\/laybuy\",\"extension\\/payment\\/liqpay\",\"extension\\/payment\\/nochex\",\"extension\\/payment\\/paymate\",\"extension\\/payment\\/paypoint\",\"extension\\/payment\\/payza\",\"extension\\/payment\\/perpetual_payments\",\"extension\\/payment\\/pilibaba\",\"extension\\/payment\\/pp_express\",\"extension\\/payment\\/pp_payflow\",\"extension\\/payment\\/pp_payflow_iframe\",\"extension\\/payment\\/pp_pro\",\"extension\\/payment\\/pp_pro_iframe\",\"extension\\/payment\\/pp_standard\",\"extension\\/payment\\/realex\",\"extension\\/payment\\/realex_remote\",\"extension\\/payment\\/sagepay_direct\",\"extension\\/payment\\/sagepay_server\",\"extension\\/payment\\/sagepay_us\",\"extension\\/payment\\/securetrading_pp\",\"extension\\/payment\\/securetrading_ws\",\"extension\\/payment\\/skrill\",\"extension\\/payment\\/stripe_payments\",\"extension\\/payment\\/twocheckout\",\"extension\\/payment\\/web_payment_software\",\"extension\\/payment\\/worldpay\",\"extension\\/shipping\\/auspost\",\"extension\\/shipping\\/citylink\",\"extension\\/shipping\\/fedex\",\"extension\\/shipping\\/flat\",\"extension\\/shipping\\/free\",\"extension\\/shipping\\/item\",\"extension\\/shipping\\/parcelforce_48\",\"extension\\/shipping\\/pickup\",\"extension\\/shipping\\/royal_mail\",\"extension\\/shipping\\/ups\",\"extension\\/shipping\\/usps\",\"extension\\/shipping\\/weight\",\"extension\\/store\",\"extension\\/theme\\/theme_default\",\"extension\\/total\\/coupon\",\"extension\\/total\\/credit\",\"extension\\/total\\/handling\",\"extension\\/total\\/klarna_fee\",\"extension\\/total\\/low_order_fee\",\"extension\\/total\\/reward\",\"extension\\/total\\/shipping\",\"extension\\/total\\/sub_total\",\"extension\\/total\\/tax\",\"extension\\/total\\/total\",\"extension\\/total\\/voucher\",\"localisation\\/country\",\"localisation\\/currency\",\"localisation\\/geo_zone\",\"localisation\\/language\",\"localisation\\/length_class\",\"localisation\\/location\",\"localisation\\/order_status\",\"localisation\\/return_action\",\"localisation\\/return_reason\",\"localisation\\/return_status\",\"localisation\\/stock_status\",\"localisation\\/tax_class\",\"localisation\\/tax_rate\",\"localisation\\/weight_class\",\"localisation\\/zone\",\"marketing\\/affiliate\",\"marketing\\/contact\",\"marketing\\/coupon\",\"marketing\\/marketing\",\"payment\\/stripe_payments\",\"report\\/affiliate\",\"report\\/affiliate_activity\",\"report\\/affiliate_login\",\"report\\/customer_activity\",\"report\\/customer_credit\",\"report\\/customer_login\",\"report\\/customer_online\",\"report\\/customer_order\",\"report\\/customer_reward\",\"report\\/customer_search\",\"report\\/marketing\",\"report\\/product_purchased\",\"report\\/product_viewed\",\"report\\/sale_coupon\",\"report\\/sale_order\",\"report\\/sale_return\",\"report\\/sale_shipping\",\"report\\/sale_tax\",\"sale\\/order\",\"sale\\/recurring\",\"sale\\/return\",\"sale\\/voucher\",\"sale\\/voucher_theme\",\"setting\\/setting\",\"setting\\/store\",\"startup\\/compatibility\",\"startup\\/error\",\"startup\\/event\",\"startup\\/login\",\"startup\\/permission\",\"startup\\/router\",\"startup\\/sass\",\"startup\\/startup\",\"tool\\/backup\",\"tool\\/log\",\"tool\\/upload\",\"user\\/api\",\"user\\/user\",\"user\\/user_permission\",\"extension\\/payment\\/pp_standard\",\"extension\\/payment\\/pp_payflow\",\"extension\\/payment\\/pp_payflow_iframe\",\"extension\\/payment\\/pp_payflow_iframe\",\"extension\\/payment\\/pp_pro_iframe\",\"extension\\/payment\\/pp_pro\"],\"modify\":[\"catalog\\/attribute\",\"catalog\\/attribute_group\",\"catalog\\/category\",\"catalog\\/download\",\"catalog\\/filter\",\"catalog\\/information\",\"catalog\\/manufacturer\",\"catalog\\/option\",\"catalog\\/product\",\"catalog\\/recurring\",\"catalog\\/review\",\"common\\/column_left\",\"common\\/filemanager\",\"customer\\/custom_field\",\"customer\\/customer\",\"customer\\/customer_group\",\"design\\/banner\",\"design\\/language\",\"design\\/layout\",\"design\\/menu\",\"design\\/theme\",\"design\\/translation\",\"event\\/compatibility\",\"event\\/theme\",\"extension\\/analytics\\/google_analytics\",\"extension\\/captcha\\/basic_captcha\",\"extension\\/captcha\\/google_captcha\",\"extension\\/dashboard\\/activity\",\"extension\\/dashboard\\/chart\",\"extension\\/dashboard\\/customer\",\"extension\\/dashboard\\/map\",\"extension\\/dashboard\\/online\",\"extension\\/dashboard\\/order\",\"extension\\/dashboard\\/recent\",\"extension\\/dashboard\\/sale\",\"extension\\/event\",\"extension\\/extension\",\"extension\\/extension\\/analytics\",\"extension\\/extension\\/captcha\",\"extension\\/extension\\/dashboard\",\"extension\\/extension\\/feed\",\"extension\\/extension\\/fraud\",\"extension\\/extension\\/module\",\"extension\\/extension\\/payment\",\"extension\\/extension\\/shipping\",\"extension\\/extension\\/theme\",\"extension\\/extension\\/total\",\"extension\\/feed\\/google_base\",\"extension\\/feed\\/google_sitemap\",\"extension\\/feed\\/openbaypro\",\"extension\\/fraud\\/fraudlabspro\",\"extension\\/fraud\\/ip\",\"extension\\/fraud\\/maxmind\",\"extension\\/installer\",\"extension\\/modification\",\"extension\\/module\\/account\",\"extension\\/module\\/affiliate\",\"extension\\/module\\/amazon_login\",\"extension\\/module\\/amazon_pay\",\"extension\\/module\\/banner\",\"extension\\/module\\/bestseller\",\"extension\\/module\\/blogger\",\"extension\\/module\\/carousel\",\"extension\\/module\\/category\",\"extension\\/module\\/divido_calculator\",\"extension\\/module\\/ebay_listing\",\"extension\\/module\\/featured\",\"extension\\/module\\/filter\",\"extension\\/module\\/google_hangouts\",\"extension\\/module\\/html\",\"extension\\/module\\/htmlfeature\",\"extension\\/module\\/information\",\"extension\\/module\\/klarna_checkout_module\",\"extension\\/module\\/latest\",\"extension\\/module\\/laybuy_layout\",\"extension\\/module\\/ocsearchcategory\",\"extension\\/module\\/pilibaba_button\",\"extension\\/module\\/pp_button\",\"extension\\/module\\/pp_login\",\"extension\\/module\\/recent\",\"extension\\/module\\/sagepay_direct_cards\",\"extension\\/module\\/sagepay_server_cards\",\"extension\\/module\\/slideshow\",\"extension\\/module\\/special\",\"extension\\/module\\/store\",\"extension\\/openbay\",\"extension\\/openbay\\/amazon\",\"extension\\/openbay\\/amazon_listing\",\"extension\\/openbay\\/amazon_product\",\"extension\\/openbay\\/amazonus\",\"extension\\/openbay\\/amazonus_listing\",\"extension\\/openbay\\/amazonus_product\",\"extension\\/openbay\\/ebay\",\"extension\\/openbay\\/ebay_profile\",\"extension\\/openbay\\/ebay_template\",\"extension\\/openbay\\/etsy\",\"extension\\/openbay\\/etsy_product\",\"extension\\/openbay\\/etsy_shipping\",\"extension\\/openbay\\/etsy_shop\",\"extension\\/openbay\\/fba\",\"extension\\/payment\\/amazon_login_pay\",\"extension\\/payment\\/authorizenet_aim\",\"extension\\/payment\\/authorizenet_sim\",\"extension\\/payment\\/bank_transfer\",\"extension\\/payment\\/bluepay_hosted\",\"extension\\/payment\\/bluepay_redirect\",\"extension\\/payment\\/cardconnect\",\"extension\\/payment\\/cardinity\",\"extension\\/payment\\/cheque\",\"extension\\/payment\\/cod\",\"extension\\/payment\\/divido\",\"extension\\/payment\\/eway\",\"extension\\/payment\\/firstdata\",\"extension\\/payment\\/firstdata_remote\",\"extension\\/payment\\/free_checkout\",\"extension\\/payment\\/g2apay\",\"extension\\/payment\\/globalpay\",\"extension\\/payment\\/globalpay_remote\",\"extension\\/payment\\/klarna_account\",\"extension\\/payment\\/klarna_checkout\",\"extension\\/payment\\/klarna_invoice\",\"extension\\/payment\\/laybuy\",\"extension\\/payment\\/liqpay\",\"extension\\/payment\\/nochex\",\"extension\\/payment\\/paymate\",\"extension\\/payment\\/paypoint\",\"extension\\/payment\\/payza\",\"extension\\/payment\\/perpetual_payments\",\"extension\\/payment\\/pilibaba\",\"extension\\/payment\\/pp_express\",\"extension\\/payment\\/pp_payflow\",\"extension\\/payment\\/pp_payflow_iframe\",\"extension\\/payment\\/pp_pro\",\"extension\\/payment\\/pp_pro_iframe\",\"extension\\/payment\\/pp_standard\",\"extension\\/payment\\/realex\",\"extension\\/payment\\/realex_remote\",\"extension\\/payment\\/sagepay_direct\",\"extension\\/payment\\/sagepay_server\",\"extension\\/payment\\/sagepay_us\",\"extension\\/payment\\/securetrading_pp\",\"extension\\/payment\\/securetrading_ws\",\"extension\\/payment\\/skrill\",\"extension\\/payment\\/stripe_payments\",\"extension\\/payment\\/twocheckout\",\"extension\\/payment\\/web_payment_software\",\"extension\\/payment\\/worldpay\",\"extension\\/shipping\\/auspost\",\"extension\\/shipping\\/citylink\",\"extension\\/shipping\\/fedex\",\"extension\\/shipping\\/flat\",\"extension\\/shipping\\/free\",\"extension\\/shipping\\/item\",\"extension\\/shipping\\/parcelforce_48\",\"extension\\/shipping\\/pickup\",\"extension\\/shipping\\/royal_mail\",\"extension\\/shipping\\/ups\",\"extension\\/shipping\\/usps\",\"extension\\/shipping\\/weight\",\"extension\\/store\",\"extension\\/theme\\/theme_default\",\"extension\\/total\\/coupon\",\"extension\\/total\\/credit\",\"extension\\/total\\/handling\",\"extension\\/total\\/klarna_fee\",\"extension\\/total\\/low_order_fee\",\"extension\\/total\\/reward\",\"extension\\/total\\/shipping\",\"extension\\/total\\/sub_total\",\"extension\\/total\\/tax\",\"extension\\/total\\/total\",\"extension\\/total\\/voucher\",\"localisation\\/country\",\"localisation\\/currency\",\"localisation\\/geo_zone\",\"localisation\\/language\",\"localisation\\/length_class\",\"localisation\\/location\",\"localisation\\/order_status\",\"localisation\\/return_action\",\"localisation\\/return_reason\",\"localisation\\/return_status\",\"localisation\\/stock_status\",\"localisation\\/tax_class\",\"localisation\\/tax_rate\",\"localisation\\/weight_class\",\"localisation\\/zone\",\"marketing\\/affiliate\",\"marketing\\/contact\",\"marketing\\/coupon\",\"marketing\\/marketing\",\"payment\\/stripe_payments\",\"report\\/affiliate\",\"report\\/affiliate_activity\",\"report\\/affiliate_login\",\"report\\/customer_activity\",\"report\\/customer_credit\",\"report\\/customer_login\",\"report\\/customer_online\",\"report\\/customer_order\",\"report\\/customer_reward\",\"report\\/customer_search\",\"report\\/marketing\",\"report\\/product_purchased\",\"report\\/product_viewed\",\"report\\/sale_coupon\",\"report\\/sale_order\",\"report\\/sale_return\",\"report\\/sale_shipping\",\"report\\/sale_tax\",\"sale\\/order\",\"sale\\/recurring\",\"sale\\/return\",\"sale\\/voucher\",\"sale\\/voucher_theme\",\"setting\\/setting\",\"setting\\/store\",\"startup\\/compatibility\",\"startup\\/error\",\"startup\\/event\",\"startup\\/login\",\"startup\\/permission\",\"startup\\/router\",\"startup\\/sass\",\"startup\\/startup\",\"tool\\/backup\",\"tool\\/log\",\"tool\\/upload\",\"user\\/api\",\"user\\/user\",\"user\\/user_permission\",\"extension\\/payment\\/pp_standard\",\"extension\\/payment\\/pp_payflow\",\"extension\\/payment\\/pp_payflow_iframe\",\"extension\\/payment\\/pp_payflow_iframe\",\"extension\\/payment\\/pp_pro_iframe\",\"extension\\/payment\\/pp_pro\"]}'),
+(10, 'Demonstration', '{\"access\":[\"catalog\\/attribute\",\"catalog\\/attribute_group\",\"catalog\\/category\",\"catalog\\/download\",\"catalog\\/filter\",\"catalog\\/information\",\"catalog\\/manufacturer\",\"catalog\\/option\",\"catalog\\/product\",\"catalog\\/recurring\",\"catalog\\/review\",\"common\\/column_left\",\"common\\/filemanager\",\"customer\\/custom_field\",\"customer\\/customer\",\"customer\\/customer_group\",\"design\\/banner\",\"design\\/language\",\"design\\/layout\",\"design\\/menu\",\"design\\/theme\",\"design\\/translation\",\"event\\/compatibility\",\"event\\/theme\",\"extension\\/analytics\\/google_analytics\",\"extension\\/captcha\\/basic_captcha\",\"extension\\/captcha\\/google_captcha\",\"extension\\/dashboard\\/activity\",\"extension\\/dashboard\\/chart\",\"extension\\/dashboard\\/customer\",\"extension\\/dashboard\\/map\",\"extension\\/dashboard\\/online\",\"extension\\/dashboard\\/order\",\"extension\\/dashboard\\/recent\",\"extension\\/dashboard\\/sale\",\"extension\\/event\",\"extension\\/extension\",\"extension\\/extension\\/analytics\",\"extension\\/extension\\/captcha\",\"extension\\/extension\\/dashboard\",\"extension\\/extension\\/feed\",\"extension\\/extension\\/fraud\",\"extension\\/extension\\/module\",\"extension\\/extension\\/payment\",\"extension\\/extension\\/shipping\",\"extension\\/extension\\/theme\",\"extension\\/extension\\/total\",\"extension\\/feed\\/google_base\",\"extension\\/feed\\/google_sitemap\",\"extension\\/feed\\/openbaypro\",\"extension\\/fraud\\/fraudlabspro\",\"extension\\/fraud\\/ip\",\"extension\\/fraud\\/maxmind\",\"extension\\/installer\",\"extension\\/modification\",\"extension\\/module\\/account\",\"extension\\/module\\/affiliate\",\"extension\\/module\\/amazon_login\",\"extension\\/module\\/amazon_pay\",\"extension\\/module\\/banner\",\"extension\\/module\\/bestseller\",\"extension\\/module\\/blogger\",\"extension\\/module\\/carousel\",\"extension\\/module\\/category\",\"extension\\/module\\/divido_calculator\",\"extension\\/module\\/ebay_listing\",\"extension\\/module\\/featured\",\"extension\\/module\\/filter\",\"extension\\/module\\/google_hangouts\",\"extension\\/module\\/html\",\"extension\\/module\\/htmlfeature\",\"extension\\/module\\/information\",\"extension\\/module\\/klarna_checkout_module\",\"extension\\/module\\/latest\",\"extension\\/module\\/laybuy_layout\",\"extension\\/module\\/ocsearchcategory\",\"extension\\/module\\/pilibaba_button\",\"extension\\/module\\/pp_button\",\"extension\\/module\\/pp_login\",\"extension\\/module\\/recent\",\"extension\\/module\\/sagepay_direct_cards\",\"extension\\/module\\/sagepay_server_cards\",\"extension\\/module\\/slideshow\",\"extension\\/module\\/special\",\"extension\\/module\\/store\",\"extension\\/openbay\",\"extension\\/openbay\\/amazon\",\"extension\\/openbay\\/amazon_listing\",\"extension\\/openbay\\/amazon_product\",\"extension\\/openbay\\/amazonus\",\"extension\\/openbay\\/amazonus_listing\",\"extension\\/openbay\\/amazonus_product\",\"extension\\/openbay\\/ebay\",\"extension\\/openbay\\/ebay_profile\",\"extension\\/openbay\\/ebay_template\",\"extension\\/openbay\\/etsy\",\"extension\\/openbay\\/etsy_product\",\"extension\\/openbay\\/etsy_shipping\",\"extension\\/openbay\\/etsy_shop\",\"extension\\/openbay\\/fba\",\"extension\\/payment\\/amazon_login_pay\",\"extension\\/payment\\/authorizenet_aim\",\"extension\\/payment\\/authorizenet_sim\",\"extension\\/payment\\/bank_transfer\",\"extension\\/payment\\/bluepay_hosted\",\"extension\\/payment\\/bluepay_redirect\",\"extension\\/payment\\/cardconnect\",\"extension\\/payment\\/cardinity\",\"extension\\/payment\\/cheque\",\"extension\\/payment\\/cod\",\"extension\\/payment\\/divido\",\"extension\\/payment\\/eway\",\"extension\\/payment\\/firstdata\",\"extension\\/payment\\/firstdata_remote\",\"extension\\/payment\\/free_checkout\",\"extension\\/payment\\/g2apay\",\"extension\\/payment\\/globalpay\",\"extension\\/payment\\/globalpay_remote\",\"extension\\/payment\\/klarna_account\",\"extension\\/payment\\/klarna_checkout\",\"extension\\/payment\\/klarna_invoice\",\"extension\\/payment\\/laybuy\",\"extension\\/payment\\/liqpay\",\"extension\\/payment\\/nochex\",\"extension\\/payment\\/paymate\",\"extension\\/payment\\/paypoint\",\"extension\\/payment\\/payza\",\"extension\\/payment\\/perpetual_payments\",\"extension\\/payment\\/pilibaba\",\"extension\\/payment\\/pp_express\",\"extension\\/payment\\/pp_payflow\",\"extension\\/payment\\/pp_payflow_iframe\",\"extension\\/payment\\/pp_pro\",\"extension\\/payment\\/pp_pro_iframe\",\"extension\\/payment\\/pp_standard\",\"extension\\/payment\\/realex\",\"extension\\/payment\\/realex_remote\",\"extension\\/payment\\/sagepay_direct\",\"extension\\/payment\\/sagepay_server\",\"extension\\/payment\\/sagepay_us\",\"extension\\/payment\\/securetrading_pp\",\"extension\\/payment\\/securetrading_ws\",\"extension\\/payment\\/skrill\",\"extension\\/payment\\/twocheckout\",\"extension\\/payment\\/web_payment_software\",\"extension\\/payment\\/worldpay\",\"extension\\/shipping\\/auspost\",\"extension\\/shipping\\/citylink\",\"extension\\/shipping\\/fedex\",\"extension\\/shipping\\/flat\",\"extension\\/shipping\\/free\",\"extension\\/shipping\\/item\",\"extension\\/shipping\\/parcelforce_48\",\"extension\\/shipping\\/pickup\",\"extension\\/shipping\\/royal_mail\",\"extension\\/shipping\\/ups\",\"extension\\/shipping\\/usps\",\"extension\\/shipping\\/weight\",\"extension\\/store\",\"extension\\/theme\\/theme_default\",\"extension\\/total\\/coupon\",\"extension\\/total\\/credit\",\"extension\\/total\\/handling\",\"extension\\/total\\/klarna_fee\",\"extension\\/total\\/low_order_fee\",\"extension\\/total\\/reward\",\"extension\\/total\\/shipping\",\"extension\\/total\\/sub_total\",\"extension\\/total\\/tax\",\"extension\\/total\\/total\",\"extension\\/total\\/voucher\",\"localisation\\/country\",\"localisation\\/currency\",\"localisation\\/geo_zone\",\"localisation\\/language\",\"localisation\\/length_class\",\"localisation\\/location\",\"localisation\\/order_status\",\"localisation\\/return_action\",\"localisation\\/return_reason\",\"localisation\\/return_status\",\"localisation\\/stock_status\",\"localisation\\/tax_class\",\"localisation\\/tax_rate\",\"localisation\\/weight_class\",\"localisation\\/zone\",\"marketing\\/affiliate\",\"marketing\\/contact\",\"marketing\\/coupon\",\"marketing\\/marketing\",\"payment\\/stripe_payments\",\"report\\/affiliate\",\"report\\/affiliate_activity\",\"report\\/affiliate_login\",\"report\\/customer_activity\",\"report\\/customer_credit\",\"report\\/customer_login\",\"report\\/customer_online\",\"report\\/customer_order\",\"report\\/customer_reward\",\"report\\/customer_search\",\"report\\/marketing\",\"report\\/product_purchased\",\"report\\/product_viewed\",\"report\\/sale_coupon\",\"report\\/sale_order\",\"report\\/sale_return\",\"report\\/sale_shipping\",\"report\\/sale_tax\",\"sale\\/order\",\"sale\\/recurring\",\"sale\\/return\",\"sale\\/voucher\",\"sale\\/voucher_theme\",\"setting\\/setting\",\"setting\\/store\",\"startup\\/compatibility\",\"startup\\/error\",\"startup\\/event\",\"startup\\/login\",\"startup\\/permission\",\"startup\\/router\",\"startup\\/sass\",\"startup\\/startup\",\"tool\\/backup\",\"tool\\/log\",\"tool\\/upload\",\"user\\/api\",\"user\\/user\",\"user\\/user_permission\"],\"modify\":[\"catalog\\/attribute\",\"catalog\\/attribute_group\",\"catalog\\/category\",\"catalog\\/download\",\"catalog\\/filter\",\"catalog\\/information\",\"catalog\\/manufacturer\",\"catalog\\/option\",\"catalog\\/product\",\"catalog\\/recurring\",\"catalog\\/review\",\"common\\/column_left\",\"common\\/filemanager\",\"customer\\/custom_field\",\"customer\\/customer\",\"customer\\/customer_group\",\"design\\/banner\",\"design\\/language\",\"design\\/layout\",\"design\\/menu\",\"design\\/theme\",\"design\\/translation\",\"event\\/compatibility\",\"event\\/theme\",\"extension\\/analytics\\/google_analytics\",\"extension\\/captcha\\/basic_captcha\",\"extension\\/captcha\\/google_captcha\",\"extension\\/dashboard\\/activity\",\"extension\\/dashboard\\/chart\",\"extension\\/dashboard\\/customer\",\"extension\\/dashboard\\/map\",\"extension\\/dashboard\\/online\",\"extension\\/dashboard\\/order\",\"extension\\/dashboard\\/recent\",\"extension\\/dashboard\\/sale\",\"extension\\/event\",\"extension\\/extension\",\"extension\\/extension\\/analytics\",\"extension\\/extension\\/captcha\",\"extension\\/extension\\/dashboard\",\"extension\\/extension\\/feed\",\"extension\\/extension\\/fraud\",\"extension\\/extension\\/module\",\"extension\\/extension\\/payment\",\"extension\\/extension\\/shipping\",\"extension\\/extension\\/theme\",\"extension\\/extension\\/total\",\"extension\\/feed\\/google_base\",\"extension\\/feed\\/google_sitemap\",\"extension\\/feed\\/openbaypro\",\"extension\\/fraud\\/fraudlabspro\",\"extension\\/fraud\\/ip\",\"extension\\/fraud\\/maxmind\",\"extension\\/installer\",\"extension\\/modification\",\"extension\\/module\\/account\",\"extension\\/module\\/affiliate\",\"extension\\/module\\/amazon_login\",\"extension\\/module\\/amazon_pay\",\"extension\\/module\\/banner\",\"extension\\/module\\/bestseller\",\"extension\\/module\\/blogger\",\"extension\\/module\\/carousel\",\"extension\\/module\\/category\",\"extension\\/module\\/divido_calculator\",\"extension\\/module\\/ebay_listing\",\"extension\\/module\\/featured\",\"extension\\/module\\/filter\",\"extension\\/module\\/google_hangouts\",\"extension\\/module\\/html\",\"extension\\/module\\/htmlfeature\",\"extension\\/module\\/information\",\"extension\\/module\\/klarna_checkout_module\",\"extension\\/module\\/latest\",\"extension\\/module\\/laybuy_layout\",\"extension\\/module\\/ocsearchcategory\",\"extension\\/module\\/pilibaba_button\",\"extension\\/module\\/pp_button\",\"extension\\/module\\/pp_login\",\"extension\\/module\\/recent\",\"extension\\/module\\/sagepay_direct_cards\",\"extension\\/module\\/sagepay_server_cards\",\"extension\\/module\\/slideshow\",\"extension\\/module\\/special\",\"extension\\/module\\/store\",\"extension\\/openbay\",\"extension\\/openbay\\/amazon\",\"extension\\/openbay\\/amazon_listing\",\"extension\\/openbay\\/amazon_product\",\"extension\\/openbay\\/amazonus\",\"extension\\/openbay\\/amazonus_listing\",\"extension\\/openbay\\/amazonus_product\",\"extension\\/openbay\\/ebay\",\"extension\\/openbay\\/ebay_profile\",\"extension\\/openbay\\/ebay_template\",\"extension\\/openbay\\/etsy\",\"extension\\/openbay\\/etsy_product\",\"extension\\/openbay\\/etsy_shipping\",\"extension\\/openbay\\/etsy_shop\",\"extension\\/openbay\\/fba\",\"extension\\/payment\\/amazon_login_pay\",\"extension\\/payment\\/authorizenet_aim\",\"extension\\/payment\\/authorizenet_sim\",\"extension\\/payment\\/bank_transfer\",\"extension\\/payment\\/bluepay_hosted\",\"extension\\/payment\\/bluepay_redirect\",\"extension\\/payment\\/cardconnect\",\"extension\\/payment\\/cardinity\",\"extension\\/payment\\/cheque\",\"extension\\/payment\\/cod\",\"extension\\/payment\\/divido\",\"extension\\/payment\\/eway\",\"extension\\/payment\\/firstdata\",\"extension\\/payment\\/firstdata_remote\",\"extension\\/payment\\/free_checkout\",\"extension\\/payment\\/g2apay\",\"extension\\/payment\\/globalpay\",\"extension\\/payment\\/globalpay_remote\",\"extension\\/payment\\/klarna_account\",\"extension\\/payment\\/klarna_checkout\",\"extension\\/payment\\/klarna_invoice\",\"extension\\/payment\\/laybuy\",\"extension\\/payment\\/liqpay\",\"extension\\/payment\\/nochex\",\"extension\\/payment\\/paymate\",\"extension\\/payment\\/paypoint\",\"extension\\/payment\\/payza\",\"extension\\/payment\\/perpetual_payments\",\"extension\\/payment\\/pilibaba\",\"extension\\/payment\\/pp_express\",\"extension\\/payment\\/pp_payflow\",\"extension\\/payment\\/pp_payflow_iframe\",\"extension\\/payment\\/pp_pro\",\"extension\\/payment\\/pp_pro_iframe\",\"extension\\/payment\\/pp_standard\",\"extension\\/payment\\/realex\",\"extension\\/payment\\/realex_remote\",\"extension\\/payment\\/sagepay_direct\",\"extension\\/payment\\/sagepay_server\",\"extension\\/payment\\/sagepay_us\",\"extension\\/payment\\/securetrading_pp\",\"extension\\/payment\\/securetrading_ws\",\"extension\\/payment\\/skrill\",\"extension\\/payment\\/twocheckout\",\"extension\\/payment\\/web_payment_software\",\"extension\\/payment\\/worldpay\",\"extension\\/shipping\\/auspost\",\"extension\\/shipping\\/citylink\",\"extension\\/shipping\\/fedex\",\"extension\\/shipping\\/flat\",\"extension\\/shipping\\/free\",\"extension\\/shipping\\/item\",\"extension\\/shipping\\/parcelforce_48\",\"extension\\/shipping\\/pickup\",\"extension\\/shipping\\/royal_mail\",\"extension\\/shipping\\/ups\",\"extension\\/shipping\\/usps\",\"extension\\/shipping\\/weight\",\"extension\\/store\",\"extension\\/theme\\/theme_default\",\"extension\\/total\\/coupon\",\"extension\\/total\\/credit\",\"extension\\/total\\/handling\",\"extension\\/total\\/klarna_fee\",\"extension\\/total\\/low_order_fee\",\"extension\\/total\\/reward\",\"extension\\/total\\/shipping\",\"extension\\/total\\/sub_total\",\"extension\\/total\\/tax\",\"extension\\/total\\/total\",\"extension\\/total\\/voucher\",\"localisation\\/country\",\"localisation\\/currency\",\"localisation\\/geo_zone\",\"localisation\\/language\",\"localisation\\/length_class\",\"localisation\\/location\",\"localisation\\/order_status\",\"localisation\\/return_action\",\"localisation\\/return_reason\",\"localisation\\/return_status\",\"localisation\\/stock_status\",\"localisation\\/tax_class\",\"localisation\\/tax_rate\",\"localisation\\/weight_class\",\"localisation\\/zone\",\"marketing\\/affiliate\",\"marketing\\/contact\",\"marketing\\/coupon\",\"marketing\\/marketing\",\"payment\\/stripe_payments\",\"report\\/affiliate\",\"report\\/affiliate_activity\",\"report\\/affiliate_login\",\"report\\/customer_activity\",\"report\\/customer_credit\",\"report\\/customer_login\",\"report\\/customer_online\",\"report\\/customer_order\",\"report\\/customer_reward\",\"report\\/customer_search\",\"report\\/marketing\",\"report\\/product_purchased\",\"report\\/product_viewed\",\"report\\/sale_coupon\",\"report\\/sale_order\",\"report\\/sale_return\",\"report\\/sale_shipping\",\"report\\/sale_tax\",\"sale\\/order\",\"sale\\/recurring\",\"sale\\/return\",\"sale\\/voucher\",\"sale\\/voucher_theme\",\"setting\\/setting\",\"setting\\/store\",\"startup\\/compatibility\",\"startup\\/error\",\"startup\\/event\",\"startup\\/login\",\"startup\\/permission\",\"startup\\/router\",\"startup\\/sass\",\"startup\\/startup\",\"tool\\/backup\",\"tool\\/log\",\"tool\\/upload\",\"user\\/api\",\"user\\/user\",\"user\\/user_permission\"]}');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_voucher`
+-- Cấu trúc bảng cho bảng `oc_voucher`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_voucher` (
-  `voucher_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_voucher` (
+  `voucher_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `code` varchar(10) NOT NULL,
   `from_name` varchar(64) NOT NULL,
@@ -4675,39 +4752,36 @@ CREATE TABLE IF NOT EXISTS `oc_voucher` (
   `message` text NOT NULL,
   `amount` decimal(15,4) NOT NULL,
   `status` tinyint(1) NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`voucher_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `date_added` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_voucher_history`
+-- Cấu trúc bảng cho bảng `oc_voucher_history`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_voucher_history` (
-  `voucher_history_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_voucher_history` (
+  `voucher_history_id` int(11) NOT NULL,
   `voucher_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `amount` decimal(15,4) NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`voucher_history_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `date_added` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_voucher_theme`
+-- Cấu trúc bảng cho bảng `oc_voucher_theme`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_voucher_theme` (
-  `voucher_theme_id` int(11) NOT NULL AUTO_INCREMENT,
-  `image` varchar(255) NOT NULL,
-  PRIMARY KEY (`voucher_theme_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+CREATE TABLE `oc_voucher_theme` (
+  `voucher_theme_id` int(11) NOT NULL,
+  `image` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_voucher_theme`
+-- Đang đổ dữ liệu cho bảng `oc_voucher_theme`
 --
 
 INSERT INTO `oc_voucher_theme` (`voucher_theme_id`, `image`) VALUES
@@ -4718,18 +4792,17 @@ INSERT INTO `oc_voucher_theme` (`voucher_theme_id`, `image`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_voucher_theme_description`
+-- Cấu trúc bảng cho bảng `oc_voucher_theme_description`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_voucher_theme_description` (
+CREATE TABLE `oc_voucher_theme_description` (
   `voucher_theme_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `name` varchar(32) NOT NULL,
-  PRIMARY KEY (`voucher_theme_id`,`language_id`)
+  `name` varchar(32) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_voucher_theme_description`
+-- Đang đổ dữ liệu cho bảng `oc_voucher_theme_description`
 --
 
 INSERT INTO `oc_voucher_theme_description` (`voucher_theme_id`, `language_id`, `name`) VALUES
@@ -4743,17 +4816,16 @@ INSERT INTO `oc_voucher_theme_description` (`voucher_theme_id`, `language_id`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_weight_class`
+-- Cấu trúc bảng cho bảng `oc_weight_class`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_weight_class` (
-  `weight_class_id` int(11) NOT NULL AUTO_INCREMENT,
-  `value` decimal(15,8) NOT NULL DEFAULT '0.00000000',
-  PRIMARY KEY (`weight_class_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+CREATE TABLE `oc_weight_class` (
+  `weight_class_id` int(11) NOT NULL,
+  `value` decimal(15,8) NOT NULL DEFAULT '0.00000000'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_weight_class`
+-- Đang đổ dữ liệu cho bảng `oc_weight_class`
 --
 
 INSERT INTO `oc_weight_class` (`weight_class_id`, `value`) VALUES
@@ -4765,19 +4837,18 @@ INSERT INTO `oc_weight_class` (`weight_class_id`, `value`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_weight_class_description`
+-- Cấu trúc bảng cho bảng `oc_weight_class_description`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_weight_class_description` (
+CREATE TABLE `oc_weight_class_description` (
   `weight_class_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `title` varchar(32) NOT NULL,
-  `unit` varchar(4) NOT NULL,
-  PRIMARY KEY (`weight_class_id`,`language_id`)
+  `unit` varchar(4) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_weight_class_description`
+-- Đang đổ dữ liệu cho bảng `oc_weight_class_description`
 --
 
 INSERT INTO `oc_weight_class_description` (`weight_class_id`, `language_id`, `title`, `unit`) VALUES
@@ -4793,20 +4864,19 @@ INSERT INTO `oc_weight_class_description` (`weight_class_id`, `language_id`, `ti
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_zone`
+-- Cấu trúc bảng cho bảng `oc_zone`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_zone` (
-  `zone_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_zone` (
+  `zone_id` int(11) NOT NULL,
   `country_id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
   `code` varchar(32) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`zone_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4236 ;
+  `status` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_zone`
+-- Đang đổ dữ liệu cho bảng `oc_zone`
 --
 
 INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
@@ -4907,7 +4977,7 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (95, 3, 'Medea', 'MED', 1),
 (96, 3, 'Mila', 'MIL', 1),
 (97, 3, 'Mostaganem', 'MOS', 1),
-(98, 3, 'M''Sila', 'MSI', 1),
+(98, 3, 'M\'Sila', 'MSI', 1),
 (99, 3, 'Naama', 'NAA', 1),
 (100, 3, 'Oran', 'ORA', 1),
 (101, 3, 'Ouargla', 'OUA', 1),
@@ -4927,7 +4997,7 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (115, 3, 'Tizi Ouzou', 'TOU', 1),
 (116, 3, 'Tlemcen', 'TLE', 1),
 (117, 4, 'Eastern', 'E', 1),
-(118, 4, 'Manu''a', 'M', 1),
+(118, 4, 'Manu\'a', 'M', 1),
 (119, 4, 'Rose Island', 'R', 1),
 (120, 4, 'Swains Island', 'S', 1),
 (121, 4, 'Western', 'W', 1),
@@ -4992,13 +5062,13 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (180, 11, 'Aragatsotn', 'AGT', 1),
 (181, 11, 'Ararat', 'ARR', 1),
 (182, 11, 'Armavir', 'ARM', 1),
-(183, 11, 'Geghark''unik''', 'GEG', 1),
-(184, 11, 'Kotayk''', 'KOT', 1),
+(183, 11, 'Geghark\'unik\'', 'GEG', 1),
+(184, 11, 'Kotayk\'', 'KOT', 1),
 (185, 11, 'Lorri', 'LOR', 1),
 (186, 11, 'Shirak', 'SHI', 1),
-(187, 11, 'Syunik''', 'SYU', 1),
+(187, 11, 'Syunik\'', 'SYU', 1),
 (188, 11, 'Tavush', 'TAV', 1),
-(189, 11, 'Vayots'' Dzor', 'VAY', 1),
+(189, 11, 'Vayots\' Dzor', 'VAY', 1),
 (190, 11, 'Yerevan', 'YER', 1),
 (191, 13, 'Australian Capital Territory', 'ACT', 1),
 (192, 13, 'New South Wales', 'NSW', 1),
@@ -5112,7 +5182,7 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (300, 16, 'Long Island', 'LNG', 1),
 (301, 16, 'Mangrove Cay', 'MAN', 1),
 (302, 16, 'Mayaguana', 'MAY', 1),
-(303, 16, 'Moore''s Island', 'MOO', 1),
+(303, 16, 'Moore\'s Island', 'MOO', 1),
 (304, 16, 'North Abaco', 'NAB', 1),
 (305, 16, 'North Andros', 'NAN', 1),
 (306, 16, 'North Eleuthera', 'NEL', 1),
@@ -5147,7 +5217,7 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (335, 19, 'Saint Philip', 'PHI', 1),
 (336, 19, 'Saint Thomas', 'THO', 1),
 (337, 20, 'Brestskaya (Brest)', 'BR', 1),
-(338, 20, 'Homyel''skaya (Homyel'')', 'HO', 1),
+(338, 20, 'Homyel\'skaya (Homyel\')', 'HO', 1),
 (339, 20, 'Horad Minsk', 'HM', 1),
 (340, 20, 'Hrodzyenskaya (Hrodna)', 'HR', 1),
 (341, 20, 'Mahilyowskaya (Mahilyow)', 'MA', 1),
@@ -5187,9 +5257,9 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (375, 24, 'Paget', 'PG', 1),
 (376, 24, 'Pembroke', 'PB', 1),
 (377, 24, 'Saint George City', 'GC', 1),
-(378, 24, 'Saint George''s', 'SG', 1),
+(378, 24, 'Saint George\'s', 'SG', 1),
 (379, 24, 'Sandys', 'SA', 1),
-(380, 24, 'Smith''s', 'SM', 1),
+(380, 24, 'Smith\'s', 'SM', 1),
 (381, 24, 'Southampton', 'SH', 1),
 (382, 24, 'Warwick', 'WA', 1),
 (383, 25, 'Bumthang', 'BUM', 1),
@@ -5458,7 +5528,7 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (646, 41, 'Mambere-KadeÔ', 'MKD', 1),
 (647, 41, 'Mbomou', 'MBO', 1),
 (648, 41, 'Nana-Mambere', 'NMM', 1),
-(649, 41, 'Ombella-M''Poko', 'OMP', 1),
+(649, 41, 'Ombella-M\'Poko', 'OMP', 1),
 (650, 41, 'Ouaka', 'OUK', 1),
 (651, 41, 'Ouham', 'OUH', 1),
 (652, 41, 'Ouham-Pende', 'OPE', 1),
@@ -5486,7 +5556,7 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (674, 43, 'Atacama', 'AT', 1),
 (675, 43, 'Bio-Bio', 'BI', 1),
 (676, 43, 'Coquimbo', 'CO', 1),
-(677, 43, 'Libertador General Bernardo O''Higgins', 'LI', 1),
+(677, 43, 'Libertador General Bernardo O\'Higgins', 'LI', 1),
 (678, 43, 'Los Lagos', 'LL', 1),
 (679, 43, 'Magallanes y de la Antartica Chilena', 'MA', 1),
 (680, 43, 'Maule', 'ML', 1),
@@ -5728,7 +5798,7 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (916, 57, 'Vejle', 'VK', 1),
 (917, 57, 'Vestj&aelig;lland', 'VJ', 1),
 (918, 57, 'Viborg', 'VB', 1),
-(919, 58, '''Ali Sabih', 'S', 1),
+(919, 58, '\'Ali Sabih', 'S', 1),
 (920, 58, 'Dikhil', 'K', 1),
 (921, 58, 'Djibouti', 'J', 1),
 (922, 58, 'Obock', 'O', 1),
@@ -5816,7 +5886,7 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (1004, 63, 'Al Fayyum', 'FYM', 1),
 (1005, 63, 'Al Gharbiyah', 'GBY', 1),
 (1006, 63, 'Al Iskandariyah', 'IDR', 1),
-(1007, 63, 'Al Isma''iliyah', 'IML', 1),
+(1007, 63, 'Al Isma\'iliyah', 'IML', 1),
 (1008, 63, 'Al Jizah', 'JZH', 1),
 (1009, 63, 'Al Minufiyah', 'MFY', 1),
 (1010, 63, 'Al Minya', 'MNY', 1),
@@ -5828,13 +5898,13 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (1016, 63, 'Aswan', 'ASW', 1),
 (1017, 63, 'Asyut', 'ASY', 1),
 (1018, 63, 'Bani Suwayf', 'BSW', 1),
-(1019, 63, 'Bur Sa''id', 'BSD', 1),
+(1019, 63, 'Bur Sa\'id', 'BSD', 1),
 (1020, 63, 'Dumyat', 'DMY', 1),
-(1021, 63, 'Janub Sina''', 'JNS', 1),
+(1021, 63, 'Janub Sina\'', 'JNS', 1),
 (1022, 63, 'Kafr ash Shaykh', 'KSH', 1),
 (1023, 63, 'Matruh', 'MAT', 1),
 (1024, 63, 'Qina', 'QIN', 1),
-(1025, 63, 'Shamal Sina''', 'SHS', 1),
+(1025, 63, 'Shamal Sina\'', 'SHS', 1),
 (1026, 63, 'Suhaj', 'SUH', 1),
 (1027, 64, 'Ahuachapan', 'AH', 1),
 (1028, 64, 'Cabanas', 'CA', 1),
@@ -5995,7 +6065,7 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (1206, 74, 'Hauts de Seine', '92', 1),
 (1207, 74, 'Seine St-Denis', '93', 1),
 (1208, 74, 'Val de Marne', '94', 1),
-(1209, 74, 'Val d''Oise', '95', 1),
+(1209, 74, 'Val d\'Oise', '95', 1),
 (1210, 76, 'Archipel des Marquises', 'M', 1),
 (1211, 76, 'Archipel des Tuamotu', 'T', 1),
 (1212, 76, 'Archipel des Tubuai', 'I', 1),
@@ -6167,7 +6237,7 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (1378, 92, 'Upper Takutu-Upper Essequibo', 'UT', 1),
 (1379, 93, 'Artibonite', 'AR', 1),
 (1380, 93, 'Centre', 'CE', 1),
-(1381, 93, 'Grand''Anse', 'GA', 1),
+(1381, 93, 'Grand\'Anse', 'GA', 1),
 (1382, 93, 'Nord', 'ND', 1),
 (1383, 93, 'Nord-Est', 'NE', 1),
 (1384, 93, 'Nord-Ouest', 'NO', 1),
@@ -6331,7 +6401,7 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (1581, 102, 'Ninawa', 'NN', 1),
 (1582, 102, 'Dahuk', 'DH', 1),
 (1583, 102, 'Arbil', 'AL', 1),
-(1584, 102, 'At Ta''mim', 'TM', 1),
+(1584, 102, 'At Ta\'mim', 'TM', 1),
 (1585, 102, 'As Sulaymaniyah', 'SL', 1),
 (1586, 103, 'Carlow', 'CA', 1),
 (1587, 103, 'Cavan', 'CV', 1),
@@ -6342,10 +6412,10 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (1592, 103, 'Galway', 'GA', 1),
 (1593, 103, 'Kerry', 'KE', 1),
 (1594, 103, 'Kildare', 'KI', 1),
-(1595, 103, 'Kilkenny', 'KL', 1);
-INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
+(1595, 103, 'Kilkenny', 'KL', 1),
 (1596, 103, 'Laois', 'LA', 1),
-(1597, 103, 'Leitrim', 'LE', 1),
+(1597, 103, 'Leitrim', 'LE', 1);
+INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (1598, 103, 'Limerick', 'LI', 1),
 (1599, 103, 'Longford', 'LO', 1),
 (1600, 103, 'Louth', 'LU', 1),
@@ -6360,8 +6430,8 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (1609, 103, 'Westmeath', 'WE', 1),
 (1610, 103, 'Wexford', 'WX', 1),
 (1611, 103, 'Wicklow', 'WI', 1),
-(1612, 104, 'Be''er Sheva', 'BS', 1),
-(1613, 104, 'Bika''at Hayarden', 'BH', 1),
+(1612, 104, 'Be\'er Sheva', 'BS', 1),
+(1613, 104, 'Bika\'at Hayarden', 'BH', 1),
 (1614, 104, 'Eilat and Arava', 'EA', 1),
 (1615, 104, 'Galil', 'GA', 1),
 (1616, 104, 'Haifa', 'HA', 1),
@@ -6451,17 +6521,17 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (1701, 107, 'Yamagata', 'YA', 1),
 (1702, 107, 'Yamaguchi', 'YM', 1),
 (1703, 107, 'Yamanashi', 'YN', 1),
-(1704, 108, '''Amman', 'AM', 1),
+(1704, 108, '\'Amman', 'AM', 1),
 (1705, 108, 'Ajlun', 'AJ', 1),
-(1706, 108, 'Al ''Aqabah', 'AA', 1),
-(1707, 108, 'Al Balqa''', 'AB', 1),
+(1706, 108, 'Al \'Aqabah', 'AA', 1),
+(1707, 108, 'Al Balqa\'', 'AB', 1),
 (1708, 108, 'Al Karak', 'AK', 1),
 (1709, 108, 'Al Mafraq', 'AL', 1),
 (1710, 108, 'At Tafilah', 'AT', 1),
-(1711, 108, 'Az Zarqa''', 'AZ', 1),
+(1711, 108, 'Az Zarqa\'', 'AZ', 1),
 (1712, 108, 'Irbid', 'IR', 1),
 (1713, 108, 'Jarash', 'JA', 1),
-(1714, 108, 'Ma''an', 'MA', 1),
+(1714, 108, 'Ma\'an', 'MA', 1),
 (1715, 108, 'Madaba', 'MD', 1),
 (1716, 109, 'Almaty', 'AL', 1),
 (1717, 109, 'Almaty City', 'AC', 1),
@@ -6515,30 +6585,30 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (1765, 112, 'Hwanghae-bukto', 'HWB', 1),
 (1766, 112, 'Hwanghae-namdo', 'HWN', 1),
 (1767, 112, 'Kangwon-do', 'KAN', 1),
-(1768, 112, 'P''yongan-bukto', 'PYB', 1),
-(1769, 112, 'P''yongan-namdo', 'PYN', 1),
+(1768, 112, 'P\'yongan-bukto', 'PYB', 1),
+(1769, 112, 'P\'yongan-namdo', 'PYN', 1),
 (1770, 112, 'Ryanggang-do (Yanggang-do)', 'YAN', 1),
 (1771, 112, 'Rason Directly Governed City', 'NAJ', 1),
-(1772, 112, 'P''yongyang Special City', 'PYO', 1),
-(1773, 113, 'Ch''ungch''ong-bukto', 'CO', 1),
-(1774, 113, 'Ch''ungch''ong-namdo', 'CH', 1),
+(1772, 112, 'P\'yongyang Special City', 'PYO', 1),
+(1773, 113, 'Ch\'ungch\'ong-bukto', 'CO', 1),
+(1774, 113, 'Ch\'ungch\'ong-namdo', 'CH', 1),
 (1775, 113, 'Cheju-do', 'CD', 1),
 (1776, 113, 'Cholla-bukto', 'CB', 1),
 (1777, 113, 'Cholla-namdo', 'CN', 1),
-(1778, 113, 'Inch''on-gwangyoksi', 'IG', 1),
+(1778, 113, 'Inch\'on-gwangyoksi', 'IG', 1),
 (1779, 113, 'Kangwon-do', 'KA', 1),
 (1780, 113, 'Kwangju-gwangyoksi', 'KG', 1),
 (1781, 113, 'Kyonggi-do', 'KD', 1),
 (1782, 113, 'Kyongsang-bukto', 'KB', 1),
 (1783, 113, 'Kyongsang-namdo', 'KN', 1),
 (1784, 113, 'Pusan-gwangyoksi', 'PG', 1),
-(1785, 113, 'Soul-t''ukpyolsi', 'SO', 1),
+(1785, 113, 'Soul-t\'ukpyolsi', 'SO', 1),
 (1786, 113, 'Taegu-gwangyoksi', 'TA', 1),
 (1787, 113, 'Taejon-gwangyoksi', 'TG', 1),
-(1788, 114, 'Al ''Asimah', 'AL', 1),
+(1788, 114, 'Al \'Asimah', 'AL', 1),
 (1789, 114, 'Al Ahmadi', 'AA', 1),
 (1790, 114, 'Al Farwaniyah', 'AF', 1),
-(1791, 114, 'Al Jahra''', 'AJ', 1),
+(1791, 114, 'Al Jahra\'', 'AJ', 1),
 (1792, 114, 'Hawalli', 'HA', 1),
 (1793, 115, 'Bishkek', 'GB', 1),
 (1794, 115, 'Batken', 'B', 1),
@@ -6571,9 +6641,9 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (1854, 119, 'Leribe', 'LE', 1),
 (1855, 119, 'Mafeteng', 'MF', 1),
 (1856, 119, 'Maseru', 'MS', 1),
-(1857, 119, 'Mohale''s Hoek', 'MH', 1),
+(1857, 119, 'Mohale\'s Hoek', 'MH', 1),
 (1858, 119, 'Mokhotlong', 'MK', 1),
-(1859, 119, 'Qacha''s Nek', 'QN', 1),
+(1859, 119, 'Qacha\'s Nek', 'QN', 1),
 (1860, 119, 'Quthing', 'QT', 1),
 (1861, 119, 'Thaba-Tseka', 'TT', 1),
 (1862, 120, 'Bomi', 'BI', 1),
@@ -6590,14 +6660,14 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (1873, 120, 'River Cess', 'RC', 1),
 (1874, 120, 'Sinoe', 'SN', 1),
 (1875, 121, 'Ajdabiya', 'AJ', 1),
-(1876, 121, 'Al ''Aziziyah', 'AZ', 1),
+(1876, 121, 'Al \'Aziziyah', 'AZ', 1),
 (1877, 121, 'Al Fatih', 'FA', 1),
 (1878, 121, 'Al Jabal al Akhdar', 'JA', 1),
 (1879, 121, 'Al Jufrah', 'JU', 1),
 (1880, 121, 'Al Khums', 'KH', 1),
 (1881, 121, 'Al Kufrah', 'KU', 1),
 (1882, 121, 'An Nuqat al Khams', 'NK', 1),
-(1883, 121, 'Ash Shati''', 'AS', 1),
+(1883, 121, 'Ash Shati\'', 'AS', 1),
 (1884, 121, 'Awbari', 'AW', 1),
 (1885, 121, 'Az Zawiyah', 'ZA', 1),
 (1886, 121, 'Banghazi', 'BA', 1),
@@ -7065,7 +7135,7 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (2347, 153, 'Coromandel', 'COR', 1),
 (2348, 153, 'Gisborne', 'GIS', 1),
 (2349, 153, 'Fiordland', 'FIO', 1),
-(2350, 153, 'Hawke''s Bay', 'HKB', 1),
+(2350, 153, 'Hawke\'s Bay', 'HKB', 1),
 (2351, 153, 'Marlborough', 'MBH', 1),
 (2352, 153, 'Manawatu-Wanganui', 'MWT', 1),
 (2353, 153, 'Mt Cook-Mackenzie', 'MCM', 1),
@@ -7392,7 +7462,7 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (2674, 173, 'Ar Rayyan', 'RN', 1),
 (2675, 173, 'Jarayan al Batinah', 'JB', 1),
 (2676, 173, 'Madinat ash Shamal', 'MS', 1),
-(2677, 173, 'Umm Sa''id', 'UD', 1),
+(2677, 173, 'Umm Sa\'id', 'UD', 1),
 (2678, 173, 'Umm Salal', 'UL', 1),
 (2679, 175, 'Alba', 'AB', 1),
 (2680, 175, 'Arad', 'AR', 1),
@@ -7509,9 +7579,9 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (2792, 176, 'Tver', 'TV', 1),
 (2793, 176, 'Tyumen', 'TY', 1),
 (2794, 176, 'Ufa', 'UF', 1),
-(2795, 176, 'Ul''yanovsk', 'UL', 1),
+(2795, 176, 'Ul\'yanovsk', 'UL', 1),
 (2796, 176, 'Ulan-Ude', 'UU', 1),
-(2797, 176, 'Ust''-Ordynskiy', 'US', 1),
+(2797, 176, 'Ust\'-Ordynskiy', 'US', 1),
 (2798, 176, 'Vladikavkaz', 'VL', 1),
 (2799, 176, 'Vladimir', 'VA', 1),
 (2800, 176, 'Vladivostok', 'VV', 1),
@@ -7566,16 +7636,16 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (2849, 180, 'Saint David', 'D', 1),
 (2850, 180, 'Saint George', 'G', 1),
 (2851, 180, 'Saint Patrick', 'P', 1),
-(2852, 181, 'A''ana', 'AN', 1),
+(2852, 181, 'A\'ana', 'AN', 1),
 (2853, 181, 'Aiga-i-le-Tai', 'AI', 1),
 (2854, 181, 'Atua', 'AT', 1),
-(2855, 181, 'Fa''asaleleaga', 'FA', 1),
-(2856, 181, 'Gaga''emauga', 'GE', 1),
+(2855, 181, 'Fa\'asaleleaga', 'FA', 1),
+(2856, 181, 'Gaga\'emauga', 'GE', 1),
 (2857, 181, 'Gagaifomauga', 'GF', 1),
 (2858, 181, 'Palauli', 'PA', 1),
-(2859, 181, 'Satupa''itea', 'SA', 1),
+(2859, 181, 'Satupa\'itea', 'SA', 1),
 (2860, 181, 'Tuamasaga', 'TU', 1),
-(2861, 181, 'Va''a-o-Fonoti', 'VF', 1),
+(2861, 181, 'Va\'a-o-Fonoti', 'VF', 1),
 (2862, 181, 'Vaisigano', 'VS', 1),
 (2863, 182, 'Acquaviva', 'AC', 1),
 (2864, 182, 'Borgo Maggiore', 'BM', 1),
@@ -7595,8 +7665,8 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (2878, 184, 'Al Qasim', 'QS', 1),
 (2879, 184, 'Ar Riyad', 'RD', 1),
 (2880, 184, 'Ash Sharqiyah (Eastern)', 'AQ', 1),
-(2881, 184, '''Asir', 'AS', 1),
-(2882, 184, 'Ha''il', 'HL', 1),
+(2881, 184, '\'Asir', 'AS', 1),
+(2882, 184, 'Ha\'il', 'HL', 1),
 (2883, 184, 'Jizan', 'JZ', 1),
 (2884, 184, 'Makkah', 'ML', 1),
 (2885, 184, 'Najran', 'NR', 1),
@@ -7624,8 +7694,8 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (2907, 186, 'Bel Ombre', 'BO', 1),
 (2908, 186, 'Cascade', 'CA', 1),
 (2909, 186, 'Glacis', 'GL', 1),
-(2910, 186, 'Grand'' Anse (on Mahe)', 'GM', 1),
-(2911, 186, 'Grand'' Anse (on Praslin)', 'GP', 1),
+(2910, 186, 'Grand\' Anse (on Mahe)', 'GM', 1),
+(2911, 186, 'Grand\' Anse (on Praslin)', 'GP', 1),
 (2912, 186, 'La Digue', 'DG', 1),
 (2913, 186, 'La Riviere Anglaise', 'RA', 1),
 (2914, 186, 'Mont Buxton', 'MB', 1),
@@ -7746,7 +7816,7 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (3029, 196, 'Uva', 'UV', 1),
 (3030, 196, 'Western', 'WE', 1),
 (3032, 197, 'Saint Helena', 'S', 1),
-(3034, 199, 'A''ali an Nil', 'ANL', 1),
+(3034, 199, 'A\'ali an Nil', 'ANL', 1),
 (3035, 199, 'Al Bahr al Ahmar', 'BAM', 1),
 (3036, 199, 'Al Buhayrat', 'BRT', 1),
 (3037, 199, 'Al Jazirah', 'JZR', 1),
@@ -7757,7 +7827,7 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (3042, 199, 'An Nil al Azraq', 'ANZ', 1),
 (3043, 199, 'Ash Shamaliyah', 'ASH', 1),
 (3044, 199, 'Bahr al Jabal', 'BJA', 1),
-(3045, 199, 'Gharb al Istiwa''iyah', 'GIS', 1),
+(3045, 199, 'Gharb al Istiwa\'iyah', 'GIS', 1),
 (3046, 199, 'Gharb Bahr al Ghazal', 'GBG', 1),
 (3047, 199, 'Gharb Darfur', 'GDA', 1),
 (3048, 199, 'Gharb Kurdufan', 'GKU', 1),
@@ -7769,7 +7839,7 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (3054, 199, 'Shamal Bahr al Ghazal', 'SBG', 1),
 (3055, 199, 'Shamal Darfur', 'SDA', 1),
 (3056, 199, 'Shamal Kurdufan', 'SKU', 1),
-(3057, 199, 'Sharq al Istiwa''iyah', 'SIS', 1),
+(3057, 199, 'Sharq al Istiwa\'iyah', 'SIS', 1),
 (3058, 199, 'Sinnar', 'SNR', 1),
 (3059, 199, 'Warab', 'WRB', 1),
 (3060, 200, 'Brokopondo', 'BR', 1),
@@ -7845,11 +7915,11 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (3130, 205, 'Hamah', 'HM', 1),
 (3131, 205, 'Hims', 'HI', 1),
 (3132, 205, 'Idlib', 'ID', 1),
-(3133, 205, 'Rif Dimashq', 'RD', 1);
-INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
+(3133, 205, 'Rif Dimashq', 'RD', 1),
 (3134, 205, 'Tartus', 'TA', 1),
 (3135, 206, 'Chang-hua', 'CH', 1),
-(3136, 206, 'Chia-i', 'CI', 1),
+(3136, 206, 'Chia-i', 'CI', 1);
+INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (3137, 206, 'Hsin-chu', 'HS', 1),
 (3138, 206, 'Hua-lien', 'HL', 1),
 (3139, 206, 'I-lan', 'IL', 1),
@@ -7857,22 +7927,22 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (3141, 206, 'Kin-men', 'KM', 1),
 (3142, 206, 'Lien-chiang', 'LC', 1),
 (3143, 206, 'Miao-li', 'ML', 1),
-(3144, 206, 'Nan-t''ou', 'NT', 1),
-(3145, 206, 'P''eng-hu', 'PH', 1),
-(3146, 206, 'P''ing-tung', 'PT', 1),
-(3147, 206, 'T''ai-chung', 'TG', 1),
-(3148, 206, 'T''ai-nan', 'TA', 1),
-(3149, 206, 'T''ai-pei county', 'TP', 1),
-(3150, 206, 'T''ai-tung', 'TT', 1),
-(3151, 206, 'T''ao-yuan', 'TY', 1),
+(3144, 206, 'Nan-t\'ou', 'NT', 1),
+(3145, 206, 'P\'eng-hu', 'PH', 1),
+(3146, 206, 'P\'ing-tung', 'PT', 1),
+(3147, 206, 'T\'ai-chung', 'TG', 1),
+(3148, 206, 'T\'ai-nan', 'TA', 1),
+(3149, 206, 'T\'ai-pei county', 'TP', 1),
+(3150, 206, 'T\'ai-tung', 'TT', 1),
+(3151, 206, 'T\'ao-yuan', 'TY', 1),
 (3152, 206, 'Yun-lin', 'YL', 1),
 (3153, 206, 'Chia-i city', 'CC', 1),
 (3154, 206, 'Chi-lung', 'CL', 1),
 (3155, 206, 'Hsin-chu', 'HC', 1),
-(3156, 206, 'T''ai-chung', 'TH', 1),
-(3157, 206, 'T''ai-nan', 'TN', 1),
+(3156, 206, 'T\'ai-chung', 'TH', 1),
+(3157, 206, 'T\'ai-nan', 'TN', 1),
 (3158, 206, 'Kao-hsiung city', 'KC', 1),
-(3159, 206, 'T''ai-pei city', 'TC', 1),
+(3159, 206, 'T\'ai-pei city', 'TC', 1),
 (3160, 207, 'Gorno-Badakhstan', 'GB', 1),
 (3161, 207, 'Khatlon', 'KT', 1),
 (3162, 207, 'Sughd', 'SU', 1),
@@ -7986,9 +8056,9 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (3270, 211, 'Atafu', 'A', 1),
 (3271, 211, 'Fakaofo', 'F', 1),
 (3272, 211, 'Nukunonu', 'N', 1),
-(3273, 212, 'Ha''apai', 'H', 1),
+(3273, 212, 'Ha\'apai', 'H', 1),
 (3274, 212, 'Tongatapu', 'T', 1),
-(3275, 212, 'Vava''u', 'V', 1),
+(3275, 212, 'Vava\'u', 'V', 1),
 (3276, 213, 'Couva/Tabaquite/Talparo', 'CT', 1),
 (3277, 213, 'Diego Martin', 'DM', 1),
 (3278, 213, 'Mayaro/Rio Claro', 'MR', 1),
@@ -8193,38 +8263,38 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (3477, 219, 'Mbarara', 'MBR', 1),
 (3478, 219, 'Ntungamo', 'NTU', 1),
 (3479, 219, 'Rukungiri', 'RUK', 1),
-(3480, 220, 'Cherkas''ka Oblast''', '71', 1),
-(3481, 220, 'Chernihivs''ka Oblast''', '74', 1),
-(3482, 220, 'Chernivets''ka Oblast''', '77', 1),
+(3480, 220, 'Cherkas\'ka Oblast\'', '71', 1),
+(3481, 220, 'Chernihivs\'ka Oblast\'', '74', 1),
+(3482, 220, 'Chernivets\'ka Oblast\'', '77', 1),
 (3483, 220, 'Crimea', '43', 1),
-(3484, 220, 'Dnipropetrovs''ka Oblast''', '12', 1),
-(3485, 220, 'Donets''ka Oblast''', '14', 1),
-(3486, 220, 'Ivano-Frankivs''ka Oblast''', '26', 1),
-(3487, 220, 'Khersons''ka Oblast''', '65', 1),
-(3488, 220, 'Khmel''nyts''ka Oblast''', '68', 1),
-(3489, 220, 'Kirovohrads''ka Oblast''', '35', 1),
+(3484, 220, 'Dnipropetrovs\'ka Oblast\'', '12', 1),
+(3485, 220, 'Donets\'ka Oblast\'', '14', 1),
+(3486, 220, 'Ivano-Frankivs\'ka Oblast\'', '26', 1),
+(3487, 220, 'Khersons\'ka Oblast\'', '65', 1),
+(3488, 220, 'Khmel\'nyts\'ka Oblast\'', '68', 1),
+(3489, 220, 'Kirovohrads\'ka Oblast\'', '35', 1),
 (3490, 220, 'Kyiv', '30', 1),
-(3491, 220, 'Kyivs''ka Oblast''', '32', 1),
-(3492, 220, 'Luhans''ka Oblast''', '09', 1),
-(3493, 220, 'L''vivs''ka Oblast''', '46', 1),
-(3494, 220, 'Mykolayivs''ka Oblast''', '48', 1),
-(3495, 220, 'Odes''ka Oblast''', '51', 1),
-(3496, 220, 'Poltavs''ka Oblast''', '53', 1),
-(3497, 220, 'Rivnens''ka Oblast''', '56', 1),
-(3498, 220, 'Sevastopol''', '40', 1),
-(3499, 220, 'Sums''ka Oblast''', '59', 1),
-(3500, 220, 'Ternopil''s''ka Oblast''', '61', 1),
-(3501, 220, 'Vinnyts''ka Oblast''', '05', 1),
-(3502, 220, 'Volyns''ka Oblast''', '07', 1),
-(3503, 220, 'Zakarpats''ka Oblast''', '21', 1),
-(3504, 220, 'Zaporiz''ka Oblast''', '23', 1),
-(3505, 220, 'Zhytomyrs''ka oblast''', '18', 1),
+(3491, 220, 'Kyivs\'ka Oblast\'', '32', 1),
+(3492, 220, 'Luhans\'ka Oblast\'', '09', 1),
+(3493, 220, 'L\'vivs\'ka Oblast\'', '46', 1),
+(3494, 220, 'Mykolayivs\'ka Oblast\'', '48', 1),
+(3495, 220, 'Odes\'ka Oblast\'', '51', 1),
+(3496, 220, 'Poltavs\'ka Oblast\'', '53', 1),
+(3497, 220, 'Rivnens\'ka Oblast\'', '56', 1),
+(3498, 220, 'Sevastopol\'', '40', 1),
+(3499, 220, 'Sums\'ka Oblast\'', '59', 1),
+(3500, 220, 'Ternopil\'s\'ka Oblast\'', '61', 1),
+(3501, 220, 'Vinnyts\'ka Oblast\'', '05', 1),
+(3502, 220, 'Volyns\'ka Oblast\'', '07', 1),
+(3503, 220, 'Zakarpats\'ka Oblast\'', '21', 1),
+(3504, 220, 'Zaporiz\'ka Oblast\'', '23', 1),
+(3505, 220, 'Zhytomyrs\'ka oblast\'', '18', 1),
 (3506, 221, 'Abu Dhabi', 'ADH', 1),
-(3507, 221, '''Ajman', 'AJ', 1),
+(3507, 221, '\'Ajman', 'AJ', 1),
 (3508, 221, 'Al Fujayrah', 'FU', 1),
 (3509, 221, 'Ash Shariqah', 'SH', 1),
 (3510, 221, 'Dubai', 'DU', 1),
-(3511, 221, 'R''as al Khaymah', 'RK', 1),
+(3511, 221, 'R\'as al Khaymah', 'RK', 1),
 (3512, 221, 'Umm al Qaywayn', 'UQ', 1),
 (3513, 222, 'Aberdeen', 'ABN', 1),
 (3514, 222, 'Aberdeenshire', 'ABNS', 1),
@@ -8421,12 +8491,12 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (3705, 225, 'Treinta y Tres', 'TT', 1),
 (3706, 226, 'Andijon', 'AN', 1),
 (3707, 226, 'Buxoro', 'BU', 1),
-(3708, 226, 'Farg''ona', 'FA', 1),
+(3708, 226, 'Farg\'ona', 'FA', 1),
 (3709, 226, 'Jizzax', 'JI', 1),
 (3710, 226, 'Namangan', 'NG', 1),
 (3711, 226, 'Navoiy', 'NW', 1),
 (3712, 226, 'Qashqadaryo', 'QA', 1),
-(3713, 226, 'Qoraqalpog''iston Republikasi', 'QR', 1),
+(3713, 226, 'Qoraqalpog\'iston Republikasi', 'QR', 1),
 (3714, 226, 'Samarqand', 'SA', 1),
 (3715, 226, 'Sirdaryo', 'SI', 1),
 (3716, 226, 'Surxondaryo', 'SU', 1),
@@ -8514,13 +8584,13 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (3798, 235, 'Ibb', 'IB', 1),
 (3799, 235, 'Al Jawf', 'JA', 1),
 (3800, 235, 'Lahij', 'LA', 1),
-(3801, 235, 'Ma''rib', 'MA', 1),
+(3801, 235, 'Ma\'rib', 'MA', 1),
 (3802, 235, 'Al Mahrah', 'MR', 1),
 (3803, 235, 'Al Mahwit', 'MW', 1),
-(3804, 235, 'Sa''dah', 'SD', 1),
-(3805, 235, 'San''a', 'SN', 1),
+(3804, 235, 'Sa\'dah', 'SD', 1),
+(3805, 235, 'San\'a', 'SN', 1),
 (3806, 235, 'Shabwah', 'SH', 1),
-(3807, 235, 'Ta''izz', 'TA', 1),
+(3807, 235, 'Ta\'izz', 'TA', 1),
 (3812, 237, 'Bas-Congo', 'BC', 1),
 (3813, 237, 'Bandundu', 'BN', 1),
 (3814, 237, 'Equateur', 'EQ', 1),
@@ -8909,7 +8979,7 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (4221, 117, 'Zilupes novads', '0681801', 1),
 (4222, 43, 'Arica y Parinacota', 'AP', 1),
 (4223, 43, 'Los Rios', 'LR', 1),
-(4224, 220, 'Kharkivs''ka Oblast''', '63', 1),
+(4224, 220, 'Kharkivs\'ka Oblast\'', '63', 1),
 (4225, 118, 'Beirut', 'LB-BR', 1),
 (4226, 118, 'Bekaa', 'LB-BE', 1),
 (4227, 118, 'Mount Lebanon', 'LB-ML', 1),
@@ -8925,21 +8995,20 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_zone_to_geo_zone`
+-- Cấu trúc bảng cho bảng `oc_zone_to_geo_zone`
 --
 
-CREATE TABLE IF NOT EXISTS `oc_zone_to_geo_zone` (
-  `zone_to_geo_zone_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oc_zone_to_geo_zone` (
+  `zone_to_geo_zone_id` int(11) NOT NULL,
   `country_id` int(11) NOT NULL,
   `zone_id` int(11) NOT NULL DEFAULT '0',
   `geo_zone_id` int(11) NOT NULL,
   `date_added` datetime NOT NULL,
-  `date_modified` datetime NOT NULL,
-  PRIMARY KEY (`zone_to_geo_zone_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=116 ;
+  `date_modified` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `oc_zone_to_geo_zone`
+-- Đang đổ dữ liệu cho bảng `oc_zone_to_geo_zone`
 --
 
 INSERT INTO `oc_zone_to_geo_zone` (`zone_to_geo_zone_id`, `country_id`, `zone_id`, `geo_zone_id`, `date_added`, `date_modified`) VALUES
@@ -9056,6 +9125,1351 @@ INSERT INTO `oc_zone_to_geo_zone` (`zone_to_geo_zone_id`, `country_id`, `zone_id
 (114, 99, 1493, 5, '2017-04-12 12:15:58', '0000-00-00 00:00:00'),
 (113, 99, 1485, 5, '2017-04-12 12:15:58', '0000-00-00 00:00:00');
 
+--
+-- Chỉ mục cho các bảng đã đổ
+--
+
+--
+-- Chỉ mục cho bảng `oc_address`
+--
+ALTER TABLE `oc_address`
+  ADD PRIMARY KEY (`address_id`),
+  ADD KEY `customer_id` (`customer_id`);
+
+--
+-- Chỉ mục cho bảng `oc_affiliate`
+--
+ALTER TABLE `oc_affiliate`
+  ADD PRIMARY KEY (`affiliate_id`);
+
+--
+-- Chỉ mục cho bảng `oc_affiliate_activity`
+--
+ALTER TABLE `oc_affiliate_activity`
+  ADD PRIMARY KEY (`affiliate_activity_id`);
+
+--
+-- Chỉ mục cho bảng `oc_affiliate_login`
+--
+ALTER TABLE `oc_affiliate_login`
+  ADD PRIMARY KEY (`affiliate_login_id`),
+  ADD KEY `email` (`email`),
+  ADD KEY `ip` (`ip`);
+
+--
+-- Chỉ mục cho bảng `oc_affiliate_transaction`
+--
+ALTER TABLE `oc_affiliate_transaction`
+  ADD PRIMARY KEY (`affiliate_transaction_id`);
+
+--
+-- Chỉ mục cho bảng `oc_api`
+--
+ALTER TABLE `oc_api`
+  ADD PRIMARY KEY (`api_id`);
+
+--
+-- Chỉ mục cho bảng `oc_api_ip`
+--
+ALTER TABLE `oc_api_ip`
+  ADD PRIMARY KEY (`api_ip_id`);
+
+--
+-- Chỉ mục cho bảng `oc_api_session`
+--
+ALTER TABLE `oc_api_session`
+  ADD PRIMARY KEY (`api_session_id`);
+
+--
+-- Chỉ mục cho bảng `oc_attribute`
+--
+ALTER TABLE `oc_attribute`
+  ADD PRIMARY KEY (`attribute_id`);
+
+--
+-- Chỉ mục cho bảng `oc_attribute_description`
+--
+ALTER TABLE `oc_attribute_description`
+  ADD PRIMARY KEY (`attribute_id`,`language_id`);
+
+--
+-- Chỉ mục cho bảng `oc_attribute_group`
+--
+ALTER TABLE `oc_attribute_group`
+  ADD PRIMARY KEY (`attribute_group_id`);
+
+--
+-- Chỉ mục cho bảng `oc_attribute_group_description`
+--
+ALTER TABLE `oc_attribute_group_description`
+  ADD PRIMARY KEY (`attribute_group_id`,`language_id`);
+
+--
+-- Chỉ mục cho bảng `oc_banner`
+--
+ALTER TABLE `oc_banner`
+  ADD PRIMARY KEY (`banner_id`);
+
+--
+-- Chỉ mục cho bảng `oc_banner_image`
+--
+ALTER TABLE `oc_banner_image`
+  ADD PRIMARY KEY (`banner_image_id`);
+
+--
+-- Chỉ mục cho bảng `oc_blogger`
+--
+ALTER TABLE `oc_blogger`
+  ADD PRIMARY KEY (`blogger_id`);
+
+--
+-- Chỉ mục cho bảng `oc_blogger_comment`
+--
+ALTER TABLE `oc_blogger_comment`
+  ADD PRIMARY KEY (`blogger_comment_id`,`blogger_id`);
+
+--
+-- Chỉ mục cho bảng `oc_blogger_comment_description`
+--
+ALTER TABLE `oc_blogger_comment_description`
+  ADD PRIMARY KEY (`blogger_comment_id`,`language_id`);
+
+--
+-- Chỉ mục cho bảng `oc_blogger_description`
+--
+ALTER TABLE `oc_blogger_description`
+  ADD PRIMARY KEY (`blogger_id`,`language_id`);
+
+--
+-- Chỉ mục cho bảng `oc_cart`
+--
+ALTER TABLE `oc_cart`
+  ADD PRIMARY KEY (`cart_id`),
+  ADD KEY `cart_id` (`api_id`,`customer_id`,`session_id`,`product_id`,`recurring_id`);
+
+--
+-- Chỉ mục cho bảng `oc_category`
+--
+ALTER TABLE `oc_category`
+  ADD PRIMARY KEY (`category_id`),
+  ADD KEY `parent_id` (`parent_id`);
+
+--
+-- Chỉ mục cho bảng `oc_category_description`
+--
+ALTER TABLE `oc_category_description`
+  ADD PRIMARY KEY (`category_id`,`language_id`),
+  ADD KEY `name` (`name`);
+
+--
+-- Chỉ mục cho bảng `oc_category_filter`
+--
+ALTER TABLE `oc_category_filter`
+  ADD PRIMARY KEY (`category_id`,`filter_id`);
+
+--
+-- Chỉ mục cho bảng `oc_category_path`
+--
+ALTER TABLE `oc_category_path`
+  ADD PRIMARY KEY (`category_id`,`path_id`);
+
+--
+-- Chỉ mục cho bảng `oc_category_to_layout`
+--
+ALTER TABLE `oc_category_to_layout`
+  ADD PRIMARY KEY (`category_id`,`store_id`);
+
+--
+-- Chỉ mục cho bảng `oc_category_to_store`
+--
+ALTER TABLE `oc_category_to_store`
+  ADD PRIMARY KEY (`category_id`,`store_id`);
+
+--
+-- Chỉ mục cho bảng `oc_country`
+--
+ALTER TABLE `oc_country`
+  ADD PRIMARY KEY (`country_id`);
+
+--
+-- Chỉ mục cho bảng `oc_coupon`
+--
+ALTER TABLE `oc_coupon`
+  ADD PRIMARY KEY (`coupon_id`);
+
+--
+-- Chỉ mục cho bảng `oc_coupon_category`
+--
+ALTER TABLE `oc_coupon_category`
+  ADD PRIMARY KEY (`coupon_id`,`category_id`);
+
+--
+-- Chỉ mục cho bảng `oc_coupon_history`
+--
+ALTER TABLE `oc_coupon_history`
+  ADD PRIMARY KEY (`coupon_history_id`);
+
+--
+-- Chỉ mục cho bảng `oc_coupon_product`
+--
+ALTER TABLE `oc_coupon_product`
+  ADD PRIMARY KEY (`coupon_product_id`);
+
+--
+-- Chỉ mục cho bảng `oc_currency`
+--
+ALTER TABLE `oc_currency`
+  ADD PRIMARY KEY (`currency_id`);
+
+--
+-- Chỉ mục cho bảng `oc_customer`
+--
+ALTER TABLE `oc_customer`
+  ADD PRIMARY KEY (`customer_id`);
+
+--
+-- Chỉ mục cho bảng `oc_customer_activity`
+--
+ALTER TABLE `oc_customer_activity`
+  ADD PRIMARY KEY (`customer_activity_id`);
+
+--
+-- Chỉ mục cho bảng `oc_customer_group`
+--
+ALTER TABLE `oc_customer_group`
+  ADD PRIMARY KEY (`customer_group_id`);
+
+--
+-- Chỉ mục cho bảng `oc_customer_group_description`
+--
+ALTER TABLE `oc_customer_group_description`
+  ADD PRIMARY KEY (`customer_group_id`,`language_id`);
+
+--
+-- Chỉ mục cho bảng `oc_customer_history`
+--
+ALTER TABLE `oc_customer_history`
+  ADD PRIMARY KEY (`customer_history_id`);
+
+--
+-- Chỉ mục cho bảng `oc_customer_ip`
+--
+ALTER TABLE `oc_customer_ip`
+  ADD PRIMARY KEY (`customer_ip_id`),
+  ADD KEY `ip` (`ip`);
+
+--
+-- Chỉ mục cho bảng `oc_customer_login`
+--
+ALTER TABLE `oc_customer_login`
+  ADD PRIMARY KEY (`customer_login_id`),
+  ADD KEY `email` (`email`),
+  ADD KEY `ip` (`ip`);
+
+--
+-- Chỉ mục cho bảng `oc_customer_online`
+--
+ALTER TABLE `oc_customer_online`
+  ADD PRIMARY KEY (`ip`);
+
+--
+-- Chỉ mục cho bảng `oc_customer_reward`
+--
+ALTER TABLE `oc_customer_reward`
+  ADD PRIMARY KEY (`customer_reward_id`);
+
+--
+-- Chỉ mục cho bảng `oc_customer_search`
+--
+ALTER TABLE `oc_customer_search`
+  ADD PRIMARY KEY (`customer_search_id`);
+
+--
+-- Chỉ mục cho bảng `oc_customer_transaction`
+--
+ALTER TABLE `oc_customer_transaction`
+  ADD PRIMARY KEY (`customer_transaction_id`);
+
+--
+-- Chỉ mục cho bảng `oc_customer_wishlist`
+--
+ALTER TABLE `oc_customer_wishlist`
+  ADD PRIMARY KEY (`customer_id`,`product_id`);
+
+--
+-- Chỉ mục cho bảng `oc_custom_field`
+--
+ALTER TABLE `oc_custom_field`
+  ADD PRIMARY KEY (`custom_field_id`);
+
+--
+-- Chỉ mục cho bảng `oc_custom_field_customer_group`
+--
+ALTER TABLE `oc_custom_field_customer_group`
+  ADD PRIMARY KEY (`custom_field_id`,`customer_group_id`);
+
+--
+-- Chỉ mục cho bảng `oc_custom_field_description`
+--
+ALTER TABLE `oc_custom_field_description`
+  ADD PRIMARY KEY (`custom_field_id`,`language_id`);
+
+--
+-- Chỉ mục cho bảng `oc_custom_field_value`
+--
+ALTER TABLE `oc_custom_field_value`
+  ADD PRIMARY KEY (`custom_field_value_id`);
+
+--
+-- Chỉ mục cho bảng `oc_custom_field_value_description`
+--
+ALTER TABLE `oc_custom_field_value_description`
+  ADD PRIMARY KEY (`custom_field_value_id`,`language_id`);
+
+--
+-- Chỉ mục cho bảng `oc_download`
+--
+ALTER TABLE `oc_download`
+  ADD PRIMARY KEY (`download_id`);
+
+--
+-- Chỉ mục cho bảng `oc_download_description`
+--
+ALTER TABLE `oc_download_description`
+  ADD PRIMARY KEY (`download_id`,`language_id`);
+
+--
+-- Chỉ mục cho bảng `oc_event`
+--
+ALTER TABLE `oc_event`
+  ADD PRIMARY KEY (`event_id`);
+
+--
+-- Chỉ mục cho bảng `oc_extension`
+--
+ALTER TABLE `oc_extension`
+  ADD PRIMARY KEY (`extension_id`);
+
+--
+-- Chỉ mục cho bảng `oc_filter`
+--
+ALTER TABLE `oc_filter`
+  ADD PRIMARY KEY (`filter_id`);
+
+--
+-- Chỉ mục cho bảng `oc_filter_description`
+--
+ALTER TABLE `oc_filter_description`
+  ADD PRIMARY KEY (`filter_id`,`language_id`);
+
+--
+-- Chỉ mục cho bảng `oc_filter_group`
+--
+ALTER TABLE `oc_filter_group`
+  ADD PRIMARY KEY (`filter_group_id`);
+
+--
+-- Chỉ mục cho bảng `oc_filter_group_description`
+--
+ALTER TABLE `oc_filter_group_description`
+  ADD PRIMARY KEY (`filter_group_id`,`language_id`);
+
+--
+-- Chỉ mục cho bảng `oc_geo_zone`
+--
+ALTER TABLE `oc_geo_zone`
+  ADD PRIMARY KEY (`geo_zone_id`);
+
+--
+-- Chỉ mục cho bảng `oc_information`
+--
+ALTER TABLE `oc_information`
+  ADD PRIMARY KEY (`information_id`);
+
+--
+-- Chỉ mục cho bảng `oc_information_description`
+--
+ALTER TABLE `oc_information_description`
+  ADD PRIMARY KEY (`information_id`,`language_id`);
+
+--
+-- Chỉ mục cho bảng `oc_information_to_layout`
+--
+ALTER TABLE `oc_information_to_layout`
+  ADD PRIMARY KEY (`information_id`,`store_id`);
+
+--
+-- Chỉ mục cho bảng `oc_information_to_store`
+--
+ALTER TABLE `oc_information_to_store`
+  ADD PRIMARY KEY (`information_id`,`store_id`);
+
+--
+-- Chỉ mục cho bảng `oc_language`
+--
+ALTER TABLE `oc_language`
+  ADD PRIMARY KEY (`language_id`),
+  ADD KEY `name` (`name`);
+
+--
+-- Chỉ mục cho bảng `oc_layout`
+--
+ALTER TABLE `oc_layout`
+  ADD PRIMARY KEY (`layout_id`);
+
+--
+-- Chỉ mục cho bảng `oc_layout_module`
+--
+ALTER TABLE `oc_layout_module`
+  ADD PRIMARY KEY (`layout_module_id`);
+
+--
+-- Chỉ mục cho bảng `oc_layout_route`
+--
+ALTER TABLE `oc_layout_route`
+  ADD PRIMARY KEY (`layout_route_id`);
+
+--
+-- Chỉ mục cho bảng `oc_length_class`
+--
+ALTER TABLE `oc_length_class`
+  ADD PRIMARY KEY (`length_class_id`);
+
+--
+-- Chỉ mục cho bảng `oc_length_class_description`
+--
+ALTER TABLE `oc_length_class_description`
+  ADD PRIMARY KEY (`length_class_id`,`language_id`);
+
+--
+-- Chỉ mục cho bảng `oc_location`
+--
+ALTER TABLE `oc_location`
+  ADD PRIMARY KEY (`location_id`),
+  ADD KEY `name` (`name`);
+
+--
+-- Chỉ mục cho bảng `oc_manufacturer`
+--
+ALTER TABLE `oc_manufacturer`
+  ADD PRIMARY KEY (`manufacturer_id`);
+
+--
+-- Chỉ mục cho bảng `oc_manufacturer_to_store`
+--
+ALTER TABLE `oc_manufacturer_to_store`
+  ADD PRIMARY KEY (`manufacturer_id`,`store_id`);
+
+--
+-- Chỉ mục cho bảng `oc_marketing`
+--
+ALTER TABLE `oc_marketing`
+  ADD PRIMARY KEY (`marketing_id`);
+
+--
+-- Chỉ mục cho bảng `oc_menu`
+--
+ALTER TABLE `oc_menu`
+  ADD PRIMARY KEY (`menu_id`);
+
+--
+-- Chỉ mục cho bảng `oc_menu_description`
+--
+ALTER TABLE `oc_menu_description`
+  ADD PRIMARY KEY (`menu_id`,`language_id`);
+
+--
+-- Chỉ mục cho bảng `oc_menu_module`
+--
+ALTER TABLE `oc_menu_module`
+  ADD PRIMARY KEY (`menu_module_id`),
+  ADD KEY `menu_id` (`menu_id`);
+
+--
+-- Chỉ mục cho bảng `oc_modification`
+--
+ALTER TABLE `oc_modification`
+  ADD PRIMARY KEY (`modification_id`);
+
+--
+-- Chỉ mục cho bảng `oc_module`
+--
+ALTER TABLE `oc_module`
+  ADD PRIMARY KEY (`module_id`);
+
+--
+-- Chỉ mục cho bảng `oc_option`
+--
+ALTER TABLE `oc_option`
+  ADD PRIMARY KEY (`option_id`);
+
+--
+-- Chỉ mục cho bảng `oc_option_description`
+--
+ALTER TABLE `oc_option_description`
+  ADD PRIMARY KEY (`option_id`,`language_id`);
+
+--
+-- Chỉ mục cho bảng `oc_option_value`
+--
+ALTER TABLE `oc_option_value`
+  ADD PRIMARY KEY (`option_value_id`);
+
+--
+-- Chỉ mục cho bảng `oc_option_value_description`
+--
+ALTER TABLE `oc_option_value_description`
+  ADD PRIMARY KEY (`option_value_id`,`language_id`);
+
+--
+-- Chỉ mục cho bảng `oc_order`
+--
+ALTER TABLE `oc_order`
+  ADD PRIMARY KEY (`order_id`);
+
+--
+-- Chỉ mục cho bảng `oc_order_custom_field`
+--
+ALTER TABLE `oc_order_custom_field`
+  ADD PRIMARY KEY (`order_custom_field_id`);
+
+--
+-- Chỉ mục cho bảng `oc_order_history`
+--
+ALTER TABLE `oc_order_history`
+  ADD PRIMARY KEY (`order_history_id`);
+
+--
+-- Chỉ mục cho bảng `oc_order_option`
+--
+ALTER TABLE `oc_order_option`
+  ADD PRIMARY KEY (`order_option_id`);
+
+--
+-- Chỉ mục cho bảng `oc_order_product`
+--
+ALTER TABLE `oc_order_product`
+  ADD PRIMARY KEY (`order_product_id`);
+
+--
+-- Chỉ mục cho bảng `oc_order_recurring`
+--
+ALTER TABLE `oc_order_recurring`
+  ADD PRIMARY KEY (`order_recurring_id`);
+
+--
+-- Chỉ mục cho bảng `oc_order_recurring_transaction`
+--
+ALTER TABLE `oc_order_recurring_transaction`
+  ADD PRIMARY KEY (`order_recurring_transaction_id`);
+
+--
+-- Chỉ mục cho bảng `oc_order_status`
+--
+ALTER TABLE `oc_order_status`
+  ADD PRIMARY KEY (`order_status_id`,`language_id`);
+
+--
+-- Chỉ mục cho bảng `oc_order_total`
+--
+ALTER TABLE `oc_order_total`
+  ADD PRIMARY KEY (`order_total_id`),
+  ADD KEY `order_id` (`order_id`);
+
+--
+-- Chỉ mục cho bảng `oc_order_voucher`
+--
+ALTER TABLE `oc_order_voucher`
+  ADD PRIMARY KEY (`order_voucher_id`);
+
+--
+-- Chỉ mục cho bảng `oc_paypal_iframe_order`
+--
+ALTER TABLE `oc_paypal_iframe_order`
+  ADD PRIMARY KEY (`paypal_iframe_order_id`);
+
+--
+-- Chỉ mục cho bảng `oc_paypal_iframe_order_transaction`
+--
+ALTER TABLE `oc_paypal_iframe_order_transaction`
+  ADD PRIMARY KEY (`paypal_iframe_order_transaction_id`);
+
+--
+-- Chỉ mục cho bảng `oc_paypal_payflow_iframe_order`
+--
+ALTER TABLE `oc_paypal_payflow_iframe_order`
+  ADD PRIMARY KEY (`order_id`),
+  ADD KEY `secure_token_id` (`secure_token_id`);
+
+--
+-- Chỉ mục cho bảng `oc_paypal_payflow_iframe_order_transaction`
+--
+ALTER TABLE `oc_paypal_payflow_iframe_order_transaction`
+  ADD PRIMARY KEY (`transaction_reference`),
+  ADD KEY `order_id` (`order_id`);
+
+--
+-- Chỉ mục cho bảng `oc_product`
+--
+ALTER TABLE `oc_product`
+  ADD PRIMARY KEY (`product_id`);
+
+--
+-- Chỉ mục cho bảng `oc_product_attribute`
+--
+ALTER TABLE `oc_product_attribute`
+  ADD PRIMARY KEY (`product_id`,`attribute_id`,`language_id`);
+
+--
+-- Chỉ mục cho bảng `oc_product_description`
+--
+ALTER TABLE `oc_product_description`
+  ADD PRIMARY KEY (`product_id`,`language_id`),
+  ADD KEY `name` (`name`);
+
+--
+-- Chỉ mục cho bảng `oc_product_discount`
+--
+ALTER TABLE `oc_product_discount`
+  ADD PRIMARY KEY (`product_discount_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
+-- Chỉ mục cho bảng `oc_product_filter`
+--
+ALTER TABLE `oc_product_filter`
+  ADD PRIMARY KEY (`product_id`,`filter_id`);
+
+--
+-- Chỉ mục cho bảng `oc_product_image`
+--
+ALTER TABLE `oc_product_image`
+  ADD PRIMARY KEY (`product_image_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
+-- Chỉ mục cho bảng `oc_product_option`
+--
+ALTER TABLE `oc_product_option`
+  ADD PRIMARY KEY (`product_option_id`);
+
+--
+-- Chỉ mục cho bảng `oc_product_option_value`
+--
+ALTER TABLE `oc_product_option_value`
+  ADD PRIMARY KEY (`product_option_value_id`);
+
+--
+-- Chỉ mục cho bảng `oc_product_recurring`
+--
+ALTER TABLE `oc_product_recurring`
+  ADD PRIMARY KEY (`product_id`,`recurring_id`,`customer_group_id`);
+
+--
+-- Chỉ mục cho bảng `oc_product_related`
+--
+ALTER TABLE `oc_product_related`
+  ADD PRIMARY KEY (`product_id`,`related_id`);
+
+--
+-- Chỉ mục cho bảng `oc_product_reward`
+--
+ALTER TABLE `oc_product_reward`
+  ADD PRIMARY KEY (`product_reward_id`);
+
+--
+-- Chỉ mục cho bảng `oc_product_special`
+--
+ALTER TABLE `oc_product_special`
+  ADD PRIMARY KEY (`product_special_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
+-- Chỉ mục cho bảng `oc_product_to_category`
+--
+ALTER TABLE `oc_product_to_category`
+  ADD PRIMARY KEY (`product_id`,`category_id`),
+  ADD KEY `category_id` (`category_id`);
+
+--
+-- Chỉ mục cho bảng `oc_product_to_download`
+--
+ALTER TABLE `oc_product_to_download`
+  ADD PRIMARY KEY (`product_id`,`download_id`);
+
+--
+-- Chỉ mục cho bảng `oc_product_to_layout`
+--
+ALTER TABLE `oc_product_to_layout`
+  ADD PRIMARY KEY (`product_id`,`store_id`);
+
+--
+-- Chỉ mục cho bảng `oc_product_to_store`
+--
+ALTER TABLE `oc_product_to_store`
+  ADD PRIMARY KEY (`product_id`,`store_id`);
+
+--
+-- Chỉ mục cho bảng `oc_recurring`
+--
+ALTER TABLE `oc_recurring`
+  ADD PRIMARY KEY (`recurring_id`);
+
+--
+-- Chỉ mục cho bảng `oc_recurring_description`
+--
+ALTER TABLE `oc_recurring_description`
+  ADD PRIMARY KEY (`recurring_id`,`language_id`);
+
+--
+-- Chỉ mục cho bảng `oc_return`
+--
+ALTER TABLE `oc_return`
+  ADD PRIMARY KEY (`return_id`);
+
+--
+-- Chỉ mục cho bảng `oc_return_action`
+--
+ALTER TABLE `oc_return_action`
+  ADD PRIMARY KEY (`return_action_id`,`language_id`);
+
+--
+-- Chỉ mục cho bảng `oc_return_history`
+--
+ALTER TABLE `oc_return_history`
+  ADD PRIMARY KEY (`return_history_id`);
+
+--
+-- Chỉ mục cho bảng `oc_return_reason`
+--
+ALTER TABLE `oc_return_reason`
+  ADD PRIMARY KEY (`return_reason_id`,`language_id`);
+
+--
+-- Chỉ mục cho bảng `oc_return_status`
+--
+ALTER TABLE `oc_return_status`
+  ADD PRIMARY KEY (`return_status_id`,`language_id`);
+
+--
+-- Chỉ mục cho bảng `oc_review`
+--
+ALTER TABLE `oc_review`
+  ADD PRIMARY KEY (`review_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
+-- Chỉ mục cho bảng `oc_setting`
+--
+ALTER TABLE `oc_setting`
+  ADD PRIMARY KEY (`setting_id`);
+
+--
+-- Chỉ mục cho bảng `oc_stock_status`
+--
+ALTER TABLE `oc_stock_status`
+  ADD PRIMARY KEY (`stock_status_id`,`language_id`);
+
+--
+-- Chỉ mục cho bảng `oc_store`
+--
+ALTER TABLE `oc_store`
+  ADD PRIMARY KEY (`store_id`);
+
+--
+-- Chỉ mục cho bảng `oc_tax_class`
+--
+ALTER TABLE `oc_tax_class`
+  ADD PRIMARY KEY (`tax_class_id`);
+
+--
+-- Chỉ mục cho bảng `oc_tax_rate`
+--
+ALTER TABLE `oc_tax_rate`
+  ADD PRIMARY KEY (`tax_rate_id`);
+
+--
+-- Chỉ mục cho bảng `oc_tax_rate_to_customer_group`
+--
+ALTER TABLE `oc_tax_rate_to_customer_group`
+  ADD PRIMARY KEY (`tax_rate_id`,`customer_group_id`);
+
+--
+-- Chỉ mục cho bảng `oc_tax_rule`
+--
+ALTER TABLE `oc_tax_rule`
+  ADD PRIMARY KEY (`tax_rule_id`);
+
+--
+-- Chỉ mục cho bảng `oc_theme`
+--
+ALTER TABLE `oc_theme`
+  ADD PRIMARY KEY (`theme_id`);
+
+--
+-- Chỉ mục cho bảng `oc_translation`
+--
+ALTER TABLE `oc_translation`
+  ADD PRIMARY KEY (`translation_id`);
+
+--
+-- Chỉ mục cho bảng `oc_upload`
+--
+ALTER TABLE `oc_upload`
+  ADD PRIMARY KEY (`upload_id`);
+
+--
+-- Chỉ mục cho bảng `oc_url_alias`
+--
+ALTER TABLE `oc_url_alias`
+  ADD PRIMARY KEY (`url_alias_id`),
+  ADD KEY `query` (`query`),
+  ADD KEY `keyword` (`keyword`);
+
+--
+-- Chỉ mục cho bảng `oc_user`
+--
+ALTER TABLE `oc_user`
+  ADD PRIMARY KEY (`user_id`);
+
+--
+-- Chỉ mục cho bảng `oc_user_group`
+--
+ALTER TABLE `oc_user_group`
+  ADD PRIMARY KEY (`user_group_id`);
+
+--
+-- Chỉ mục cho bảng `oc_voucher`
+--
+ALTER TABLE `oc_voucher`
+  ADD PRIMARY KEY (`voucher_id`);
+
+--
+-- Chỉ mục cho bảng `oc_voucher_history`
+--
+ALTER TABLE `oc_voucher_history`
+  ADD PRIMARY KEY (`voucher_history_id`);
+
+--
+-- Chỉ mục cho bảng `oc_voucher_theme`
+--
+ALTER TABLE `oc_voucher_theme`
+  ADD PRIMARY KEY (`voucher_theme_id`);
+
+--
+-- Chỉ mục cho bảng `oc_voucher_theme_description`
+--
+ALTER TABLE `oc_voucher_theme_description`
+  ADD PRIMARY KEY (`voucher_theme_id`,`language_id`);
+
+--
+-- Chỉ mục cho bảng `oc_weight_class`
+--
+ALTER TABLE `oc_weight_class`
+  ADD PRIMARY KEY (`weight_class_id`);
+
+--
+-- Chỉ mục cho bảng `oc_weight_class_description`
+--
+ALTER TABLE `oc_weight_class_description`
+  ADD PRIMARY KEY (`weight_class_id`,`language_id`);
+
+--
+-- Chỉ mục cho bảng `oc_zone`
+--
+ALTER TABLE `oc_zone`
+  ADD PRIMARY KEY (`zone_id`);
+
+--
+-- Chỉ mục cho bảng `oc_zone_to_geo_zone`
+--
+ALTER TABLE `oc_zone_to_geo_zone`
+  ADD PRIMARY KEY (`zone_to_geo_zone_id`);
+
+--
+-- AUTO_INCREMENT cho các bảng đã đổ
+--
+
+--
+-- AUTO_INCREMENT cho bảng `oc_address`
+--
+ALTER TABLE `oc_address`
+  MODIFY `address_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+--
+-- AUTO_INCREMENT cho bảng `oc_affiliate`
+--
+ALTER TABLE `oc_affiliate`
+  MODIFY `affiliate_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT cho bảng `oc_affiliate_activity`
+--
+ALTER TABLE `oc_affiliate_activity`
+  MODIFY `affiliate_activity_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT cho bảng `oc_affiliate_login`
+--
+ALTER TABLE `oc_affiliate_login`
+  MODIFY `affiliate_login_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT cho bảng `oc_affiliate_transaction`
+--
+ALTER TABLE `oc_affiliate_transaction`
+  MODIFY `affiliate_transaction_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT cho bảng `oc_api`
+--
+ALTER TABLE `oc_api`
+  MODIFY `api_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT cho bảng `oc_api_ip`
+--
+ALTER TABLE `oc_api_ip`
+  MODIFY `api_ip_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT cho bảng `oc_api_session`
+--
+ALTER TABLE `oc_api_session`
+  MODIFY `api_session_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT cho bảng `oc_attribute`
+--
+ALTER TABLE `oc_attribute`
+  MODIFY `attribute_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+--
+-- AUTO_INCREMENT cho bảng `oc_attribute_group`
+--
+ALTER TABLE `oc_attribute_group`
+  MODIFY `attribute_group_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT cho bảng `oc_banner`
+--
+ALTER TABLE `oc_banner`
+  MODIFY `banner_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+--
+-- AUTO_INCREMENT cho bảng `oc_banner_image`
+--
+ALTER TABLE `oc_banner_image`
+  MODIFY `banner_image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=297;
+--
+-- AUTO_INCREMENT cho bảng `oc_blogger`
+--
+ALTER TABLE `oc_blogger`
+  MODIFY `blogger_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT cho bảng `oc_blogger_comment`
+--
+ALTER TABLE `oc_blogger_comment`
+  MODIFY `blogger_comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT cho bảng `oc_cart`
+--
+ALTER TABLE `oc_cart`
+  MODIFY `cart_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+--
+-- AUTO_INCREMENT cho bảng `oc_category`
+--
+ALTER TABLE `oc_category`
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+--
+-- AUTO_INCREMENT cho bảng `oc_country`
+--
+ALTER TABLE `oc_country`
+  MODIFY `country_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=258;
+--
+-- AUTO_INCREMENT cho bảng `oc_coupon`
+--
+ALTER TABLE `oc_coupon`
+  MODIFY `coupon_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT cho bảng `oc_coupon_history`
+--
+ALTER TABLE `oc_coupon_history`
+  MODIFY `coupon_history_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT cho bảng `oc_coupon_product`
+--
+ALTER TABLE `oc_coupon_product`
+  MODIFY `coupon_product_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT cho bảng `oc_currency`
+--
+ALTER TABLE `oc_currency`
+  MODIFY `currency_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT cho bảng `oc_customer`
+--
+ALTER TABLE `oc_customer`
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+--
+-- AUTO_INCREMENT cho bảng `oc_customer_activity`
+--
+ALTER TABLE `oc_customer_activity`
+  MODIFY `customer_activity_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT cho bảng `oc_customer_group`
+--
+ALTER TABLE `oc_customer_group`
+  MODIFY `customer_group_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT cho bảng `oc_customer_history`
+--
+ALTER TABLE `oc_customer_history`
+  MODIFY `customer_history_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT cho bảng `oc_customer_ip`
+--
+ALTER TABLE `oc_customer_ip`
+  MODIFY `customer_ip_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+--
+-- AUTO_INCREMENT cho bảng `oc_customer_login`
+--
+ALTER TABLE `oc_customer_login`
+  MODIFY `customer_login_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+--
+-- AUTO_INCREMENT cho bảng `oc_customer_reward`
+--
+ALTER TABLE `oc_customer_reward`
+  MODIFY `customer_reward_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT cho bảng `oc_customer_search`
+--
+ALTER TABLE `oc_customer_search`
+  MODIFY `customer_search_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT cho bảng `oc_customer_transaction`
+--
+ALTER TABLE `oc_customer_transaction`
+  MODIFY `customer_transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT cho bảng `oc_custom_field`
+--
+ALTER TABLE `oc_custom_field`
+  MODIFY `custom_field_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT cho bảng `oc_custom_field_value`
+--
+ALTER TABLE `oc_custom_field_value`
+  MODIFY `custom_field_value_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT cho bảng `oc_download`
+--
+ALTER TABLE `oc_download`
+  MODIFY `download_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT cho bảng `oc_event`
+--
+ALTER TABLE `oc_event`
+  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT cho bảng `oc_extension`
+--
+ALTER TABLE `oc_extension`
+  MODIFY `extension_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+--
+-- AUTO_INCREMENT cho bảng `oc_filter`
+--
+ALTER TABLE `oc_filter`
+  MODIFY `filter_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT cho bảng `oc_filter_group`
+--
+ALTER TABLE `oc_filter_group`
+  MODIFY `filter_group_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT cho bảng `oc_geo_zone`
+--
+ALTER TABLE `oc_geo_zone`
+  MODIFY `geo_zone_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT cho bảng `oc_information`
+--
+ALTER TABLE `oc_information`
+  MODIFY `information_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT cho bảng `oc_language`
+--
+ALTER TABLE `oc_language`
+  MODIFY `language_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT cho bảng `oc_layout`
+--
+ALTER TABLE `oc_layout`
+  MODIFY `layout_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+--
+-- AUTO_INCREMENT cho bảng `oc_layout_module`
+--
+ALTER TABLE `oc_layout_module`
+  MODIFY `layout_module_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1434;
+--
+-- AUTO_INCREMENT cho bảng `oc_layout_route`
+--
+ALTER TABLE `oc_layout_route`
+  MODIFY `layout_route_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=215;
+--
+-- AUTO_INCREMENT cho bảng `oc_length_class`
+--
+ALTER TABLE `oc_length_class`
+  MODIFY `length_class_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT cho bảng `oc_location`
+--
+ALTER TABLE `oc_location`
+  MODIFY `location_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT cho bảng `oc_manufacturer`
+--
+ALTER TABLE `oc_manufacturer`
+  MODIFY `manufacturer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT cho bảng `oc_marketing`
+--
+ALTER TABLE `oc_marketing`
+  MODIFY `marketing_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT cho bảng `oc_menu`
+--
+ALTER TABLE `oc_menu`
+  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT cho bảng `oc_modification`
+--
+ALTER TABLE `oc_modification`
+  MODIFY `modification_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT cho bảng `oc_module`
+--
+ALTER TABLE `oc_module`
+  MODIFY `module_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+--
+-- AUTO_INCREMENT cho bảng `oc_option`
+--
+ALTER TABLE `oc_option`
+  MODIFY `option_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT cho bảng `oc_option_value`
+--
+ALTER TABLE `oc_option_value`
+  MODIFY `option_value_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+--
+-- AUTO_INCREMENT cho bảng `oc_order`
+--
+ALTER TABLE `oc_order`
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+--
+-- AUTO_INCREMENT cho bảng `oc_order_custom_field`
+--
+ALTER TABLE `oc_order_custom_field`
+  MODIFY `order_custom_field_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT cho bảng `oc_order_history`
+--
+ALTER TABLE `oc_order_history`
+  MODIFY `order_history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+--
+-- AUTO_INCREMENT cho bảng `oc_order_option`
+--
+ALTER TABLE `oc_order_option`
+  MODIFY `order_option_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+--
+-- AUTO_INCREMENT cho bảng `oc_order_product`
+--
+ALTER TABLE `oc_order_product`
+  MODIFY `order_product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+--
+-- AUTO_INCREMENT cho bảng `oc_order_recurring`
+--
+ALTER TABLE `oc_order_recurring`
+  MODIFY `order_recurring_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT cho bảng `oc_order_recurring_transaction`
+--
+ALTER TABLE `oc_order_recurring_transaction`
+  MODIFY `order_recurring_transaction_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT cho bảng `oc_order_status`
+--
+ALTER TABLE `oc_order_status`
+  MODIFY `order_status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+--
+-- AUTO_INCREMENT cho bảng `oc_order_total`
+--
+ALTER TABLE `oc_order_total`
+  MODIFY `order_total_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
+--
+-- AUTO_INCREMENT cho bảng `oc_order_voucher`
+--
+ALTER TABLE `oc_order_voucher`
+  MODIFY `order_voucher_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT cho bảng `oc_paypal_iframe_order`
+--
+ALTER TABLE `oc_paypal_iframe_order`
+  MODIFY `paypal_iframe_order_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT cho bảng `oc_paypal_iframe_order_transaction`
+--
+ALTER TABLE `oc_paypal_iframe_order_transaction`
+  MODIFY `paypal_iframe_order_transaction_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT cho bảng `oc_product`
+--
+ALTER TABLE `oc_product`
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+--
+-- AUTO_INCREMENT cho bảng `oc_product_discount`
+--
+ALTER TABLE `oc_product_discount`
+  MODIFY `product_discount_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=558;
+--
+-- AUTO_INCREMENT cho bảng `oc_product_image`
+--
+ALTER TABLE `oc_product_image`
+  MODIFY `product_image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2940;
+--
+-- AUTO_INCREMENT cho bảng `oc_product_option`
+--
+ALTER TABLE `oc_product_option`
+  MODIFY `product_option_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=227;
+--
+-- AUTO_INCREMENT cho bảng `oc_product_option_value`
+--
+ALTER TABLE `oc_product_option_value`
+  MODIFY `product_option_value_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+--
+-- AUTO_INCREMENT cho bảng `oc_product_reward`
+--
+ALTER TABLE `oc_product_reward`
+  MODIFY `product_reward_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=618;
+--
+-- AUTO_INCREMENT cho bảng `oc_product_special`
+--
+ALTER TABLE `oc_product_special`
+  MODIFY `product_special_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=520;
+--
+-- AUTO_INCREMENT cho bảng `oc_recurring`
+--
+ALTER TABLE `oc_recurring`
+  MODIFY `recurring_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT cho bảng `oc_return`
+--
+ALTER TABLE `oc_return`
+  MODIFY `return_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT cho bảng `oc_return_action`
+--
+ALTER TABLE `oc_return_action`
+  MODIFY `return_action_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT cho bảng `oc_return_history`
+--
+ALTER TABLE `oc_return_history`
+  MODIFY `return_history_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT cho bảng `oc_return_reason`
+--
+ALTER TABLE `oc_return_reason`
+  MODIFY `return_reason_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT cho bảng `oc_return_status`
+--
+ALTER TABLE `oc_return_status`
+  MODIFY `return_status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT cho bảng `oc_review`
+--
+ALTER TABLE `oc_review`
+  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT cho bảng `oc_setting`
+--
+ALTER TABLE `oc_setting`
+  MODIFY `setting_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3318;
+--
+-- AUTO_INCREMENT cho bảng `oc_stock_status`
+--
+ALTER TABLE `oc_stock_status`
+  MODIFY `stock_status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT cho bảng `oc_store`
+--
+ALTER TABLE `oc_store`
+  MODIFY `store_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT cho bảng `oc_tax_class`
+--
+ALTER TABLE `oc_tax_class`
+  MODIFY `tax_class_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT cho bảng `oc_tax_rate`
+--
+ALTER TABLE `oc_tax_rate`
+  MODIFY `tax_rate_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+--
+-- AUTO_INCREMENT cho bảng `oc_tax_rule`
+--
+ALTER TABLE `oc_tax_rule`
+  MODIFY `tax_rule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
+--
+-- AUTO_INCREMENT cho bảng `oc_theme`
+--
+ALTER TABLE `oc_theme`
+  MODIFY `theme_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT cho bảng `oc_translation`
+--
+ALTER TABLE `oc_translation`
+  MODIFY `translation_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT cho bảng `oc_upload`
+--
+ALTER TABLE `oc_upload`
+  MODIFY `upload_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT cho bảng `oc_url_alias`
+--
+ALTER TABLE `oc_url_alias`
+  MODIFY `url_alias_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1034;
+--
+-- AUTO_INCREMENT cho bảng `oc_user`
+--
+ALTER TABLE `oc_user`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT cho bảng `oc_user_group`
+--
+ALTER TABLE `oc_user_group`
+  MODIFY `user_group_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT cho bảng `oc_voucher`
+--
+ALTER TABLE `oc_voucher`
+  MODIFY `voucher_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT cho bảng `oc_voucher_history`
+--
+ALTER TABLE `oc_voucher_history`
+  MODIFY `voucher_history_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT cho bảng `oc_voucher_theme`
+--
+ALTER TABLE `oc_voucher_theme`
+  MODIFY `voucher_theme_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT cho bảng `oc_weight_class`
+--
+ALTER TABLE `oc_weight_class`
+  MODIFY `weight_class_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT cho bảng `oc_zone`
+--
+ALTER TABLE `oc_zone`
+  MODIFY `zone_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4236;
+--
+-- AUTO_INCREMENT cho bảng `oc_zone_to_geo_zone`
+--
+ALTER TABLE `oc_zone_to_geo_zone`
+  MODIFY `zone_to_geo_zone_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
