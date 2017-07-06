@@ -10,6 +10,7 @@ class ControllerExtensionPaymentTwoCheckoutPP extends Controller {
 		$this->load->model('setting/setting');
 			
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
+			print_r($_POST);die();
 			$this->model_setting_setting->editSetting('twocheckout_pp', $this->request->post);				
 			
 			$this->session->data['success'] = $this->language->get('text_success');
