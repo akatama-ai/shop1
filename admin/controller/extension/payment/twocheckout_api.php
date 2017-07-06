@@ -1,5 +1,5 @@
 <?php 
-class ControllerPaymentTwoCheckoutApi extends Controller {
+class ControllerExtensionPaymentTwoCheckoutApi extends Controller {
 	private $error = array(); 
 
 	public function index() {
