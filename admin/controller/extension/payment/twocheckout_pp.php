@@ -15,7 +15,7 @@ class ControllerExtensionPaymentTwoCheckoutPP extends Controller {
 			
 			$this->session->data['success'] = $this->language->get('text_success');
 
-			$this->response->redirect($this->url->link('extension/payment', 'token=' . $this->session->data['token'], true));
+			$this->response->redirect($this->url->link('extension/extension', 'token=' . $this->session->data['token'], true));
 		}
 
 		$data['heading_title'] = $this->language->get('heading_title');
@@ -65,7 +65,7 @@ class ControllerExtensionPaymentTwoCheckoutPP extends Controller {
 
    		$data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('text_payment'),
-			'href'      => $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL'),
+			'href'      => $this->url->link('extension/extension', 'token=' . $this->session->data['token'], 'SSL'),
       		'separator' => ' :: '
    		);
 
@@ -77,7 +77,7 @@ class ControllerExtensionPaymentTwoCheckoutPP extends Controller {
 				
 		$data['action'] = $this->url->link('extension/payment/twocheckout_pp', 'token=' . $this->session->data['token'], 'SSL');
 		
-		$data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL');
+		$data['cancel'] = $this->url->link('extension/extension', 'token=' . $this->session->data['token'], 'SSL');
 		
 		if (isset($this->request->post['twocheckout_pp_account'])) {
 			$data['twocheckout_pp_account'] = $this->request->post['twocheckout_pp_account'];
