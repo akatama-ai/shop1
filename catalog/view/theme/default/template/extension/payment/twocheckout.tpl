@@ -24,15 +24,13 @@
   <?php $i++; ?>
   <?php } ?>
   <input type="hidden" name="id_type" value="1" />
-  <?php if ($demo) { ?>
-  <input type="hidden" name="demo" value="<?php echo $demo; ?>" />
-  <?php } ?>
+  <input type="hidden" name="paypal_direct" value="Y" />
   <input type="hidden" name="lang" value="<?php echo $lang; ?>" />
   <input type="hidden" name="return_url" value="<?php echo $return_url; ?>" />
   <input type="hidden" name="currency_code" value="<?php echo $currency_code; ?>" />
   <div class="buttons">
-    <div class="pull-right">
-      <input type="submit" value="<?php echo $button_confirm; ?>" class="btn btn-primary" />
+    <div class="right">
+      <input type="submit" value="<?php echo $button_confirm; ?>" class="button" />
     </div>
   </div>
 </form>
