@@ -70,11 +70,11 @@ class ControllerExtensionPaymentTwoCheckoutPP extends Controller {
 
    		$data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('heading_title'),
-			'href'      => $this->url->link('payment/twocheckout_pp', 'token=' . $this->session->data['token'], 'SSL'),
+			'href'      => $this->url->link('extension/payment/twocheckout_pp', 'token=' . $this->session->data['token'], 'SSL'),
       		'separator' => ' :: '
    		);
 				
-		$data['action'] = $this->url->link('payment/twocheckout_pp', 'token=' . $this->session->data['token'], 'SSL');
+		$data['action'] = $this->url->link('extension/payment/twocheckout_pp', 'token=' . $this->session->data['token'], 'SSL');
 		
 		$data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL');
 		
