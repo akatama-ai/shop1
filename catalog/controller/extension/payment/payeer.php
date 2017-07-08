@@ -8,6 +8,7 @@ class ControllerExtensionPaymentPayeer extends Controller
 		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
 
 		$m_key = $this->config->get('payeer_security');
+		print_r($m_key);die();
 		$data['lang'] = $this->session->data['language'];
 		$data['action'] = $this->config->get('payeer_url');
 		$data['m_shop'] = $this->config->get('payeer_merchant');
