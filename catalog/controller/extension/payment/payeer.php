@@ -8,7 +8,7 @@ class ControllerExtensionPaymentPayeer extends Controller
 		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
 
 		$m_key = $this->config->get('payeer_security');
-	
+
 		$data['lang'] = $this->session->data['language'];
 		$data['action'] = $this->config->get('payeer_url');
 		$data['m_shop'] = $this->config->get('payeer_merchant');
@@ -22,12 +22,11 @@ class ControllerExtensionPaymentPayeer extends Controller
 			$data['m_orderid'],
 			$data['m_amount'],
 			$data['m_curr'],
-			$data['m_desc'],
-			$m_key
+			$data['m_desc']
 		);
-		
+		$arHash[] = $m_key;
 		$data['sign'] = strtoupper(hash('sha256', implode(':', $arHash)));
-			print_r($data);die();
+
 		$this->model_checkout_order->addOrderHistory($data['m_orderid'], $this->config->get('payeer_order_wait_id'));
 		
 		return $this->load->view('extension/payment/payeer', $data);
